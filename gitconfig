@@ -9,7 +9,7 @@
 	autosetupmerge = true
 [github]
 	user = telemachus
-	token = 0b234853d2c10d042785b612c65f3bdf
+	token = <oops>
 [alias]
 	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
 [core]
