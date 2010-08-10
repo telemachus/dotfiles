@@ -1,3 +1,7 @@
+### Bash alias file
+### Peter Aronoff
+### 2010-08-10
+
 # enable color support of ls and also add handy aliases
 if [[ "$TERM" != "dumb" ]]; then
     alias ls='gls --color=auto'
@@ -6,9 +10,13 @@ if [[ "$TERM" != "dumb" ]]; then
 fi
 
 # some more ls aliases
+alias l='ls'
 alias ll='ls -l'
 alias la='ls -A'
-alias l='ls -CF'
+alias lf='ls -CF'
+alias l.='ls -d .[^.]*'
+alias l.f='l. -F'
+alias ll.='l. -l'
 
 # aliases for safety
 alias rmi='rm -i'
@@ -30,12 +38,13 @@ alias realias='vim ~/.bash_aliases;source ~/.bash_aliases'
 # alias to add or edit functions
 alias refunction='vim ~/.bash_functions;source ~/.bash_functions'
 
-# make pstotext work without resetting $PATH
-alias pstotext='pstotext -gs "/usr/local/gs/bin/gs"'
-
 # a few git aliases
-alias status='git status'
-alias fetch='git fetch'
-alias pull='git pull'
-alias push='git push'
-alias sched='/usr/local/bin/ruby $HOME/bin/schedule.rb'
+alias gs='git status'
+alias gd='git diff'
+alias gdh='git diff HEAD'
+alias gl='git pull'
+alias gp='git push'
+alias sched='ruby $HOME/bin/schedule.rb'
+
+# View current playlist with numbers
+alias nlist='mpc playlist | cat -n -'

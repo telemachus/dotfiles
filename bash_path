@@ -5,22 +5,18 @@
 # /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
 # My preferred order - /usr/local goes first, damn it!
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+# Also, add /usr/local/sbin
+PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-# Add Subversion to the mix
-PATH=/opt/subversion/bin:$PATH
+# Append $HOME/bin
+export PATH=$PATH:$HOME/bin
 
-# Add MacPorts to the mix
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# Add python bin for eggs, pip, etc.
+export PATH=$PATH:/usr/local/Cellar/python/2.7/bin
 
-# Add Git to the mix
-export PATH=/usr/local/git/bin:$PATH
-
-# Prepend $HOME/bin
-export PATH=$HOME/bin:$PATH
-
-# Finally add cabal
-export PATH=$HOME/.cabal/bin:$PATH
+# Vim 7.3b
+VIM=/usr/local/vim3/bin
+export PATH=$VIM:$PATH
 
 #### Now let's take care of the $MANPATH
 # Backup of original $MANPATH
@@ -29,11 +25,6 @@ export PATH=$HOME/.cabal/bin:$PATH
 # My manpath - fix /usr/local/man here so that it goes first
 MANPATH=/usr/local/man:/usr/local/share/man:/usr/share/man:/usr/X11/man
 
-# Add Subversion to the mix
-export MANPATH=/opt/subversion/man:$MANPATH
-
-# Add MacPorts to the mix
-export MANPATH=/opt/local/share/man:$MANPATH
-
-# Add Git to the mix
-export MANPATH=/usr/local/git/man:$MANPATH
+# Vim 7.3b
+VIM=/usr/local/vim3/man
+export MANPATH=$VIM:$MANPATH
