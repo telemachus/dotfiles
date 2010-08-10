@@ -1,0 +1,31 @@
+#$include /etc/inputrc
+
+$if Bash
+    # append a '/' to show a dir is a dir
+    set mark-directories on
+    set mark-symlinked-directories on
+    # no audible or visual bell
+    set bell-style none
+    # use ls -F style highlights for completion
+    set visible-stats on
+    # go right to showing multiple options
+    set show-all-if-ambiguous on
+    # ctrl-p cycles through options
+    "\C-p": menu-complete
+    "\C-x\C-x": exchange-point-and-mark
+    "\ew": copy-region-as-kill
+    # easier back and forth by word
+    "\C-b": backward-word
+    "\eb": backward-char
+    "\C-f": forward-word
+    "\ef": forward-char
+    "\C-d\C-d": kill-whole-line
+$endif
+
+# Two silly macros
+#
+# Insert double quotes & set cursor between them
+"\C-x\"": "\"\"\eb"
+#
+# Insert single quotes & set cursor between them
+"\C-x'": "''\eb"
