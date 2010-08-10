@@ -22,22 +22,17 @@ pack()
     fi
 }
 
-# Get svn revision #
-#parse_svn_revision() {
-#    local REV=$(svnversion 2>/dev/null)
-#    [ $? -eq 0 ] || return
-#    [ "$REV" == 'exported' ] && return
-#    echo " ($REV)"
-#}
-
 # Get a password and copy it to the clipboard with pbcopy and pwsafe
-# FIX ME: This barfs up if the item is a nil value
+# FIXME
 pw() {
     pwsafe -p $1 | ruby -e 'print gets.chomp' | pbcopy
 }
 
-# Get Mercurial information in my PS1; see
-# http://sjl.bitbucket.org/hg-prompt/quickstart/
-#hg_ps1() {
-#    hg prompt " [{hg: {branch}}{ {status}}{update}]" 2> /dev/null
-#}
+# start mpd if it's not already running
+mp_start() {
+    count=$(ps -c | grep mpd | wc -l)
+    if (( $count > 0 ))
+    then
+        mpd --no-daemon &
+    fi
+}
