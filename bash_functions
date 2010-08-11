@@ -23,9 +23,8 @@ pack()
 }
 
 # Get a password and copy it to the clipboard with pbcopy and pwsafe
-# FIXME
 pw() {
-    pwsafe -p $1 | ruby -e 'print gets.chomp' | pbcopy
+    pwsafe -p $1 | pwhelper
 }
 
 # start mpd if it's not already running
@@ -34,5 +33,7 @@ mp_start() {
     if (( $count > 0 ))
     then
         mpd --no-daemon &
+        mpdscribble --no-daemon &
+        mpc clear
     fi
 }
