@@ -8,10 +8,6 @@ set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500	            " Keep 50 lines of command line history
 set scrolloff=3             " A little breathing room
-if !has('gui')
-    set undofile            " Test the persistent unto feature
-    set undodir=$HOME/.vim_undo,/tmp
-endif
 
 " Set items for view @ bottom of windows
 set ruler                   " Show the cursor position all the time
@@ -66,12 +62,13 @@ set backup
 set backupdir=$HOME/.vim_backups,/tmp
 set directory=/tmp,$HOME/.vim_backups
 
+" Vim 7.3, now with persistent undo
+set undofile            " Test the persistent unto feature
+set undodir=$HOME/.vim_undo,/tmp
+
 " Some Perl voodoo: insert Perl base & set filetype
 imap ,perl #!/usr/bin/env perl<CR>use strict;
     \<CR>use warnings;<CR><esc>:set filetype=perl<ENTER>i
-"
-" Check for templates at start up
-autocmd! BufNewFile * silent! 0r $HOME/.vim/templates/tpl.%:e
 
 " Tell Vim to print using US-sized paper, not A4
 set printoptions:paper:letter
@@ -89,7 +86,7 @@ nmap <silent> <leader>n :nohlsearch<CR>
 set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 set shortmess=atI
-nmap <silent> <leader>p :set invpaste<CR>
+nmap <silent> <leader>pa :set invpaste<CR>
 imap <C-l> =><Space>
 
 inoremap kj <Esc>
@@ -103,12 +100,6 @@ set statusline=%<%f\ %h%m%r%y
 \%{exists('g:loaded_rvm')?Rvm#statusline_ft_ruby():''}
 \%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 \%=%-14.(%l,%c%V%)\ %P
-
-" Uncomment on a MacBook
-"set t_ku=[A
-"set t_kd=[B
-"set t_kr=[C
-"set t_kl=[D
 
 " Modeline experiment
 " Append modeline after last line in buffer.
