@@ -32,6 +32,17 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab               " Use spaces for tabs
 
+" Editor layout {{{
+set termencoding=utf-8
+set encoding=utf-8
+set lazyredraw              " don't update the display while executing macros
+set laststatus=2            " tell VIM to always put a status line in, even
+                            "    if there is only one window
+set showtabline=2           " show a tabbar on top, always
+set cmdheight=2             " use a status bar that is 2 rows high
+" }}}
+
+
 " Search basics
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
