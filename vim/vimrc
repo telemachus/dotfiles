@@ -47,7 +47,7 @@ map Q gq
 set mouse=a
 
 " Use Dim for my colorscheme
-colorscheme Dim
+colorscheme desert
 
 " Make tab in v-mode indent code
 vmap <tab> >gv
@@ -117,3 +117,4 @@ nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+let g:is_bash = 1
