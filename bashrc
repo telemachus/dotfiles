@@ -79,6 +79,7 @@ if [[ -r $rvm_path/scripts/completion ]]; then
     source $rvm_path/scripts/completion
 fi
 export rvm_project_rvmrc_default=1
+export rvm_pretty_print_flag=1
 export LAYOUT_OPTS="--author:Peter Aronoff:--type:ruby"
 
 ## Perl varia
