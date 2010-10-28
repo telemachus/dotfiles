@@ -20,22 +20,25 @@ let g:loaded_matchparen = 1
 
 " Syntax basics
 syntax on
-filetype indent on
+filetype plugin indent on
 set autoindent
 set smartindent
-filetype plugin on
 
 " Text basics
-set textwidth=75            " Set text to wrap at 75 columns
+set wrap
+set linebreak
+set colorcolumn=85
+set formatoptions=qn1
+let &showbreak = '+++ '
 set tabstop=4               " A reasonable set of tab defaults
 set softtabstop=4
 set shiftwidth=4
 set expandtab               " Use spaces for tabs
+set number
 
 " Editor layout {{{
 set termencoding=utf-8
 set encoding=utf-8
-set lazyredraw              " don't update the display while executing macros
 set laststatus=2            " tell VIM to always put a status line in, even
                             "    if there is only one window
 set showtabline=2           " show a tabbar on top, always
@@ -48,7 +51,7 @@ set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
 
 " Matchy match
-"set showmatch              " Show matching brackets
+set showmatch              " Show matching brackets
 set matchtime=1             " But turn it off quickly
 
 " Don't use Ex mode, use Q for formatting
@@ -74,7 +77,7 @@ set backupdir=$HOME/.vim_backups,/tmp
 set directory=/tmp,$HOME/.vim_backups
 
 " Vim 7.3, now with persistent undo
-set undofile            " Test the persistent unto feature
+set undofile
 set undodir=$HOME/.vim_undo,/tmp
 
 " Some Perl voodoo: insert Perl base & set filetype
@@ -82,11 +85,12 @@ imap ,perl #!/usr/bin/env perl<CR>use strict;
     \<CR>use warnings;<CR><esc>:set filetype=perl<ENTER>i
 
 " Tell Vim to print using US-sized paper, not A4
-set printoptions:paper:letter
+set printoptions:paper:letter,header:0
 " Easier way to get into normal mode?
 imap jk <Esc>
 
-" Stuff from here: http://tuxtraining.com/2008/11/11/exploring-vim-configurations
+" Stuff from here:
+" http://tuxtraining.com/2008/11/11/exploring-vim-configurations
 set hidden
 nnoremap ' `
 nnoremap ` '
@@ -128,4 +132,3 @@ nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
-let g:is_bash = 1
