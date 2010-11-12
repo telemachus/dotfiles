@@ -8,6 +8,7 @@ set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500	            " Keep 50 lines of command line history
 set scrolloff=3             " A little breathing room
+set number                  " Always show line numbers
 
 " Set items for view @ bottom of windows
 set ruler                   " Show the cursor position all the time
@@ -45,10 +46,21 @@ set showtabline=2           " show a tabbar on top, always
 set cmdheight=2             " use a status bar that is 2 rows high
 " }}}
 
+" An easier leader than \
+let mapleader = ","
 
-" Search basics
+" Search and regex settings
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
 set incsearch               " Do incremental searching
+set showmatch
 set hlsearch                " Highlight all matches in a search
+nnoremap <silent> <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Matchy match
 set showmatch              " Show matching brackets
@@ -57,10 +69,7 @@ set matchtime=1             " But turn it off quickly
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Enable mouse
-set mouse=a
-
-" Use Dim for my colorscheme
+" Use desert for my colorscheme
 colorscheme desert
 
 " Make tab in v-mode indent code
@@ -89,8 +98,7 @@ set printoptions:paper:letter,header:0
 " Easier way to get into normal mode?
 imap jk <Esc>
 
-" Stuff from here:
-" http://tuxtraining.com/2008/11/11/exploring-vim-configurations
+" Stuff from http://tuxtraining.com/2008/11/11/exploring-vim-configurations
 set hidden
 nnoremap ' `
 nnoremap ` '
@@ -104,14 +112,12 @@ set shortmess=atI
 nmap <silent> <leader>pa :set invpaste<CR>
 imap <C-l> =><Space>
 
-inoremap kj <Esc>
 let g:liquid_highlight_types = ["html","erb=eruby","html+erb=eruby.html"]
 let g:closetag_html_style = 1
 let g:delimitMate_excluded_regions = "Comment,String"
 
 " status line hijinks
 set statusline=%<%f\ %h%m%r%y
-\%{exists('g:loaded_perlbrew')?PerlFilesPerlVersion():''}
 \%{exists('g:loaded_rvm')?Rvm#statusline_ft_ruby():''}
 \%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 \%=%-14.(%l,%c%V%)\ %P
@@ -127,8 +133,13 @@ function! AppendModeline()
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+
+" Comment and uncomment visual blocks quickly
+vmap <leader>- :s/\v^(\s*)(.*)$/\1# \2/<CR>:nohl<CR>
+vmap <leader>_ :s/\v^(\s*)# (.*)$/\1\2/<CR>:nohl<CR>
