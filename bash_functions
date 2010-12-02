@@ -37,3 +37,36 @@ mp_start() {
         mpc clear
     fi
 }
+
+# ksh-style "cd old new" for bash
+# "my_cd old new" replaces old with new throughout $PWD and then tries
+# to cd to the new path
+#
+# This works very well for eg $HOME/mmt/2010/compsci2/grades ->
+# $HOME/mmt/2010/compsci3/grades which I have to do constantly
+#
+# Shamelessly stolen from Learning the Bash Shell (3ed), Cameron Newham
+# & Bill Rosenblatt
+my_cd() {
+    case "$#" in
+        0|1)
+            builtincd $1
+    ;;
+        2)
+            newdir=${PWD//$1/$2}
+            case "$newdir" in
+                $PWD)
+                    echo "bash: my_cd: bad substitution" >&2
+                    return 1
+                ;;
+                *)
+                    builtin cd "$newdir"
+                ;;
+            esac
+        ;;
+        *)
+            echo "bash: my_cd: wrong arg count" 1>&2
+            return 1
+        ;;
+    esac
+}
