@@ -143,3 +143,6 @@ set listchars=tab:▸\ ,eol:¬
 " Comment and uncomment visual blocks quickly
 vmap <leader>- :s/\v^(\s*)(.*)$/\1# \2/<CR>:nohl<CR>
 vmap <leader>_ :s/\v^(\s*)# (.*)$/\1\2/<CR>:nohl<CR>
+
+" Clipboard fix for OSX?
+set clipboard=unnamed
