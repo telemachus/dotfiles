@@ -1,0 +1,15 @@
+#!/usr/local/bin/bash
+
+target=${1:-'/Users/admin/build'}
+mount=${2:-'/Volumes/athena'}
+
+if [[ ! -d $mount ]]; then
+    mkdir $mount
+fi
+
+sshfs admin@athena.marymountny.org:${target} $mount \
+    -ovolname=athena \
+    -oreconnect \
+    -oauto_cache \
+    -oworkaround=nonodelay \
+    -ovolicon=/Users/circe/bin/drive.icns
