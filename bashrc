@@ -64,7 +64,7 @@ export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
 export EDITOR=vim
 
 # Use CDPATH to make life better
-export CDPATH=.:$HOME:$HOME/code:$HOME/mmt/2010-2011
+CDPATH=.:$HOME:$HOME/code:$HOME/mmt/2010-2011
 
 ## Ruby varia
 # source rvm
