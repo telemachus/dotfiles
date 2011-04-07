@@ -22,11 +22,6 @@ pack()
     fi
 }
 
-# Get a password and copy it to the clipboard with pbcopy and pwsafe
-pw() {
-    pwsafe -p $1 | pwhelper
-}
-
 # start mpd if it's not already running
 mp_start() {
     count=$(ps -c | grep mpd | wc -l)
@@ -36,6 +31,11 @@ mp_start() {
         mpdscribble --no-daemon &
         mpc clear
     fi
+}
+
+mycc() {
+  output=${2:-"${1%.c}"}
+  clang -Wall -W -pedantic -std=c99 -o "$output" "$1"
 }
 
 # ksh-style "cd old new" for bash
@@ -51,22 +51,32 @@ my_cd() {
     case "$#" in
         0|1)
             builtincd $1
-    ;;
+            ;;
         2)
             newdir=${PWD//$1/$2}
-            case "$newdir" in
-                $PWD)
-                    echo "bash: my_cd: bad substitution" >&2
-                    return 1
-                ;;
-                *)
-                    builtin cd "$newdir"
-                ;;
-            esac
-        ;;
+    case "$newdir" in
+        $PWD)
+            echo "bash: my_cd: bad substitution" >&2
+            return 1
+            ;;
+        *)
+            builtin cd "$newdir"
+            ;;
+        esac
+            ;;
         *)
             echo "bash: my_cd: wrong arg count" 1>&2
             return 1
-        ;;
-    esac
+            ;;
+        esac
+}
+
+pw ()
+{
+    if grep -q $1 $HOME/.passes_list; then
+        pass=$(pwsafe -qp $1)
+        printf "%s" ${pass##"\n"} | pbcopy
+    else
+        printf "No such item found in your passwords.\n"
+    fi
 }
