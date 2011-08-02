@@ -128,7 +128,7 @@ function parse_git {
         if [[ $status =~ "Untracked files" ]]; then
             state=${bldred}${dot}${end}
         fi
-        if [[ $status =~ "Changed but not updated" ]]; then
+        if [[ $status =~ "Changes not staged for commit" ]]; then
             state=${state}${bldylw}${dot}${end}
         fi
         if [[ $status =~ "Changes to be committed" ]]; then
