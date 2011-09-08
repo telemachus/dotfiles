@@ -1,0 +1,34 @@
+# System-wide .profile for sh(1)
+
+# if [ -x /usr/libexec/path_helper ]; then
+	# eval `/usr/libexec/path_helper -s`
+# fi
+
+PATH=\
+$HOME/bin:\
+/usr/local/bin:\
+/usr/local/sbin:\
+/usr/bin:/bin:\
+/usr/sbin:\
+/sbin:\
+/usr/local/share/python
+LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
+MANPATH=/usr/local/man:/usr/local/share/man:/usr/share/man
+
+for i in $HOME/local/*; do
+    [ -d "${i}/bin" ] && PATH="${i}/bin:${PATH}"
+    [ -d "${i}/sbin" ] && PATH="${i}/sbin:${PATH}"
+    [ -d "${i}/include" ] && CPATH="${i}/include:${CPATH}"
+    [ -d "${i}/lib" ] && LD_LIBRARY_PATH="${i}/lib:${LD_LIBRARY_PATH}"
+    [ -d "${i}/lib/pkgconfig" ] &&
+        PKG_CONFIG_PATH="${i}/lib/pkgconfig:${PKG_CONFIG_PATH}"
+    [ -d "${i}/share/man" ] && MANPATH="${i}/share/man:${MANPATH}"
+done
+
+# export PATH
+# export LD_LIBRARY_PATH
+# export MANPATH
+
+if [ "${BASH-no}" != "no" ]; then
+	[ -r /etc/bashrc ] && . /etc/bashrc
+fi

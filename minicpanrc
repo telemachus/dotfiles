@@ -1,22 +1,17 @@
 # where to put stuff
 local: ~/.minicpan
-
 # where to get stuff
 remote: http://www.cpan.org/
-
+# a boolean - 1 = yes, 0 = no
 # should minicpan skip the source code for the Perl binary itself (as well
 # as Parrot for Perl6)?
-#
-# a boolean - 1 = yes, 0 = no
 skip_perl: 1
-
 # a boolean - should minicpan print to STDOUT as it works
 trace: 1
-
-# a boolean - should minicpan always force an update of the modules list
+# a boolean - should minicpan force an update of the list of modules every
+# run
 force: 1
-
-# filters - minicpan will ignore items from these space-separated lists
-module_filters: Acme AI AIX Bio Audio Catalyst Chemistry Chess Business Geo mGen
-path_filters: Acme Catalyst AI AIX Bio Audio Chemistry Chess Business Geo mGen
-
+# filters - minicpan will ignore items from this space-separated list of
+# items
+module_filters: Acme AI AIX Bio App-ZofCMS Audio Catalyst Chemistry Chess Business Geo mGen
+path_filters: Acme Catalyst AI AIX App-ZofCMS Bio Audio Chemistry Chess Business Geo mGen
