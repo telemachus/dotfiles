@@ -110,7 +110,8 @@ set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
 
 " Tell Vim to print using US-sized paper, not A4
-set printoptions:paper:letter,header:0
+set printoptions:paper:letter,header:0,syntax:n
+set printfont:Consolas
 " Easier way to get into normal mode?
 imap jk <Esc>
 
