@@ -3,12 +3,13 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
 " Most general settings first
-set nocompatible            " Set Vim rather than Vi settings; must go first
+set nocompatible            " Vim rather than Vi settings; must go first
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500	            " Keep 50 lines of command line history
 set scrolloff=3             " A little breathing room
 set number                  " Always show line numbers
+set tags=./tags;
 
 " Set items for view @ bottom of windows
 set ruler                   " Show the cursor position all the time
@@ -22,28 +23,36 @@ let g:loaded_matchparen = 1
 " Syntax basics
 syntax on
 filetype plugin indent on
-set autoindent
-set smartindent
+
+" Do POSIX right
+let g:is_posix = 1
 
 " Text basics
 set wrap
 set linebreak
+let &showbreak = '+++ '
 set colorcolumn=85
 set formatoptions=qn1
-let &showbreak = '+++ '
-set tabstop=4               " A reasonable set of tab defaults
+set fo-=c
+set fo-=r
+set fo-=o
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab               " Use spaces for tabs
 set number
 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸-,trail:·,eol:¬
+set list
+
 " Editor layout {{{
 set termencoding=utf-8
 set encoding=utf-8
-set laststatus=2            " tell VIM to always put a status line in, even
-                            "    if there is only one window
-set showtabline=2           " show a tabbar on top, always
-set cmdheight=2             " use a status bar that is 2 rows high
+set laststatus=2            " Always put a status line in, even
+                            " if there is only one window
+set showtabline=2           " Show a tabbar on top, always
+set cmdheight=2             " Use a status bar that is 2 rows high
 " }}}
 
 " An easier leader than \
@@ -62,15 +71,18 @@ nnoremap <silent> <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
 
-" Matchy match
-set showmatch              " Show matching brackets
+                            " Show matching brackets
 set matchtime=1             " But turn it off quickly
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Use desert for my colorscheme
-colorscheme desert
+" Enable mouse
+set mouse=a
+
+" Use Dim for my colorscheme
+set t_Co=256
+colorscheme inkpot
 
 " Make tab in v-mode indent code
 vmap <tab> >gv
@@ -86,39 +98,43 @@ set backupdir=$HOME/.vim_backups,/tmp
 set directory=/tmp,$HOME/.vim_backups
 
 " Vim 7.3, now with persistent undo
-set undofile
+set undofile            " Test the persistent unto feature
 set undodir=$HOME/.vim_undo,/tmp
 
 " Some Perl voodoo: insert Perl base & set filetype
-imap ,perl #!/usr/bin/env perl<CR>use strict;
-    \<CR>use warnings;<CR><esc>:set filetype=perl<ENTER>i
+imap ,perl #!/usr/bin/env perl<CR>use warnings;
+    \<CR>use 5.014;<CR>use autodie;<CR><esc>:set filetype=perl<ENTER>i
+
+" Use ack instead of grep
+set grepprg=ack\ --nogroup\ --column
+set grepformat=%f:%l:%c:%m
 
 " Tell Vim to print using US-sized paper, not A4
-set printoptions:paper:letter,header:0
+set printoptions:paper:letter,header:0,syntax:n
+set printfont:Consolas
 " Easier way to get into normal mode?
 imap jk <Esc>
 
-" Stuff from http://tuxtraining.com/2008/11/11/exploring-vim-configurations
+" From http://tuxtraining.com/2008/11/11/exploring-vim-configurations
 set hidden
 nnoremap ' `
 nnoremap ` '
-let mapleader = ","
 set title
 set scrolloff=3
-nmap <silent> <leader>n :nohlsearch<CR>
-set listchars=tab:>-,trail:·,eol:$
 nmap <silent> <leader>s :set nolist!<CR>
 set shortmess=atI
 nmap <silent> <leader>pa :set invpaste<CR>
 imap <C-l> =><Space>
 
-let g:liquid_highlight_types = ["html","erb=eruby","html+erb=eruby.html"]
+inoremap kj <Esc>
+" let g:liquid_highlight_types = ["html","erb=eruby","html+erb=eruby.html"]
 let g:closetag_html_style = 1
-let g:delimitMate_excluded_regions = "Comment,String"
+" let g:delimitMate_excluded_regions = "Comment,String"
 
 " status line hijinks
-set statusline=%<%f\ %h%m%r%y
-\%{exists('g:loaded_rvm')?Rvm#statusline_ft_ruby():''}
+set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
+\%{exists('g:loaded_rbenv')?rbenv#statusline_ft_ruby():''}
+\%{exists('g:loaded_perlbrew')?perlbrew#statusline_ft_perl():''}
 \%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 \%=%-14.(%l,%c%V%)\ %P
 
@@ -133,16 +149,30 @@ function! AppendModeline()
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
-" Comment and uncomment visual blocks quickly
+nmap <silent><leader>l :set list!<CR>
 vmap <leader>- :s/\v^(\s*)(.*)$/\1# \2/<CR>:nohl<CR>
 vmap <leader>_ :s/\v^(\s*)# (.*)$/\1\2/<CR>:nohl<CR>
 
 " Clipboard fix for OSX?
-set clipboard=unnamed
+" set clipboard=unnamed
+
+"runtime macros/matchit.vim
+"
+"function! ErlPretty()
+"  silent !erl -noshell -eval 'erl_tidy:file("%",[verbose]).' -s erlang halt
+"endfunction
+"nmap ep :execute ErlPretty()
+nmap <silent><F4> :w<CR>:make<CR>:cw<CR>
+
+" Found on StackOverflow: http://xrl.us/bk3bir
+fun! <SID>StripTrailingWhiteSpace()
+    let l = line(".")
+    let c = col(".")
+    let _s = @/
+    %s/\s\+$//e
+    call cursor(l, c)
+    let @/ = _s
+endfun
+
+autocmd BufWritePre *.js :call <SID>StripTrailingWhiteSpace()
