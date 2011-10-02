@@ -1,4 +1,8 @@
+# not relevant on osx
 #$include /etc/inputrc
+
+"\e[B": history-search-forward
+"\e[A": history-search-backward
 
 $if Bash
     # append a '/' to show a dir is a dir
@@ -10,6 +14,8 @@ $if Bash
     set visible-stats on
     # go right to showing multiple options
     set show-all-if-ambiguous on
+    # truncate long matching names
+    set completion-prefix-display-length 2
     # ctrl-p cycles through options
     "\C-p": menu-complete
     "\C-x\C-x": exchange-point-and-mark
@@ -19,7 +25,8 @@ $if Bash
     "\eb": backward-char
     "\C-f": forward-word
     "\ef": forward-char
-    "\C-d\C-d": kill-whole-line
+    # Kill whole line
+    "\C-d" kill-whole-line
 $endif
 
 # Two silly macros
