@@ -1,0 +1,12 @@
+#!/usr/bin/env dash
+
+if [ -d $HOME/.vim/bundle ]; then
+    for bundle in $HOME/.vim/bundle/*
+    do
+        if [ -d $bundle/.git ]; then
+            printf "Working on %s...\n" "${bundle##*/}"
+            cd $bundle; git pull 2>/dev/null
+            cd - 1>/dev/null
+        fi
+    done
+fi
