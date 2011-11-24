@@ -58,3 +58,6 @@
 [submodule "alterna-vim/bundle/vim-surround"]
 	path = alterna-vim/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "alterna-vim/ftbundle/html/MatchTag"]
+	path = alterna-vim/ftbundle/html/MatchTag
+	url = https://github.com/gregsexton/MatchTag.git
