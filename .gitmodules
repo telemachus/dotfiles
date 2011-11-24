@@ -61,3 +61,6 @@
 [submodule "alterna-vim/ftbundle/html/MatchTag"]
 	path = alterna-vim/ftbundle/html/MatchTag
 	url = https://github.com/gregsexton/MatchTag.git
+[submodule "alterna-vim/bundle/vim-unbundle"]
+	path = alterna-vim/bundle/vim-unbundle
+	url = https://github.com/sunaku/vim-unbundle.git
