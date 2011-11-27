@@ -1,6 +1,6 @@
-# Base $HOME/.bashrc file
-# Peter Aronoff
-# 2010-08-10
+# For testing
+# set -x
+# set -u
 
 ## A few global settings
 # + check the window size after each command and, if necessary,
@@ -8,27 +8,33 @@
 # + learn the damn Emacs bindings at least a little
 # + don't offer command completion on empty lines
 # + set term type and CLICOLOR
+# + set MAILDIR for mu
 shopt -s checkwinsize
 set -o emacs
 shopt -s no_empty_cmd_completion
-export TERM=xterm-color
+# export TERM=xterm-color
 export CLICOLOR=1
+export MAILDIR=$HOME/.maildir
 
 ## Includes
-if [ -f $HOME/.bash_aliases ]; then
-  source $HOME/.bash_aliases
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
 fi
 
-if [ -f $HOME/.bash_functions ]; then
-  source $HOME/.bash_functions
+if [ -f ~/.bash_functions ]; then
+    source ~/.bash_functions
 fi
 
 if [ -f $HOME/.bash_path ]; then
   source $HOME/.bash_path
 fi
 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    source $(brew --prefix)/etc/bash_completion
+if [ -f /usr/local/etc/bash_completion ]; then
+    source /usr/local/etc/bash_completion
+fi
+
+if [ -f $HOME/.bash_completion ]; then
+    source $HOME/.bash_completion
 fi
 
 if [ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]; then
@@ -38,14 +44,6 @@ fi
 if [ -f $HOME/.amazon_keys ]; then
     source $HOME/.amazon_keys
 fi
-
-if [ -f $HOME/.bash_perlbrew ]; then
-    source $HOME/.bash_perlbrew
-fi
-
-# Fuck steve jobs; just fuck him
-chmod -fN $HOME/Movies $HOME/Public $HOME/Music
-rm -rf $HOME/Movies $HOME/Public $HOME/Music
 
 ## History settings
 # + bigger is better
@@ -60,32 +58,15 @@ export HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S; '
 
 ## Editor settings
 export SVN_EDITOR=vim
-export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
+export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a iTerm"'
 export EDITOR=vim
 
 # Use CDPATH to make life better
-CDPATH=.:$HOME:$HOME/code:$HOME/mmt/2010-2011
-
-## Ruby varia
-# source rvm
-# use rvm defaults by directory
-# enable rvm completion
-# jeweler defaults
-# layout defaults
-if [ -s $HOME/.rvm/scripts/rvm ]; then
-    source $HOME/.rvm/scripts/rvm
-fi
-if [[ -r $rvm_path/scripts/completion ]]; then
-    source $rvm_path/scripts/completion
-fi
-export rvm_project_rvmrc_default=1
-export rvm_pretty_print_flag=1
-export LAYOUT_OPTS="--author:Peter Aronoff:--type:ruby"
+CDPATH=::$HOME:$HOME/code:$HOME/mmt/2011-2012
 
 ## Perl varia
 # put perlbrew where I want it and source it
 # defaults for cpanminus
-# a gross and utter hack to get my vim status line correct
 export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 if [ -f $HOME/.perl5/perlbrew/etc/bashrc ]; then
     source $HOME/.perl5/perlbrew/etc/bashrc
@@ -103,6 +84,7 @@ bldred='\[\e[1;31m\]' # Red
 bldgrn='\[\e[1;32m\]' # Green
 bldylw='\[\e[1;33m\]' # Yellow
 bldwht='\[\e[1;37m\]' # White
+bldcyn='\[\e[1;36m\]' # Cyan
 end='\[\e[0m\]'    # Text Reset
 
 function parse_git {
@@ -111,8 +93,8 @@ function parse_git {
         return
     fi
 
-    local forward="⟰"
-    local behind="⟱"
+    local forward="⇑"
+    local behind="⇓"
     local dot="•"
 
     remote_pattern_ahead="# Your branch is ahead of"
@@ -127,6 +109,9 @@ function parse_git {
     else
         if [[ $status =~ "Untracked files" ]]; then
             state=${bldred}${dot}${end}
+        fi
+        if [[ $status =~ "Changed but not updated" ]]; then
+            state=${state}${bldylw}${dot}${end}
         fi
         if [[ $status =~ "Changes not staged for commit" ]]; then
             state=${state}${bldylw}${dot}${end}
@@ -161,7 +146,6 @@ function set_titlebar {
 }
 
 function set_prompt {
-    local snowman=""
     git="$(parse_git)"
 
     PS1="${txtred}\u${end} ${txtred}\W${end}"
@@ -178,9 +162,23 @@ function set_prompt {
 export PROMPT_COMMAND=set_prompt
 
 ## Pager stuff
-#MANPAGER=less
-#export MANPAGER
+# MANPAGER=less
+# export MANPAGER
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
 LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 export LESSOPEN
+
+[ -d $HOME/bin ] && export PATH=$PATH:$HOME/bin
+[ -d $HOME/.cabal/bin ] && export PATH=$PATH:$HOME/.cabal/bin
+
+# Set up JS-Test-Driver
+export JSTESTDRIVER_HOME=$HOME/bin
+# export HOMEBREW_VERBOSE=1
+export HOMEBREW_USE_GCC=1
+export CC=gcc-4.2
+export CXX=g++-4.2
+export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
+eval "$(rbenv init -)"
+my_ruby=$(rbenv version-name) >/dev/null 2>&1
+export active_ruby="${my_ruby:-/usr/bin/ruby}"

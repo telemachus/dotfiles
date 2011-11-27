@@ -1,16 +1,49 @@
-[gui]
-	recentrepo = /Users/paris/git_code/ruby/algorithms
 [user]
 	name = Peter Aronoff
 	email = telemachus@arpinum.org
+
 [color]
 	ui = auto
+
 [branch]
 	autosetupmerge = true
+
 [github]
 	user = telemachus
 	token = <oops>
+
 [alias]
 	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
+	ll = log --pretty=oneline --abbrev-commit --max-count=15
+	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
+
 [core]
-	editor = mvim -f
+	excludesfile = /Users/telemachus/.gitignore_global
+	filemode = true
+	logallrefupdates = true
+	whitespace = space-before-tab, trailing-space
+
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = blue bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow bold
+	remote = green bold
+	plain = red bold
+
+[color "status"]
+	added = yellow
+	changed = green bold
+	untracked = blue bold
+
+[init]
+	templatedir = ~/.git_template
+
+# vim: noexpandtab

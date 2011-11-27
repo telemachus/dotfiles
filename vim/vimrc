@@ -1,12 +1,13 @@
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
+runtime bundle/vim-unbundle/unbundle.vim
 
 " Most general settings first
 set nocompatible            " Vim rather than Vi settings; must go first
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
-set history=500	            " Keep 50 lines of command line history
+set history=500             " Keep 50 lines of command line history
 set scrolloff=3             " A little breathing room
 set number                  " Always show line numbers
 set tags=./tags;
@@ -28,11 +29,12 @@ filetype plugin indent on
 let g:is_posix = 1
 
 " Text basics
-set wrap
-set linebreak
-let &showbreak = '+++ '
-set colorcolumn=85
-set formatoptions=qn1
+"set wrap
+"set linebreak
+"let &showbreak = '+++ '
+set textwidth=75
+set colorcolumn=80
+set formatoptions=tcqn1
 set fo-=c
 set fo-=r
 set fo-=o
@@ -176,3 +178,31 @@ fun! <SID>StripTrailingWhiteSpace()
 endfun
 
 autocmd BufWritePre *.js :call <SID>StripTrailingWhiteSpace()
+
+function! s:PasteEscaped()
+    echo "\\".getcmdline()."\""
+    let char = getchar()
+    if char == "\<esc>"
+        return ''
+    else
+        let register_content = getreg(nr2char(char))
+        let escaped_register = escape(register_content, '\'.getcmdtype())
+        return substitute(escaped_register, '\n', '\\n', 'g')
+    endif
+endfunction
+
+cnoremap <c-x> <c-r>=<SID>PasteEscaped()<cr>
+
+" Some mappings from Learn Vimscript the Hard Way
+noremap _ ddkP
+noremap - ddp
+inoremap <c-u> <esc>viwUwa
+nnoremap <c-u> viwU<esc>
+
+" Set browser for haskell_doc.vim
+let g:haddock_browser = "open"
+let g:haddock_browser_callformat = "%s %s"
+
+" Make sure Markdown files are properly recognized
+autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
+\    setlocal filetype=markdown
