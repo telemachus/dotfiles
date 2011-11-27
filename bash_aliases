@@ -1,7 +1,3 @@
-### Bash alias file
-### Peter Aronoff
-### 2010-08-10
-
 # enable color support of ls and also add handy aliases
 if [[ "$TERM" != "dumb" ]]; then
     alias ls='ls -G'
