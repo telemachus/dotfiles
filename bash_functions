@@ -28,7 +28,7 @@ mp_start() {
     if (( $count > 0 ))
     then
         mpd --no-daemon &
-        mpdscribble --no-daemon &
+        # mpdscribble --no-daemon &
         mpc clear
     fi
 }

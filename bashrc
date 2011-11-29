@@ -17,31 +17,31 @@ export CLICOLOR=1
 export MAILDIR=$HOME/.maildir
 
 ## Includes
-if [ -f ~/.bash_aliases ]; then
+if [[ -f ~/.bash_aliases ]]; then
     source ~/.bash_aliases
 fi
 
-if [ -f ~/.bash_functions ]; then
+if [[ -f ~/.bash_functions ]]; then
     source ~/.bash_functions
 fi
 
-if [ -f $HOME/.bash_path ]; then
+if [[ -f $HOME/.bash_path ]]; then
   source $HOME/.bash_path
 fi
 
-if [ -f /usr/local/etc/bash_completion ]; then
+if [[ -f /usr/local/etc/bash_completion ]]; then
     source /usr/local/etc/bash_completion
 fi
 
-if [ -f $HOME/.bash_completion ]; then
+if [[ -f $HOME/.bash_completion ]]; then
     source $HOME/.bash_completion
 fi
 
-if [ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]; then
+if [[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]]; then
     source /usr/local/Library/Contributions/brew_bash_completion.sh
 fi
 
-if [ -f $HOME/.amazon_keys ]; then
+if [[ -f $HOME/.amazon_keys ]]; then
     source $HOME/.amazon_keys
 fi
 
@@ -58,7 +58,7 @@ export HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S; '
 
 ## Editor settings
 export SVN_EDITOR=vim
-export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a iTerm"'
+export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
 export EDITOR=vim
 
 # Use CDPATH to make life better
@@ -68,7 +68,7 @@ CDPATH=::$HOME:$HOME/code:$HOME/mmt/2011-2012
 # put perlbrew where I want it and source it
 # defaults for cpanminus
 export PERLBREW_ROOT=$HOME/.perl5/perlbrew
-if [ -f $HOME/.perl5/perlbrew/etc/bashrc ]; then
+if [[ -f $HOME/.perl5/perlbrew/etc/bashrc ]]; then
     source $HOME/.perl5/perlbrew/etc/bashrc
 fi
 export PERL_CPANM_OPT="--mirror file:///Users/telemachus/.minicpan\
@@ -166,11 +166,13 @@ export PROMPT_COMMAND=set_prompt
 # export MANPAGER
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
-LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
-export LESSOPEN
+if [[ -e /usr/local/bin/lesspipe ]]; then
+    LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+    export LESSOPEN
+fi
 
-[ -d $HOME/bin ] && export PATH=$PATH:$HOME/bin
-[ -d $HOME/.cabal/bin ] && export PATH=$PATH:$HOME/.cabal/bin
+[[ -d $HOME/bin ]] && export PATH=$PATH:$HOME/bin
+[[ -d $HOME/.cabal/bin ]] && export PATH=$PATH:$HOME/.cabal/bin
 
 # Set up JS-Test-Driver
 export JSTESTDRIVER_HOME=$HOME/bin
