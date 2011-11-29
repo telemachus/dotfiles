@@ -71,31 +71,3 @@ ccd() {
             ;;
         esac
 }
-
-# pw()
-# {
-    # if grep -q $1 $HOME/.passes_list; then
-        # pass=$(pwsafe -qp $1)
-        # printf "%s" ${pass##"\n"} | pbcopy
-    # else
-        # printf "No such item found in your passwords.\n"
-    # fi
-# }
-
-bundleup()
-{
-    if [ -d ~/.vim/bundle ]
-    then
-        for dir in ~/.vim/bundle/*
-        do
-            if [ -d "$dir" ]
-            then
-                (
-                cd "$dir"
-                printf "Updating %s...\n" "${dir##*/}"
-                git pull origin master 2>/dev/null
-                )
-            fi
-        done
-    fi
-}

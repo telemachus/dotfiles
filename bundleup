@@ -1,12 +1,23 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
-if [ -d $HOME/.vim/bundle ]; then
+if [[ -d $HOME/.vim/bundle ]]; then
     for bundle in $HOME/.vim/bundle/*
     do
-        if [ -d $bundle/.git ]; then
-            printf "Working on %s...\n" "${bundle##*/}"
-            cd $bundle; git pull 2>/dev/null
-            cd - 1>/dev/null
+        if [[ -d $bundle/.git ]]; then
+            printf "Working on \e[1m%s\e[m...\n" ${bundle##*/}
+            (cd $bundle; git pull 2>/dev/null )
         fi
+    done
+
+    for bundle in $HOME/.vim/ftbundle/*
+    do
+        (cd $bundle
+        for bun in *
+        do
+            if [[ -d $bun/.git ]]; then
+                printf "Working on \e[1m%s\e[m...\n" ${bun##*/}
+                (cd $bun; git pull 2>/dev/null )
+            fi
+        done)
     done
 fi
