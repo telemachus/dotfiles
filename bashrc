@@ -184,3 +184,4 @@ export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 eval "$(rbenv init -)"
 my_ruby=$(rbenv version-name) >/dev/null 2>&1
 export active_ruby="${my_ruby:-/usr/bin/ruby}"
+export LUA_INIT="@$HOME/.lua_config.lua"
