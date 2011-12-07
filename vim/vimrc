@@ -204,5 +204,5 @@ let g:haddock_browser = "open"
 let g:haddock_browser_callformat = "%s %s"
 
 " Make sure Markdown files are properly recognized
-autocmd BufNewFile,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
+autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 \    setlocal filetype=markdown
