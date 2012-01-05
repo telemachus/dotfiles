@@ -61,8 +61,6 @@ set cmdheight=2             " Use a status bar that is 2 rows high
 let mapleader = ","
 
 " Search and regex settings
-nnoremap / /\v
-vnoremap / /\v
 set ignorecase
 set smartcase
 set gdefault
@@ -84,15 +82,15 @@ set mouse=a
 
 " Use Dim for my colorscheme
 set t_Co=256
-colorscheme inkpot
+colorscheme bubblegum
 
 " Make tab in v-mode indent code
-vmap <tab> >gv
-vmap <s-tab> <gv
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " Make tab in normal mode indent code
-nmap <tab> I<tab><esc>
-nmap <s-tab> ^i<bs><esc>
+nnoremap <tab> I<tab><esc>
+nnoremap <s-tab> ^i<bs><esc>
 
 " Fix placement of backups and swap files
 set backup
@@ -103,10 +101,6 @@ set directory=/tmp,$HOME/.vim_backups
 set undofile            " Test the persistent unto feature
 set undodir=$HOME/.vim_undo,/tmp
 
-" Some Perl voodoo: insert Perl base & set filetype
-imap ,perl #!/usr/bin/env perl<CR>use warnings;
-    \<CR>use 5.014;<CR>use autodie;<CR><esc>:set filetype=perl<ENTER>i
-
 " Use ack instead of grep
 set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
@@ -114,8 +108,6 @@ set grepformat=%f:%l:%c:%m
 " Tell Vim to print using US-sized paper, not A4
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
-" Easier way to get into normal mode?
-imap jk <Esc>
 
 " From http://tuxtraining.com/2008/11/11/exploring-vim-configurations
 set hidden
@@ -123,14 +115,9 @@ nnoremap ' `
 nnoremap ` '
 set title
 set scrolloff=3
-nmap <silent> <leader>s :set nolist!<CR>
 set shortmess=atI
-nmap <silent> <leader>pa :set invpaste<CR>
-imap <C-l> =><Space>
+nnoremap <silent> <leader>p :set invpaste<CR>
 
-inoremap kj <Esc>
-" let g:liquid_highlight_types = ["html","erb=eruby","html+erb=eruby.html"]
-let g:closetag_html_style = 1
 " let g:delimitMate_excluded_regions = "Comment,String"
 
 " status line hijinks
@@ -140,69 +127,11 @@ set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 \%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 \%=%-14.(%l,%c%V%)\ %P
 
-" Modeline experiment
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d :",
-        \ &tabstop, &shiftwidth, &textwidth)
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " Shortcut to rapidly toggle `set list`
-nmap <silent><leader>l :set list!<CR>
-vmap <leader>- :s/\v^(\s*)(.*)$/\1# \2/<CR>:nohl<CR>
-vmap <leader>_ :s/\v^(\s*)# (.*)$/\1\2/<CR>:nohl<CR>
-
-" Clipboard fix for OSX?
-" set clipboard=unnamed
+nnoremap <silent><leader>l :set list!<CR>
 
 "runtime macros/matchit.vim
 "
-"function! ErlPretty()
-"  silent !erl -noshell -eval 'erl_tidy:file("%",[verbose]).' -s erlang halt
-"endfunction
-"nmap ep :execute ErlPretty()
-nmap <silent><F4> :w<CR>:make<CR>:cw<CR>
-
-" Found on StackOverflow: http://xrl.us/bk3bir
-fun! <SID>StripTrailingWhiteSpace()
-    let l = line(".")
-    let c = col(".")
-    let _s = @/
-    %s/\s\+$//e
-    call cursor(l, c)
-    let @/ = _s
-endfun
-
-autocmd BufWritePre *.js :call <SID>StripTrailingWhiteSpace()
-
-function! s:PasteEscaped()
-    echo "\\".getcmdline()."\""
-    let char = getchar()
-    if char == "\<esc>"
-        return ''
-    else
-        let register_content = getreg(nr2char(char))
-        let escaped_register = escape(register_content, '\'.getcmdtype())
-        return substitute(escaped_register, '\n', '\\n', 'g')
-    endif
-endfunction
-
-cnoremap <c-x> <c-r>=<SID>PasteEscaped()<cr>
-
-" Some mappings from Learn Vimscript the Hard Way
-noremap _ ddkP
-noremap - ddp
-inoremap <c-u> <esc>viwUwa
-nnoremap <c-u> viwU<esc>
-
-" Set browser for haskell_doc.vim
-let g:haddock_browser = "open"
-let g:haddock_browser_callformat = "%s %s"
-
 " Make sure Markdown files are properly recognized
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 \    setlocal filetype=markdown
