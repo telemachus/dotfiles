@@ -117,6 +117,8 @@ set title
 set scrolloff=3
 set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
+imap <leader>/ <C-X>/
+imap <leader><SPACE> <C-X><SPACE>
 
 " let g:delimitMate_excluded_regions = "Comment,String"
 
