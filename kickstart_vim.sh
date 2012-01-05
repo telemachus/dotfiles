@@ -37,7 +37,10 @@ cd $HOME/.vim/bundle
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/Raimondi/delimitMate.git
 git clone https://github.com/sjl/strftimedammit.vim.git
-git clone https://github.com/tomtom/tcomment_vim.git
+git clone https://github.com/tpope/vim-eunuch
+git clone https://github.com/tpope/vim-unimpaired
+git clone https://github.com/tpope/vim-commentary
+git clone https://github.com/tpope/vim-ragtag.git
 git clone https://github.com/tpope/vim-endwise.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/tpope/vim-git.git
