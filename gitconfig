@@ -2,8 +2,17 @@
 	name = Peter Aronoff
 	email = telemachus@arpinum.org
 
-[color]
-	ui = auto
+[alias]
+	ll = log --pretty=oneline --abbrev-commit --max-count=15
+	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
+	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	staged = diff --cached
+	unstaged = diff
+	current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+	track = checkout -t
+	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
+	ll = log --pretty=oneline --abbrev-commit --max-count=15
+	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
 
 [branch]
 	autosetupmerge = true
@@ -11,11 +20,6 @@
 [github]
 	user = telemachus
 	token = <oops>
-
-[alias]
-	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
-	ll = log --pretty=oneline --abbrev-commit --max-count=15
-	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
 
 [core]
 	excludesfile = /Users/telemachus/.gitignore_global
