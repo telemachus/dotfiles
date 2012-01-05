@@ -132,7 +132,7 @@ set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 " Shortcut to rapidly toggle `set list`
 nnoremap <silent><leader>l :set list!<CR>
 
-"runtime macros/matchit.vim
+runtime macros/matchit.vim
 "
 " Make sure Markdown files are properly recognized
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
