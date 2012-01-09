@@ -82,7 +82,7 @@ set mouse=a
 
 " Use Dim for my colorscheme
 set t_Co=256
-colorscheme bubblegum
+colorscheme inkpot
 
 " Make tab in v-mode indent code
 vnoremap <tab> >gv
