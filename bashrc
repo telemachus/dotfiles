@@ -17,33 +17,19 @@ export CLICOLOR=1
 export MAILDIR=$HOME/.maildir
 
 ## Includes
-if [[ -f ~/.bash_aliases ]]; then
-    source ~/.bash_aliases
-fi
+[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
 
-if [[ -f ~/.bash_functions ]]; then
-    source ~/.bash_functions
-fi
+[[ -f ~/.bash_functions ]] && source ~/.bash_functions
 
-if [[ -f $HOME/.bash_path ]]; then
-  source $HOME/.bash_path
-fi
+[[ -f $HOME/local/share/bash-completion/bash_completion ]] \
+    && source $HOME/local/share/bash-completion/bash_completion
 
-if [[ -f /usr/local/etc/bash_completion ]]; then
-    source /usr/local/etc/bash_completion
-fi
+[[ -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
-if [[ -f $HOME/.bash_completion ]]; then
-    source $HOME/.bash_completion
-fi
+[[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]] \
+    && source /usr/local/Library/Contributions/brew_bash_completion.sh
 
-if [[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]]; then
-    source /usr/local/Library/Contributions/brew_bash_completion.sh
-fi
-
-if [[ -f $HOME/.amazon_keys ]]; then
-    source $HOME/.amazon_keys
-fi
+[[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
 ## History settings
 # + bigger is better
@@ -166,13 +152,11 @@ export PROMPT_COMMAND=set_prompt
 # export MANPAGER
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
-if [[ -e /usr/local/bin/lesspipe ]]; then
-    LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
-    export LESSOPEN
-fi
+[[ -e /usr/local/bin/lesspipe ]] \
+    && LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+export LESSOPEN
 
 [[ -d $HOME/bin ]] && export PATH=$PATH:$HOME/bin
-[[ -d $HOME/.cabal/bin ]] && export PATH=$PATH:$HOME/.cabal/bin
 
 # Set up JS-Test-Driver
 export JSTESTDRIVER_HOME=$HOME/bin
@@ -180,9 +164,9 @@ export JSTESTDRIVER_HOME=$HOME/bin
 export HOMEBREW_USE_GCC=1
 export CC=gcc-4.2
 export CXX=g++-4.2
-export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
-eval "$(rbenv init -)"
-my_ruby=$(rbenv version-name) >/dev/null 2>&1
-export active_ruby="${my_ruby:-/usr/bin/ruby}"
+# export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
+# eval "$(rbenv init -)"
+# my_ruby=$(rbenv version-name) >/dev/null 2>&1
+# export active_ruby="${my_ruby:-/usr/bin/ruby}"
 export LUA_INIT="@$HOME/.lua_config.lua"
 eval "$(luarocks path)"
