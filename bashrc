@@ -150,6 +150,7 @@ export PROMPT_COMMAND=set_prompt
 ## Pager stuff
 # MANPAGER=less
 # export MANPAGER
+export PAGER=less
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
 [[ -e /usr/local/bin/lesspipe ]] \
