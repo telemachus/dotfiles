@@ -120,7 +120,6 @@ nnoremap <silent> <leader>p :set invpaste<CR>
 imap <leader>/ <C-X>/
 imap <C-_>     <C-X><SPACE>
 imap <leader>w <M-e>
-let g:AutoPairs={'(':')','[':']','{':'}',"'":"'",'"':'"','`':'`'}
 
 " let g:delimitMate_excluded_regions = "Comment,String"
 
