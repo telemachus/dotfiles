@@ -16,9 +16,9 @@ export CLICOLOR=1
 export MAILDIR=$HOME/.maildir
 
 ## Includes
-[[ -f ~/.bash_aliases ]] && source ~/.bash_aliases
+[[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
 
-[[ -f ~/.bash_functions ]] && source ~/.bash_functions
+[[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
 [[ -f $HOME/local/share/bash-completion/bash_completion ]] \
     && source $HOME/local/share/bash-completion/bash_completion
