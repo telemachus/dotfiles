@@ -65,14 +65,10 @@ set ignorecase
 set smartcase
 set gdefault
 set incsearch               " Do incremental searching
-set showmatch
 set hlsearch                " Highlight all matches in a search
 nnoremap <silent> <leader><space> :noh<cr>
 nnoremap <tab> %
 vnoremap <tab> %
-
-                            " Show matching brackets
-set matchtime=1             " But turn it off quickly
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
