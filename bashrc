@@ -71,7 +71,7 @@ bldgrn='\[\e[1;32m\]' # Green
 bldylw='\[\e[1;33m\]' # Yellow
 bldwht='\[\e[1;37m\]' # White
 bldcyn='\[\e[1;36m\]' # Cyan
-end='\[\e[0m\]'    # Text Reset
+end='\[\e[0m\]'       # Text Reset
 
 function parse_git {
     branch=$(__git_ps1 "%s")
