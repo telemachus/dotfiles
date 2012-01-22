@@ -12,7 +12,6 @@
 shopt -s checkwinsize
 set -o emacs
 shopt -s no_empty_cmd_completion
-# export TERM=xterm-color
 export CLICOLOR=1
 export MAILDIR=$HOME/.maildir
 
