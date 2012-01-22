@@ -6,7 +6,7 @@ alias la='ls -A'
 alias lf='ls -CF'
 alias l.='ls -d .[^.]* 2>/dev/null'
 alias l.f='l. -F'
-alias l.l='l. -l'
+alias l.l='ls -ld .[^.]* 2>/dev/null'
 
 # Aliases for safety
 alias rmi='rm -i'
