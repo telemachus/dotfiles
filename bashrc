@@ -20,8 +20,9 @@ export MAILDIR=$HOME/.maildir
 
 [[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
-[[ -f $HOME/local/share/bash-completion/bash_completion ]] \
-    && source $HOME/local/share/bash-completion/bash_completion
+
+bco=$HOME/local/bash-completion-1.99/share/bash-completion/bash_completion
+[[ -f $bco ]] && source $bco
 
 [[ -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
