@@ -67,8 +67,6 @@ set gdefault
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
 nnoremap <silent> <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -79,14 +77,6 @@ set mouse=a
 " Use Dim for my colorscheme
 set t_Co=256
 colorscheme inkpot
-
-" Make tab in v-mode indent code
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
-
-" Make tab in normal mode indent code
-nnoremap <tab> I<tab><esc>
-nnoremap <s-tab> ^i<bs><esc>
 
 " Fix placement of backups and swap files
 set backup
