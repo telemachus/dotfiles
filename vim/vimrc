@@ -124,3 +124,14 @@ runtime macros/matchit.vim
 " Make sure Markdown files are properly recognized
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 \    setlocal filetype=markdown
+
+" Erlang settings
+autocmd FileType erlang
+\   setlocal foldmethod=indent tabstop=4 shiftwidth=4
+
+" Vimerl plugin:
+let erlang_folding     = 1
+let erlang_show_errors = 0
+let erlang_skel_header = {'author':
+\   'Peter Aronoff <telemachus@arpinum.org>',
+\   'owner' : 'Peter Aronoff'}
