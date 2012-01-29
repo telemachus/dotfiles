@@ -74,9 +74,10 @@ map Q gq
 " Enable mouse
 set mouse=a
 
-" Use Dim for my colorscheme
-set t_Co=256
-colorscheme inkpot
+" Use Solarized for my colorscheme
+"set t_Co=256
+set background=dark
+colorscheme solarized
 
 " Fix placement of backups and swap files
 set backup
