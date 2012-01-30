@@ -1,5 +1,4 @@
 " A few things to get MacVim just right
-colorscheme github
 set columns=95 lines=45
 set go-=T
 set guifont=Consolas:h14

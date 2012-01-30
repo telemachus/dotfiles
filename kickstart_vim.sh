@@ -35,7 +35,7 @@ mkdir $HOME/.vim/ftbundle/scss
 
 cd $HOME/.vim/bundle
 git clone https://github.com/mileszs/ack.vim.git
-git clone https://github.com/Raimondi/delimitMate.git
+git clone https://github.com/jiangmiao/auto-pairs.git
 git clone https://github.com/sjl/strftimedammit.vim.git
 git clone https://github.com/tpope/vim-eunuch
 git clone https://github.com/tpope/vim-unimpaired
@@ -51,6 +51,7 @@ git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/sunaku/vim-unbundle.git
 git clone https://github.com/telemachus/vim-varia.git
+git clone https://github.com/jimenezrick/vimerl.git
 git clone https://github.com/wincent/Command-T.git
 cd $HOME/.vim/bundle/Command-T/ruby/command-t
 /usr/bin/ruby extconf.rb
