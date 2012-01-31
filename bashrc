@@ -176,3 +176,4 @@ export CC=gcc-4.2
 export CXX=g++-4.2
 export LUA_INIT="@$HOME/.lua_config.lua"
 eval "$(luarocks path)"
+INFODIR=/usr/local/share/info:$INFODIR
