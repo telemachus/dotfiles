@@ -48,6 +48,7 @@ export EDITOR=vim
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/code:$HOME/mmt/2011-2012
+INFOPATH=/usr/local/share/info:$INFOPATH
 
 ## Perl varia
 # put perlbrew where I want it and source it
@@ -122,18 +123,6 @@ end='\[\e[0m\]'       # Text Reset
 #     printf "%s" "$git_bit"
 # }
 
-set_titlebar() {
-    case $TERM in
-        *xterm*|ansi|rxvt)
-            printf "\033]0;%s\007" "$*"
-            ;;
-    esac
-}
-
-get_dir() {
-    printf "%s" $(pwd | sed "s:$HOME:~:")
-}
-
 # function set_prompt {
 #     git="$(parse_git)"
 
@@ -149,11 +138,28 @@ get_dir() {
 # }
 
 # export PROMPT_COMMAND=set_prompt
+set_titlebar() {
+    case $TERM in
+        *xterm*|ansi|rxvt)
+            printf "\033]0;%s\007" "$*"
+            ;;
+    esac
+}
+
+get_dir() {
+    printf "%s" $(pwd | sed "s:$HOME:~:")
+}
+
+get_sha() {
+    git rev-parse --short HEAD 2>/dev/null
+}
+
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto git"
-export PS1='\[\e[1;31m\]\u\[\e[0m\] \W$(__git_ps1 " [\[\e[1;31m\]%s\[\e[0m\]]")\$ '
+
+export PS1='\[\e[1;31m\]\u\[\e[0m\] \W$(__git_ps1 " [\[\e[1;31m\]%s $(get_sha)\[\e[0m\]]")\$ '
 export PROMPT_COMMAND='set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
 
 ## Pager stuff
