@@ -113,8 +113,8 @@ export LESSOPEN
 export JSTESTDRIVER_HOME=$HOME/bin
 # export HOMEBREW_VERBOSE=1
 export HOMEBREW_USE_GCC=1
-export CC=gcc-4.2
-export CXX=g++-4.2
+# export CC=gcc-4.2
+# export CXX=g++-4.2
 export LUA_INIT="@$HOME/.lua_config.lua"
 eval "$(luarocks path)"
 INFODIR=/usr/local/share/info:$INFODIR
