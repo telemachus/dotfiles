@@ -39,7 +39,7 @@ mycc() {
 }
 
 # ksh-style "cd old new" for bash
-# "my_cd old new" replaces old with new throughout $PWD and then tries
+# "ccd old new" replaces old with new throughout $PWD and then tries
 # to cd to the new path
 #
 # This works very well for eg $HOME/mmt/2010/compsci2/grades ->
@@ -54,20 +54,20 @@ ccd() {
             ;;
         2)
             newdir=${PWD//$1/$2}
-    case "$newdir" in
-        $PWD)
-            echo "bash: my_cd: bad substitution" >&2
-            return 1
+            case "$newdir" in
+                $PWD)
+                    echo "ccd: bad substitution" >&2
+                    return 1
+                    ;;
+                *)
+                    builtin cd "$newdir"
+                    pwd
+                    ;;
+            esac
             ;;
         *)
-            builtin cd "$newdir"
-            pwd
-            ;;
-        esac
-            ;;
-        *)
-            echo "bash: my_cd: wrong arg count" 1>&2
+            echo "ccd: wrong arg count" 1>&2
             return 1
             ;;
-        esac
+    esac
 }

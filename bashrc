@@ -94,7 +94,7 @@ GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto git"
 
-export PS1='\[\e[1;31m\]\u\[\e[0m\] \W$(__git_ps1 " [\[\e[1;31m\]%s $(get_sha)\[\e[0m\]]")\$ '
+export PS1='\u \W$(__git_ps1 " [%s $(get_sha)]")\$ '
 export PROMPT_COMMAND='set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
 
 ## Pager stuff
@@ -118,3 +118,4 @@ export HOMEBREW_USE_GCC=1
 export LUA_INIT="@$HOME/.lua_config.lua"
 eval "$(luarocks path)"
 INFODIR=/usr/local/share/info:$INFODIR
+[ -n "$TMUX"  ] && export TERM=screen-256color
