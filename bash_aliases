@@ -51,8 +51,5 @@ alias be='b exec'
 alias bu='b update'
 alias binit='bi && b package && echo "vendor/ruby" >> .gitignore'
 
-# Use short-name for nanoc3
-alias nanoc='nanoc3'
-
 # Lock my screen quickly
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
