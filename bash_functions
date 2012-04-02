@@ -4,9 +4,9 @@ hack()
     var=$(history | ack $1 | grep -v 'bin/ack' | wc -l)
     if (( $var > 22 ))
     then
-        history | ack $1 | grep -v 'bin/ack' | less
+        history | ack $1 | grep -v hack | less
     else
-        history | ack $1 | grep -v 'bin/ack'
+        history | ack $1 | grep -v hack
     fi
 }
 
