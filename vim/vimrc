@@ -1,7 +1,5 @@
 filetype off
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
-runtime bundle/vim-unbundle/unbundle.vim
+call pathogen#infect()
 
 " Most general settings first
 set nocompatible            " Vim rather than Vi settings; must go first
@@ -74,8 +72,13 @@ set mouse=a
 
 " Use Solarized for my colorscheme
 "set t_Co=256
-set background=dark
-colorscheme solarized
+" set background=dark
+if has("gui_running")
+    colorscheme github
+else
+    set background=dark
+    colorscheme solarized
+endif
 
 " Fix placement of backups and swap files
 set backup
