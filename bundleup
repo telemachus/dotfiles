@@ -1,23 +1,21 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
-if [[ -d $HOME/.vim/bundle ]]; then
-    for bundle in $HOME/.vim/bundle/*
-    do
-        if [[ -d $bundle/.git ]]; then
-            printf "Working on \e[1m%s\e[m...\n" ${bundle##*/}
-            (cd $bundle; git pull 2>/dev/null )
-        fi
-    done
+START_DIR=$(pwd)
 
-    for bundle in $HOME/.vim/ftbundle/*
-    do
-        (cd $bundle
-        for bun in *
-        do
-            if [[ -d $bun/.git ]]; then
-                printf "Working on \e[1m%s\e[m...\n" ${bun##*/}
-                (cd $bun; git pull 2>/dev/null )
-            fi
-        done)
-    done
+if [ -d $HOME/.vim/autoload ]; then
+	cd $HOME/.vim/autoload
+	curl -so pathogen.vim \
+		https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
 fi
+
+if [ -d "$HOME/.vim/bundle" ]; then
+	for bundle in "$HOME/.vim/bundle/"*
+	do
+		if [ -d "$bundle/.git" ]; then
+			printf "Working on %s...\n" ${bundle##*/}
+			cd "$bundle"; git pull 2>/dev/null
+		fi
+	done
+fi
+
+cd $START_DIR
