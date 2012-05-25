@@ -27,10 +27,10 @@ alias ..='cd ..'
 alias ...='cd ../../'
 
 # Alias to add or edit aliases
-alias realias='vim ~/.bash_aliases;source ~/.bash_aliases'
+alias realias='vim ~/.bash_aliases && source ~/.bash_aliases'
 
 # Alias to add or edit functions
-alias refunction='vim ~/.bash_functions;source ~/.bash_functions'
+alias refunction='vim ~/.bash_functions && source ~/.bash_functions'
 
 # A few git aliases
 alias gs='git status'
