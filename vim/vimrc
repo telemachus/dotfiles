@@ -6,7 +6,7 @@ set nocompatible            " Vim rather than Vi settings; must go first
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 50 lines of command line history
-" set scrolloff=3             " A little breathing room
+set scrolloff=3             " A little breathing room
 set number                  " Always show line numbers
 set autoindent
 set tags=./tags;
