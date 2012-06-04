@@ -71,3 +71,9 @@ ccd() {
             ;;
     esac
 }
+
+## See https://twitter.com/#!/mlafeldt/status/192195940164173824
+# Get the absolute directory, symlinks resolved
+realdir() {
+    ( cd -P -- "${1:-.}" && pwd )
+}

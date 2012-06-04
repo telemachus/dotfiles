@@ -33,11 +33,11 @@ let g:is_posix = 1
 "let &showbreak = '+++ '
 set textwidth=75
 set colorcolumn=80
-set formatoptions=tcqn1
+" set formatoptions=tcqn1
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab               " Use spaces for tabs
+set noexpandtab
 set number
 
 " Use the same symbols as TextMate for tabstops and EOLs
@@ -63,6 +63,9 @@ set gdefault
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
 nnoremap <silent> <leader><space> :noh<cr>
+
+" Indent pastes properly
+nnoremap <leader>pi p`[v`]=
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -126,6 +129,8 @@ runtime macros/matchit.vim
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 \    setlocal filetype=markdown
 
+autocmd BufNewFile,BufNew,BufRead *.bnf
+\		setlocal filetype=bnf
 " Erlang settings
 autocmd FileType erlang
 \   setlocal foldmethod=indent tabstop=4 shiftwidth=4
