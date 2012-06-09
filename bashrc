@@ -47,7 +47,7 @@ export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
 export EDITOR=vim
 
 # Use CDPATH to make life better
-CDPATH=::$HOME:$HOME/code:$HOME/mmt/2011-2012
+CDPATH=::$HOME:$HOME/code
 INFOPATH=/usr/local/share/info:$INFOPATH
 
 ## Perl varia
@@ -112,7 +112,7 @@ export LESSOPEN
 # Set up JS-Test-Driver
 export JSTESTDRIVER_HOME=$HOME/bin
 # export HOMEBREW_VERBOSE=1
-export HOMEBREW_USE_GCC=1
+# export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
 # export CXX=g++-4.2
 export LUA_INIT="@$HOME/.lua_config.lua"
