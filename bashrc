@@ -57,7 +57,7 @@ export PERLBREW_ROOT=$HOME/.perl5/perlbrew
 if [[ -f $HOME/.perl5/perlbrew/etc/bashrc ]]; then
     source $HOME/.perl5/perlbrew/etc/bashrc
 fi
-export PERL_CPANM_OPT="--mirror file:///Users/telemachus/.minicpan\
+export PERL_CPANM_OPT="--mirror file:///$HOME/.minicpan\
     --mirror http://cpan.cpantesters.org"
 
 ## The prompt below gets ideas from the following:
