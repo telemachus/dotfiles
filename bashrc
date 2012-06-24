@@ -49,6 +49,7 @@ export EDITOR=vim
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/code
 INFOPATH=/usr/local/share/info:$INFOPATH
+INFODIR=/usr/local/share/info:$INFODIR
 
 ## Perl varia
 # put perlbrew where I want it and source it
@@ -109,13 +110,14 @@ export LESSOPEN
 
 [[ -d $HOME/bin ]] && export PATH=$PATH:$HOME/bin
 
+[[ -x $HOME/bin/rbfu ]] && eval "$(rbfu --init)"
+
 # Set up JS-Test-Driver
 export JSTESTDRIVER_HOME=$HOME/bin
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
 # export CXX=g++-4.2
-export LUA_INIT="@$HOME/.lua_config.lua"
-eval "$(luarocks path)"
-INFODIR=/usr/local/share/info:$INFODIR
-[ -n "$TMUX"  ] && export TERM=screen-256color
+[[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
+[[ command -v luarocks >/dev/null ]] && eval "$(luarocks path)"
+# [ -n "$TMUX"  ] && export TERM=screen-256color
