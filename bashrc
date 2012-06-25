@@ -119,5 +119,5 @@ export JSTESTDRIVER_HOME=$HOME/bin
 # export CC=gcc-4.2
 # export CXX=g++-4.2
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
-[[ command -v luarocks >/dev/null ]] && eval "$(luarocks path)"
+command -v luarocks >/dev/null && eval "$(luarocks path)"
 # [ -n "$TMUX"  ] && export TERM=screen-256color
