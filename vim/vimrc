@@ -37,7 +37,7 @@ set colorcolumn=80
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set number
 
 " Use the same symbols as TextMate for tabstops and EOLs
