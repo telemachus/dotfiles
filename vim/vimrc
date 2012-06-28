@@ -141,3 +141,7 @@ let erlang_show_errors = 0
 let erlang_skel_header = {'author':
 \   'Peter Aronoff <telemachus@arpinum.org>',
 \   'owner' : 'Peter Aronoff'}
+
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
