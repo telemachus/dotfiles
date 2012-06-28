@@ -43,8 +43,9 @@ git clone http://github.com/tpope/vim-rake.git
 git clone https://github.com/vim-ruby/vim-ruby.git
 git clone https://github.com/nelstrom/vim-textobj-rubyblock.git
 git clone https://github.com/cakebaker/scss-syntax.vim.git
-git clone https://github.com/wincent/Command-T.git
 git clone https://github.com/sunaku/vim-ruby-minitest
+git clone https://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/wincent/Command-T.git
 cd $HOME/.vim/bundle/Command-T/ruby/command-t
 /usr/bin/ruby extconf.rb
 make
