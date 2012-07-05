@@ -112,6 +112,9 @@ export LESSOPEN
 
 [[ -x $HOME/bin/rbfu ]] && eval "$(rbfu --init)"
 
+[[ -d "/Applications/Postgres.app" ]] &&
+	PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
+
 # Set up JS-Test-Driver
 export JSTESTDRIVER_HOME=$HOME/bin
 # export HOMEBREW_VERBOSE=1

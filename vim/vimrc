@@ -6,7 +6,7 @@ set nocompatible            " Vim rather than Vi settings; must go first
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 50 lines of command line history
-set scrolloff=3             " A little breathing room
+set scrolloff=0             " No breathing room
 set number                  " Always show line numbers
 set autoindent
 set tags=./tags;
@@ -32,17 +32,17 @@ let g:is_posix = 1
 "set linebreak
 "let &showbreak = '+++ '
 set textwidth=75
-set colorcolumn=80
+set colorcolumn=78
 " set formatoptions=tcqn1
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set noexpandtab
 set number
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸-,trail:·,eol:¬
-set list
+set nolist
 
 " Editor layout {{{
 set termencoding=utf-8
@@ -141,3 +141,7 @@ let erlang_show_errors = 0
 let erlang_skel_header = {'author':
 \   'Peter Aronoff <telemachus@arpinum.org>',
 \   'owner' : 'Peter Aronoff'}
+
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
