@@ -38,7 +38,6 @@ alias gd='git diff'
 alias gdh='git diff HEAD'
 alias gl='git pull'
 alias gp='git push'
-alias sched='ruby $HOME/bin/schedule.rb'
 
 # View current playlist with numbers
 alias nlist='mpc playlist | cat -n -'
@@ -53,3 +52,9 @@ alias binit='bi && b package && echo "vendor/ruby" >> .gitignore'
 
 # Lock my screen quickly
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+
+# gist appears to be unmaintained
+alias gist='jist'
+
+# reindex spotlight
+respotlight='sudo mdutil -E /'
