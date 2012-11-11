@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.user.clean</string>
+
+  <key>LowPriorityIO</key>
+  <true/>
+
+  <key>Program</key>
+  <string>/Users/user/bin/clean.sh</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/user/bin/clean.sh</string>
+  </array>
+
+  <key>WatchPaths</key>
+  <array>
+      <string>/Users/user</string>
+  </array>
+
+  <key>Nice</key>
+  <integer>10</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/clean.err</string>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/clean.out</string>
+</dict>
+</plist>
