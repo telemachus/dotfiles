@@ -67,14 +67,14 @@ export PERL_CPANM_OPT="--mirror file:///$HOME/.minicpan\
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
 # http://github.com/adamv/dotfiles/blob/master/bashrc
 # http://wiki.archlinux.org/index.php/Color_Bash_Prompt
-txtred='\[\e[0;31m\]' # Red
-txtwht='\[\e[0;37m\]' # White
-bldred='\[\e[1;31m\]' # Red
-bldgrn='\[\e[1;32m\]' # Green
-bldylw='\[\e[1;33m\]' # Yellow
-bldwht='\[\e[1;37m\]' # White
-bldcyn='\[\e[1;36m\]' # Cyan
-end='\[\e[0m\]'       # Text Reset
+# txtred='\[\e[0;31m\]' # Red
+# txtwht='\[\e[0;37m\]' # White
+# bldred='\[\e[1;31m\]' # Red
+# bldgrn='\[\e[1;32m\]' # Green
+# bldylw='\[\e[1;33m\]' # Yellow
+# bldwht='\[\e[1;37m\]' # White
+# bldcyn='\[\e[1;36m\]' # Cyan
+# end='\[\e[0m\]'       # Text Reset
 
 set_titlebar() {
     case $TERM in
