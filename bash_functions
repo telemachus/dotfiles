@@ -4,9 +4,9 @@ hack()
     var=$(history | ack $1 | grep -v 'bin/ack' | wc -l)
     if (( $var > 22 ))
     then
-        history | ack $1 | grep -v hack | less
+        history | ack $1 | grep -v '; hack' | less
     else
-        history | ack $1 | grep -v hack
+        history | ack $1 | grep -v '; hack'
     fi
 }
 
@@ -56,7 +56,7 @@ ccd() {
             newdir=${PWD//$1/$2}
             case "$newdir" in
                 $PWD)
-                    echo "ccd: bad substitution" >&2
+                    printf "ccd: bad substitution\n" >&2
                     return 1
                     ;;
                 *)
@@ -66,7 +66,7 @@ ccd() {
             esac
             ;;
         *)
-            echo "ccd: wrong arg count" 1>&2
+            printf "ccd: wrong arg count\n" 1>&2
             return 1
             ;;
     esac
@@ -76,4 +76,18 @@ ccd() {
 # Get the absolute directory, symlinks resolved
 realdir() {
     ( cd -P -- "${1:-.}" && pwd )
+}
+
+# Preview a markdown document in bcat
+preview() {
+    markdown "$1" | bcat
+}
+
+# Create a directory and cd into it
+mkcd() {
+    mkdir "$1" && cd "$1"
+}
+
+colors() {
+    printf "red orange yellow green blue purple\n"
 }

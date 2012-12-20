@@ -33,16 +33,13 @@ let g:is_posix = 1
 "let &showbreak = '+++ '
 set textwidth=75
 set colorcolumn=78
-" set formatoptions=tcqn1
+set formatoptions=tcqn1
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 set number
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸-,trail:·,eol:¬
-set nolist
+autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
 
 " Editor layout {{{
 set termencoding=utf-8
@@ -52,6 +49,10 @@ set laststatus=2            " Always put a status line in, even
 set showtabline=2           " Show a tabbar on top, always
 set cmdheight=2             " Use a status bar that is 2 rows high
 " }}}
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,trail:·,eol:¬
+set list
 
 " An easier leader than \
 let mapleader = ","
@@ -80,7 +81,7 @@ if has("gui_running")
     colorscheme github
 else
     set background=dark
-    colorscheme solarized
+    colorscheme lucius
 endif
 
 " Fix placement of backups and swap files
@@ -108,14 +109,16 @@ set title
 set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
 imap <leader>/ <C-X>/
-imap <C-_>     <C-X><SPACE>
-imap <leader>w <M-e>
+"I don't think I use these any more, do I?
+" imap <C-_>     <C-X><SPACE>
+" imap <leader>w <M-e>
 
 " let g:delimitMate_excluded_regions = "Comment,String"
 
 " status line hijinks
+" I've disabled ruby-checking, but in case I want it back:
+" \%{exists('g:loaded_rbenv')?rbenv#statusline_ft_ruby():''}
 set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
-\%{exists('g:loaded_rbenv')?rbenv#statusline_ft_ruby():''}
 \%{exists('g:loaded_perlbrew')?perlbrew#statusline_ft_perl():''}
 \%{exists('g:loaded_fugitive')?fugitive#statusline():''}
 \%=%-14.(%l,%c%V%)\ %P
@@ -124,13 +127,26 @@ set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 nnoremap <silent><leader>l :set list!<CR>
 
 runtime macros/matchit.vim
+
+" Some tips from Practical Vim
 "
+"   Use %% to get current buffer's directory for :edit, :write, :saveas and
+"   :find
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
+"
+"   bash-style TAB expansion
+set wildmode=longest,list
+
 " Make sure Markdown files are properly recognized
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
-\    setlocal filetype=markdown
+\   setlocal filetype=markdown
 
 autocmd BufNewFile,BufNew,BufRead *.bnf
-\		setlocal filetype=bnf
+\   setlocal filetype=bnf
+
+autocmd BufNewFile,BufNew,BufRead *.rockspec
+\   setlocal filetype=lua
+
 " Erlang settings
 autocmd FileType erlang
 \   setlocal foldmethod=indent tabstop=4 shiftwidth=4
@@ -142,6 +158,5 @@ let erlang_skel_header = {'author':
 \   'Peter Aronoff <telemachus@arpinum.org>',
 \   'owner' : 'Peter Aronoff'}
 
-let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
