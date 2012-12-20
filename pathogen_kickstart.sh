@@ -33,19 +33,14 @@ git clone https://github.com/kana/vim-textobj-lastpat.git
 git clone https://github.com/kana/vim-textobj-user.git
 git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/telemachus/vim-varia.git
-git clone https://github.com/kchmck/vim-coffee-script.git
-git clone https://github.com/lukerandall/haskellmode-vim.git
 git clone https://github.com/gregsexton/MatchTag.git
-git clone https://github.com/pangloss/vim-javascript.git
 git clone http://github.com/sukima/vim-markdown.git
-git clone https://github.com/telemachus/vim-perlbrew.git
 git clone http://github.com/tpope/vim-rake.git
 git clone https://github.com/vim-ruby/vim-ruby.git
 git clone https://github.com/nelstrom/vim-textobj-rubyblock.git
-git clone https://github.com/cakebaker/scss-syntax.vim.git
 git clone https://github.com/sunaku/vim-ruby-minitest
 git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/wincent/Command-T.git
 cd $HOME/.vim/bundle/Command-T/ruby/command-t
-/usr/bin/ruby extconf.rb
+$(which ruby) extconf.rb
 make
