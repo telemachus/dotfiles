@@ -133,11 +133,6 @@ export LESSOPEN
 command -v luarocks >/dev/null && eval "$(luarocks path)"
 # [ -n "$TMUX"  ] && export TERM=screen-256color
 
-# Let's try chruby for a while
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-RUBIES=( $HOME/.rubies/* )
-# chruby 1.9.3
-
 # From http://mah.everybody.org/docs/ssh
 SSH_ENV="$HOME/.ssh/environment"
 
@@ -159,5 +154,3 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
-
-chruby 1.9.3
