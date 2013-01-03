@@ -57,4 +57,7 @@ alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resour
 alias gist='jist'
 
 # reindex spotlight
-respotlight='sudo mdutil -E /'
+alias respotlight='sudo mdutil -E /'
+
+# convenience invocation of head
+alias one='head -n1'
