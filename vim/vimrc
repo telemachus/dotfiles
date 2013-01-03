@@ -164,3 +164,5 @@ let erlang_skel_header = {'author':
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+
+let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
