@@ -95,12 +95,18 @@ get_sha() {
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWCOLORHINTS=
+GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWUPSTREAM="auto git"
 
-# if [ $VIM ]; then export PS1=...
-
-export PS1='\u \W$(__git_ps1 " [%s $(get_sha)]")\$ '
+export PS1='$(__git_ps1 "{%s $(get_sha)}")\$ '
+# export PROMPT_COMMAND='__git_ps1 "\u \W" "\\\$ " "[%s $(get_sha)]"; set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
 export PROMPT_COMMAND='set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
+
+# if [ "$VIM" ]; then
+#     PS1='\$ '
+# fi
+
 
 ## Pager stuff
 # MANPAGER=less
