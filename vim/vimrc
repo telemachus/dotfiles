@@ -17,8 +17,12 @@ set showcmd                 " Display incomplete commands
 set showmode                " Display current mode
 set ls=2                    " Always show status bar
 
-" Remove overbright matching of parentheses
-let g:loaded_matchparen = 1
+" Control matchparen: I want it for scheme, but only there.
+" If you set loaded_matchparen = 1, then you can't turn it the feature
+" later.
+" let loaded_matchparen = 0
+autocmd FileType ruby,lua,bash,sh,perl,c,erlang NoMatchParen
+autocmd FileType scheme DoMatchParen
 
 " Syntax basics
 syntax on
