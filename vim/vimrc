@@ -21,7 +21,7 @@ set ls=2                    " Always show status bar
 " If you set loaded_matchparen = 1, then you can't turn it the feature
 " later.
 " let loaded_matchparen = 0
-autocmd FileType ruby,lua,bash,sh,perl,c,erlang NoMatchParen
+autocmd FileType ruby,lua,bash,sh,perl,c,erlang,mail NoMatchParen
 autocmd FileType scheme DoMatchParen
 
 " Syntax basics
