@@ -123,12 +123,16 @@ export LESSOPEN
 [[ -d "/Applications/Postgres.app" ]] &&
     PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
+[[ -d "/usr/local/Cellar/smlnj/110.75/libexec/bin" ]] &&
+    PATH=$PATH:"/usr/local/Cellar/smlnj/110.75/libexec/bin"
+
 # Set up JS-Test-Driver
 # export JSTESTDRIVER_HOME=$HOME/bin
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
 # export CXX=g++-4.2
+export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
 command -v luarocks >/dev/null && eval "$(luarocks path)"
 # [ -n "$TMUX"  ] && export TERM=screen-256color
