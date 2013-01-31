@@ -1,0 +1,10 @@
+#!/usr/bin/env dash -e
+
+case $# in
+    1 ) cat >> "$1"
+        ;;
+    2 ) cat "$1" >> "$2"
+        ;;
+    * ) printf "Usage: %s [fromfile] tofile" "$0" 1>&2
+        exit 1
+esac

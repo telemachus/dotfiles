@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require 'growl'
+
+haiku = `haiku`
+
+n = Growl.new
+n.message = haiku
+n.image = ENV['HOME'] + '/bin/fuji.png'
+n.run
+## Add this or the like to a cronjob, and away we go:
+## 45 7-16 * * 1-5 /usr/bin/perl "$HOME/.bin/alert"

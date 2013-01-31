@@ -1,0 +1,517 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+my $haiku;
+$/ = "%%\n";
+rand($.) < 1 && ($haiku = $_) while <DATA>;
+
+$haiku =~ s/%%//; # Instead of chomp, accounts for extra \n
+
+print "\n$haiku";
+
+__DATA__
+   Even in Kyoto
+hearing the cuckoo's cry--
+   I long for Kyoto.
+    Basho
+%%
+   This road--
+no one goes down it,
+   autumn evening.
+    Basho
+%%
+   The whitebait
+opens its black eye
+   in the net of the law.
+    Basho
+%%
+   Felling a tree
+and seeing the cut end--
+   tonight's moon.
+    Basho
+%%
+   Autumn moonlight--
+a worm digs silently
+   into the chestnut.
+    Basho
+%%
+   A snowy morning--
+by myself,
+   chewing on dried salmon.
+    Basho
+%%
+   A crow
+has settled on a bare branch--
+   autumn evening.
+    Basho
+%%
+   On the way to the outhouse--
+the white of the moonflower
+   by torchlight.
+    Basho
+%%
+   The crane's legs
+have gotten shorter
+   in the spring rain.
+    Basho
+%%
+   First day of spring--
+I keep thinking about
+   the end of autumn.
+    Basho
+%%
+   Weathered bones
+on my mind,
+   a wind-pierced body.
+    Basho
+%%
+   In this world
+We walk on the roof of hell
+   Gazing at flowers.
+    Issa
+%%
+   Misty rain,
+can't see Fuji
+   --interesting!
+    Basho
+%%
+   As for the hibiscus
+on the roadside--
+   my horse ate it.
+    Basho
+%%
+   It would melt
+in my hand--
+   the autumn frost.
+    Basho
+%%
+   I go,
+you stay;
+   two autumns.
+    Buson
+%%
+   The two plum trees--
+I love their blooming!
+   one early, one later.
+    Buson
+%%
+   Coolness--
+the sound of the bell
+   as it leaves the bell.
+    Buson
+%%
+   White blossoms of the pear
+and a woman in moonlight
+   reading a letter.
+    Buson
+%%
+   Plums in blossom
+and the geishas who can't go out
+   are buying sashes.
+    Buson
+%%
+   The spring sea rising
+and falling,rising
+   and falling all day.
+    Buson
+%%
+   How awkward it looks
+swimming--
+   the frog.
+    Buson
+%%
+   The old pond--
+a frog jumps in,
+   sound of water.
+    Basho
+%%
+   New Year's Day--
+everything is in blossom!
+   I feel about average.
+    Issa
+%%
+   The snow is melting
+and the village is flooded
+   with children.
+    Issa
+%%
+   Don't worry, spiders,
+I keep house
+   casually.
+    Issa
+%%
+   Noon,
+orioles singing,
+   the river flows in silence.
+    Issa
+%%
+   Goes out,
+comes back--
+   the loves of a cat.
+    Issa
+%%
+   Children imitating cormorants
+are even more wonderful
+   than cormorants.
+    Issa
+%%
+   Mosquito at my ear--
+does it think
+   I'm deaf?
+    Issa
+%%
+   What a strange thing!
+to be alive
+   beneath cherry blossoms.
+    Issa
+%%
+   Deer licking
+first frost
+   from each other's coats.
+    Issa
+%%
+   Moon, plum blossoms,
+this, that,
+   and the day goes.
+    Issa
+%%
+   In the white plum blossoms
+night to next day
+   just turning.
+    Buson
+%%
+   Asked how old he was,
+the boy in the new kimono
+   stretched out all five fingers.
+    Issa
+%%
+   My cat,
+frisking in the scale,
+   records its weight.
+    Issa.
+%%
+   I'm going out,
+flies, so relax,
+   make love.
+    Issa
+%%
+   Even on the smallest islands,
+they are tilling the fields,
+   skylarks singing.
+    Issa
+%%
+   Seen
+through a telescope
+   ten cents worth of fog.
+    Issa
+%%
+   January--
+in other provinces,
+   plums blooming.
+    Issa
+%%
+   For you fleas too
+the nights must be long,
+   they must be lonely.
+    Issa
+%%
+   Even with insects--
+some can sing
+   some can't.
+    Issa
+%%
+   Blossoms at night,
+and the faces of people
+   moved by music.
+    Issa
+%%
+   If the times were good,
+I'd ask one more of you to join me,
+   flies.
+    Issa
+%%
+   Sick on a journey,
+my dreams wander
+   the withered fields.
+    Basho
+%%
+   All the time I pray to Buddha
+I keep on
+   killing mosquitoes.
+    Issa
+%%
+   The moon and the flowers,
+forty-nine years,
+   walking around, wasting time.
+    Issa
+%%
+   Full moon;
+my ramshackle hut
+   is what it is.
+    Issa
+%%
+   Even a fleabite,
+when she's young,
+   is beautiful.
+    Issa
+%%
+   One human being,
+one fly,
+   in a large room.
+    Issa
+%%
+   What good luck!
+Bitten by
+   this year's mosquitoes too.
+    Issa
+%%
+   The toad! It looks like
+it could belch
+   a cloud.
+    Issa
+%%
+   Red morning sky,
+snail;
+   are you glad of it?
+    Issa
+%%
+   The bedbugs
+scatter as I clean,
+   parents and children.
+    Issa
+%%
+   Napped half the day;
+no one
+   punished me!
+    Issa
+%%
+   In the white plum blossoms
+night to next day
+   just turning.
+    Buson
+%%
+   She's put the child to sleep
+and now she washes clothes
+   under the summer moon.
+    Issa
+%%
+   Not yet become a Buddha,
+this ancient pine tree,
+   dreaming.
+    Issa
+%%
+   In spring rain
+a pretty girl
+   yawning.
+    Issa
+%%
+   Fom the end of the nose
+of the Buddha on the moor
+   hang icicles.
+    Issa
+%%
+   Washing the saucepans--
+the moon glows on her hands
+   in the shallow river.
+    Issa
+%%
+   Not very anxious
+to bloom,
+   my plum tree.
+    Issa
+%%
+   Face of the spring moon--
+about twelve years old,
+   I'd say.
+    Issa
+%%
+   Zealous flea,
+you're about to be a Buddha
+   by my hand.
+    Issa
+%%
+   Fleas in my hut,
+it's my fault
+   you look so skinny.
+    Issa
+%%
+   Another year gone--
+hat in my hand,
+   sandals on my feet.
+    Basho
+%%
+   Deep autumn--
+my neighbor,
+   how does he live, I wonder?
+    Basho
+%%
+   Many nights on the road
+and not dead yet--
+   the end of autumn.
+    Basho
+%%
+   A bee
+staggers out
+   of the peony.
+    Basho
+%%
+   Awake at night--
+the sound of the water jar
+   cracking in the cold
+    Basho
+%%
+   Midfield,
+attached to nothing,
+   the skylark singing.
+    Basho
+%%
+   Clear water--
+a tiny crab
+   crawling up my leg.
+    Basho
+%%
+   Sickly,
+but somehow the chrysanthemum
+   is budding.
+    Basho
+%%
+   A petal shower
+of mountain roses,
+   and the sound of the rapids.
+    Basho
+%%
+   I don't know
+which tree it comes from,
+   that fragrance.
+    Basho
+%%
+   The jars of octopus--
+brief dreams
+   under the summer moon.
+    Basho
+%%
+   Exciting at first,
+then sad,
+   watching the cormorant-fishing.
+    Basho
+%%
+   Not this human sadness,
+cuckoo,
+   but your solitary cry.
+    Basho
+%%
+   Seeing people off,
+being seen off--
+   autumn in Kiso.
+    Basho
+%%
+   It's not like anything
+they compare it to--
+   the summer moon.
+    Basho
+%%
+   From all these trees,
+in the salads, the soup, everywhere,
+   cherry blossoms fall.
+    Basho
+%%
+   No talent
+and no sin,
+   a winter day.
+    Issa
+%%
+   The cuckoo sings
+to me, to the mountain,
+   to me, to the mountain.
+    Issa
+%%
+   A poor box;
+four or five pennies,
+   evening rain.
+    Issa
+%%
+   The fat priest--
+edging out
+   while he reads the last prayer.
+    Issa
+%%
+   Writing shit about new snow
+for the rich
+   is not art.
+    Issa
+%%
+   From now on,
+it's all clear profit,
+   every sky.
+    Issa
+%%
+   Mother I never knew,
+every time I see the ocean,
+   every time--
+    Issa
+%%
+   The snail gets up
+and goes to bed
+   with very little fuss.
+    Issa
+%%
+   The world of dew
+is the world of dew.
+   And yet, and yet--
+    Issa
+%%
+   Not knowing
+it's a tub they're in,
+   the fish cooling at the gate.
+    Issa
+%%
+   With my father
+I would watch dawn
+   over green fields.
+    Issa
+%%
+   Windy fall--
+these are the scarlet flowers
+   she liked to pick.
+    Issa
+%%
+   Here,
+I'm here--
+   the snow falling.
+    Issa
+%%
+   This first fallen snow
+is barely enough to bend
+   the jonquil leaves
+    Basho
+%%
+   Traveling this high
+mountain trail, delighted
+   by violets
+    Basho
+%%
+   A solitary
+crow on a bare branch--
+   autumn evening
+    Basho
+%%
+   Nothing in the cry
+of cicadas suggests they
+   are about to die
+    Basho
+%%
+   Just beyond the gate,
+a neat yellow hole--
+   someone pissed in the snow
+    Issa
+%%
+   People working fields,
+from my deepest heart, I bow.
+   Now a little nap.
+    Issa
+%%
+   Brilliant moon,
+is it true that you too
+   must pass in a hurry
+    Issa
