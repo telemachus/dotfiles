@@ -5,7 +5,8 @@ haiku = `haiku`
 
 n = Growl.new
 n.message = haiku
-n.image = ENV['HOME'] + '/bin/fuji.png'
+n.image = File.join(File.dirname(__FILE__), 'fuji.png')
 n.run
+puts File.join(Dir.pwd, 'fuji.png')
 ## Add this or the like to a cronjob, and away we go:
 ## 45 7-16 * * 1-5 /usr/bin/perl "$HOME/.bin/alert"
