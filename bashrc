@@ -137,24 +137,7 @@ export RLWRAP_HOME="$HOME/.rlwrap"
 command -v luarocks >/dev/null && eval "$(luarocks path)"
 # [ -n "$TMUX"  ] && export TERM=screen-256color
 
-# From http://mah.everybody.org/docs/ssh
-SSH_ENV="$HOME/.ssh/environment"
-
-start_agent() {
-    printf "Initializing new SSH agent...\n"
-    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-    printf "Successful start of SSH agent.\n"
-    chmod 600 "${SSH_ENV}"
-    source "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
-}
-
-# # Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-    source "${SSH_ENV}" > /dev/null
-    ps -ef | grep "${SSH_AGENT_PID}" | grep ssh-agent$ > /dev/null || {
-        start_agent;
-    }
-else
-    start_agent;
-fi
+# chruby settings
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+RUBIES=( $HOME/.rubies/* )
+chruby 1.9.3
