@@ -1,0 +1,11 @@
+#!/usr/bin/env awk -f
+
+{
+    i=$1
+    sub(i,x)
+    A[i]=A[i]$0
+}
+
+FILENAME==ARGV[ARGC-1] {
+    print i A[i]
+}
