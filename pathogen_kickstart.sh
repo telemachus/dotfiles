@@ -16,24 +16,18 @@ curl -so pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/HEAD/autoload/pathogen.vim
 cd $HOME/.vim/bundle
 git clone https://github.com/gregsexton/MatchTag.git
-git clone https://github.com/gregsexton/Muon.git
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/jiangmiao/auto-pairs.git
 git clone https://github.com/mattn/gist-vim.git
 git clone https://github.com/msanders/snipmate.vim.git
 git clone https://github.com/sjl/strftimedammit.vim.git
-git clone https://github.com/tristen/superman.git
-git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/tpope/vim-endwise.git
 git clone https://github.com/tpope/vim-eunuch
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/tpope/vim-git.git
-git clone https://github.com/embear/vim-localvimrc.git
-git clone http://github.com/sukima/vim-markdown.git
-git clone https://github.com/telemachus/vim-perlbrew.git
-git clone https://github.com/tpope/vim-ragtag.git
-git clone http://github.com/tpope/vim-rake.git
+git clone https://github.com/sukima/vim-markdown.git
+git clone https://github.com/tpope/vim-rake.git
 git clone https://github.com/tpope/vim-repeat.git
 git clone https://github.com/vim-ruby/vim-ruby.git
 git clone https://github.com/sunaku/vim-ruby-minitest
@@ -49,7 +43,7 @@ git clone https://github.com/bronson/vim-trailing-whitespace.git
 git clone https://github.com/tpope/vim-unimpaired
 git clone https://github.com/telemachus/vim-varia.git
 git clone https://github.com/mattn/webapi-vim.git
-git clone https://github.com/wincent/Command-T.git
-cd $HOME/.vim/bundle/Command-T/ruby/command-t
-$(which ruby) extconf.rb
-make
+git clone https://github.com/wincent/Command-T.git &&
+    cd $HOME/.vim/bundle/Command-T/ruby/command-t &&
+    $(which ruby) extconf.rb &&
+    make
