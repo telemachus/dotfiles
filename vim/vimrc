@@ -5,7 +5,7 @@ call pathogen#infect()
 set nocompatible            " Vim rather than Vi settings; must go first
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
-set history=500             " Keep 50 lines of command line history
+set history=500             " Keep 500 lines of command line history
 set scrolloff=0             " No breathing room
 set number                  " Always show line numbers
 set autoindent
@@ -144,6 +144,18 @@ set wildmode=longest,list
 " Make sure Markdown files are properly recognized
 autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 \   setlocal filetype=markdown
+
+" Git rebase bindings from
+" http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
+augroup vim_config
+    autocmd FileType gitrebase call LoadGitrebaseBindings()
+augroup END
+
+fun! LoadGitrebaseBindings()
+    nnoremap P :Pick
+    nnoremap S :Squash
+    nnoremap C :Cycle
+endfun
 
 autocmd BufNewFile,BufNew,BufRead *.bnf
 \   setlocal filetype=bnf
