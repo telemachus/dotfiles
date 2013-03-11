@@ -1,3 +1,0 @@
-#!/usr/bin/env dash
-
-curl -s -d "long_url=$1" http://metamark.net/api/rest/simple | pbcopy
