@@ -61,3 +61,4 @@ alias respotlight='sudo mdutil -E /'
 
 # convenience invocation of head
 alias one='head -n1'
+alias ldoc='ldoc.lua'
