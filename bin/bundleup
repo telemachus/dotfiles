@@ -20,5 +20,5 @@ if [ -d "$HOME/.vim/bundle" ]; then
             fi
         fi
     done
-    cd "$here"
+    # cd "$here"
 fi

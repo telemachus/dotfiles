@@ -49,7 +49,7 @@ export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
 export EDITOR=vim
 
 # Use CDPATH to make life better
-CDPATH=::$HOME:$HOME/code
+CDPATH=::$HOME:$HOME/projects
 INFOPATH=/usr/local/share/info:$INFOPATH
 INFODIR=/usr/local/share/info:$INFODIR
 
