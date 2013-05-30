@@ -1,6 +1,6 @@
 # For testing
- # set -x
- # set -u
+# set -x
+# set -u
 
 ## A few global settings
 # + check the window size after each command and, if necessary,
@@ -20,7 +20,7 @@ export MAILDIR=$HOME/.maildir
 
 [[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
-bc="$HOME/local/bash-completion-2.0/share/bash-completion/bash_completion"
+bc="$HOME/local/bc/share/bash-completion/bash_completion"
 [[ $PS1 && -f $bc ]] && source $bc
 
 [[ -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
@@ -28,7 +28,7 @@ bc="$HOME/local/bash-completion-2.0/share/bash-completion/bash_completion"
 [[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]] \
     && source /usr/local/Library/Contributions/brew_bash_completion.sh
 
-[[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
+# [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
 ## History settings
 # + bigger is better
@@ -53,15 +53,18 @@ CDPATH=::$HOME:$HOME/projects
 INFOPATH=/usr/local/share/info:$INFOPATH
 INFODIR=/usr/local/share/info:$INFODIR
 
+## FIGNORE
+# FIGNORE=bst:aux:bbl:blg:pdf:fls:fdb_latexmk
+
 ## Perl varia
 # put perlbrew where I want it and source it
 # defaults for cpanminus
-export PERLBREW_ROOT=$HOME/.perl5/perlbrew
-if [[ -f $HOME/.perl5/perlbrew/etc/bashrc ]]; then
-    source $HOME/.perl5/perlbrew/etc/bashrc
-fi
-export PERL_CPANM_OPT="--mirror file:///$HOME/.minicpan\
-    --mirror http://cpan.cpantesters.org"
+# export PERLBREW_ROOT=$HOME/.perl5/perlbrew
+# if [[ -f $HOME/.perl5/perlbrew/etc/bashrc ]]; then
+#     source $HOME/.perl5/perlbrew/etc/bashrc
+# fi
+# export PERL_CPANM_OPT="--mirror file:///$HOME/.minicpan\
+#     --mirror http://cpan.cpantesters.org"
 
 ## The prompt below gets ideas from the following:
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
@@ -101,7 +104,11 @@ GIT_PS1_SHOWUPSTREAM="auto git"
 
 export PS1='$(__git_ps1 "{%s $(get_sha)}")\$ '
 # export PROMPT_COMMAND='__git_ps1 "\u \W" "\\\$ " "[%s $(get_sha)]"; set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
-export PROMPT_COMMAND='set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
+
+export PROMPT_COMMAND='
+    set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"
+    FIGNORE=bst:aux:bbl:blg:fls:fdb_latexmk
+'
 
 # if [ "$VIM" ]; then
 #     PS1='\$ '
@@ -118,7 +125,7 @@ export LESS
     && LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 export LESSOPEN
 
-[[ -d $HOME/bin ]] && export PATH=$PATH:$HOME/bin
+# [[ -d $HOME/bin ]] && export PATH=$PATH:$HOME/bin
 
 # [[ -d "/Applications/Postgres.app" ]] &&
 #     PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
@@ -140,6 +147,6 @@ command -v luarocks >/dev/null && eval "$(luarocks path)"
 # export CVS_RSH=ssh
 
 # chruby settings
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-RUBIES=( $HOME/.rubies/* )
-chruby 1.9.3
+# source /usr/local/opt/chruby/share/chruby/chruby.sh
+# RUBIES=( $HOME/.rubies/* )
+# chruby 1.9.3
