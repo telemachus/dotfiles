@@ -184,3 +184,4 @@ let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do scri
 let g:tex_conceal=''
 
 let g:gist_clip_command='pbcopy'
+let g:github_user = 'telemachus'
