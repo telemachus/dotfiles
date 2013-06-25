@@ -91,3 +91,9 @@ mkcd() {
 colors() {
     printf "red orange yellow green blue purple\n"
 }
+
+bumpvim() {
+    brew up
+    brew uninstall vim
+    brew install --env=std telemachus/vim/vim
+}
