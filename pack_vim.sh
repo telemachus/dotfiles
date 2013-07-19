@@ -16,7 +16,7 @@ git_dirty() {
         warn "Uncommitted changes in $PWD."
     fi
 
-    if [ -z "$(git ls-files --exclude-standard --others)" ]; then
+    if [ -n "$(git ls-files --exclude-standard --others)" ]; then
         warn "Untracked files in $PWD."
     fi
 }
