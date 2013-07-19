@@ -132,6 +132,7 @@ set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
 
 " Shortcut to rapidly toggle `set list`
 nnoremap <silent><leader>l :set list!<CR>
+nnoremap <leader>) )ge
 
 runtime macros/matchit.vim
 
@@ -185,3 +186,18 @@ let g:tex_conceal=''
 
 let g:gist_clip_command='pbcopy'
 let g:github_user = 'telemachus'
+
+" vim-airline settings
+" Separators
+" let g:airline_left_sep='>>'
+" let g:airline_right_sep='<<'
+" fugitive and syntastic off
+let g:airline_enable_fugitive=0
+let g:airline_enable_syntastic=0
+" " Set second section to filename
+" let g:airline_section_b='%f'
+" " Empty third and fourth sections
+" let g:airline_section_c=''
+" let g:airline_section_x=''
+" " Put filetype in fifth section
+" let g:airline_section_y='%Y'

@@ -95,5 +95,19 @@ colors() {
 bumpvim() {
     brew up
     brew uninstall vim
-    brew install --env=std telemachus/vim/vim
+    brew install --env=std telemachus/brew/vim
+}
+
+shorten() {
+    curl -s --data-urlencode "long_url=${1:-$(pbpaste)}" \
+        http://metamark.net/api/rest/simple | pbcopy
+}
+
+bitly() {
+    curl -s \
+        --data-urlencode "login=telemachus" \
+        --data-urlencode "apiKey=R_05e66ace4fa4e5fbfe96d70a4d2bef8e" \
+        --data-urlencode "longUrl=${1:-$(pbpaste)}" \
+        http://api.bit.ly/v3/shorten | jq '.data.url' -M -r | tr -d '\n' \
+        | pbcopy
 }
