@@ -4,6 +4,11 @@
 "\e[B": history-search-forward
 "\e[A": history-search-backward
 
+$if csi
+    set show-all-if-ambiguous on
+    "\C-p": menu-complete
+$endif
+
 $if Bash
     # append a '/' to show a dir is a dir
     set mark-directories on

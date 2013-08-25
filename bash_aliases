@@ -34,6 +34,7 @@ alias refunction='vim ~/.bash_functions && source ~/.bash_functions'
 
 # A few git aliases
 alias gs='git status -sb'
+alias g.='gs .'
 alias gd='git diff'
 alias gdh='git diff HEAD'
 alias gl='git pull'
@@ -62,3 +63,6 @@ alias respotlight='sudo mdutil -E /'
 # convenience invocation of head
 alias one='head -n1'
 alias ldoc='ldoc.lua'
+
+# Make life simpler
+alias words='wc -w'

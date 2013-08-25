@@ -111,3 +111,7 @@ bitly() {
         http://api.bit.ly/v3/shorten | jq '.data.url' -M -r | tr -d '\n' \
         | pbcopy
 }
+
+csview () {
+ <$1 sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
+}

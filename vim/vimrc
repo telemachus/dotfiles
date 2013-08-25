@@ -10,6 +10,7 @@ set scrolloff=0             " No breathing room
 set number                  " Always show line numbers
 set autoindent
 set tags=./tags;
+set ttimeoutlen=50
 
 " Set items for view @ bottom of windows
 set ruler                   " Show the cursor position all the time
@@ -72,6 +73,9 @@ set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
 nnoremap <silent> <leader><space> :noh<cr>
 
+" Open folds in normal mode with <space>
+nnoremap <space> za
+
 " Indent pastes properly
 nnoremap <leader>pi p`[v`]=
 
@@ -81,14 +85,13 @@ map Q gq
 " Enable mouse
 set mouse=a
 
-" Use Solarized for my colorscheme
-"set t_Co=256
-" set background=dark
+" Use github, a light colorscheme, in the gui and Tomorrow-Night-Bright,
+" a dark colorscheme, in the terminal.
 if has("gui_running")
     colorscheme github
 else
     set background=dark
-    colorscheme lucius
+    colorscheme Tomorrow-Night-Bright
 endif
 
 " Fix placement of backups and swap files
@@ -115,7 +118,7 @@ nnoremap ` '
 set title
 set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
-imap <leader>/ <C-X>/
+" imap <leader>/ <C-X>/
 "I don't think I use these any more, do I?
 " imap <C-_>     <C-X><SPACE>
 " imap <leader>w <M-e>
@@ -142,7 +145,7 @@ runtime macros/matchit.vim
 "   :find
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 "
-"   bash-style TAB expansion
+" Bash-style TAB expansion
 set wildmode=longest,list
 
 " Make sure Markdown files are properly recognized
@@ -172,16 +175,16 @@ autocmd FileType erlang
 \   setlocal foldmethod=indent tabstop=4 shiftwidth=4
 
 " Vimerl plugin:
-let erlang_folding     = 1
-let erlang_show_errors = 0
-let erlang_skel_header = {'author':
-\   'Peter Aronoff <telemachus@arpinum.org>',
-\   'owner' : 'Peter Aronoff'}
+" let erlang_folding     = 1
+" let erlang_show_errors = 0
+" let erlang_skel_header = {'author':
+" \   'Peter Aronoff <telemachus@arpinum.org>',
+" \   'owner' : 'Peter Aronoff'}
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
+" let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
 let g:tex_conceal=''
 
 let g:gist_clip_command='pbcopy'
@@ -189,15 +192,11 @@ let g:github_user = 'telemachus'
 
 " vim-airline settings
 " Separators
-" let g:airline_left_sep='>>'
-" let g:airline_right_sep='<<'
-" fugitive and syntastic off
-let g:airline_enable_fugitive=0
+let g:airline_left_sep='>>'
+let g:airline_right_sep='<<'
+" fugitive on, and syntastic off
+let g:airline_enable_branch=1
+let g:airline_branch_prefix = '⎇ '
 let g:airline_enable_syntastic=0
-" " Set second section to filename
-" let g:airline_section_b='%f'
-" " Empty third and fourth sections
-" let g:airline_section_c=''
-" let g:airline_section_x=''
-" " Put filetype in fifth section
-" let g:airline_section_y='%Y'
+let g:airline_detect_whitespace=0
+let g:airline_theme='tomorrow'

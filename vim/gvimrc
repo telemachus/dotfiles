@@ -3,3 +3,4 @@ set columns=85 lines=40
 set go-=T
 set go-=r
 set guifont=Consolas:h14
+let g:airline_theme='dark'
