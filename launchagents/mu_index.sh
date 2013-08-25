@@ -1,3 +1,3 @@
 #!/usr/local/bin/dash
 
-mu index --quiet --maildir /Users/user/.maildir
+/usr/local/bin/mu index --quiet --maildir /Users/user/.maildir
