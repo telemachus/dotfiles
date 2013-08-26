@@ -192,8 +192,8 @@ let g:github_user = 'telemachus'
 
 " vim-airline settings
 " Separators
-let g:airline_left_sep='>>'
-let g:airline_right_sep='<<'
+" let g:airline_left_sep='>>'
+" let g:airline_right_sep='<<'
 " fugitive on, and syntastic off
 let g:airline_enable_branch=1
 let g:airline_branch_prefix = '⎇ '
