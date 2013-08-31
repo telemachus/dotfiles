@@ -1,5 +1,6 @@
 filetype off
 execute pathogen#infect()
+execute pathogen#helptags()
 
 " Most general settings first
 set nocompatible            " Vim rather than Vi settings; must go first
@@ -191,12 +192,14 @@ let g:gist_clip_command='pbcopy'
 let g:github_user = 'telemachus'
 
 " vim-airline settings
-" Separators
+" separators
 " let g:airline_left_sep='>>'
 " let g:airline_right_sep='<<'
 " fugitive on, and syntastic off
-let g:airline_enable_branch=1
+let g:airline_extensions_branch_enabled = 1
+let g:airline_extensions_branch_empty_message = ''
 let g:airline_branch_prefix = '⎇ '
 let g:airline_enable_syntastic=0
 let g:airline_detect_whitespace=0
 let g:airline_theme='tomorrow'
+let g:airline#extensions#default#section_truncate_width = {}

@@ -1,8 +1,8 @@
 #!/usr/local/bin/dash
 
-chmod -fN /Users/achilles/Public
-chmod -fN /Users/achilles/Movies
-chmod -fN /Users/achilles/Music
-rm -rf /Users/achilles/Public
-rm -rf /Users/achilles/Movies
-rm -rf /Users/achilles/Music
+chmod -fN $HOME/Public
+chmod -fN $HOME/Movies
+chmod -fN $HOME/Music
+rm -rf $HOME/Public
+rm -rf $HOME/Movies
+rm -rf $HOME/Music
