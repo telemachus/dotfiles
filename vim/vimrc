@@ -201,5 +201,9 @@ let g:airline_extensions_branch_empty_message = ''
 let g:airline_branch_prefix = '⎇ '
 let g:airline_enable_syntastic=0
 let g:airline_detect_whitespace=0
-let g:airline_theme='tomorrow'
+if has("gui_running")
+    let g:airline_theme='luna'
+else
+    let g:airline_theme='tomorrow'
+endif
 let g:airline#extensions#default#section_truncate_width = {}
