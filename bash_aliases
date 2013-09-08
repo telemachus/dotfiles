@@ -55,7 +55,7 @@ alias binit='bi && b package && echo "vendor/ruby" >> .gitignore'
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
 # gist appears to be unmaintained
-alias gist='jist'
+# alias gist='jist'
 
 # reindex spotlight
 alias respotlight='sudo mdutil -E /'
