@@ -1,17 +1,15 @@
-filetype off
 execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-set nocompatible            " Vim rather than Vi settings; must go first
+set nocompatible            " Vim rather than Vi; implied by this file
+syntax on                   " Syntax highlighting on
+filetype plugin indent on   " Filetype detection
 set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 500 lines of command line history
 set scrolloff=0             " No breathing room
 set number                  " Always show line numbers
-set autoindent
-set tags=./tags;
-set ttimeoutlen=50
 
 " Set items for view @ bottom of windows
 set ruler                   " Show the cursor position all the time
@@ -20,15 +18,8 @@ set showmode                " Display current mode
 set ls=2                    " Always show status bar
 
 " Control matchparen: I want it for scheme, but only there.
-" If you set loaded_matchparen = 1, then you can't turn it the feature
-" later.
-" let loaded_matchparen = 0
-autocmd FileType ruby,lua,bash,sh,perl,c,erlang,mail NoMatchParen
-autocmd FileType scheme DoMatchParen
-
-" Syntax basics
-syntax on
-filetype plugin indent on
+" autocmd FileType ruby,lua,bash,sh,perl,c,erlang,mail NoMatchParen
+" autocmd FileType scheme DoMatchParen
 
 " Do POSIX right
 let g:is_posix = 1
@@ -56,7 +47,6 @@ set encoding=utf-8
 set laststatus=2            " Always put a status line in, even
                             " if there is only one window
 set showtabline=2           " Show a tabbar on top, always
-set cmdheight=2             " Use a status bar that is 2 rows high
 " }}}
 
 " Use the same symbols as TextMate for tabstops and EOLs
@@ -119,20 +109,25 @@ nnoremap ` '
 set title
 set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
-" imap <leader>/ <C-X>/
-"I don't think I use these any more, do I?
-" imap <C-_>     <C-X><SPACE>
-" imap <leader>w <M-e>
 
-" let g:delimitMate_excluded_regions = "Comment,String"
+" A simple function to clean up the ugly business of getting the git branch
+" into the status line.
+function! Git_Branch()
+    let b:head=''
+    if exists('*fugitive#head')
+        let b:head = fugitive#head(7)
+    endif
 
-" status line hijinks
-" I've disabled ruby-checking, but in case I want it back:
+    return empty(b:head) ? '' : '[⎇  ' . b:head . ']'
+endfunction
+
+" My status line
+" I've disabled ruby and perl checking, but in case I want them back:
 " \%{exists('g:loaded_rbenv')?rbenv#statusline_ft_ruby():''}
-set statusline=%<%f\ %h%m%r%y%{\"[\".(&fenc==\"\"?&enc:&fenc).\"]\"}
-\%{exists('g:loaded_perlbrew')?perlbrew#statusline_ft_perl():''}
-\%{exists('g:loaded_fugitive')?fugitive#statusline():''}
-\%=%-14.(%l,%c%V%)\ %P
+" \%{exists('g:loaded_perlbrew')?perlbrew#statusline_ft_perl():''}
+set statusline=\ %<%.20f\ %h%m%r%y[%{&fenc==''?&enc:&fenc}]
+set statusline+=%{Git_Branch()}
+set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)\ 
 
 " Shortcut to rapidly toggle `set list`
 nnoremap <silent><leader>l :set list!<CR>
@@ -165,45 +160,11 @@ fun! LoadGitrebaseBindings()
     nnoremap C :Cycle
 endfun
 
-autocmd BufNewFile,BufNew,BufRead *.bnf
-\   setlocal filetype=bnf
-
 autocmd BufNewFile,BufNew,BufRead *.rockspec
 \   setlocal filetype=lua
-
-" Erlang settings
-autocmd FileType erlang
-\   setlocal foldmethod=indent tabstop=4 shiftwidth=4
-
-" Vimerl plugin:
-" let erlang_folding     = 1
-" let erlang_show_errors = 0
-" let erlang_skel_header = {'author':
-" \   'Peter Aronoff <telemachus@arpinum.org>',
-" \   'owner' : 'Peter Aronoff'}
 
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" let g:slimv_swank_cmd = '!osascript -e "tell application \"Terminal\" to do script \"sbcl --load ~/.vim/bundle/slimv/slime/start-swank.lisp\""'
-let g:tex_conceal=''
-
 let g:gist_clip_command='pbcopy'
 let g:github_user = 'telemachus'
-
-" vim-airline settings
-" separators
-" let g:airline_left_sep='>>'
-" let g:airline_right_sep='<<'
-" fugitive on, and syntastic off
-let g:airline_extensions_branch_enabled = 1
-let g:airline_extensions_branch_empty_message = ''
-let g:airline_branch_prefix = '⎇ '
-let g:airline_enable_syntastic=0
-let g:airline_detect_whitespace=0
-if has("gui_running")
-    let g:airline_theme='luna'
-else
-    let g:airline_theme='tomorrow'
-endif
-let g:airline#extensions#default#section_truncate_width = {}
