@@ -24,7 +24,6 @@ git clone https://github.com/telemachus/snipmate-snippets-bib.git
 git clone https://github.com/sjl/strftimedammit.vim.git
 git clone https://github.com/tomtom/tlib_vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
-git clone https://github.com/bling/vim-airline.git
 git clone https://github.com/PeterRincker/vim-argumentative.git
 git clone https://github.com/tpope/vim-commentary
 git clone https://github.com/tpope/vim-endwise.git
