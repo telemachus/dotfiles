@@ -1,0 +1,90 @@
+## Trinity school dates 2013-2014
+
+# US Faculty meetings
+REM 18 September +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 23 October +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 20 November +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 22 January +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 19 February +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 16 April +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+REM 14 May +5 MSG US Faculty meeting at 3:00pm (%b %c)%
+
+# US Advising afternoon meetings
+REM 2 October +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 6 November +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 4 December +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 8 January +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 5 February +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 5 March +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 2 April +5 MSG US Advising meeting at 2:45pm (%b %c)%
+REM 30 May +5 MSG US Advising meeting at 2:45pm (%b %c)%
+
+# US Advising dates with students
+REM 2013-09-17 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2013-10-08 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2013-10-23 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2013-10-25 +5 MSG US individual advising at 9:45am (%b %c)%
+REM 2013-11-12 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2013-11-20 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2013-11-22 +5 MSG US individual advising at 9:45am (%b %c)%
+REM 2013-12-10 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-01-14 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-01-29 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2014-01-31 +5 MSG US individual advising at 9:45am (%b %c)%
+REM 2014-02-11 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-02-26 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2014-02-28 +5 MSG US individual advising at 9:45am (%b %c)%
+REM 2014-03-11 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-04-08 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-04-23 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2014-04-25 +5 MSG US individual advising at 9:45am (%b %c)%
+REM 2014-05-06 +5 MSG US group advising at 8:15am (%b %c)%
+REM 2014-05-28 +5 MSG US individual advising at 10:00am (%b %c)%
+REM 2014-05-30 +5 MSG US individual advising at 9:45am (%b %c)%
+
+# US grade-level meetings in Chapel
+REM 2013-10-15 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+REM 2013-11-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+REM 2014-01-07 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+REM 2014-02-24 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+REM 2014-04-16 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+REM 2014-05-22 +5 MSG US 9th grade meeting in Chapel at 8:15am (%b %c)%
+
+# All-School meetings
+REM 24 October +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 21 November +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 30 January +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 13 March +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 10 April +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 15 May +5 MSG All-school meeting at 3:30pm (%b %c)%
+REM 13 June +5 MSG Final faculty & staff luncheon (%b %c)%
+
+# Department meetings
+REM 7 October +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 4 November +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 2 December +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 6 January +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 3 February +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 3 March +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 7 April +5 MSG Department meeting at 3:30pm (%b %c)%
+REM 5 May +5 MSG Department meeting at 3:30pm (%b %c)%
+
+# US quarters and reports
+REM 15 October 2013 +5 MSG US Q1 progress reports due by ad hoc (%b %c)%
+REM 7 November 2013 +5 MSG US Q1 ends (%b %c)%
+REM 11 November 2013 +5 MSG US Q1 grades and comments due by ad hoc (%b %c)%
+REM 11 November 2013 +5 MSG US Q2 begins (%b %c)%
+REM 9 December 2013 +5 MSG US Q2 progress reports due by ad hoc (%b %c)%
+REM 22 January 2014 +5 MSG US Q2/S1 ends (%b %c)%
+REM 27 January 2014 +5 MSG US Q2/S1 grades due by ad hoc (%b %c)%
+REM 3 March 2014 +5 MSG US Q3 progress reports due by ad hoc (%b %c)%
+REM 11 April 2014 +5 MSG US Q3 ends (%b %c)%
+REM 16 April 2014 +5 MSG US Q3 grades and comments due by ad hoc (%b %c)%
+REM 16 April 2014 +5 MSG US Q4 begins (%b %c)%
+REM 11 June 2014 +5 MSG US grades due by 3:00pm (%b %c)%
+
+# Varia
+REM 17 September 2013 +5 MSG MS curriculum night (%b %c)%
+REM 10 October 2013 +5 MSG US curriculum night (%b %c)%
+REM 8 November 2013 +5 MSG US work day: no US classes (%b %c)%
+REM 14 April 2014 +5 MSG US work day: no US classes (%b %c)%
