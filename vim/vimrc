@@ -2,10 +2,8 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-set nocompatible            " Vim rather than Vi; implied by this file
 syntax on                   " Syntax highlighting on
 filetype plugin indent on   " Filetype detection
-set noeb                    " Set no audio or visual error beep
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 500 lines of command line history
 set scrolloff=0             " No breathing room

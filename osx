@@ -3,6 +3,15 @@
 # ~/.osx — http://mths.be/osx
 # Tweaked for preferences by Peter Aronoff, August 27, 2013.
 
+# Check if $1 has a name for our computer. If not, bail out
+if [[ -z "$1" ]]; then
+    printf "No name given for the computer. Run again, please.\n" >&2
+    printf "usage: $0 <name-for-computer>\n" >&2
+    exit 1
+else
+    hostname="$1"
+fi
+
 # Ask for the administrator password upfront
 sudo -v
 
@@ -12,10 +21,10 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # General UI/UX
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "ithaca"
-sudo scutil --set HostName "ithaca"
-sudo scutil --set LocalHostName "ithaca"
-sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "ithaca"
+sudo scutil --set ComputerName "$hostname"
+sudo scutil --set HostName "$hostname"
+sudo scutil --set LocalHostName "$hostname"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "$hostname"
 
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
@@ -110,7 +119,7 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # Trackpad: map bottom left corner to right-click
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 3
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Trackpad: swipe between pages with three fingers
