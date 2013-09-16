@@ -5,8 +5,7 @@ if [ "$1" = "-v" ]; then
     verbose=true
 fi
 
-for item in birthdays medical personal school
-do
+for item in birthdays medical personal school; do
     if [ -f "${HOME}/.${item}.rem" ]; then
         if [ "$verbose" = "true" ]; then
             printf "First we'll remove the existing "
@@ -16,6 +15,14 @@ do
         fi
     fi
 done
+
+if [ "$verbose" = "true" ]; then
+    printf "Create %s/.reminders\n" "$HOME"
+fi
+
+for item in school medical personal birthdays; do
+    printf "include %s/.%s.rem\n" "$HOME" "$item"
+done > "$HOME/.reminders"
 
 for item in "$(pwd)/reminders/"*; do
     if [ "$verbose" = "true" ]; then
