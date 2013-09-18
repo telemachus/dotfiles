@@ -17,7 +17,7 @@ REM 8 January +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 5 February +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 5 March +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 2 April +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 30 May +5 MSG US Advising meeting at 2:45pm (%c)%
+REM 30 April +5 MSG US Advising meeting at 2:45pm (%c)%
 
 # US Advising dates with students
 REM 2013-09-17 +5 MSG US group advising at 8:15am (%c)%
@@ -48,13 +48,13 @@ REM 2013-11-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-01-07 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-02-24 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-04-16 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
-REM 2014-05-22 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2014-05-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 
 # All-School meetings
-REM 24 October +5 MSG All-school meeting at 3:30pm (%c)%
+REM 24 October +5 MSG All-school TGIT at 3:30pm (%c)%
 REM 21 November +5 MSG All-school meeting at 3:30pm (%c)%
 REM 30 January +5 MSG All-school meeting at 3:30pm (%c)%
-REM 13 March +5 MSG All-school meeting at 3:30pm (%c)%
+REM 13 March +5 MSG All-school TGIT at 3:30pm (%c)%
 REM 10 April +5 MSG All-school meeting at 3:30pm (%c)%
 REM 15 May +5 MSG All-school meeting at 3:30pm (%c)%
 REM 13 June +5 MSG Final faculty & staff luncheon (%c)%
