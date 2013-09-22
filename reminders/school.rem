@@ -83,6 +83,11 @@ REM 16 April 2014 +5 MSG US Q3 grades and comments due by ad hoc (%c)%
 REM 16 April 2014 +5 MSG US Q4 begins (%c)%
 REM 11 June 2014 +5 MSG US grades due by 3:00pm (%c)%
 
+# MS trimester days
+REM 18 October 2013 +5 MSG Mid-point of 1st trimester (%c)%
+REM 21 October 2013 +5 MSG MS progress reports due by 1:00pm (%c)%
+REM 22 October 2013 +5 MSG End of 1st trimester (%c)%
+
 # Varia
 REM 17 September 2013 +5 MSG MS curriculum night (%c)%
 REM 10 October 2013 +5 MSG US curriculum night (%c)%
