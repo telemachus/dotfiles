@@ -116,16 +116,13 @@ function! Git_Branch()
         let b:head = fugitive#head(7)
     endif
 
-    return empty(b:head) ? '' : '[⎇  ' . b:head . ']'
+    return empty(b:head) ? '' : '[' . b:head . ']'
 endfunction
 
 " My status line
-" I've disabled ruby and perl checking, but in case I want them back:
-" \%{exists('g:loaded_rbenv')?rbenv#statusline_ft_ruby():''}
-" \%{exists('g:loaded_perlbrew')?perlbrew#statusline_ft_perl():''}
-set statusline=\ %<%.20f\ %h%m%r%y[%{&fenc==''?&enc:&fenc}]
+set statusline=%<%.20f\ %h%m%r%y[%{&fenc==''?&enc:&fenc}]
 set statusline+=%{Git_Branch()}
-set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)\ 
+set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 " Shortcut to rapidly toggle `set list`
 nnoremap <silent><leader>l :set list!<CR>
