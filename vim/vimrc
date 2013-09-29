@@ -74,12 +74,11 @@ map Q gq
 " Enable mouse
 set mouse=a
 
-" Use github, a light colorscheme, in the gui and Tomorrow-Night-Bright,
+" Use sol, a light colorscheme, in the gui and Tomorrow-Night-Bright,
 " a dark colorscheme, in the terminal.
 if has("gui_running")
-    colorscheme github
+    colorscheme sol
 else
-    set background=dark
     colorscheme Tomorrow-Night-Bright
 endif
 
