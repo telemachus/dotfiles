@@ -86,7 +86,7 @@ REM 11 June 2014 +5 MSG US grades due by 3:00pm (%c)%
 # MS trimester days
 REM 18 October 2013 +5 MSG Mid-point of 1st trimester (%c)%
 REM 21 October 2013 +5 MSG MS progress reports due by 1:00pm (%c)%
-REM 22 October 2013 +5 MSG End of 1st trimester (%c)%
+REM 22 November 2013 +5 MSG End of 1st trimester (%c)%
 
 # Varia
 REM 17 September 2013 +5 MSG MS curriculum night (%c)%
