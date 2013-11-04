@@ -89,8 +89,6 @@ REM 21 October 2013 +5 MSG MS progress reports due by 1:00pm (%c)%
 REM 22 October 2013 +5 MSG End of 1st trimester (%c)%
 
 # Varia
-REM 17 September 2013 +5 MSG MS curriculum night (%c)%
-REM 10 October 2013 +5 MSG US curriculum night (%c)%
 REM 8 November 2013 +5 MSG US work day: no US classes (%c)%
+REM 22 November 2013 +10 MSG TigerWeb meeting 9:45am (%c)%
 REM 14 April 2014 +5 MSG US work day: no US classes (%c)%
-REM 15 October 2013 +10 MSG Cover Kaori's second period class!!! (%c)%
