@@ -18,6 +18,7 @@ set ls=2                    " Always show status bar
 " Control matchparen: I want it for scheme, but only there.
 " autocmd FileType ruby,lua,bash,sh,perl,c,erlang,mail NoMatchParen
 " autocmd FileType scheme DoMatchParen
+let g:match_paren_insert_timeout=5
 
 " Do POSIX right
 let g:is_posix = 1
