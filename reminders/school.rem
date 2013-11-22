@@ -87,8 +87,15 @@ REM 11 June 2014 +5 MSG US grades due by 3:00pm (%c)%
 REM 18 October 2013 +5 MSG Mid-point of 1st trimester (%c)%
 REM 21 October 2013 +5 MSG MS progress reports due by 1:00pm (%c)%
 REM 22 November 2013 +5 MSG End of 1st trimester (%c)%
+REM 3 December 2013 +5 MSG 1st trimester class notes due (%c)%
+REM 6 December 2013 +5 MSG 1st trimester student comments due by 1:00pm (%c)%
+REM 21 January 2014 +5 MSG 2nd trimester MS progress reports due by 1:00pm (%c)%
+REM 24 February 2014 +5 MSG 2nd trimester class notes due (%c)%
+REM 3 March 2014 +5 MSG 2nd trimester student comments due by 1:00pm (%c)%
+REM 21 April 2014 +5 MSG 3rd trimester MS progress reports due by 1:00pm (%c)%
+REM 3 June 2014 +5 MSG 3rd trimester class notes due (%c)%
+REM 12 June 2014 +5 MSG 3rd trimester student notes due by 1:00pm (%c)%
 
 # Varia
 REM 8 November 2013 +5 MSG US work day: no US classes (%c)%
-REM 22 November 2013 +10 MSG TigerWeb meeting 9:45am (%c)%
 REM 14 April 2014 +5 MSG US work day: no US classes (%c)%
