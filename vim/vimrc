@@ -78,6 +78,7 @@ set mouse=a
 " Use sol, a light colorscheme, in the gui and Tomorrow-Night-Bright,
 " a dark colorscheme, in the terminal.
 if has("gui_running")
+    let g:command_t_loaded = 1
     colorscheme sol
 else
     colorscheme Tomorrow-Night-Bright
