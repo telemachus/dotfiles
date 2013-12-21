@@ -23,7 +23,7 @@ git clone https://github.com/mattn/gist-vim.git
 git clone https://github.com/telemachus/snipmate-snippets-bib.git
 git clone https://github.com/sjl/strftimedammit.vim.git
 git clone https://github.com/tomtom/tlib_vim.git
-git clone https://github.com/Pychimp/vim-sol.git
+git clone https://github.com/Shougo/unite.vim.git
 git clone https://github.com/MarcWeber/vim-addon-mw-utils.git
 git clone https://github.com/PeterRincker/vim-argumentative.git
 git clone https://github.com/tpope/vim-commentary
@@ -41,6 +41,7 @@ git clone https://github.com/sunaku/vim-ruby-minitest
 git clone https://github.com/tpope/vim-scriptease.git
 git clone https://github.com/garbas/vim-snipmate.git
 git clone https://github.com/telemachus/vim-snippets.git
+git clone https://github.com/Pychimp/vim-sol.git
 git clone https://github.com/tpope/vim-surround.git
 git clone https://github.com/kana/vim-textobj-entire.git
 git clone https://github.com/kana/vim-textobj-function.git
