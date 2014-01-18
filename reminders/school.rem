@@ -1,33 +1,18 @@
 ## Trinity school dates 2013-2014
 
 # US Faculty meetings
-REM 18 September +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 23 October +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 20 November +5 MSG US Faculty meeting at 3:00pm (%c)%
 REM 22 January +5 MSG US Faculty meeting at 3:00pm (%c)%
 REM 19 February +5 MSG US Faculty meeting at 3:00pm (%c)%
 REM 16 April +5 MSG US Faculty meeting at 3:00pm (%c)%
 REM 14 May +5 MSG US Faculty meeting at 3:00pm (%c)%
 
 # US Advising afternoon meetings
-REM 2 October +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 6 November +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 4 December +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 8 January +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 5 February +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 5 March +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 2 April +5 MSG US Advising meeting at 2:45pm (%c)%
 REM 30 April +5 MSG US Advising meeting at 2:45pm (%c)%
 
 # US Advising dates with students
-REM 2013-09-17 +5 MSG US group advising at 8:15am (%c)%
-REM 2013-10-08 +5 MSG US group advising at 8:15am (%c)%
-REM 2013-10-23 +5 MSG US individual advising at 10:00am (%c)%
-REM 2013-10-25 +5 MSG US individual advising at 9:45am (%c)%
-REM 2013-11-12 +5 MSG US group advising at 8:15am (%c)%
-REM 2013-11-20 +5 MSG US individual advising at 10:00am (%c)%
-REM 2013-11-22 +5 MSG US individual advising at 9:45am (%c)%
-REM 2013-12-10 +5 MSG US group advising at 8:15am (%c)%
 REM 2014-01-14 +5 MSG US group advising at 8:15am (%c)%
 REM 2014-01-29 +5 MSG US individual advising at 10:00am (%c)%
 REM 2014-01-31 +5 MSG US individual advising at 9:45am (%c)%
@@ -43,16 +28,12 @@ REM 2014-05-28 +5 MSG US individual advising at 10:00am (%c)%
 REM 2014-05-30 +5 MSG US individual advising at 9:45am (%c)%
 
 # US grade-level meetings in Chapel
-REM 2013-10-15 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
-REM 2013-11-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-01-07 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-02-24 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-04-16 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 REM 2014-05-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 
 # All-School meetings
-REM 24 October +5 MSG All-school TGIT at 3:30pm (%c)%
-REM 21 November +5 MSG All-school meeting at 3:30pm (%c)%
 REM 30 January +5 MSG All-school meeting at 3:30pm (%c)%
 REM 13 March +5 MSG All-school TGIT at 3:30pm (%c)%
 REM 10 April +5 MSG All-school meeting at 3:30pm (%c)%
@@ -70,11 +51,6 @@ REM 7 April +5 MSG Department meeting at 3:30pm (%c)%
 REM 5 May +5 MSG Department meeting at 3:30pm (%c)%
 
 # US quarters and reports
-REM 15 October 2013 +5 MSG US Q1 progress reports due by ad hoc (%c)%
-REM 7 November 2013 +5 MSG US Q1 ends (%c)%
-REM 11 November 2013 +5 MSG US Q1 grades and comments due by ad hoc (%c)%
-REM 11 November 2013 +5 MSG US Q2 begins (%c)%
-REM 9 December 2013 +5 MSG US Q2 progress reports due by ad hoc (%c)%
 REM 22 January 2014 +5 MSG US Q2/S1 ends (%c)%
 REM 27 January 2014 +5 MSG US Q2/S1 grades due by ad hoc (%c)%
 REM 3 March 2014 +5 MSG US Q3 progress reports due by ad hoc (%c)%
@@ -84,11 +60,6 @@ REM 16 April 2014 +5 MSG US Q4 begins (%c)%
 REM 11 June 2014 +5 MSG US grades due by 3:00pm (%c)%
 
 # MS trimester days
-REM 18 October 2013 +5 MSG Mid-point of 1st trimester (%c)%
-REM 21 October 2013 +5 MSG MS progress reports due by 1:00pm (%c)%
-REM 22 November 2013 +5 MSG End of 1st trimester (%c)%
-REM 3 December 2013 +5 MSG 1st trimester class notes due (%c)%
-REM 6 December 2013 +5 MSG 1st trimester student comments due by 1:00pm (%c)%
 REM 21 January 2014 +5 MSG 2nd trimester MS progress reports due by 1:00pm (%c)%
 REM 24 February 2014 +5 MSG 2nd trimester class notes due (%c)%
 REM 3 March 2014 +5 MSG 2nd trimester student comments due by 1:00pm (%c)%
@@ -97,6 +68,5 @@ REM 3 June 2014 +5 MSG 3rd trimester class notes due (%c)%
 REM 12 June 2014 +5 MSG 3rd trimester student notes due by 1:00pm (%c)%
 
 # Varia
-REM 8 November 2013 +5 MSG US work day: no US classes (%c)%
 REM 20 January 2014 +5 MSG Meet Amanda in MS at 7:50AM (%c)%
 REM 14 April 2014 +5 MSG US work day: no US classes (%c)%
