@@ -2,7 +2,7 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-syntax on                   " Syntax highlighting on
+syntax off                  " Syntax highlighting off
 filetype plugin indent on   " Filetype detection
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 500 lines of command line history
