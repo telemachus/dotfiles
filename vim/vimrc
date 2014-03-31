@@ -2,7 +2,7 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-syntax off                  " Syntax highlighting off
+syntax on                   " Syntax highlighting on
 filetype plugin indent on   " Filetype detection
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 500 lines of command line history
@@ -79,12 +79,12 @@ set mouse=a
 
 " Use sol, a light colorscheme, in the gui and Tomorrow-Night-Bright,
 " a dark colorscheme, in the terminal.
-if has("gui_running")
-    let g:command_t_loaded = 1
-    colorscheme sol
-else
-    colorscheme Tomorrow-Night-Bright
-endif
+" if has("gui_running")
+"     colorscheme sol
+" else
+"     colorscheme Tomorrow-Night-Bright
+" endif
+colorscheme sol
 
 " Fix placement of backups and swap files
 set backup
@@ -111,20 +111,8 @@ set title
 set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
 
-" A simple function to clean up the ugly business of getting the git branch
-" into the status line.
-function! Git_Branch()
-    let b:head=''
-    if exists('*fugitive#head')
-        let b:head = fugitive#head(7)
-    endif
-
-    return empty(b:head) ? '' : '[' . b:head . ']'
-endfunction
-
 " My status line
 set statusline=%<%.20f\ %h%m%r%y[%{&fenc==''?&enc:&fenc}]
-set statusline+=%{Git_Branch()}
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 " Shortcut to rapidly toggle `set list`
@@ -143,8 +131,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 set wildmode=longest,list
 
 " Make sure Markdown files are properly recognized
-autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
-\   setlocal filetype=markdown
+" autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
+" \   setlocal filetype=markdown
 
 " Git rebase bindings from
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
@@ -167,7 +155,7 @@ let g:html_indent_style1 = "inc"
 let g:gist_clip_command='pbcopy'
 let g:github_user = 'telemachus'
 
-function! NeatFoldText() "{{{2
+function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
   let lines_count = v:foldend - v:foldstart + 1
   let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
@@ -178,4 +166,3 @@ function! NeatFoldText() "{{{2
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
-" }}}2
