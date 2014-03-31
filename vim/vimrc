@@ -22,6 +22,9 @@ let g:match_paren_insert_timeout=5
 
 " Do POSIX right
 let g:is_posix = 1
+if &shell =~# 'fish$'
+    set shell=bash
+endif
 
 " Text basics {{{
 "set wrap
