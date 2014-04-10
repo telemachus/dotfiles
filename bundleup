@@ -14,7 +14,7 @@ if [ -d "$HOME/.vim/bundle" ]; then
 		if [ -d "$bundle/.git" ]; then
 			printf "Working on %s...\n" ${bundle##*/}
 			cd "$bundle"
-			git pull 2>/dev/null
+			git pull --depth=1 2>/dev/null
 		fi
 	done
 fi
