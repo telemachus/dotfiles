@@ -15,9 +15,9 @@ if [ -d "$HOME/.vim/bundle" ]; then
         if [ -d "$bundle/.git" ]; then
             if [ "$quiet" != "-q" ]; then
                 printf "Working on %s...\n" ${bundle##*/}
-                cd "$bundle"; git pull --depth=1 2>/dev/null
+                cd "$bundle"; git pull --update-shallow 2>/dev/null
             else
-                cd "$bundle"; git pull --depth=1 1>/dev/null 2>&1
+                cd "$bundle"; git pull --update-shallow 1>/dev/null 2>&1
             fi
         fi
     done
