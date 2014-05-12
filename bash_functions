@@ -103,15 +103,6 @@ shorten() {
         http://metamark.net/api/rest/simple | pbcopy
 }
 
-bitly() {
-    curl -s \
-        --data-urlencode "login=telemachus" \
-        --data-urlencode "apiKey=R_05e66ace4fa4e5fbfe96d70a4d2bef8e" \
-        --data-urlencode "longUrl=${1:-$(pbpaste)}" \
-        http://api.bit.ly/v3/shorten | jq '.data.url' -M -r | tr -d '\n' \
-        | pbcopy
-}
-
 csview () {
  <$1 sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 }
