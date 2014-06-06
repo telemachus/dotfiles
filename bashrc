@@ -56,28 +56,10 @@ INFODIR=/usr/local/share/info:$INFODIR
 ## FIGNORE
 # FIGNORE=bst:aux:bbl:blg:pdf:fls:fdb_latexmk
 
-## Perl varia
-# put perlbrew where I want it and source it
-# defaults for cpanminus
-# export PERLBREW_ROOT=$HOME/.perl5/perlbrew
-# if [[ -f $HOME/.perl5/perlbrew/etc/bashrc ]]; then
-#     source $HOME/.perl5/perlbrew/etc/bashrc
-# fi
-# export PERL_CPANM_OPT="--mirror file:///$HOME/.minicpan\
-#     --mirror http://cpan.cpantesters.org"
-
 ## The prompt below gets ideas from the following:
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
 # http://github.com/adamv/dotfiles/blob/master/bashrc
 # http://wiki.archlinux.org/index.php/Color_Bash_Prompt
-# txtred='\[\e[0;31m\]' # Red
-# txtwht='\[\e[0;37m\]' # White
-# bldred='\[\e[1;31m\]' # Red
-# bldgrn='\[\e[1;32m\]' # Green
-# bldylw='\[\e[1;33m\]' # Yellow
-# bldwht='\[\e[1;37m\]' # White
-# bldcyn='\[\e[1;36m\]' # Cyan
-# end='\[\e[0m\]'       # Text Reset
 
 set_titlebar() {
     case $TERM in
@@ -114,7 +96,6 @@ export PROMPT_COMMAND='
 #     PS1='\$ '
 # fi
 
-
 ## Pager stuff
 # MANPAGER=less
 # export MANPAGER
@@ -132,11 +113,3 @@ export LESSOPEN
 export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
 command -v luarocks >/dev/null && eval "$(luarocks path)"
-# [ -n "$TMUX"  ] && export TERM=screen-256color
-# CVS_RSH=ssh
-# export CVS_RSH=ssh
-
-# chruby settings
-# source /usr/local/opt/chruby/share/chruby/chruby.sh
-# RUBIES=( $HOME/.rubies/* )
-# chruby 1.9.3
