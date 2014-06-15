@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+ordinalize() {
+    case "$1" in
+        1|21|31)
+            ordinalized="${1}st"
+            ;;
+        2|22)
+            ordinalized="${1}nd"
+            ;;
+        3|23)
+            ordinalized="${1}rd"
+            ;;
+        *)
+            ordinalized="${1}th"
+
+    esac
+}
+
+date_first="$(date '+%A, %B')"
+date_secnd="$(date '+%e')"
+date_third="$(date '+%Y at %l:%M%p')"
+ordinalize $date_secnd
+printf "%s %s, %s" "${date_first}" "${ordinalized}" "${date_third}" | tr -s " "

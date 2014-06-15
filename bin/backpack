@@ -1,0 +1,24 @@
+#!/usr/bin/env dash
+
+set -e
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/Documents/keep /Volumes/Olympus/cito/documents
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/Pictures/pictura /Volumes/Olympus/cito
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/projects /Volumes/Olympus/cito
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/practice /Volumes/Olympus/cito
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/trinity /Volumes/Olympus/cito
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/.maildir/ /Volumes/Olympus/cito/maildir
+
+rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
+    $HOME/.musica/ /Volumes/Olympus/cito/musica

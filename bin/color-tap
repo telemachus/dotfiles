@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# set -x
+green="\033[0;32m"
+red="\033[0;31m"
+end="\033[0m"
+
+if [ -t 1 ]; then
+    awk "{
+    if (\$0 ~ /^ok/)
+        print \"${green}\" \$0 \"${end}\"
+    else if (\$0 ~ /^not/)
+        print \"${red}\" \$0 \"${end}\"
+    else
+        print \$0
+    }"
+else
+    awk '{ print $0 }'
+fi
