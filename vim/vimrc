@@ -26,7 +26,7 @@ if &shell =~# 'fish$'
     set shell=bash
 endif
 
-" Text basics {{{
+" Text basics
 "set wrap
 "set linebreak
 "let &showbreak = '+++ '
@@ -43,7 +43,6 @@ set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
-" }}}
 
 " Editor layout
 set termencoding=utf-8
@@ -114,7 +113,7 @@ set shortmess=atI
 nnoremap <silent> <leader>p :set invpaste<CR>
 
 " My status line
-set statusline=%<%.20f\ %h%m%r%y[%{&fenc==''?&enc:&fenc}]
+set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 " Shortcut to rapidly toggle `set list`
@@ -168,3 +167,7 @@ function! NeatFoldText()
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
+
+let g:UltinipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<tab>"
