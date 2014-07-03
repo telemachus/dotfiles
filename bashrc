@@ -118,3 +118,4 @@ command -v luarocks >/dev/null && eval "$(luarocks path)"
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
 fi
+export PATH=$PATH:$HOME/local/node-v0.10.29/bin

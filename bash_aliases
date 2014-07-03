@@ -54,6 +54,3 @@ alias one='head -n1'
 
 # Make life simpler
 alias words='wc -w'
-
-# brewdo!
-#alias 'brew=brewdo brew'
