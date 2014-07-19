@@ -126,6 +126,9 @@ set wildmode=longest,list
 " autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 " \   setlocal filetype=markdown
 
+" My header files are C, not C++
+autocmd BufNewFile,BufNew,BufRead *.h setlocal filetype=c
+
 " Git rebase bindings from
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
 augroup vim_config
