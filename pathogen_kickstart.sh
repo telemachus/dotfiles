@@ -17,11 +17,16 @@ DEPTH='--depth 1'
 cd $HOME/.vim/autoload
 curl -S -o pathogen.vim \
     https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+
 cd $HOME/.vim/bundle
-$CLONE $DEPTH https://github.com/mattn/gist-vim.git
+$CLONE $DEPTH https://github.com/ConradIrwin/vim-bracketed-paste.git
 $CLONE $DEPTH https://github.com/SirVer/ultisnips.git
+$CLONE $DEPTH https://github.com/mattn/gist-vim.git
+$CLONE $DEPTH https://github.com/mattn/webapi-vim.git
 $CLONE $DEPTH https://github.com/plasticboy/vim-markdown.git
+$CLONE $DEPTH https://github.com/tpope/vim-dispatch.git
 $CLONE $DEPTH https://github.com/tpope/vim-repeat.git
 $CLONE $DEPTH https://github.com/tpope/vim-surround.git
-$CLONE $DEPTH https://bitbucket.org/telemachus/vim-varia.git
-$CLONE $DEPTH https://github.com/mattn/webapi-vim.git
+
+# Don't use DEPTH here, since I may want to work on this repo sometimes.
+$CLONE git@bitbucket.org:telemachus/vim-varia.git
