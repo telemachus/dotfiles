@@ -70,7 +70,11 @@ nnoremap <silent> <leader><space> :noh<cr>
 nnoremap <space> za
 
 " Indent pastes properly
+nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
 nnoremap <leader>pi p`[v`]=
+
+
+nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -101,7 +105,7 @@ nnoremap ' `
 nnoremap ` '
 set title
 set shortmess=atI
-nnoremap <silent> <leader>p :set invpaste<CR>
+"nnoremap <silent> <leader>p :set invpaste<CR>
 
 " My status line
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
@@ -161,6 +165,13 @@ function! NeatFoldText()
   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 set foldtext=NeatFoldText()
+
+function! SpaceOutParens()
+    let l:winview = winsaveview()
+    normal 0f(cs)(
+    call winrestview(l:winview)
+endfunction
+
 
 let g:UltinipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
