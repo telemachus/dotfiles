@@ -2,11 +2,11 @@
 
 quiet=$1
 here=$(pwd)
-pathogen='https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
+pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 
 if [ -d "$HOME/.vim/autoload" ]; then
     cd "$HOME/.vim/autoload"
-    curl -so pathogen.vim $pathogen
+    curl -S -o pathogen.vim $pathogen
 fi
 
 if [ -d "$HOME/.vim/bundle" ]; then

@@ -3,11 +3,11 @@
 set -e
 
 [ "$1" = "-v" ] && V="-v"
-: ${DOTFILES:=$HOME/code/dotfiles}
+: ${DOTFILES:=$HOME/projects/dotfiles}
 
 for item in ".bash_aliases" ".bash_completion" ".bash_functions" \
     ".bashrc" ".profile" ".gemrc" ".irbrc" ".inputrc" ".hushlogin" \
-    ".gitignore_global" ".minicpanrc" ".procmailrc"
+    ".gitignore_global" ".procmailrc"
 do
     # Adapted from https://wiki.ubuntu.com/DashAsBinSh
     item_no_dot=$(printf $item | awk '{ print substr($1, 2); }')
@@ -18,7 +18,7 @@ done
 
 for item in "bash_aliases" "bash_completion" "bash_functions" \
     "bashrc" "profile" "gemrc" "irbrc" "inputrc" "hushlogin" \
-    "gitignore_global" "minicpanrc" "procmailrc"
+    "gitignore_global" "procmailrc"
 do
     if [ -e "$DOTFILES/$item" ]; then
         ln -s $V "$DOTFILES/$item" "$HOME/.$item"

@@ -1,73 +1,119 @@
 ## Trinity school dates 2013-2014
 
+# All-school chapel
+REM 2014-09-18 +5 MSG All-school chapel at 10:00am (%c)%
+REM 2014-11-26 +5 MSG All-school chapel at 10:30am (%c)%
+
 # US Faculty meetings
-REM 22 January +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 19 February +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 16 April +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 14 May +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2014-09-17 +5 MSG US Faculty meeting at 3:00am (%c)%
+REM 2015-01-22 +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2015-02-19 +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2015-04-16 +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2015-05-14 +5 MSG US Faculty meeting at 3:00pm (%c)%
 
 # US Advising afternoon meetings
-REM 5 February +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 5 March +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 2 April +5 MSG US Advising meeting at 2:45pm (%c)%
-REM 30 April +5 MSG US Advising meeting at 2:45pm (%c)%
+REM 2014-09-02 +5 MSG US Advising meeting at 1:00pm (%c)%
+REM 2014-10-01 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2014-11-05 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2014-12-03 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2015-01-28 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2015-02-18 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2015-03-04 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2015-04-15 +5 MSG US Advising meeting at 3:00pm (%c)%
+REM 2015-05-06 +5 MSG US Advising meeting at 3:00pm (%c)%
 
 # US Advising dates with students
-REM 2014-01-14 +5 MSG US group advising at 8:15am (%c)%
-REM 2014-01-29 +5 MSG US individual advising at 10:00am (%c)%
-REM 2014-01-31 +5 MSG US individual advising at 9:45am (%c)%
+REM 2014-09-16 +5 MSG US group advising at 8:15am (%c)%
+REM 2014-10-22 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-10-24 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-11-18 +5 MSG US group advising at 8:15am (%c)%
 REM 2014-02-11 +5 MSG US group advising at 8:15am (%c)%
+REM 2014-02-04 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-02-06 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-02-10 +5 MSG US group advising at 8:15am (%c)%
+REM 2014-02-24 +5 MSG US group advising at 8:15am (%c)%
+REM 2014-02-25 +5 MSG US individual advising at 10:00am (%c)%
 REM 2014-02-26 +5 MSG US individual advising at 10:00am (%c)%
-REM 2014-02-28 +5 MSG US individual advising at 9:45am (%c)%
-REM 2014-03-11 +5 MSG US group advising at 8:15am (%c)%
-REM 2014-04-08 +5 MSG US group advising at 8:15am (%c)%
-REM 2014-04-23 +5 MSG US individual advising at 10:00am (%c)%
-REM 2014-04-25 +5 MSG US individual advising at 9:45am (%c)%
-REM 2014-05-06 +5 MSG US group advising at 8:15am (%c)%
-REM 2014-05-28 +5 MSG US individual advising at 10:00am (%c)%
-REM 2014-05-30 +5 MSG US individual advising at 9:45am (%c)%
+REM 2014-02-27 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-03-02 +5 MSG US individual advising at 10:25am (%c)%
+REM 2014-03-03 +5 MSG US individual advising at 10:25am (%c)%
+REM 2014-03-03 +5 MSG US group/individual advising at 8:15am (%c)%
+REM 2014-04-22 +5 MSG US individual advising at 10:00am (%c)%
+REM 2014-04-24 +5 MSG US individual advising at 10:00am (%c)%
 
 # US grade-level meetings in Chapel
-REM 2014-01-07 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
-REM 2014-02-24 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
-REM 2014-04-16 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
-REM 2014-05-20 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2014-09-09 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2014-10-19 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2014-11-19 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2015-01-06 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2015-02-24 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2015-04-21 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+REM 2015-05-19 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
 
-# All-School meetings
-REM 30 January +5 MSG All-school meeting at 3:30pm (%c)%
-REM 13 March +5 MSG All-school TGIT at 3:30pm (%c)%
-REM 10 April +5 MSG All-school meeting at 3:30pm (%c)%
-REM 15 May +5 MSG All-school meeting at 3:30pm (%c)%
-REM 13 June +5 MSG Final faculty & staff luncheon (%c)%
+# All-school meetings
+REM 2014-09-02 +5 MSG All-school Faculty meeting at 8:30am (%c)%
+REM 2014-09-03 +5 MSG All-school Faculty meeting at 9:00am (%c)%
+REM 2014-11-20 +5 MSG All-school Faculty meeting at 3:30pm (%c)%
+REM 2015-01-29 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2015-05-14 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2015-06-13 +5 MSG Final faculty & staff luncheon (%c)%
 
 # Department meetings
-REM 7 October +5 MSG Department meeting at 3:30pm (%c)%
-REM 4 November +5 MSG Department meeting at 3:30pm (%c)%
-REM 2 December +5 MSG Department meeting at 3:30pm (%c)%
-REM 6 January +5 MSG Department meeting at 3:30pm (%c)%
-REM 3 February +5 MSG Department meeting at 3:30pm (%c)%
-REM 3 March +5 MSG Department meeting at 3:30pm (%c)%
-REM 7 April +5 MSG Department meeting at 3:30pm (%c)%
-REM 5 May +5 MSG Department meeting at 3:30pm (%c)%
+REM 2014-09-03 +5 MSG Department meeting at 1:00pm (%c)%
+REM 2014-10-08 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2014-11-12 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2014-12-10 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-01-07 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-02-11 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-03-11 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-04-08 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-05-13 +5 MSG Department meeting at 3:00pm (%c)%
 
 # US quarters and reports
-REM 22 January 2014 +5 MSG US Q2/S1 ends (%c)%
-REM 27 January 2014 +5 MSG US Q2/S1 grades due by ad hoc (%c)%
-REM 3 March 2014 +5 MSG US Q3 progress reports due by ad hoc (%c)%
-REM 11 April 2014 +5 MSG US Q3 ends (%c)%
-REM 16 April 2014 +5 MSG US Q3 grades and comments due by ad hoc (%c)%
-REM 16 April 2014 +5 MSG US Q4 begins (%c)%
-REM 11 June 2014 +5 MSG US grades due by 3:00pm (%c)%
+REM 2014-10-06 +5 MSG US Q1 progress reports due by ad hoc (%c)%
+REM 2014-11-06 +5 MSG US Q1 ends (%c)%
+REM 2014-11-10 +5 MSG US Q1 grades and comments due by ad hoc (%c)%
+REM 2014-12-08 +5 MSG US Q2 progress reports due by ad hoc (%c)%
+REM 2015-01-16 +5 MSG US Q2/S1 ends (%c)%
+REM 2015-01-26 +5 MSG US Q2/S1 grades due by ad hoc (%c)%
+REM 2015-04-09 +5 MSG US Q3 ends (%c)%
+REM 2015-04-13 +5 MSG US Q3 grades and comments due by ad hoc (%c)%
 
 # MS trimester days
-REM 21 January 2014 +5 MSG 2nd trimester MS progress reports due by 1:00pm (%c)%
-REM 24 February 2014 +5 MSG 2nd trimester class notes due (%c)%
-REM 3 March 2014 +5 MSG 2nd trimester student comments due by 1:00pm (%c)%
-REM 21 April 2014 +5 MSG 3rd trimester MS progress reports due by 1:00pm (%c)%
-REM 3 June 2014 +5 MSG 3rd trimester class notes due (%c)%
-REM 12 June 2014 +5 MSG 3rd trimester student notes due by 1:00pm (%c)%
+REM 2014-10-14 +5 MSG MS T1 mid-point (%c)%
+REM 2014-10-17 +5 MSG MS T1 comments due by 1:00pm (%c)%
+REM 2014-11-21 +5 MSG MS T1 ends (%c)%
+REM 2014-12-01 +5 MSG MS T1 class notes due by 1:00pm (%c)%
+REM 2014-12-09 +5 MSG MS T1 grades and comments due by 1:00pm (%c)%
+REM 2015-01-20 +5 MSG MS T2 mid-point (%c)%
+REM 2015-01-23 +5 MSG MS T2 comments due by 1:00pm (%c)%
+REM 2015-02-20 +5 MSG MS T2 ends (%c)%
+REM 2015-02-18 +5 MSG MS T2 class notes due by 1:00pm (%c)%
+REM 2015-02-25 +5 MSG MS T2 grades and comments due by 1:00pm (%c)%
+REM 2015-04-10 +5 MSG MS T3 mid-point (%c)%
+REM 2015-04-13 +5 MSG MS T3 comments due by 1:00pm (%c)%
+REM 2015-05-29 +5 MSG MS T3 ends (%c)%
+REM 2015-06-03 +5 MSG MS T3 class notes due by 1:00pm (%c)%
+REM 2015-06-12 +5 MSG MS T3 grades and comments due by 1:00pm (%c)%
+
+# Holidays
+REM 2014-09-25 +5 MSG No classes: Rosh Hashanah (%c)%
+REM 2014-10-13 +5 MSG No classes: Columbus day (%c)%
+REM 2014-10-15 +5 MSG No classes: testing day (%c)%
+REM 2014-11-07 +5 MSG No classes: US work day (%c)%
+REM 2014-11-27 +5 MSG No classes: Thanksgiving (%c)%
+REM 2014-11-28 +5 MSG No classes: Thanksgiving (%c)%
+REM 2014-12-04 +5 MSG No classes: MS work day (%c)%
+REM 2014-12-16 +5 MSG No classes: MS fall conferences (%c)%
+REM 2015-01-19 +5 MSG No classes: MLK Jr. day (%c)%
+REM 2015-02-16 +5 MSG No classes: Presidents' days (%c)%
+REM 2015-02-23 +5 MSG No classes: MS work day (%c)%
+REM 2015-02-17 +5 MSG No classes: Presidents' days (%c)%
+REM 2015-03-11 +5 MSG No classes: MS spring conferences (%c)%
+REM 2015-04-03 +5 MSG No classes: Good Friday (%c)%
+REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
+REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
-REM 20 January 2014 +5 MSG Meet Amanda in MS at 7:50AM (%c)%
-REM 6 March 2014 +5 MSG Cover for Echo in afterschool proctoring (%c)%
-REM 14 April 2014 +5 MSG US work day: no US classes (%c)%
+REM 2014-09-15 +5 MSG MS Curriculum Night (%c)%
+REM 2014-10-09 +5 MSG US Curriculum Night (%c)%

@@ -45,7 +45,7 @@ shopt -s cmdhist
 
 ## Editor settings
 export SVN_EDITOR=vim
-export GIT_EDITOR='mvim -f -c"au VimLeave * !open -a Terminal"'
+export GIT_EDITOR=vim
 export EDITOR=vim
 
 # Use CDPATH to make life better
@@ -113,3 +113,9 @@ export LESSOPEN
 export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
 command -v luarocks >/dev/null && eval "$(luarocks path)"
+
+# Load chruby
+if [ -f /usr/local/share/chruby/chruby.sh ]; then
+    source /usr/local/share/chruby/chruby.sh
+fi
+export PATH=$PATH:$HOME/local/node-v0.10.29/bin

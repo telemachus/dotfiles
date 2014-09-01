@@ -43,26 +43,14 @@ alias gp='git push'
 # View current playlist with numbers
 alias nlist='mpc playlist | cat -n -'
 
-# Some bundler aliases
-alias b='bundle'
-alias bi='b install --path vendor'
-alias bil='bi --local'
-alias be='b exec'
-alias bu='b update'
-alias binit='bi && b package && echo "vendor/ruby" >> .gitignore'
-
 # Lock my screen quickly
 alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-
-# gist appears to be unmaintained
-# alias gist='jist'
 
 # reindex spotlight
 alias respotlight='sudo mdutil -E /'
 
 # convenience invocation of head
 alias one='head -n1'
-# alias ldoc='ldoc.lua'
 
 # Make life simpler
 alias words='wc -w'

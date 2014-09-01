@@ -70,7 +70,11 @@ nnoremap <silent> <leader><space> :noh<cr>
 nnoremap <space> za
 
 " Indent pastes properly
+nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
 nnoremap <leader>pi p`[v`]=
+
+
+nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -101,7 +105,7 @@ nnoremap ' `
 nnoremap ` '
 set title
 set shortmess=atI
-nnoremap <silent> <leader>p :set invpaste<CR>
+"nnoremap <silent> <leader>p :set invpaste<CR>
 
 " My status line
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
@@ -125,6 +129,9 @@ set wildmode=longest,list
 " Make sure Markdown files are properly recognized
 " autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
 " \   setlocal filetype=markdown
+
+" My header files are C, not C++
+autocmd BufNewFile,BufNew,BufRead *.h setlocal filetype=c
 
 " Git rebase bindings from
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
@@ -159,6 +166,13 @@ function! NeatFoldText()
 endfunction
 set foldtext=NeatFoldText()
 
+function! SpaceOutParens()
+    let l:winview = winsaveview()
+    normal 0f(cs)(
+    call winrestview(l:winview)
+endfunction
+
+
 let g:UltinipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"

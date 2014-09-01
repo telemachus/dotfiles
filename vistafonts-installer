@@ -5,7 +5,7 @@ exists() { which "$1" &> /dev/null ; }
 if ! [ -d ./fonts ] ; then
 	exec 2>&1
 	echo 'There is no fonts directory here.'
-    echo 'Please make one.'
+	echo 'Please make one.'
 	exit 1
 fi
 

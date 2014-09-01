@@ -33,7 +33,7 @@ for item in *
 do
     if [ -d "$BUNDLE_HOME/$item" ]; then
         cd "$BUNDLE_HOME/$item"
-        info "git clone $(get_remote_url)"
+        info "$(get_remote_url)"
     fi
 done
 
