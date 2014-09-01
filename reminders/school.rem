@@ -80,12 +80,21 @@ REM 2015-04-09 +5 MSG US Q3 ends (%c)%
 REM 2015-04-13 +5 MSG US Q3 grades and comments due by ad hoc (%c)%
 
 # MS trimester days
-REM 21 January 2014 +5 MSG 2nd trimester MS progress reports due by 1:00pm (%c)%
-REM 24 February 2014 +5 MSG 2nd trimester class notes due (%c)%
-REM 3 March 2014 +5 MSG 2nd trimester student comments due by 1:00pm (%c)%
-REM 21 April 2014 +5 MSG 3rd trimester MS progress reports due by 1:00pm (%c)%
-REM 3 June 2014 +5 MSG 3rd trimester class notes due (%c)%
-REM 12 June 2014 +5 MSG 3rd trimester student notes due by 1:00pm (%c)%
+REM 2014-10-14 +5 MSG MS T1 mid-point (%c)%
+REM 2014-10-17 +5 MSG MS T1 comments due by 1:00pm (%c)%
+REM 2014-11-21 +5 MSG MS T1 ends (%c)%
+REM 2014-12-01 +5 MSG MS T1 class notes due by 1:00pm (%c)%
+REM 2014-12-09 +5 MSG MS T1 grades and comments due by 1:00pm (%c)%
+REM 2015-01-20 +5 MSG MS T2 mid-point (%c)%
+REM 2015-01-23 +5 MSG MS T2 comments due by 1:00pm (%c)%
+REM 2015-02-20 +5 MSG MS T2 ends (%c)%
+REM 2015-02-18 +5 MSG MS T2 class notes due by 1:00pm (%c)%
+REM 2015-02-25 +5 MSG MS T2 grades and comments due by 1:00pm (%c)%
+REM 2015-04-10 +5 MSG MS T3 mid-point (%c)%
+REM 2015-04-13 +5 MSG MS T3 comments due by 1:00pm (%c)%
+REM 2015-05-29 +5 MSG MS T3 ends (%c)%
+REM 2015-06-03 +5 MSG MS T3 class notes due by 1:00pm (%c)%
+REM 2015-06-12 +5 MSG MS T3 grades and comments due by 1:00pm (%c)%
 
 # Holidays
 REM 2014-09-25 +5 MSG No classes: Rosh Hashanah (%c)%
@@ -94,13 +103,17 @@ REM 2014-10-15 +5 MSG No classes: testing day (%c)%
 REM 2014-11-07 +5 MSG No classes: US work day (%c)%
 REM 2014-11-27 +5 MSG No classes: Thanksgiving (%c)%
 REM 2014-11-28 +5 MSG No classes: Thanksgiving (%c)%
+REM 2014-12-04 +5 MSG No classes: MS work day (%c)%
+REM 2014-12-16 +5 MSG No classes: MS fall conferences (%c)%
 REM 2015-01-19 +5 MSG No classes: MLK Jr. day (%c)%
 REM 2015-02-16 +5 MSG No classes: Presidents' days (%c)%
+REM 2015-02-23 +5 MSG No classes: MS work day (%c)%
 REM 2015-02-17 +5 MSG No classes: Presidents' days (%c)%
+REM 2015-03-11 +5 MSG No classes: MS spring conferences (%c)%
 REM 2015-04-03 +5 MSG No classes: Good Friday (%c)%
 REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
 REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
-REM 9 October 2014 +5 MSG US Curriculum Night (%c)%
-REM 7 November 2014 +5 MSG No classes: US work day (%c)%
+REM 2014-09-15 +5 MSG MS Curriculum Night (%c)%
+REM 2014-10-09 +5 MSG US Curriculum Night (%c)%
