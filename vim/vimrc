@@ -27,13 +27,7 @@ if &shell =~# 'fish$'
 endif
 
 " Text basics
-set wrap
-set linebreak
-set nolist
-set textwidth=0
-set wrapmargin=0
-set showbreak=…
-"let &showbreak = '+++ '
+set textwidth=79
 set colorcolumn=78
 set autoindent
 set formatoptions=tcqn1
@@ -45,6 +39,10 @@ set number
 set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
+
+" Use TextMate symbols for tabstops and EOLs
+set listchars=tab:▸\ ,trail:·,eol:¬
+set list
 
 " Colorschemes
 colorscheme sol-term
