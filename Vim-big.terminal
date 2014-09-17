@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Bell</key>
+	<false/>
+	<key>BlinkText</key>
+	<false/>
+	<key>CommandString</key>
+	<string>vim</string>
+	<key>Font</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKQHCBESVSRudWxs1AkKCwwNDg8QVk5TU2l6ZVhOU2ZGbGFnc1ZOU05hbWVWJGNs
+	YXNzI0AwAAAAAAAAEBCAAoADWENvbnNvbGFz0hMUFRZaJGNsYXNzbmFtZVgkY2xhc3Nl
+	c1ZOU0ZvbnSiFRdYTlNPYmplY3RfEA9OU0tleWVkQXJjaGl2ZXLRGhtUcm9vdIABCBEa
+	Iy0yNzxCS1JbYmlydHZ4gYaRmqGkrb/CxwAAAAAAAAEBAAAAAAAAABwAAAAAAAAAAAAA
+	AAAAAADJ
+	</data>
+	<key>ProfileCurrentVersion</key>
+	<real>2.02</real>
+	<key>RunCommandAsShell</key>
+	<false/>
+	<key>ShowActiveProcessInTitle</key>
+	<false/>
+	<key>ShowDimensionsInTitle</key>
+	<false/>
+	<key>UseBoldFonts</key>
+	<true/>
+	<key>WindowTitle</key>
+	<string>Vim</string>
+	<key>columnCount</key>
+	<integer>85</integer>
+	<key>name</key>
+	<string>Vim-big</string>
+	<key>noWarnProcesses</key>
+	<array>
+		<dict>
+			<key>ProcessName</key>
+			<string>vim</string>
+		</dict>
+	</array>
+	<key>rowCount</key>
+	<integer>40</integer>
+	<key>shellExitAction</key>
+	<integer>0</integer>
+	<key>type</key>
+	<string>Window Settings</string>
+</dict>
+</plist>
