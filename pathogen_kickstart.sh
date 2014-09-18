@@ -22,9 +22,8 @@ cd $HOME/.vim/bundle
 $CLONE $DEPTH https://github.com/SirVer/ultisnips.git
 $CLONE $DEPTH https://github.com/mattn/gist-vim.git
 $CLONE $DEPTH https://github.com/mattn/webapi-vim.git
-$CLONE $DEPTH https://github.com/plasticboy/vim-markdown.git
+$CLONE $DEPTH https://github.com/tpope/vim-markdown.git
 $CLONE $DEPTH https://github.com/tpope/vim-repeat.git
 $CLONE $DEPTH https://github.com/tpope/vim-surround.git
-
-# Don't use DEPTH here, since I may want to work on this repo sometimes.
-$CLONE git@bitbucket.org:telemachus/vim-varia.git
+$CLONE $DEPTH https://bitbucket.org/telemachus/vim-varia.git
+$CLONE $DEPTH https://github.com/Pychimp/vim-sol.git
