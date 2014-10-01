@@ -1,7 +1,7 @@
 # System-wide .profile for sh(1)
 
 # if [ -x /usr/libexec/path_helper ]; then
-	# eval `/usr/libexec/path_helper -s`
+    # eval `/usr/libexec/path_helper -s`
 # fi
 
 PATH=\
@@ -10,8 +10,8 @@ $HOME/bin:\
 /usr/local/sbin:\
 /usr/bin:/bin:\
 /usr/sbin:\
-/sbin:\
-/usr/local/share/python
+/sbin
+
 LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 MANPATH=/usr/local/man:/usr/local/share/man:/usr/share/man
 
@@ -25,10 +25,6 @@ for i in $HOME/local/*; do
     [ -d "${i}/share/man" ] && MANPATH="${i}/share/man:${MANPATH}"
 done
 
-# export PATH
-# export LD_LIBRARY_PATH
-# export MANPATH
-
 if [ "${BASH-no}" != "no" ]; then
-	[ -r /etc/bashrc ] && . /etc/bashrc
+    [ -r /etc/bashrc ] && . /etc/bashrc
 fi

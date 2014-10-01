@@ -74,3 +74,6 @@ tags
 *.vrb
 *.xdy
 *.tdo
+
+## Personal
+.calc_history
