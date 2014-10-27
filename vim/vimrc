@@ -45,7 +45,7 @@ set listchars=tab:▸\ ,trail:·,eol:¬
 set list
 
 " Colorschemes
-colorscheme sol
+colorscheme sweater
 
 " Adhere to Ruby norms. Le sigh.
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
