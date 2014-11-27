@@ -44,9 +44,6 @@ set foldmethod=marker
 set listchars=tab:▸\ ,trail:·,eol:¬
 set list
 
-" Colorschemes
-colorscheme sweater
-
 " Adhere to Ruby norms. Le sigh.
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
 
@@ -197,3 +194,5 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 let g:tex_conceal=""
 let g:tex_flavor="latex"
+
+colorscheme sweater
