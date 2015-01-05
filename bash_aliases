@@ -55,5 +55,5 @@ alias one='head -n1'
 # Make life simpler
 alias words='wc -w'
 
-# what's new is old again!
+# Everything old is new again
 alias vi='nvim'
