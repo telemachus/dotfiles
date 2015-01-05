@@ -2,7 +2,7 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-syntax on                   " Syntax highlighting off
+syntax on                   " Syntax highlighting on
 filetype plugin indent on   " Filetype detection
 set bs=indent,eol,start     " Backspace over everything in insert mode
 set history=500             " Keep 500 lines of command line history
@@ -43,9 +43,6 @@ set foldmethod=marker
 " Use TextMate symbols for tabstops and EOLs
 set listchars=tab:▸\ ,trail:·,eol:¬
 set list
-
-" Colorschemes
-colorscheme sweater
 
 " Adhere to Ruby norms. Le sigh.
 autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
@@ -197,3 +194,6 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
 let g:tex_conceal=""
 let g:tex_flavor="latex"
+
+" Colorscheme
+colorscheme sweater
