@@ -31,3 +31,4 @@ $CLONE $DEPTH https://github.com/Pychimp/vim-sol.git
 $CLONE $DEPTH https://github.com/tpope/vim-surround.git
 $CLONE $DEPTH https://bitbucket.org/telemachus/vim-varia.git
 $CLONE $DEPTH https://github.com/mattn/webapi-vim.git
+$CLONE $DEPTH https://github.com/dietsche/vim-lastplace.git
