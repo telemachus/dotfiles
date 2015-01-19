@@ -10,6 +10,8 @@ fi
 mkdir $HOME/.vim
 mkdir $HOME/.vim/autoload
 mkdir $HOME/.vim/bundle
+mkdir $HOME/.vim_backups
+mkdir $HOME/.vim_undo
 
 CLONE='git clone'
 DEPTH='--depth 1'

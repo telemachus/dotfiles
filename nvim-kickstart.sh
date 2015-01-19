@@ -10,6 +10,8 @@ fi
 mkdir $HOME/.nvim
 mkdir $HOME/.nvim/autoload
 mkdir $HOME/.nvim/bundle
+mkdir $HOME/.nvim_backups
+mkdir $HOME/.nvim_undo
 
 CLONE='git clone'
 DEPTH='--depth 1'
