@@ -1,7 +1,6 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
-" Most general settings first
 syntax on
 filetype plugin indent on
 set bs=indent,eol,start     " Backspace over everything in insert mode
@@ -9,11 +8,13 @@ set history=500
 set scrolloff=0
 set number
 
-" View @ terminal's bottom
 set ruler                   " Show the cursor position all the time
 set showcmd                 " Display incomplete commands
 set showmode
 set ls=2                    " Always show status bar
+set showtabline=2           " Show a tabbar on top, always
+set termencoding=utf-8
+set encoding=utf-8
 
 let g:match_paren_insert_timeout=5
 
@@ -22,7 +23,6 @@ if &shell =~# 'fish$'
     set shell=bash
 endif
 
-" Text basics
 set textwidth=79
 set colorcolumn=78
 set autoindent
@@ -40,47 +40,31 @@ set foldmethod=marker
 set listchars=tab:▸\ ,trail:·,eol:¬
 set list
 
-" Editor layout
-set termencoding=utf-8
-set encoding=utf-8
-set laststatus=2            " Always put a status line in, even
-                            " if there is only one window
-set showtabline=2           " Show a tabbar on top, always
-
-" An easier leader than \
 let mapleader = ","
 
-" Search and regex settings
 set ignorecase
 set smartcase               " Only care about case if I enter capitals
-set gdefault                " Substitutions use g flag by default
+set gdefault                " Substitutions are global ('g') by default
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
+" An easy way to clear search highlighting
 nnoremap <silent> <leader><space> :noh<cr>
 
 " Indent pastes properly
 nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
 nnoremap <leader>pi p`[v`]=
 
-nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
-
-" Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Fix placement of backups and swap files
 set backup
 set backupdir=$HOME/.vim_backups,/tmp
 set directory=/tmp,$HOME/.vim_backups
-
-" Persistent undo, even across editing sessions
 set undofile
 set undodir=$HOME/.vim_undo,/tmp
 
-" Use ack instead of grep
 set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
 
-" Tell Vim to print using US-sized paper, not A4
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
 
@@ -90,13 +74,10 @@ nnoremap ` '
 set title
 set shortmess=atI
 
-" My status line
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
-" Shortcut to rapidly toggle `set list`
 nnoremap <silent><leader>l :set list!<CR>
-nnoremap <leader>) )ge
 
 runtime macros/matchit.vim
 
@@ -106,7 +87,6 @@ runtime macros/matchit.vim
 "   :find
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 "
-" Bash-style TAB expansion
 set wildmode=longest,list
 
 " My header files are C, not C++
@@ -150,7 +130,7 @@ function! SpaceOutParens()
     normal 0f(cs)(
     call winrestview(l:winview)
 endfunction
-
+nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
 
 let g:UltinipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
