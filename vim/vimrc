@@ -2,25 +2,21 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Most general settings first
-syntax on                   " Syntax highlighting off
-filetype plugin indent on   " Filetype detection
+syntax on
+filetype plugin indent on
 set bs=indent,eol,start     " Backspace over everything in insert mode
-set history=500             " Keep 500 lines of command line history
-set scrolloff=0             " No breathing room
-set number                  " Always show line numbers
+set history=500
+set scrolloff=0
+set number
 
-" Set items for view @ bottom of windows
+" View @ terminal's bottom
 set ruler                   " Show the cursor position all the time
 set showcmd                 " Display incomplete commands
-set showmode                " Display current mode
+set showmode
 set ls=2                    " Always show status bar
 
-" Control matchparen: I want it for scheme, but only there.
-" autocmd FileType ruby,lua,bash,sh,perl,c,erlang,mail NoMatchParen
-" autocmd FileType scheme DoMatchParen
 let g:match_paren_insert_timeout=5
 
-" Do POSIX right
 let g:is_posix = 1
 if &shell =~# 'fish$'
     set shell=bash
@@ -44,9 +40,6 @@ set foldmethod=marker
 set listchars=tab:▸\ ,trail:·,eol:¬
 set list
 
-" Adhere to Ruby norms. Le sigh.
-autocmd Filetype ruby setlocal ts=2 sw=2 sts=2 expandtab
-
 " Editor layout
 set termencoding=utf-8
 set encoding=utf-8
@@ -54,44 +47,33 @@ set laststatus=2            " Always put a status line in, even
                             " if there is only one window
 set showtabline=2           " Show a tabbar on top, always
 
-" Use the same symbols as TextMate for tabstops and EOLs
-"set listchars=tab:▸\ ,trail:·,eol:¬
-"set list
-
 " An easier leader than \
 let mapleader = ","
 
 " Search and regex settings
 set ignorecase
-set smartcase
-set gdefault
+set smartcase               " Only care about case if I enter capitals
+set gdefault                " Substitutions use g flag by default
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
 nnoremap <silent> <leader><space> :noh<cr>
 
-" Toggle all folds in normal mode with <space>
-nnoremap <space> zi
-
 " Indent pastes properly
 nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
 nnoremap <leader>pi p`[v`]=
-
 
 nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-" Enable mouse
-set mouse=a
-
 " Fix placement of backups and swap files
 set backup
 set backupdir=$HOME/.vim_backups,/tmp
 set directory=/tmp,$HOME/.vim_backups
 
-" Vim 7.3, now with persistent undo
-set undofile            " Test the persistent unto feature
+" Persistent undo, even across editing sessions
+set undofile
 set undodir=$HOME/.vim_undo,/tmp
 
 " Use ack instead of grep
@@ -102,13 +84,11 @@ set grepformat=%f:%l:%c:%m
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
 
-" From http://tuxtraining.com/2008/11/11/exploring-vim-configurations
 set hidden
 nnoremap ' `
 nnoremap ` '
 set title
 set shortmess=atI
-"nnoremap <silent> <leader>p :set invpaste<CR>
 
 " My status line
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
@@ -120,7 +100,7 @@ nnoremap <leader>) )ge
 
 runtime macros/matchit.vim
 
-" Some tips from Practical Vim
+" From Practical Vim
 "
 "   Use %% to get current buffer's directory for :edit, :write, :saveas and
 "   :find
@@ -128,10 +108,6 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 "
 " Bash-style TAB expansion
 set wildmode=longest,list
-
-" Make sure Markdown files are properly recognized
-" autocmd BufNewFile,BufNew,BufRead *.markdown,*.md,*.mdown,*.mkd,*.mkdn
-" \   setlocal filetype=markdown
 
 " My header files are C, not C++
 autocmd BufNewFile,BufNew,BufRead *.h setlocal filetype=c
