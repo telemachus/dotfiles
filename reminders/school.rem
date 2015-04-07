@@ -1,14 +1,10 @@
 ## Trinity school dates 2013-2014
 
 # All-school chapel
-REM 2014-09-18 +5 MSG All-school chapel at 10:00am (%c)%
-REM 2014-11-26 +5 MSG All-school chapel at 10:30am (%c)%
+#REM 2014-11-26 +5 MSG All-school chapel at 10:30am (%c)%
 
 # US Faculty meetings
-REM 2014-09-17 +5 MSG US Faculty meeting at 3:00am (%c)%
-REM 2015-01-22 +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 2015-02-19 +5 MSG US Faculty meeting at 3:00pm (%c)%
-REM 2015-04-16 +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2015-04-15 +5 MSG US Faculty meeting at 3:00pm (%c)%
 REM 2015-05-14 +5 MSG US Faculty meeting at 3:00pm (%c)%
 
 # US Advising afternoon meetings
@@ -115,5 +111,4 @@ REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
 REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
-REM 2014-10-20 +10 MSG Flu shoot 1:00PM-4:15PM (%c)%
-REM 2014-10-21 +5 MSG Meet with Holly, 3rd period, 10:45AM-11:25AM (%c)%
+REM 2015-04-16 +5 MSG Meet with Chance at 3:15pm (%c)%
