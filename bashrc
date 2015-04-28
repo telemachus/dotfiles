@@ -7,12 +7,10 @@
 #   update the values of LINES and COLUMNS.
 # + learn the damn Emacs bindings at least a little
 # + don't offer command completion on empty lines
-# + set term type and CLICOLOR
 # + set MAILDIR for mu
 shopt -s checkwinsize
 set -o emacs
 shopt -s no_empty_cmd_completion
-export CLICOLOR=1
 export MAILDIR=$HOME/.maildir
 
 ## Includes
