@@ -1,7 +1,7 @@
 ## Trinity school dates 2013-2014
 
 # All-school chapel
-REM 2015-05-14 +5 MSG US Faculty meeting at 3:00pm (%c)%
+REM 2015-05-13 +5 MSG US Faculty meeting at 9:30pm (%c)%
 
 # US Advising afternoon meetings
 REM 2015-05-06 +5 MSG US Advising meeting at 3:00pm (%c)%
@@ -30,3 +30,4 @@ REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
 REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
+REM 2015-05-14 +5 MSG Meeting with Jessica and John at 11:30pm (%c)%
