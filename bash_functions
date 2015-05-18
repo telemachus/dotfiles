@@ -1,3 +1,9 @@
+# Clean up git formulas
+brew-purge()
+{
+    brewdo brew rm "$@" && brewdo brew cleanup && brewdo brew prune
+}
+
 # Use ack to search my history file; pipe to less if necessary
 hack()
 {
