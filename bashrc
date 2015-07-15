@@ -42,9 +42,11 @@ shopt -s histappend
 shopt -s cmdhist
 
 ## Editor settings
-export SVN_EDITOR=vim
-export GIT_EDITOR=vim
-export EDITOR=vim
+## Always set EDITOR to vi and then alias vi to whatever flavor of vi I prefer
+## that month.
+export SVN_EDITOR=vi
+export GIT_EDITOR=vi
+export EDITOR=vi
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/projects
@@ -116,3 +118,14 @@ command -v luarocks >/dev/null && eval "$(luarocks path)"
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
 fi
+
+# Initialization variables for levee
+# autoindent: supply indentation while in insert mode
+# autowrite: automatically write out changes before :next, :prev
+# magic: use regular expressions in searches
+# wrapscan: searches wrap around end of buffer
+# ignorecase: searches ignore alphabetic case 
+export \
+    LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
+export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
+#export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
