@@ -42,11 +42,9 @@ shopt -s histappend
 shopt -s cmdhist
 
 ## Editor settings
-## Always set EDITOR to vi and then alias vi to whatever flavor of vi I prefer
-## that month.
-export SVN_EDITOR=vi
-export GIT_EDITOR=vi
-export EDITOR=vi
+export SVN_EDITOR=nvim
+export GIT_EDITOR=nvim
+export EDITOR=nvim
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/projects
