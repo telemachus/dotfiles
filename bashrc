@@ -53,6 +53,7 @@ INFODIR=/usr/local/share/info:$INFODIR
 
 ## FIGNORE
 # FIGNORE=bst:aux:bbl:blg:pdf:fls:fdb_latexmk
+#FIGNORE=.SO:.so:.o:.O
 
 ## The prompt below gets ideas from the following:
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
