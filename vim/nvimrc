@@ -3,18 +3,15 @@ execute pathogen#helptags()
 
 syntax on
 filetype plugin indent on
-set bs=indent,eol,start     " Backspace over everything in insert mode
+set bs=indent,eol,start
 set history=500
-set scrolloff=0
+set scrolloff=0             " No breathing room
 set number
 
 set ruler                   " Show the cursor position all the time
-set showcmd                 " Display incomplete commands
+set showcmd
 set showmode
 set ls=2                    " Always show status bar
-set showtabline=2           " Show a tabbar on top, always
-set termencoding=utf-8
-set encoding=utf-8
 
 let g:match_paren_insert_timeout=5
 
@@ -23,42 +20,47 @@ if &shell =~# 'fish$'
     set shell=bash
 endif
 
-set textwidth=79
+set wrap linebreak
 set colorcolumn=78
 set autoindent
 set formatoptions=tcqn1
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
+set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 set number
 set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
-" Use TextMate symbols for tabstops and EOLs
 set listchars=tab:▸\ ,trail:·,eol:¬
-set list
+set nolist
+
+set termencoding=utf-8
+set encoding=utf-8
+set laststatus=2            " Always put a status line in, even
+                            " if there is only one window
+set showtabline=2           " Show a tabbar on top, always
 
 let mapleader = ","
 
 set ignorecase
 set smartcase               " Only care about case if I enter capitals
-set gdefault                " Substitutions are global ('g') by default
+set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
-" An easy way to clear search highlighting
+" Quickly remove highlighting
 nnoremap <silent> <leader><space> :noh<cr>
 
 " Indent pastes properly
 nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
 nnoremap <leader>pi p`[v`]=
 
+nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
+
 map Q gq
 
 set backup
 set backupdir=$HOME/.nvim_backups,/tmp
 set directory=/tmp,$HOME/.nvim_backups
+
 set undofile
 set undodir=$HOME/.nvim_undo,/tmp
 
@@ -78,13 +80,14 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 nnoremap <silent><leader>l :set list!<CR>
+nnoremap <leader>m :.,/^-- / - d
 
 runtime macros/matchit.vim
 
 " From Practical Vim
 "
-"   Use %% to get current buffer's directory for :edit, :write, :saveas and
-"   :find
+" Use %% to get current buffer's directory for :edit, :write, :saveas and
+" :find
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
 "
 set wildmode=longest,list
@@ -130,7 +133,7 @@ function! SpaceOutParens()
     normal 0f(cs)(
     call winrestview(l:winview)
 endfunction
-nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
+
 
 let g:UltinipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -151,4 +154,6 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 let g:tex_conceal=""
 let g:tex_flavor="latex"
 
-colorscheme sweater
+set t_Co=256
+set background=light
+colorscheme papercolor
