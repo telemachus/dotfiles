@@ -1,22 +1,64 @@
-## Trinity school dates 2013-2014
+## Trinity school dates 2015-2016
 
 # All-school chapel
-REM 2015-05-13 +5 MSG US Faculty meeting at 9:30pm (%c)%
+REM 2015-10-01 +5 MSG All-school chapel at 9:30pm (%c)%
+REM 2015-11-25 +5 MSG All-school chapel at 10:30pm (%c)%
+REM 2015-12-17 +5 MSG All-school chapel at 2:00pm (%c)%
+REM 2016-05-12 +5 MSG All-school chapel at 9:30pm (%c)%
 
-# US Advising afternoon meetings
-REM 2015-05-06 +5 MSG US Advising meeting at 3:00pm (%c)%
+# US Advising afternoon meetings in 120
+REM 2015-10-07 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2015-11-04 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2015-12-02 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2016-01-27 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2016-02-17 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2016-03-02 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2016-04-06 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+REM 2016-05-04 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
 
-# US Advising dates with students
+# US grade-level meetings in upper gym
+REM 2015-09-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2015-10-20 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2016-01-05 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2016-02-29 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2016-04-18 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2016-05-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
 
-# US grade-level meetings in Chapel
-REM 2015-05-19 +5 MSG US 9th grade meeting in Chapel at 8:15am (%c)%
+# All-school meetings, location TBA
+REM 2015-10-01 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2015-10-29 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2015-11-12 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2015-12-10 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-01-07 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-01-28 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-02-25 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-03-17 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-04-28 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-06-03 +5 MSG All-school meeting at 3:30pm (%c)%
 
-# All-school meetings
-REM 2015-05-14 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2015-06-05 +5 MSG Final faculty & staff meeting at 3:30pm (%c)%
+# US faculty meetings
+REM 2015-09-30 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2015-10-21 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
+REM 2015-11-18 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2015-12-16 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
+REM 2016-01-13 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
+REM 2016-02-10 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2016-02-24 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2016-03-09 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2016-03-16 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2016-04-20 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2016-05-11 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
 
 # Department meetings
-REM 2015-05-13 +5 MSG Department meeting at 3:00pm (%c)%
+REM 2015-09-22 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2015-10-06 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2015-11-03 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2015-12-08 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-01-12 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-02-16 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-03-08 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-04-12 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-05-03 +5 MSG Department meeting at 3:15pm (%c)%
 
 # US quarters and reports
 
@@ -30,4 +72,3 @@ REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
 REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
-REM 2015-05-14 +5 MSG Meeting with Jessica and John at 11:30pm (%c)%
