@@ -32,3 +32,4 @@ $CLONE $DEPTH https://github.com/nice/sweater.git
 $CLONE $DEPTH https://github.com/tpope/vim-markdown.git
 $CLONE $DEPTH https://github.com/tpope/vim-repeat.git
 $CLONE $DEPTH https://github.com/tpope/vim-surround.git
+$CLONE $DEPTH https://github.com/NLKNguyen/papercolor-theme.git
