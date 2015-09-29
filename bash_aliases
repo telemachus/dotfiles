@@ -56,3 +56,6 @@ alias words='wc -w'
 
 # Everything old is new again
 alias vi='nvim'
+
+# ctrl-l not working
+alias ""=clear
