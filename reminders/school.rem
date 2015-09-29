@@ -1,10 +1,10 @@
 ## Trinity school dates 2015-2016
 
 # All-school chapel
-REM 2015-10-01 +5 MSG All-school chapel at 9:30pm (%c)%
-REM 2015-11-25 +5 MSG All-school chapel at 10:30pm (%c)%
+REM 2015-10-01 +5 MSG All-school chapel at 9:30am (%c)%
+REM 2015-11-25 +5 MSG All-school chapel at 10:30am (%c)%
 REM 2015-12-17 +5 MSG All-school chapel at 2:00pm (%c)%
-REM 2016-05-12 +5 MSG All-school chapel at 9:30pm (%c)%
+REM 2016-05-12 +5 MSG All-school chapel at 9:30am (%c)%
 
 # US Advising afternoon meetings in 120
 REM 2015-10-07 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
@@ -61,15 +61,33 @@ REM 2016-04-12 +5 MSG Department meeting at 3:15pm (%c)%
 REM 2016-05-03 +5 MSG Department meeting at 3:15pm (%c)%
 
 # US quarters and reports
+REM 2015-11-05 +5 MSG US Q1 ends (%c)%
+REM 2015-11-09 +5 MSG US Q1 grades and comments due (%c)%
+REM 2016-01-21 +5 MSG US Q2 and S1 end (%c)%
+REM 2016-04-07 +5 MSG US Q3 ends (%c)%
+REM 2016-04-11 +5 MSG US Q3 grades and comments due (%c)%
+REM 2016-06-01 +5 MSG US Q4 and S2 end (%c)%
+REM 2016-06-03 +5 MSG US Q4 grades due (%c)%
 
 # MS trimester days
-REM 2015-05-29 +5 MSG MS T3 ends (%c)%
-REM 2015-06-03 +5 MSG MS T3 class notes due by 1:00pm (%c)%
-REM 2015-06-12 +5 MSG MS T3 grades and comments due by 1:00pm (%c)%
+REM 2015-10-22 +5 MSG MS T1 mid-point (%c)%
+REM 2015-10-26 +10 MSG MS T1 progress reports due (%c)%
+REM 2015-12-02 +5 MSG MS T1 ends (%c)%
+REM 2015-12-03 +5 MSG MS T1 class notes due (%c)%
+REM 2015-12-07 +5 MSG MS T1 grades and comments due (%c)%
+REM 2016-01-15 +5 MSG MS T2 mid-point (%c)%
+REM 2016-01-19 +5 MSG MS T2 progress reports due (%c)%
+REM 2016-02-17 +5 MSG MS T2 class notes due (%c)%
+REM 2016-02-19 +5 MSG MS T2 ends (%c)%
+REM 2016-02-26 +5 MSG MS T2 grades and comments due (%c)%
+REM 2016-04-15 +5 MSG MS T3 mid-point (%c)%
+REM 2016-04-18 +5 MSG MS T3 progress reports due (%c)%
+REM 2016-06-01 +5 MSG MS T3 class notes due (%c)%
+REM 2016-06-02 +5 MSG MS T3 ends (%c)%
+REM 2016-06-09 +5 MSG MS T3 grades and comments due (%c)%
 
 # Holidays
-REM 2015-05-22 +5 MSG No classes: Graduation (%c)%
-REM 2015-05-25 +5 MSG No classes: Memorial day (%c)%
+REM 2016-05-20 +5 MSG No classes: Graduation (%c)%
+REM 2016-05-30 +5 MSG No classes: Memorial day (%c)%
 
 # Varia
-REM 2015-09-22 +5 MSG Meeting in Brass re feminism at 12:55pm (%c)%
