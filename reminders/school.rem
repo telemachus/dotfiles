@@ -64,10 +64,11 @@ REM 2016-05-03 +5 MSG Department meeting at 3:15pm (%c)%
 REM 2015-11-05 +5 MSG US Q1 ends (%c)%
 REM 2015-11-09 +5 MSG US Q1 grades and comments due (%c)%
 REM 2016-01-21 +5 MSG US Q2 and S1 end (%c)%
+REM 2016-01-28 +5 MSG US S1 grades due (%c)%
 REM 2016-04-07 +5 MSG US Q3 ends (%c)%
 REM 2016-04-11 +5 MSG US Q3 grades and comments due (%c)%
 REM 2016-06-01 +5 MSG US Q4 and S2 end (%c)%
-REM 2016-06-03 +5 MSG US Q4 grades due (%c)%
+REM 2016-06-03 +5 MSG US final grades due (%c)%
 
 # MS trimester days
 REM 2015-10-22 +5 MSG MS T1 mid-point (%c)%
