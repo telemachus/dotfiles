@@ -62,7 +62,7 @@ ccd() {
             newdir=${PWD//$1/$2}
             case "$newdir" in
                 $PWD)
-                    printf "ccd: bad substitution\n" >&2
+                    printf "ccd: \$PWD is already $PWD\n" >&2
                     return 1
                     ;;
                 *)
