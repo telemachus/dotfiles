@@ -2,25 +2,26 @@
 
 set -e
 
-if [ -e $HOME/.nvim ]; then
-    printf "Backing up current .nvim directory to $HOME/old-nvim...\n"
-    mv $HOME/.nvim $HOME/old-nvim
+if [ -e $HOME/.config/nvim ]; then
+    printf "Backing up current .config/nvim directory to $HOME/old-nvim...\n"
+    mv $HOME/.config/nvim $HOME/old-nvim
 fi
 
-mkdir $HOME/.nvim
-mkdir $HOME/.nvim/autoload
-mkdir $HOME/.nvim/bundle
+mkdir $HOME/.config
+mkdir $HOME/.config/nvim
+mkdir $HOME/.config/nvim/autoload
+mkdir $HOME/.config/nvim/bundle
 mkdir $HOME/.nvim_backups
 mkdir $HOME/.nvim_undo
 
 CLONE='git clone'
 DEPTH='--depth 1'
 
-cd $HOME/.nvim/autoload
+cd $HOME/.config/nvim/autoload
 curl -S -o pathogen.vim \
     https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
-cd $HOME/.nvim/bundle
+cd $HOME/.config/nvim/bundle
 $CLONE $DEPTH https://bitbucket.org/telemachus/vim-varia.git
 $CLONE $DEPTH https://github.com/Pychimp/vim-sol.git
 $CLONE $DEPTH https://github.com/SirVer/ultisnips.git

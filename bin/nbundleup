@@ -4,13 +4,13 @@ quiet=$1
 here=$(pwd)
 pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 
-if [ -d "$HOME/.nvim/autoload" ]; then
+if [ -d "$HOME/.config/nvim/autoload" ]; then
 	cd "$HOME/.nvim/autoload"
 	curl -S -o pathogen.vim "$pathogen"
 fi
 
-if [ -d "$HOME/.nvim/bundle" ]; then
-	for bundle in "$HOME/.nvim/bundle/"*
+if [ -d "$HOME/.config/nvim/bundle" ]; then
+	for bundle in "$HOME/.config/nvim/bundle/"*
 	do
 		if [ -d "$bundle/.git" ]; then
 			if [ "$quiet" != "-q" ]; then
