@@ -112,3 +112,8 @@ shorten() {
 csview () {
  <$1 sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 }
+
+revim() {
+	brew-purge neovim && brew install --HEAD neovim && \
+		pip install --upgrade pip setuptools neovim
+}
