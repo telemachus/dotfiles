@@ -5,7 +5,7 @@ here=$(pwd)
 pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 
 if [ -d "$HOME/.config/nvim/autoload" ]; then
-	cd "$HOME/.nvim/autoload"
+	cd "$HOME/.config/nvim/autoload"
 	curl -S -o pathogen.vim "$pathogen"
 fi
 
@@ -15,9 +15,11 @@ if [ -d "$HOME/.config/nvim/bundle" ]; then
 		if [ -d "$bundle/.git" ]; then
 			if [ "$quiet" != "-q" ]; then
 				printf "Working on %s...\n" ${bundle##*/}
-				cd "$bundle"; git pull --update-shallow 2>/dev/null
+				cd "$bundle"
+				git pull --update-shallow 2>/dev/null
 			else
-				cd "$bundle"; git pull --update-shallow 2>/dev/null
+				cd "$bundle"
+				git pull --update-shallow 2>/dev/null
 			fi
 		fi
 	done

@@ -77,21 +77,36 @@ set title
 set shortmess=atI
 
 function! WordCount()
-   let s:old_status = v:statusmsg
-   let position = getpos(".")
-   exe ":silent normal g\<c-g>"
-   let stat = v:statusmsg
-   let s:word_count = 0
-   if stat != "--No lines in buffer--"
-     let s:word_count = str2nr(split(v:statusmsg)[11])
-     let v:statusmsg = s:old_status
-   end
-   call setpos(".", position)
-   return s:word_count
+	if &filetype !~ '\vmarkdown|txt|mail'
+		return ''
+	endif
+
+	let l:old_status = v:statusmsg
+	let l:position = getpos('.')
+	if !exists('b:res')
+		let b:res = ''
+	endif
+	if mode() =~? '\vv|s'
+		" Leave word count as it was in visual or select modes
+		return b:res
+	endif
+        exe ":silent normal! g\<c-g>"
+	let l:stat = v:statusmsg
+	call setpos('.', l:position)
+	let v:statusmsg = l:old_status
+
+	let l:parts = split(l:stat)
+	let l:cnt = '0'
+	if len(l:parts) > 11
+		let l:cnt = str2nr(split(stat)[11])
+	endif
+	let l:res = printf(' Words: %d', l:cnt)
+	let b:res = l:res
+	return l:res
 endfunction
 
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
-set statusline+=%=%([Line:\ %l\ Column:\ %c\ Words:\ %{WordCount()}\ %P]%)
+set statusline+=%=%([Line:\ %l\ Column:\ %c%{WordCount()}\ %P]%)
 
 nnoremap <silent><leader>l :set list!<CR>
 nnoremap <leader>m :.,/^-- / - d
