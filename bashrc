@@ -23,8 +23,8 @@ bc="$HOME/local/bc/share/bash-completion/bash_completion"
 
 [[ -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
-[[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]] \
-    && source /usr/local/Library/Contributions/brew_bash_completion.sh
+[[ -f /usr/local/etc/bash_completion.d/brew ]] \
+    && source /usr/local/etc/bash_completion.d/brew
 
 # [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
@@ -105,13 +105,14 @@ export LESS
     && LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 export LESSOPEN
 
+export HOMEBREW_NO_ANALYTICS=1
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
 # export CXX=g++-4.2
 export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
-command -v luarocks >/dev/null && eval "$(luarocks path)"
+#command -v luarocks >/dev/null && eval "$(luarocks path)"
 
 # Load chruby
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
