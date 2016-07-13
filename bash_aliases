@@ -29,7 +29,7 @@ alias ...='cd ../../'
 alias realias='$EDITOR ~/.bash_aliases && source ~/.bash_aliases'
 
 # Alias to add or edit functions
-alias refunction='vim ~/.bash_functions && source ~/.bash_functions'
+alias refunction='$EDITOR ~/.bash_functions && source ~/.bash_functions'
 
 # A few git aliases
 alias gs='git status -sb'

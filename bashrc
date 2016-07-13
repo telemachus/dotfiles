@@ -21,10 +21,10 @@ export MAILDIR=$HOME/.maildir
 bc="$HOME/local/bc/share/bash-completion/bash_completion"
 [[ $PS1 && -f $bc ]] && source $bc
 
-[[ -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
+[[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
-[[ -f /usr/local/Library/Contributions/brew_bash_completion.sh ]] \
-    && source /usr/local/Library/Contributions/brew_bash_completion.sh
+bc="/usr/local/etc/bash_completion.d/brew"
+[[ $PS1 && -f $bc ]] && source $bc
 
 # [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
@@ -111,7 +111,7 @@ export LESSOPEN
 # export CXX=g++-4.2
 export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
-command -v luarocks >/dev/null && eval "$(luarocks path)"
+#command -v luarocks >/dev/null && eval "$(luarocks path)"
 
 # Load chruby
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
@@ -128,3 +128,5 @@ export \
     LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 #export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
+# No analytics
+export HOMEBREW_NO_ANALYTICS=1

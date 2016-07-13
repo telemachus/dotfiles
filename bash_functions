@@ -117,3 +117,8 @@ revim() {
 	brew-purge neovim && brew install --HEAD neovim && \
 		pip install --upgrade pip setuptools neovim
 }
+
+relat() {
+	osascript -e 'quit app "Preview"' && make "$1" && \
+		open "${1}.pdf"
+}
