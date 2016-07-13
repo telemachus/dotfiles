@@ -5,7 +5,7 @@ BUNDLE_HOME="$HOME"/.config/nvim/bundle
 info() { printf "$1\n"; }
 
 get_remote_url() {
-    git config --get remote.origin.url
+	git config --get remote.origin.url
 }
 
 git_dirty() {
@@ -30,19 +30,24 @@ git_unpushed_changes() {
 cd "$BUNDLE_HOME"
 for item in *
 do
-    if [ -d "$BUNDLE_HOME/$item" ]; then
-        cd "$BUNDLE_HOME/$item"
-        info "$(get_remote_url)"
-    fi
+	if [ -d "$BUNDLE_HOME/$item" -a -d "$BUNDLE_HOME/$item/.git" ]; then
+		cd "$BUNDLE_HOME/$item"
+		info "$(get_remote_url)"
+	fi
 done
 
 cd "$BUNDLE_HOME"
 for item in *
 do
-    if [ -d "$BUNDLE_HOME/$item" ]; then
-        cd "$BUNDLE_HOME/$item"
-        git_dirty
-	git_untracked_files
-        git_unpushed_changes
-    fi
+	if [ -d "$BUNDLE_HOME/$item" ]; then
+		cd "$BUNDLE_HOME/$item"
+		if [ -d "$PWD/.git" ]; then
+			git_dirty
+			git_untracked_files
+			git_unpushed_changes
+		else
+			short=$(basename $PWD)
+			info "$short is not a git repository"
+		fi
+	fi
 done
