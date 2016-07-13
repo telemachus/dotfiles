@@ -105,6 +105,7 @@ export LESS
     && LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
 export LESSOPEN
 
+export HOMEBREW_NO_ANALYTICS=1
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
