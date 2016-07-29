@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.achilles.mu_index</string>
+  <string>com.telemachus.mu_index</string>
 
   <key>Program</key>
-  <string>/Users/achilles/bin/mu_index.sh</string>
+  <string>/Users/telemachus/bin/mu_index.sh</string>
 
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/achilles/bin/mu_index.sh</string>
+    <string>/Users/telemachus/bin/mu_index.sh</string>
   </array>
 
   <key>Nice</key>

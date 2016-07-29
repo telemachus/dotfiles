@@ -74,39 +74,39 @@ set hidden
 nnoremap ' `
 nnoremap ` '
 set title
-set shortmess=atI
+set shortmess=atIF
 
-function! WordCount()
-	if &filetype !~ '\vmarkdown|txt|mail'
-		return ''
-	endif
+" function! WordCount()
+" 	if &filetype !~ '\vmarkdown|txt|mail'
+" 		return ''
+" 	endif
 
-	let l:old_status = v:statusmsg
-	let l:position = getpos('.')
-	if !exists('b:res')
-		let b:res = ''
-	endif
-	if mode() =~? '\vv|s'
-		" Leave word count as it was in visual or select modes
-		return b:res
-	endif
-        exe ":silent normal! g\<c-g>"
-	let l:stat = v:statusmsg
-	call setpos('.', l:position)
-	let v:statusmsg = l:old_status
+" 	let l:old_status = v:statusmsg
+" 	let l:position = getpos('.')
+" 	if !exists('b:res')
+" 		let b:res = ''
+" 	endif
+" 	if mode() =~? '\vv|s'
+" 		" Leave word count as it was in visual or select modes
+" 		return b:res
+" 	endif
+"         exe ":silent normal! g\<c-g>"
+" 	let l:stat = v:statusmsg
+" 	call setpos('.', l:position)
+" 	let v:statusmsg = l:old_status
 
-	let l:parts = split(l:stat)
-	let l:cnt = '0'
-	if len(l:parts) > 11
-		let l:cnt = str2nr(split(stat)[11])
-	endif
-	let l:res = printf(' Words: %d', l:cnt)
-	let b:res = l:res
-	return l:res
-endfunction
+" 	let l:parts = split(l:stat)
+" 	let l:cnt = '0'
+" 	if len(l:parts) > 11
+" 		let l:cnt = str2nr(split(stat)[11])
+" 	endif
+" 	let l:res = printf(' Words: %d', l:cnt)
+" 	let b:res = l:res
+" 	return l:res
+" endfunction
 
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
-set statusline+=%=%([Line:\ %l\ Column:\ %c%{WordCount()}\ %P]%)
+set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 nnoremap <silent><leader>l :set list!<CR>
 nnoremap <leader>m :.,/^-- / - d
@@ -186,3 +186,22 @@ let g:tex_flavor="latex"
 set t_Co=256
 set background=light
 colorscheme papercolor
+
+" Settings for vim-textobj-quote
+augroup textobj_quote
+	autocmd!
+	autocmd FileType mail call textobj#quote#init({'educate': 1})
+	autocmd FileType markdown call textobj#quote#init({'educate': 1})
+	autocmd FileType text call textobj#quote#init({'educate': 1})
+augroup END
+
+augroup mail_settings
+	autocmd!
+	autocmd FileType mail setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+augroup END
+
+map <silent> <leader>qc <Plug>ReplaceWithCurly
+map <silent> <leader>qs <Plug>ReplaceWithStraight
+
+let g:markdown_fenced_languages = ['html', 'python', 'lua', 'bash=sh']
+let g:markdown_syntax_conceal = 0

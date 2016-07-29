@@ -59,14 +59,17 @@ state_file		"~/.mpd/mpd.state"
 # initialization. This setting is disabled by default and MPD is run as the
 # current user.
 #
-user			"hektor"
+user			"telemachus"
 #
-# This setting sets the address for the daemon to listen on. Careful attention
-# should be paid if this is assigned to anything other then the default, any.
-# This setting can deny access to control of the daemon.
+# This setting sets the address for the daemon to listen on. Careful
+# attention should be paid if this is assigned to anything other then the
+# default, any.  This setting can deny access to control of the daemon.
+#
+# Notwithstanding the warning above, let's change the bind_to_address in
+# order to squelch a stupid ipv6 related warning: http://bit.ly/T2Tcux.
 #
 # For network
-bind_to_address		"any"
+bind_to_address		"127.0.0.1"
 #
 # And for Unix Socket
 #bind_to_address	"~/.mpd/socket"
@@ -218,15 +221,15 @@ input {
 #
 # An example of a httpd output (built-in HTTP streaming server):
 #
-audio_output {
-	type		"httpd"
-	name		"My HTTP Stream"
+#audio_output {
+#	type		"httpd"
+#	name		"My HTTP Stream"
 #	encoder		"vorbis"		# optional, vorbis or lame
-	port		"8000"
+#	port		"8000"
 ##	quality		"5.0"			# do not define if bitrate is defined
-	bitrate		"128"			# do not define if quality is defined
-	format		"44100:16:1"
-}
+#	bitrate		"128"			# do not define if quality is defined
+#	format		"44100:16:1"
+#}
 #
 # An example of a pulseaudio output (streaming to a remote pulseaudio server)
 #
@@ -258,10 +261,10 @@ audio_output {
 #}
 # audio_output as in http://evanhanson.com/2010/03/22/mpd-on-os-x/
 audio_output {
-	type		"osx"
-	name		"OSX"
+    type		"osx"
+    name		"OSX"
 }
-#
+
 # This setting will change all decoded audio to be converted to the specified
 # format before being passed to the audio outputs. By default, this setting is
 # disabled.
@@ -295,7 +298,7 @@ audio_output {
 # all controls, even if the mixer is not supported by the device and will not
 # affect any other sound producing applications.
 #
-mixer_type			"software"
+mixer_type			"hardware"
 #
 # This example will not allow MPD to touch the mixer at all and will disable
 # all volume controls.

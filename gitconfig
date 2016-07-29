@@ -3,6 +3,8 @@
 	email = telemachus@arpinum.org
 
 [alias]
+    unmerged = !git branch -r --no-merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+    merged = !git branch -r --merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
 	ll = log --pretty=oneline --abbrev-commit --max-count=15
 	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
@@ -13,22 +15,28 @@
 	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
 	ll = log --pretty=oneline --abbrev-commit --max-count=15
 	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
+	c = rev-parse --short HEAD
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+	find = "!func() { git grep $1 $(git rev-list --all); }; func"
+	logger = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ctags = !.git/hooks/ctags
+
+[color]
+	ui = auto
 
 [branch]
 	autosetupmerge = true
 
 [github]
 	user = telemachus
-	token = <oops>
+	token = <TODO>
+	password = <TODO>
 
 [core]
-	excludesfile = /Users/telemachus/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	filemode = true
 	logallrefupdates = true
 	whitespace = space-before-tab, trailing-space
-
-[color]
-	ui = auto
 
 [color "diff"]
 	meta = blue bold
@@ -50,4 +58,13 @@
 [init]
 	templatedir = ~/.git_template
 
-# vim: noexpandtab
+[credential]
+	helper = osxkeychain
+
+[push]
+	default = simple
+
+[http]
+
+[diff]
+	compactionHeuristic = true
