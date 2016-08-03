@@ -7,6 +7,7 @@ set bs=indent,eol,start
 set history=500
 set scrolloff=0             " No breathing room
 set number
+set mouse=		    " No mouse capture
 
 set ruler                   " Show the cursor position all the time
 set showcmd
@@ -130,11 +131,11 @@ augroup vim_config
     autocmd FileType gitrebase call LoadGitrebaseBindings()
 augroup END
 
-fun! LoadGitrebaseBindings()
+function! LoadGitrebaseBindings()
     nnoremap P :Pick
     nnoremap S :Squash
     nnoremap C :Cycle
-endfun
+endfunction
 
 autocmd BufNewFile,BufNew,BufRead *.rockspec
 \   setlocal filetype=lua
