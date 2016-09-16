@@ -114,9 +114,13 @@ export RLWRAP_HOME="$HOME/.rlwrap"
 [[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
 #command -v luarocks >/dev/null && eval "$(luarocks path)"
 
-# Load chruby
+# Load chruby and gem_home
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
+fi
+
+if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
+    source /usr/local/share/gem_home/gem_home.sh
 fi
 
 # Initialization variables for levee
