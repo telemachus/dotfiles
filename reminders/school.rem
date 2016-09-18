@@ -1,95 +1,121 @@
-## Trinity school dates 2015-2016
+## Trinity school dates 2016-2017
 
 # All-school chapel
-REM 2015-10-01 +5 MSG All-school chapel at 9:30am (%c)%
-REM 2015-11-25 +5 MSG All-school chapel at 10:30am (%c)%
-REM 2015-12-17 +5 MSG All-school chapel at 2:00pm (%c)%
-REM 2016-05-12 +5 MSG All-school chapel at 9:30am (%c)%
+REM 2016-09-29 +5 MSG All-school chapel at 10:00am (%c)%
+REM 2016-11-22 +5 MSG All-school chapel at 2:00pm (%c)%
+REM 2016-12-26 +5 MSG All-school chapel at 10:30am (%c)%
+REM 2017-05-10 +5 MSG All-school chapel at 10:00am (%c)%
 
-# US Advising afternoon meetings in 120
-REM 2015-10-07 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2015-11-04 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2015-12-02 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2016-01-27 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2016-02-17 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2016-03-02 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2016-04-06 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
-REM 2016-05-04 +5 MSG 11th grade advising meeting in 120 at 3:00pm (%c)%
+# US Advising afternoon meetings in 214
+REM 2016-10-05 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+REM 2016-11-02 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+REM 2017-01-25 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+REM 2017-02-22 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+REM 2017-03-08 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+REM 2017-05-04 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
 
-# US grade-level meetings in upper gym
-REM 2015-09-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
-REM 2015-10-20 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
-REM 2016-01-05 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
-REM 2016-02-29 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
-REM 2016-04-18 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
-REM 2016-05-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+# US Advising morning meetings in 219
+REM 2016-11-29 +5 MSG 11th Advisory meeting in 219 at 8:15am (%c)%
+REM 2016-11-30 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2016-12-02 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2016-12-07 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2016-12-09 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-02-14 +5 MSG 11th Advisory meeting in 219 at 8:15am (%c)%
+REM 2017-02-15 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-02-17 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-02-27 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-02-28 +5 MSG 11th Advisory meeting in 219 at 8:15am (%c)%
+REM 2017-02-28 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-03-01 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-03-02 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-03-03 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-03-06 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-03-07 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-03-08 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-03-09 +5 MSG 11th Advisory meeting in 219 at 10:25am (%c)%
+REM 2017-04-25 +5 MSG 11th Advisory meeting in 219 at 8:15am (%c)%
+REM 2017-04-26 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+REM 2017-04-28 +5 MSG 11th Advisory meeting in 219 at 10:00am (%c)%
+
+# US grade-level meetings in N-225
+REM 2016-10-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2017-01-10 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2017-02-27 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2017-04-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
+REM 2017-05-17 +5 MSG US 11th grade meeting in upper gym at 8:15am (%c)%
 
 # All-school meetings, location TBA
-REM 2015-10-01 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2015-10-29 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2015-11-12 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2015-12-10 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-01-07 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-01-28 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-02-25 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-03-17 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-04-28 +5 MSG All-school meeting at 3:30pm (%c)%
-REM 2016-06-03 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-09-22 +5 MSG All-school summer book meeting at 3:30pm (%c)%
+REM 2016-09-29 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2016-10-27 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2017-02-02 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2017-03-16 +5 MSG All-school meeting at 3:30pm (%c)%
+REM 2017-06-01 +5 MSG All-school meeting at 3:30pm (%c)%
 
 # US faculty meetings
-REM 2015-09-30 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2015-10-21 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
-REM 2015-11-18 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2015-12-16 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
-REM 2016-01-13 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
-REM 2016-02-10 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2016-02-24 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2016-03-09 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2016-03-16 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2016-04-20 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
-REM 2016-05-11 +5 MSG US faculty meeting in Hawley at 3:00pm (%c)%
+REM 2016-09-21 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2016-10-26 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2016-11-16 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2016-12-14 +5 MSG US faculty meeting in N-225 at 3:00pm (%c)%
+REM 2017-01-18 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2017-02-15 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2017-03-15 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
+REM 2017-04-19 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
+REM 2017-05-10 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
 
 # Department meetings
-REM 2015-09-22 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2015-10-06 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2015-11-03 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2015-12-08 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2016-01-12 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2016-02-16 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2016-03-08 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2016-04-12 +5 MSG Department meeting at 3:15pm (%c)%
-REM 2016-05-03 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-10-06 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-11-10 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2016-12-08 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-01-05 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-02-09 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-03-09 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-04-06 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-05-04 +5 MSG Department meeting at 3:15pm (%c)%
+REM 2017-06-08 +5 MSG Department meeting at 3:15pm (%c)%
 
 # US quarters and reports
-REM 2015-11-05 +5 MSG US Q1 ends (%c)%
-REM 2015-11-09 +5 MSG US Q1 grades and comments due (%c)%
-REM 2016-01-21 +5 MSG US Q2 and S1 end (%c)%
-REM 2016-01-28 +5 MSG US S1 grades due (%c)%
-REM 2016-04-07 +5 MSG US Q3 ends (%c)%
-REM 2016-04-11 +5 MSG US Q3 grades and comments due (%c)%
-REM 2016-06-01 +5 MSG US Q4 and S2 end (%c)%
-REM 2016-06-03 +5 MSG US final grades due (%c)%
+REM 2016-10-14 +5 MSG US Q1 progress reports due (%c)%
+REM 2016-11-14 +5 MSG US Q1 grades and comments due (%c)%
+REM 2016-12-05 +5 MSG US Q2 progress reports due (%c)%
+REM 2016-11-10 +5 MSG US Q1 ends (%c)%
+REM 2016-11-14 +5 MSG US Q1 grades and comments due (%c)%
+REM 2016-12-05 +5 MSG US Q2 progress reports due (%c)%
+REM 2017-02-01 +5 MSG US Q2 and S1 end (%c)%
+REM 2017-02-06 +5 MSG US S1 grades due (%c)%
+REM 2017-02-22 +5 MSG US Q3 progress reports due (%c)%
+REM 2017-04-07 +5 MSG US Q3 ends (%c)%
+REM 2017-04-17 +5 MSG US Q3 grades and comments due (%c)%
+REM 2017-05-22 +5 MSG US Q4 progress reports due (%c)%
+REM 2017-06-16 +5 MSG US Q4 and S2 end (%c)%
+REM 2017-06-19 +5 MSG US final grades due (%c)%
 
-# MS trimester days
-REM 2015-10-22 +5 MSG MS T1 mid-point (%c)%
-REM 2015-10-26 +10 MSG MS T1 progress reports due (%c)%
-REM 2015-12-02 +5 MSG MS T1 ends (%c)%
-REM 2015-12-03 +5 MSG MS T1 class notes due (%c)%
-REM 2015-12-07 +5 MSG MS T1 grades and comments due (%c)%
-REM 2016-01-15 +5 MSG MS T2 mid-point (%c)%
-REM 2016-01-19 +5 MSG MS T2 progress reports due (%c)%
-REM 2016-02-17 +5 MSG MS T2 class notes due (%c)%
-REM 2016-02-19 +5 MSG MS T2 ends (%c)%
-REM 2016-02-26 +5 MSG MS T2 grades and comments due (%c)%
-REM 2016-04-15 +5 MSG MS T3 mid-point (%c)%
-REM 2016-04-18 +5 MSG MS T3 progress reports due (%c)%
-REM 2016-06-01 +5 MSG MS T3 class notes due (%c)%
-REM 2016-06-02 +5 MSG MS T3 ends (%c)%
-REM 2016-06-09 +5 MSG MS T3 grades and comments due (%c)%
+# Grade meetings
+REM 2016-10-17 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
+REM 2017-01-17 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
+REM 2017-02-27 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
+REM 2017-04-17 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
+REM 2017-05-17 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
 
-# Holidays
-REM 2016-05-20 +5 MSG No classes: Graduation (%c)%
-REM 2016-05-30 +5 MSG No classes: Memorial day (%c)%
+# Time matters well-being meetings
+REM 2016-09-29 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2016-10-20 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2016-11-17 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2016-12-15 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2017-01-12 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2017-02-16 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2017-04-13 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2017-05-11 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2017-06-15 +5 MSG Time matters working group meeting at 4:00pm (%c)%
 
-# Varia
-REM 2016-03-09 +5 MSG Summer reading selection 8:00AM in Obernauer (%c)%
+# Faculty reps meetings with faculty in Brass
+REM 2016-09-26 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
+REM 2016-11-07 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
+REM 2017-02-13 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
+REM 2017-04-17 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
+
+# Factulty reps meeting with administration in Obernauer
+REM 2016-10-17 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
+REM 2016-12-05 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
+REM 2017-03-06 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
+REM 2017-05-01 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
