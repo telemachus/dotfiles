@@ -10,7 +10,7 @@
 # + set MAILDIR for mu
 shopt -s checkwinsize
 set -o emacs
-shopt -s no_empty_cmd_completion
+#shopt -s no_empty_cmd_completion
 export MAILDIR=$HOME/.maildir
 
 ## Includes
