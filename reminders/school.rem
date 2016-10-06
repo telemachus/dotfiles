@@ -64,7 +64,6 @@ REM 2017-04-19 +5 MSG US faculty meeting in Morse at 3:00pm (%c)%
 REM 2017-05-10 +5 MSG US faculty meeting in Dining Room at 3:00pm (%c)%
 
 # Department meetings
-REM 2016-10-06 +5 MSG Department meeting at 3:15pm (%c)%
 REM 2016-11-10 +5 MSG Department meeting at 3:15pm (%c)%
 REM 2016-12-08 +5 MSG Department meeting at 3:15pm (%c)%
 REM 2017-01-05 +5 MSG Department meeting at 3:15pm (%c)%
@@ -99,7 +98,7 @@ REM 2017-05-17 +5 MSG Senior grade meeting at 8:15am in N-225 (%c)%
 
 # Time matters well-being meetings
 REM 2016-09-29 +5 MSG Time matters working group meeting at 4:00pm (%c)%
-REM 2016-10-20 +5 MSG Time matters working group meeting at 4:00pm (%c)%
+REM 2016-10-20 +5 MSG Well-being meeting in N-225 at 4:00pm (%c)%
 REM 2016-11-17 +5 MSG Time matters working group meeting at 4:00pm (%c)%
 REM 2016-12-15 +5 MSG Time matters working group meeting at 4:00pm (%c)%
 REM 2017-01-12 +5 MSG Time matters working group meeting at 4:00pm (%c)%
