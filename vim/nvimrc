@@ -40,13 +40,13 @@ set laststatus=2            " Always put a status line in, even
                             " if there is only one window
 set showtabline=2           " Show a tabbar on top, always
 
-let mapleader = ","
-
 set ignorecase
 set smartcase               " Only care about case if I enter capitals
 set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
+
+let mapleader = ","
 " Quickly remove highlighting
 nnoremap <silent> <leader><space> :noh<cr>
 
@@ -77,35 +77,6 @@ nnoremap ` '
 set title
 set shortmess=atIF
 
-" function! WordCount()
-" 	if &filetype !~ '\vmarkdown|txt|mail'
-" 		return ''
-" 	endif
-
-" 	let l:old_status = v:statusmsg
-" 	let l:position = getpos('.')
-" 	if !exists('b:res')
-" 		let b:res = ''
-" 	endif
-" 	if mode() =~? '\vv|s'
-" 		" Leave word count as it was in visual or select modes
-" 		return b:res
-" 	endif
-"         exe ":silent normal! g\<c-g>"
-" 	let l:stat = v:statusmsg
-" 	call setpos('.', l:position)
-" 	let v:statusmsg = l:old_status
-
-" 	let l:parts = split(l:stat)
-" 	let l:cnt = '0'
-" 	if len(l:parts) > 11
-" 		let l:cnt = str2nr(split(stat)[11])
-" 	endif
-" 	let l:res = printf(' Words: %d', l:cnt)
-" 	let b:res = l:res
-" 	return l:res
-" endfunction
-
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
@@ -131,11 +102,11 @@ augroup vim_config
     autocmd FileType gitrebase call LoadGitrebaseBindings()
 augroup END
 
-function! LoadGitrebaseBindings()
+fun! LoadGitrebaseBindings()
     nnoremap P :Pick
     nnoremap S :Squash
     nnoremap C :Cycle
-endfunction
+endfun
 
 autocmd BufNewFile,BufNew,BufRead *.rockspec
 \   setlocal filetype=lua
@@ -144,6 +115,8 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 let g:gist_clip_command='pbcopy'
+let g:gist_show_privates = 1
+let g:gist_detect_filetype = 1
 let g:github_user = 'telemachus'
 
 function! NeatFoldText()
@@ -184,9 +157,14 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 let g:tex_conceal=""
 let g:tex_flavor="latex"
 
-set t_Co=256
-set background=light
-colorscheme papercolor
+if has("gui_vimr")
+	set termguicolors
+	colorscheme github
+else
+	set t_Co=256
+	set background=light
+	colorscheme papercolor
+endif
 
 " Settings for vim-textobj-quote
 augroup textobj_quote
@@ -203,6 +181,9 @@ augroup END
 
 map <silent> <leader>qc <Plug>ReplaceWithCurly
 map <silent> <leader>qs <Plug>ReplaceWithStraight
+map <silent> <leader>mf <Plug>CharMacronFlip
+map <silent> <leader>mo <Plug>MacronsOn
+map <silent> <leader>nm <Plug>MacronsOff
 
 let g:markdown_fenced_languages = ['html', 'python', 'lua', 'bash=sh']
 let g:markdown_syntax_conceal = 0
