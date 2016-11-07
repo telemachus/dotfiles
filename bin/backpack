@@ -12,10 +12,10 @@ rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
     $HOME/projects /Volumes/Olympus/cito
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/practice /Volumes/Olympus/cito
+    $HOME/trinity /Volumes/Olympus/cito
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/trinity /Volumes/Olympus/cito
+    $HOME/legenda /Volumes/Olympus/cito
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
     $HOME/.maildir/ /Volumes/Olympus/cito/maildir
