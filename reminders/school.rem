@@ -6,13 +6,13 @@ REM 2016-11-22 +5 MSG All-school chapel at 2:00pm (%c)%
 REM 2016-12-26 +5 MSG All-school chapel at 10:30am (%c)%
 REM 2017-05-10 +5 MSG All-school chapel at 10:00am (%c)%
 
-# US Advising afternoon meetings in 214
-REM 2016-10-05 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
-REM 2016-11-02 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
-REM 2017-01-25 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
-REM 2017-02-22 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
-REM 2017-03-08 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
-REM 2017-05-04 +5 MSG Senior advisers meeting in 214 at 2:45pm (%c)%
+# US Advising afternoon meetings in N-338
+REM 2016-10-05 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
+REM 2016-11-02 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
+REM 2017-01-25 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
+REM 2017-02-22 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
+REM 2017-03-08 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
+REM 2017-05-04 +5 MSG Senior advisers meeting in N-338 at 2:45pm (%c)%
 
 # US Advising morning meetings in 219
 REM 2016-11-29 +5 MSG 11th Advisory meeting in 219 at 8:15am (%c)%
@@ -118,3 +118,9 @@ REM 2016-10-17 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
 REM 2016-12-05 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
 REM 2017-03-06 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
 REM 2017-05-01 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
+
+# Varia
+REM 2016-10-18 +5 MSG Meet Elliot 2nd period re paper (%c)%
+REM 2016-10-18 +5 MSG Meet Arjun 4th period re paper (%c)%
+REM 2016-10-20 +5 MSG Meet CJ 1st period re test (%c)%
+REM 2016-10-20 +5 MSG Meet James Z ad hoc re paper (%c)%
