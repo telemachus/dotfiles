@@ -159,11 +159,11 @@ let g:tex_flavor="latex"
 
 if has("gui_vimr")
 	set termguicolors
-	colorscheme github
+	colorscheme PaperColor
 else
 	set t_Co=256
 	set background=light
-	colorscheme papercolor
+	colorscheme PaperColor
 endif
 
 " Settings for vim-textobj-quote
@@ -187,3 +187,24 @@ map <silent> <leader>nm <Plug>MacronsOff
 
 let g:markdown_fenced_languages = ['html', 'python', 'lua', 'bash=sh']
 let g:markdown_syntax_conceal = 0
+
+" For vim-sandwich
+nmap s <Nop>
+xmap s <Nop>
+
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+
+let g:sandwich#recipes += [
+	\ {'buns': ["`", "'"], 'nesting': 1, 'input': ["l'", "l`"],
+	\  'filetype': ['tex', 'plaintex'] },
+	\ {'buns': ["``", "''"], 'nesting': 1, 'input': ['l"'],
+	\  'filetype': ['tex', 'plaintex'], },
+	\ {'buns': ["“", "”"], 'nesting': 0, 'input': ['q"']},
+	\ {'buns': ["‘", "’"], 'nesting': 0, 'input': ["q'"]},
+	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1,
+	\  'input': ['('] },
+	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1,
+	\  'input': ['['] },
+	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1,
+	\  'input': ['{'] },
+	\ ]

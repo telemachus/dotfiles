@@ -32,6 +32,7 @@ $CLONE $DEPTH https://github.com/tpope/vim-commentary.git
 $CLONE $DEPTH https://github.com/dietsche/vim-lastplace.git
 $CLONE $DEPTH https://github.com/tpope/vim-markdown.git
 $CLONE $DEPTH https://github.com/tpope/vim-repeat.git
+$CLONE $DEPTH https://github.com/machakann/vim-sandwich.git
 $CLONE $DEPTH https://github.com/Pychimp/vim-sol.git
 $CLONE $DEPTH https://github.com/tpope/vim-surround.git
 $CLONE $DEPTH https://github.com/reedes/vim-textobj-quote.git

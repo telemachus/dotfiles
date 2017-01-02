@@ -57,17 +57,23 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>269 342 606 456 0 0 1440 877 </string>
+	<string>269 400 606 456 0 0 1440 877 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>57 639 400 129 0 0 1440 877 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>412 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 100 918 495 0 0 1280 777 </string>
+	<string>269 100 918 495 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>485 325 650 452 0 0 1280 777 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
 	<string>590 39 730 825 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>707 309 650 452 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>642 49 730 502 0 0 1440 877 </string>
+	<string>642 83 650 452 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>218 24 730 502 0 0 1440 877 </string>
+	<string>133 350 650 452 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>232 204 650 452 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -690,7 +696,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>1</integer>
+			<integer>0</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -1335,6 +1341,8 @@
 			<array/>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
+			<key>Thin Strokes</key>
+			<integer>0</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -1359,6 +1367,10 @@
 	</array>
 	<key>NoSyncInstallationId</key>
 	<string>AF41DD72-9C5F-4C83-BE5C-D6381EE965BB</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -1415,7 +1427,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-18T13:00:16Z</date>
+	<date>2016-09-18T22:36:08Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -2973,7 +2985,7 @@
 	<key>WindowNumber</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.5</string>
+	<string>3.0.9</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
