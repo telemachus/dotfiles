@@ -59,3 +59,6 @@ alias vi='nvim'
 
 # ctrl-l not working
 alias ""=clear
+
+# quick update pythons
+alias pup='pip install --upgrade pip setuptools neovim && pip3 install --upgrade cltk setuptools pip wheel neovim'
