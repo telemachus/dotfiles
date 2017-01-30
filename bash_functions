@@ -122,3 +122,8 @@ relat() {
 	osascript -e 'quit app "Preview"' && make "$1" && \
 		open "${1}.pdf"
 }
+
+rede() {
+	osascript -e 'quit app "Preview"' && make descartes && \
+		open "descartes-main.pdf"
+}
