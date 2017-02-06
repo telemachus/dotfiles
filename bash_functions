@@ -125,5 +125,5 @@ relat() {
 
 rede() {
 	osascript -e 'quit app "Preview"' && make descartes && \
-		open "descartes-main.pdf"
+		open "descartes.pdf"
 }
