@@ -108,10 +108,10 @@ REM 2017-05-11 +5 MSG Time matters working group meeting at 4:00pm (%c)%
 REM 2017-06-15 +5 MSG Time matters working group meeting at 4:00pm (%c)%
 
 # Faculty reps meetings with faculty in Brass
-REM 2016-09-26 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
-REM 2016-11-07 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
-REM 2017-02-14 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
-REM 2017-04-17 +5 MSG Faculty reps meeting in the Brass at 4:30pm (%c)%
+REM 2016-09-26 +5 MSG Faculty reps meeting in the Brass at 3:30pm (%c)%
+REM 2016-11-07 +5 MSG Faculty reps meeting in the Brass at 3:30pm (%c)%
+REM 2017-02-14 +5 MSG Faculty reps meeting in the Brass at 3:30pm (%c)%
+REM 2017-04-17 +5 MSG Faculty reps meeting in the Brass at 3:30pm (%c)%
 
 # Factulty reps meeting with administration in Obernauer
 REM 2016-10-17 +5 MSG Faculty reps meeting in Obernauer at 3:30pm (%c)%
