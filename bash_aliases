@@ -61,6 +61,6 @@ alias vi='nvim'
 alias ""=clear
 
 # quick update pythons
-alias pup='pip2 install --upgrade pip setuptools neovim && pip3 install --upgrade cltk setuptools pip wheel neovim'
+alias pup='pip3 install --upgrade setuptools pip wheel neovim'
 
 alias brew-my-use='brew uses --installed --include-optional'
