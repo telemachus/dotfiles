@@ -95,7 +95,7 @@ mkcd() {
 }
 
 colors() {
-    printf "red orange yellow green blue purple\n"
+    printf "red orange yellow green blue indigo violet\n"
 }
 
 bumpvim() {

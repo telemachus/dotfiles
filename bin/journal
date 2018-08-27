@@ -1,0 +1,22 @@
+#!/usr/bin/env dash
+
+today=$(date '+%Y%m%d')
+journal_entry="${today}.md"
+journal_dir="$HOME/.journal/$(date '+%Y/%m')"
+
+if [ -d "$journal_dir" ]; then
+	cd "$journal_dir"
+else
+	mkdir -p "$journal_dir"
+	cd "$journal_dir"
+fi
+
+nvim + "$journal_entry"
+
+if ( [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1 ); then
+	git add "$journal_entry"
+	git commit -m"Journal entry for ${today}"
+	git push
+fi
+
+#  vim: set ft=sh ts=8 sw=8 tw=0 noet :

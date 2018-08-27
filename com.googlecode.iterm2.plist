@@ -65,7 +65,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>53 304 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>485 275 730 502 0 0 1280 777 </string>
+	<string>590 0 730 777 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>550 138 730 502 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 2</key>

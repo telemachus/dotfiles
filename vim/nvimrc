@@ -170,8 +170,8 @@ endif
 augroup textobj_quote
 	autocmd!
 	autocmd FileType mail call textobj#quote#init({'educate': 1})
-	autocmd FileType markdown call textobj#quote#init({'educate': 1})
 	autocmd FileType text call textobj#quote#init({'educate': 1})
+	autocmd FileType markdown call textobj#quote#init({'educate': 1})
 augroup END
 
 augroup mail_settings
