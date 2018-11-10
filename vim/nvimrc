@@ -170,13 +170,18 @@ endif
 augroup textobj_quote
 	autocmd!
 	autocmd FileType mail call textobj#quote#init({'educate': 1})
-	autocmd FileType text call textobj#quote#init({'educate': 1})
 	autocmd FileType markdown call textobj#quote#init({'educate': 1})
+	autocmd FileType text call textobj#quote#init({'educate': 1})
 augroup END
 
 augroup mail_settings
 	autocmd!
 	autocmd FileType mail setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
+augroup END
+
+augroup scheme_settings
+	autocmd!
+	autocmd bufread,bufnewfile *.lisp,*.scm,*.rkt setlocal equalprg=scmindent.rkt
 augroup END
 
 map <silent> <leader>qc <Plug>ReplaceWithCurly
@@ -208,3 +213,15 @@ let g:sandwich#recipes += [
 	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1,
 	\  'input': ['{'] },
 	\ ]
+
+" Configure UltiSnips to easily jump backwards with shift-tab
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+ab teh the
+ab Teh The
+ab taht that
+ab Taht That
+ab tihs this
+ab Tihs This

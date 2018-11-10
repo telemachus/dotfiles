@@ -1,0 +1,3 @@
+#!/usr/local/bin/dash
+
+osascript -e 'quit app "Preview"' && make descartes &&  open "descartes.pdf"

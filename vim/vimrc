@@ -151,4 +151,4 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 let g:tex_conceal=""
 let g:tex_flavor="latex"
 
-colorscheme sweater
+colorscheme PaperColor
