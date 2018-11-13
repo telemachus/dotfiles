@@ -20,7 +20,7 @@ fi
 
 cd "$HOME/projects"
 if [ ! -d "$HOME/projects/dotfiles" ]; then
-    git clone https://github.com/telemachus/dotfiles.git
+    git clone https://bitbucket.org/telemachus/dotfiles.git
 else
     cd "$HOME/projects/dotfiles"
     git pull origin master
@@ -39,5 +39,8 @@ $COMMAND "$HOME/projects/dotfiles/irbrc" "$HOME/.irbrc"
 $COMMAND "$HOME/projects/dotfiles/procmailrc" "$HOME/.procmailrc"
 $COMMAND "$HOME/projects/dotfiles/profile" "$HOME/.profile"
 $COMMAND "$HOME/projects/dotfiles/vim/vimrc" "$HOME/.vimrc"
+
+# We need this to make procmail work correctly
+sudo install -o "$USER" -g mail -m 0600 /dev/null "/var/mail/$USER"
 
 cd "$START_DIR"

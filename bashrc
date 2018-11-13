@@ -23,6 +23,9 @@ bc="$HOME/local/bc/share/bash-completion/bash_completion"
 
 [[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
+bcc="/usr/local/share/bash-completion/bash_completion"
+[[ $PS1 && -f $bcc ]] && source $bcc
+
 bc="/usr/local/etc/bash_completion.d/brew"
 [[ $PS1 && -f $bc ]] && source $bc
 
@@ -117,6 +120,7 @@ export RLWRAP_HOME="$HOME/.rlwrap"
 # Load chruby and gem_home
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
     source /usr/local/share/chruby/chruby.sh
+    chruby "ruby-2.5.3"
 fi
 
 if [ -f /usr/local/share/gem_home/gem_home.sh ]; then

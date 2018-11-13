@@ -4,8 +4,6 @@ set -e
 
 hic=$PWD
 
-brew install --build-from-source --with-default-names lua53
-
 for mod in tapered tableutils split luacov luacheck luaposix
 do
 	luarocks install ${mod}
