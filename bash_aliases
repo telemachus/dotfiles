@@ -55,10 +55,10 @@ alias one='head -n1'
 alias words='wc -w'
 
 # Everything old is new again
-alias vi='nvim'
+# alias vi='nvim'
 
 # ctrl-l not working
 alias ""=clear
 
 # quick update pythons
-alias pup='pip3 install --upgrade cltk setuptools pip wheel neovim'
+# alias pup='pip3 install --upgrade cltk setuptools pip wheel neovim'

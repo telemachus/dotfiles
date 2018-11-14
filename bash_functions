@@ -128,11 +128,16 @@ rede() {
 		open "descartes.pdf"
 }
 
-mylast () {
+mylast() {
         re='^[0-9]+$'
         if ! [[ $1 =~ $re ]] ; then
            echo "error: $1 not a number" >&2
         else
            history | awk '{a[$2]++} END {for (i in a) print a[i], i}' | sort -rn | head -n $1
         fi
+}
+
+pup() {
+	pip2 install --upgrade setuptools pip wheel neovim
+	pip3 install --upgrade setuptools pip wheel cltk neovim
 }
