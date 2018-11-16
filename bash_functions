@@ -140,4 +140,5 @@ mylast() {
 pup() {
 	pip2 install --upgrade setuptools pip wheel neovim
 	pip3 install --upgrade setuptools pip wheel cltk neovim
+	chruby-exec ruby-2.5.3 -- gem install neovim
 }
