@@ -101,7 +101,7 @@ colors() {
 bumpvim() {
     brew up
     brew uninstall vim
-    brew install --env=std telemachus/brew/vim
+    brew install vim
 }
 
 shorten() {
@@ -113,9 +113,9 @@ csview () {
  <$1 sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
 }
 
-revim() {
+renvim() {
 	brew-purge neovim && brew install --HEAD neovim && \
-		pip install --upgrade pip setuptools neovim
+		nbundleup && pup
 }
 
 relat() {
@@ -128,17 +128,19 @@ rede() {
 		open "descartes.pdf"
 }
 
-mylast() {
+mytop() {
         re='^[0-9]+$'
         if ! [[ $1 =~ $re ]] ; then
            echo "error: $1 not a number" >&2
         else
-           history | awk '{a[$2]++} END {for (i in a) print a[i], i}' | sort -rn | head -n $1
+	    sed 's/^.*;//' "$HOME/.bash_history" | sed '/^#/d' | \
+		awk '{a[$1]++} END {for (i in a) print a[i], i}' | \
+		sort -rn | head -n $1
         fi
 }
 
 pup() {
-	pip2 install --upgrade setuptools pip wheel neovim
-	pip3 install --upgrade setuptools pip wheel cltk neovim
+	pip2 install --upgrade setuptools pip wheel pynvim
+	pip3 install --upgrade setuptools pip wheel cltk pynvim
 	chruby-exec ruby-2.5.3 -- gem install neovim
 }
