@@ -3,22 +3,22 @@
 set -e
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/Documents/keep /Volumes/Olympus/cito/documents
+    $HOME/Documents/keep/ /Volumes/olympus/cito/documents
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/Pictures/pictura /Volumes/Olympus/cito
+    $HOME/Pictures/pictura/ /Volumes/olympus/cito/pictura
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/projects /Volumes/Olympus/cito
+    $HOME/projects/ /Volumes/olympus/cito/projects
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/trinity /Volumes/Olympus/cito
+    $HOME/trinity/ /Volumes/olympus/cito/trinity
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/legenda /Volumes/Olympus/cito
+    $HOME/legenda/ /Volumes/olympus/cito/legenda
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/.maildir/ /Volumes/Olympus/cito/maildir
+    $HOME/.maildir/ /Volumes/olympus/cito/maildir
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/.musica/ /Volumes/Olympus/cito/musica
+    $HOME/.musica/ /Volumes/olympus/cito/musica
