@@ -26,8 +26,9 @@ bc="$HOME/local/bc/share/bash-completion/bash_completion"
 bcc="/usr/local/share/bash-completion/bash_completion"
 [[ $PS1 && -f $bcc ]] && source $bcc
 
-bc="/usr/local/etc/bash_completion.d/brew"
-[[ $PS1 && -f $bc ]] && source $bc
+# This is not needed. brew loads completions from this folder already.
+# bc="/usr/local/etc/bash_completion.d/brew"
+# [[ $PS1 && -f $bc ]] && source $bc
 
 # [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
