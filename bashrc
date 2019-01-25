@@ -18,16 +18,14 @@ export MAILDIR=$HOME/.maildir
 
 [[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+bcc="/usr/local/etc/profile.d/bash_completion.sh"
+[[ $PS1 && -r $bcc ]] && source $bcc
+
 bc="$HOME/local/bc/share/bash-completion/bash_completion"
-[[ $PS1 && -f $bc ]] && source $bc
+[[ $PS1 && -r $bc ]] && source $bc
 
 [[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
-
-bcc="/usr/local/share/bash-completion/bash_completion"
-[[ $PS1 && -f $bcc ]] && source $bcc
-
-# bc="/usr/local/etc/bash_completion.d/brew"
-# [[ $PS1 && -f $bc ]] && source $bc
 
 # [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
 
