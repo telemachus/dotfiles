@@ -1,6 +1,5 @@
 #!/usr/bin/env dash
 
-quiet=$1
 here=$(pwd)
 pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
 
@@ -13,16 +12,18 @@ if [ -d "$HOME/.config/nvim/bundle" ]; then
 	for bundle in "$HOME/.config/nvim/bundle/"*
 	do
 		if [ -d "$bundle/.git" ]; then
-			if [ "$quiet" != "-q" ]; then
-				printf "Working on %s...\n" ${bundle##*/}
-				cd "$bundle"
-				git pull --update-shallow 2>/dev/null
-			else
-				cd "$bundle"
-				git pull --update-shallow 2>/dev/null
-			fi
+			(cd "$bundle" && git checkout master && git up)
+			# cd "$bundle"
+			# git pull 2>/dev/null
 		fi
 	done
 fi
 
 cd "$here"
+
+pip2 install --upgrade setuptools pip wheel pynvim
+pip3 install --upgrade setuptools pip wheel cltk pynvim
+chruby-exec ruby-2.5.3 -- gem install neovim
+npm install -g neovim
+
+# vim: set ts=8 sw=8 tw=0 noet ft=sh :

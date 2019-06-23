@@ -1,0 +1,22 @@
+#!/usr/bin/env dash
+
+set -e
+
+NEO_HOME="$HOME/local/neovim"
+BUILD_ROOT="$HOME/projects"
+BUILD_FULL="$HOME/projects/neovim"
+
+cd "$BUILD_ROOT"
+if [ ! -d "$BUILD_FULL" ]; then
+	git clone https://github.com/neovim/neovim.git
+fi
+
+cd "$BUILD_FULL"
+git pull
+make CMAKE_INSTALL_PREFIX="$NEO_HOME"
+rm -rf "$NEO_HOME"
+make install
+
+nbundleup
+
+# vim: set ts=8 sw=8 tw=0 noet ft=sh :
