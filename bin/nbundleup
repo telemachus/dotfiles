@@ -12,7 +12,8 @@ if [ -d "$HOME/.config/nvim/bundle" ]; then
 	for bundle in "$HOME/.config/nvim/bundle/"*
 	do
 		if [ -d "$bundle/.git" ]; then
-			(cd "$bundle" && git checkout master && git up)
+			cd "$bundle"
+			git checkout master && git up
 			# cd "$bundle"
 			# git pull 2>/dev/null
 		fi
@@ -21,9 +22,10 @@ fi
 
 cd "$here"
 
+npm install -g neovim
 pip2 install --upgrade setuptools pip wheel pynvim
 pip3 install --upgrade setuptools pip wheel cltk pynvim
 chruby-exec ruby-2.5.3 -- gem install neovim
-npm install -g neovim
+# npm install -g neovim
 
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :

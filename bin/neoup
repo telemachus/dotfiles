@@ -13,10 +13,12 @@ fi
 
 cd "$BUILD_FULL"
 git pull
-make CMAKE_INSTALL_PREFIX="$NEO_HOME"
+# If I need to reset the BUILD_TYPE, uncomment the line below or do it
+# manually.
+# rm -rf ./build/
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$NEO_HOME"
 rm -rf "$NEO_HOME"
 make install
 
 nbundleup
-
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :

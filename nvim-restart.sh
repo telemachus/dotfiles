@@ -2,28 +2,13 @@
 
 set -e
 
-if [ -e $HOME/.config/nvim ]; then
-    printf "Backing up current .config/nvim directory to $HOME/old-nvim...\n"
-    mv $HOME/.config/nvim $HOME/old-nvim
-fi
-
-mkdir -p $HOME/.config
-mkdir -p $HOME/.config/nvim
-mkdir -p $HOME/.config/nvim/autoload
-mkdir -p $HOME/.config/nvim/bundle
-mkdir -p $HOME/.nvim_backups
-mkdir -p $HOME/.nvim_undo
-cp -v ./vim/nvimrc $HOME/.config/init.vim
 
 CLONE='git clone'
-
-cd $HOME/.config/nvim/autoload
-curl -S -o pathogen.vim \
-    https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 cd $HOME/.config/nvim/bundle
 $CLONE https://github.com/mattn/gist-vim.git
 $CLONE https://github.com/NLKNguyen/papercolor-theme.git
+$CLONE https://github.com/lambdalisue/suda.vim.git
 $CLONE https://github.com/nice/sweater.git
 $CLONE https://github.com/SirVer/ultisnips.git
 $CLONE https://github.com/tpope/vim-abolish.git
