@@ -32,7 +32,7 @@ set foldlevel=0
 set foldmethod=marker
 
 set listchars=tab:▸\ ,trail:·,eol:¬
-set nolist
+set list
 
 set termencoding=utf-8
 set encoding=utf-8
@@ -159,6 +159,7 @@ let g:tex_flavor="latex"
 
 if has("gui_vimr")
 	set termguicolors
+	set background=light
 	colorscheme PaperColor
 else
 	set t_Co=256
@@ -218,13 +219,20 @@ let g:sandwich#recipes += [
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
 let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
+" Configure gabrielelana/vim-markdown
+let g:markdown_include_jekyll_support = 0
+let g:markdown_enable_mappings = 0
+let g:markdown_enable_spell_checking = 0
+
+ab hte the
+ab Hte The
 ab teh the
 ab Teh The
 ab taht that
 ab Taht That
 ab tihs this
 ab Tihs This
+
