@@ -60,9 +60,14 @@ ccd() {
             ;;
         2)
             newdir=${PWD//$1/$2}
+	    # FIXME TODO
+	    # If the user enters two wrong variables, they trigger the first
+	    # branch of this case statement. They should trigger a different
+	    # error message.
             case "$newdir" in
                 $PWD)
                     printf "ccd: \$PWD is already $PWD\n" >&2
+		    printf "ccd: \$newdir is currently $newdir\n" >&2
                     return 1
                     ;;
                 *)
@@ -142,6 +147,6 @@ mytop() {
 pup() {
 	pip2 install --upgrade setuptools pip wheel pynvim
 	pip3 install --upgrade setuptools pip wheel cltk pynvim
-	chruby-exec ruby-2.5.3 -- gem install neovim
 	npm install -g neovim
+	chruby-exec ruby-2.5.3 -- gem install neovim
 }

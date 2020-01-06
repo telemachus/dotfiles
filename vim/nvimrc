@@ -34,7 +34,7 @@ set foldmethod=marker
 set listchars=tab:▸\ ,trail:·,eol:¬
 set list
 
-set termencoding=utf-8
+" set termencoding=utf-8
 set encoding=utf-8
 set laststatus=2            " Always put a status line in, even
                             " if there is only one window
