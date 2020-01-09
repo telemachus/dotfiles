@@ -107,6 +107,11 @@ export LESS
 export LESSOPEN
 
 export HOMEBREW_NO_ANALYTICS=1
+if [ -r "$HOME/.HOMEBREW_GITHUB_API_TOKEN"  ]; then
+	source "$HOME/.HOMEBREW_GITHUB_API_TOKEN"
+else
+	export HOMEBREW_NO_GITHUB_API
+fi
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
@@ -135,5 +140,3 @@ export \
     LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 #export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
-# No analytics
-export HOMEBREW_NO_ANALYTICS=1
