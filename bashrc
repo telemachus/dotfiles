@@ -48,7 +48,7 @@ export GIT_EDITOR=nvim
 export EDITOR=nvim
 
 # Use CDPATH to make life better
-CDPATH=::$HOME:$HOME/projects
+CDPATH=::$HOME:$HOME/trinity:$HOME/projects
 INFOPATH=/usr/local/share/info:$INFOPATH
 INFODIR=/usr/local/share/info:$INFODIR
 
@@ -130,6 +130,7 @@ if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
     source /usr/local/share/gem_home/gem_home.sh
 fi
 
+# Set PERLBREW_ROOT the way I want it
 export PERLBREW_ROOT="$HOME/.perl5/perlbrew"
 if [ -f "$HOME/.perl5/perlbrew/etc/bashrc" ]; then
 	source "$HOME/.perl5/perlbrew/etc/bashrc"
