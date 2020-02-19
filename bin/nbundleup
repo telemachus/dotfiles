@@ -23,9 +23,10 @@ fi
 cd "$here"
 
 npm install -g neovim
-python2 -m pip install --upgrade setuptools pip wheel pynvim
+# python2 -m pip install --upgrade setuptools pip wheel pynvim
 python3 -m pip install --upgrade setuptools pip wheel cltk pynvim
 chruby-exec ruby-2.5.3 -- gem install neovim
+cpanm Neovim::Ext
 # npm install -g neovim
 
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :

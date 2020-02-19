@@ -130,6 +130,11 @@ if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
     source /usr/local/share/gem_home/gem_home.sh
 fi
 
+export PERLBREW_ROOT="$HOME/.perl5/perlbrew"
+if [ -f "$HOME/.perl5/perlbrew/etc/bashrc" ]; then
+	source "$HOME/.perl5/perlbrew/etc/bashrc"
+fi
+
 # Initialization variables for levee
 # autoindent: supply indentation while in insert mode
 # autowrite: automatically write out changes before :next, :prev
