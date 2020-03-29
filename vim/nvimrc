@@ -14,6 +14,8 @@ set showcmd
 set showmode
 set ls=2                    " Always show status bar
 
+" This is no longer necessary in neovim.
+" runtime macros/matchit.vim
 let g:match_paren_insert_timeout=5
 
 let g:is_posix = 1
@@ -45,18 +47,10 @@ set smartcase               " Only care about case if I enter capitals
 set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
 set hlsearch                " Highlight all matches in a search
+set conceallevel=0
 
-let mapleader = ","
-" Quickly remove highlighting
-nnoremap <silent> <leader><space> :noh<cr>
-
-" Indent pastes properly
-nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
-nnoremap <leader>pi p`[v`]=
-
-nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
-
-map Q gq
+" Make sure neovim knows where to find python
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 set backup
 set backupdir=$HOME/.nvim_backups,/tmp
@@ -72,35 +66,62 @@ set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
 
 set hidden
-nnoremap ' `
-nnoremap ` '
 set title
 set shortmess=atIF
 
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
+" mapleader
+let mapleader = ","
+" Quickly remove highlighting
+nnoremap <silent> <leader><space> :noh<cr>
+
+" Indent pastes properly
+nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
+nnoremap <silent> <leader>pi p`[v`]=
+
+nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
+
+nnoremap Q gq
+vnoremap Q gq
+" Seriously, why did I do this?
+" '{mark} jumps to start of line with {mark}.
+" `{mark} goes to the line and column where {mark} is set.
+" I guess I thought I would want the `{mark} behavior more often than '{mark}?
+" Joke is on me: I almost never use marks!
+" nnoremap ' `
+" nnoremap ` '
 nnoremap <silent><leader>l :set list!<CR>
 nnoremap <leader>m :.,/^-- / - d
 
-runtime macros/matchit.vim
-
-" From Practical Vim
+" From Practical Vim (ed. 2, page 101)
 "
-" Use %% to get current buffer's directory for :edit, :write, :saveas and
-" :find
+" Use %% to get current buffer's directory for :edit, :write, :saveas, :read
+" and :find.
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
-"
+
+" A mapping for the :w !sudo tee % > /dev/null trick
+cnoremap w!! w !sudo tee % > /dev/null
+
+" Use bash-style tab completion: (1) tab shows longest common string and (2)
+" list all choices after that.
 set wildmode=longest,list
 
+" Define an empty augroup, so that I only have to run autocmd! once.
+augroup vim_config
+  autocmd!
+augroup END
+
 " My header files are C, not C++
-autocmd BufNewFile,BufNew,BufRead *.h setlocal filetype=c
+autocmd vim_config BufNewFile,BufNew,BufRead *.h setlocal filetype=c
+
+" Close folds when opeing LaTeX files.
+"autocmd vim_config BufNewFile,BufNew *.tex :normal zM
 
 " Git rebase bindings from
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
-augroup vim_config
-    autocmd FileType gitrebase call LoadGitrebaseBindings()
-augroup END
+autocmd vim_config FileType gitrebase call LoadGitrebaseBindings()
 
 fun! LoadGitrebaseBindings()
     nnoremap P :Pick
@@ -108,7 +129,17 @@ fun! LoadGitrebaseBindings()
     nnoremap C :Cycle
 endfun
 
-autocmd BufNewFile,BufNew,BufRead *.rockspec
+" From tpope's unimpaired.vim via *Practical Vim*
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+nnoremap <silent> [t :tabprevious<CR>
+nnoremap <silent> ]t :tabnext<CR>
+nnoremap <silent> [T :tabfirst<CR>
+nnoremap <silent> ]T :tablast<CR>
+
+autocmd vim_config BufNewFile,BufNew,BufRead *.rockspec
 \   setlocal filetype=lua
 
 let g:html_indent_script1 = "inc"
@@ -118,6 +149,9 @@ let g:gist_clip_command='pbcopy'
 let g:gist_show_privates = 1
 let g:gist_detect_filetype = 1
 let g:github_user = 'telemachus'
+
+" Uncomment this if I want files to open with all folds closed.
+" let g:lastplace_open_folds = 0
 
 function! NeatFoldText()
   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
@@ -136,11 +170,6 @@ function! SpaceOutParens()
     normal 0f(cs)(
     call winrestview(l:winview)
 endfunction
-
-
-let g:UltinipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Append modeline, from Vim wiki:
 " http://vim.wikia.com/wiki/Modeline_magic
@@ -166,24 +195,6 @@ else
 	set background=light
 	colorscheme PaperColor
 endif
-
-" Settings for vim-textobj-quote
-augroup textobj_quote
-	autocmd!
-	autocmd FileType mail call textobj#quote#init({'educate': 1})
-	autocmd FileType markdown call textobj#quote#init({'educate': 1})
-	autocmd FileType text call textobj#quote#init({'educate': 1})
-augroup END
-
-augroup mail_settings
-	autocmd!
-	autocmd FileType mail setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+\\\|^\\[^\\ze[^\\]]\\+\\]:
-augroup END
-
-augroup scheme_settings
-	autocmd!
-	autocmd bufread,bufnewfile *.lisp,*.scm,*.rkt setlocal equalprg=scmindent.rkt
-augroup END
 
 map <silent> <leader>qc <Plug>ReplaceWithCurly
 map <silent> <leader>qs <Plug>ReplaceWithStraight
@@ -219,24 +230,48 @@ let g:sandwich#recipes += [
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Configure gabrielelana/vim-markdown
-let g:markdown_include_jekyll_support = 0
-let g:markdown_enable_mappings = 0
-let g:markdown_enable_spell_checking = 0
+" let g:markdown_include_jekyll_support = 0
+" let g:markdown_enable_mappings = 0
+" let g:markdown_enable_spell_checking = 0
 
 " Have Goyo engage Limelight
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+autocmd vim_config User GoyoEnter Limelight
+autocmd vim_config User GoyoLeave Limelight!
 
-ab hte the
-ab Hte The
-ab teh the
-ab Teh The
-ab taht that
-ab Taht That
-ab tihs this
-ab Tihs This
+iab hte the
+iab Hte The
+iab teh the
+iab Teh The
+iab taht that
+iab Taht That
+iab tihs this
+iab Tihs This
+iab frist first
+iab Frist First
+iab FIrst First
+iab FRist First
+iab ahve have
+iab Ahve Have
 
+" https://github.com/jonhiggs/MacDict.vim
+function! MacDict(word)
+  execute ":silent !open -g dict://" . a:word
+  redraw!
+endfunction
+map <silent> <leader>d "dyiw:call MacDict(@d)<CR>
+
+" let g:textobj#sentence#abbreviations = [
+"   \ '[ABCDIMPSUabcdegimpsv]', 'ff',
+"   \ 'l[ab]', '[eRr]d', 'Ph', '[Ccp]l', '[Lli]n', '[cn]o',
+"   \ '[Oe]p', '[DJMSh]r', '[MVv]s', '[CFMPScfpw]t',
+"   \ 'alt', '[Ee]tc', 'div', 'es[pt]', '[Ll]td', 'min',
+"   \ '[MD]rs', '[Aa]pt', '[Aa]ve?', '[Ss]tr?',
+"   \ '[Aa]ssn', '[Bb]lvd', '[Dd]ept', 'incl', 'Inst', 'Prof', 'Univ',
+"   \ ]
+
+" augroup textobj_sentence
+"   autocmd!
+"   autocmd FileType tex call textobj#sentence#init()
+" augroup END
