@@ -33,7 +33,7 @@ set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
-set listchars=tab:▸\ ,trail:·,eol:¬
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set list
 
 " set termencoding=utf-8
