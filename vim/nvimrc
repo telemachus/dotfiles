@@ -46,8 +46,8 @@ set ignorecase
 set smartcase               " Only care about case if I enter capitals
 set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
-set hlsearch                " Highlight all matches in a search
-set conceallevel=0
+set nohlsearch              " Do not hightlight all matches in a search
+set conceallevel=0          " After considerable thought, conceal is evil
 
 " Make sure neovim knows where to find python
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -123,11 +123,11 @@ autocmd vim_config BufNewFile,BufNew,BufRead *.h setlocal filetype=c
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
 autocmd vim_config FileType gitrebase call LoadGitrebaseBindings()
 
-fun! LoadGitrebaseBindings()
+function! LoadGitrebaseBindings()
     nnoremap P :Pick
     nnoremap S :Squash
     nnoremap C :Cycle
-endfun
+endfunction
 
 " From tpope's unimpaired.vim via *Practical Vim*
 nnoremap <silent> [b :bprevious<CR>
@@ -239,6 +239,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Have Goyo engage Limelight
 autocmd vim_config User GoyoEnter Limelight
 autocmd vim_config User GoyoLeave Limelight!
+
+" From :help incsearch—I don't understand why this is not the default!
+autocmd vim_config CmdlineEnter /,\? :set hlsearch
+autocmd vim_config CmdlineLeave /,\? :set nohlsearch
 
 iab hte the
 iab Hte The
