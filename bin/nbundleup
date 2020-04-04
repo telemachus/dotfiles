@@ -1,21 +1,26 @@
 #!/usr/bin/env dash
 
-here=$(pwd)
-pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
+here="$(pwd)"
+bundle="$HOME/.config/nvim/pack/bundle"
+start="$bundle/start"
+opt="$bundle/opt"
 
-if [ -d "$HOME/.config/nvim/autoload" ]; then
-	cd "$HOME/.config/nvim/autoload"
-	curl -S -o pathogen.vim "$pathogen"
+if [[ -d "$start" ]]; then
+	for plugin in "$start/"*
+	do
+		if [[ -d "$plugin/.git" ]]; then
+			cd "$plugin"
+			git checkout master && git up
+		fi
+	done
 fi
 
-if [ -d "$HOME/.config/nvim/bundle" ]; then
-	for bundle in "$HOME/.config/nvim/bundle/"*
+if [[ -d "$opt" ]]; then
+	for plugin in "$opt/"*
 	do
-		if [ -d "$bundle/.git" ]; then
-			cd "$bundle"
+		if [[ -d "$plugin/.git" ]]; then
+			cd "$plugin"
 			git checkout master && git up
-			# cd "$bundle"
-			# git pull 2>/dev/null
 		fi
 	done
 fi
@@ -23,7 +28,7 @@ fi
 cd "$here"
 
 npm install -g neovim
-python3 -m pip install --upgrade setuptools pip wheel cltk pynvim
+python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
 chruby-exec ruby-2.5.3 -- gem install neovim
 cpanm Neovim::Ext
 

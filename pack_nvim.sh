@@ -1,6 +1,6 @@
-#!/usr/bin/env dash
+#!/usr/local/bin/bash
 
-BUNDLE_HOME="$HOME"/.config/nvim/bundle
+BUNDLE_HOME="$HOME/.config/nvim/pack/bundle/start"
 
 info() { printf "$1\n"; }
 
@@ -14,15 +14,15 @@ git_dirty() {
 }
 
 git_untracked_files() {
-	num=$(expr $(git status --porcelain 2>/dev/null | grep "^??" | wc -l))
-	if [ $num -gt 0 ]; then
+	num="$(expr $(git status --porcelain 2>/dev/null | grep "^??" | wc -l))"
+	if [[ $num -gt 0 ]]; then
 		printf "%s untracked files in $PWD\n" "$num"
 	fi
 }
 
 git_unpushed_changes() {
 	num=$(git rev-list origin..HEAD | wc -l)
-	if [ $num -gt 0 ]; then
+	if [[ $num -gt 0 ]]; then
 		info "Commits that need to be pushed in $PWD"
 	fi
 }
@@ -30,23 +30,23 @@ git_unpushed_changes() {
 cd "$BUNDLE_HOME"
 for item in *
 do
-	if [ -d "$BUNDLE_HOME/$item" -a -d "$BUNDLE_HOME/$item/.git" ]; then
+	if [[ -d "$BUNDLE_HOME/$item" && -d "$BUNDLE_HOME/$item/.git" ]]; then
 		cd "$BUNDLE_HOME/$item"
 		info "$(get_remote_url)"
 	fi
-done
+done | sort -t' ' -k 2
 
 cd "$BUNDLE_HOME"
 for item in *
 do
-	if [ -d "$BUNDLE_HOME/$item" ]; then
+	if [[ -d "$BUNDLE_HOME/$item" ]]; then
 		cd "$BUNDLE_HOME/$item"
-		if [ -d "$PWD/.git" ]; then
+		if [[ -d "$PWD/.git" ]]; then
 			git_dirty
 			git_untracked_files
 			git_unpushed_changes
 		else
-			short=$(basename $PWD)
+			short="$(basename $PWD)"
 			info "$short is not a git repository"
 		fi
 	fi

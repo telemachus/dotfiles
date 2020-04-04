@@ -47,6 +47,13 @@ export SVN_EDITOR=nvim
 export GIT_EDITOR=nvim
 export EDITOR=nvim
 
+export VIMCONFIG="$HOME/.vim"
+export VIMDATA="$HOME/.vim"
+
+export NVIMCONFIG="$HOME/.config/nvim"
+export NVIMDATA="$HOME/.local/share/nvim"
+export VISUAL=nvim
+
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/trinity:$HOME/projects
 INFOPATH=/usr/local/share/info:$INFOPATH

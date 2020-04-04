@@ -1,6 +1,3 @@
-execute pathogen#infect()
-execute pathogen#helptags()
-
 syntax on
 filetype plugin indent on
 set bs=indent,eol,start
@@ -14,8 +11,6 @@ set showcmd
 set showmode
 set ls=2                    " Always show status bar
 
-" This is no longer necessary in neovim.
-" runtime macros/matchit.vim
 let g:match_paren_insert_timeout=5
 
 let g:is_posix = 1
@@ -116,9 +111,6 @@ augroup END
 " My header files are C, not C++
 autocmd vim_config BufNewFile,BufNew,BufRead *.h setlocal filetype=c
 
-" Close folds when opeing LaTeX files.
-"autocmd vim_config BufNewFile,BufNew *.tex :normal zM
-
 " Git rebase bindings from
 " http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
 autocmd vim_config FileType gitrebase call LoadGitrebaseBindings()
@@ -138,6 +130,14 @@ nnoremap <silent> [t :tabprevious<CR>
 nnoremap <silent> ]t :tabnext<CR>
 nnoremap <silent> [T :tabfirst<CR>
 nnoremap <silent> ]T :tablast<CR>
+nnoremap <silent> [l :lprevious<CR>
+nnoremap <silent> ]l :lnext<CR>
+nnoremap <silent> [L :lclose<CR>
+nnoremap <silent> ]L :lopen<CR>
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+nnoremap <silent> [Q :cclose<CR>
+nnoremap <silent> ]Q :copen<CR>
 
 autocmd vim_config BufNewFile,BufNew,BufRead *.rockspec
 \   setlocal filetype=lua
@@ -186,15 +186,9 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 let g:tex_conceal=""
 let g:tex_flavor="latex"
 
-if has("gui_vimr")
-	set termguicolors
-	set background=light
-	colorscheme PaperColor
-else
-	set t_Co=256
-	set background=light
-	colorscheme PaperColor
-endif
+set termguicolors
+set background=light
+colorscheme PaperColor
 
 map <silent> <leader>qc <Plug>ReplaceWithCurly
 map <silent> <leader>qs <Plug>ReplaceWithStraight
@@ -206,35 +200,13 @@ let g:markdown_fenced_languages = ['html', 'python', 'lua', 'bash=sh']
 let g:markdown_syntax_conceal = 0
 
 " For vim-sandwich
-nmap s <Nop>
-xmap s <Nop>
-
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-
-let g:sandwich#recipes += [
-	\ {'buns': ["`", "'"], 'nesting': 1, 'input': ["l'", "l`"],
-	\  'filetype': ['tex', 'plaintex'] },
-	\ {'buns': ["``", "''"], 'nesting': 1, 'input': ['l"'],
-	\  'filetype': ['tex', 'plaintex'], },
-	\ {'buns': ["“", "”"], 'nesting': 0, 'input': ['q"']},
-	\ {'buns': ["‘", "’"], 'nesting': 0, 'input': ["q'"]},
-	\ {'buns': ["( ", " )"], 'nesting': 1, 'match_syntax': 1,
-	\  'input': ['('] },
-	\ {'buns': ["[ ", " ]"], 'nesting': 1, 'match_syntax': 1,
-	\  'input': ['['] },
-	\ {'buns': ["{ ", " }"], 'nesting': 1, 'match_syntax': 1,
-	\  'input': ['{'] },
-	\ ]
+" nmap s <Nop>
+" xmap s <Nop>
 
 " Configure UltiSnips to easily jump backwards with shift-tab
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Configure gabrielelana/vim-markdown
-" let g:markdown_include_jekyll_support = 0
-" let g:markdown_enable_mappings = 0
-" let g:markdown_enable_spell_checking = 0
 
 " Have Goyo engage Limelight
 autocmd vim_config User GoyoEnter Limelight
@@ -259,23 +231,28 @@ iab FRist First
 iab ahve have
 iab Ahve Have
 
-" https://github.com/jonhiggs/MacDict.vim
-function! MacDict(word)
-  execute ":silent !open -g dict://" . a:word
-  redraw!
-endfunction
-map <silent> <leader>d "dyiw:call MacDict(@d)<CR>
+" Enable syntax highlighting when buffers were loaded through :bufdo, which
+" disables the Syntax autocmd event to speed up processing.
+"
+  " Filetype processing does happen, so we can detect a buffer initially
+  " loaded during :bufdo through a set filetype, but missing b:current_syntax.
+  " Also don't do this when the user explicitly turned off syntax highlighting
+  " via :syntax off.  Note: Must allow nesting of autocmds so that the :syntax
+  " enable triggers the ColorScheme event. Otherwise, some highlighting groups
+  " may not be restored properly.
+autocmd vim_config BufWinEnter * nested if exists('syntax_on')
+      \ && ! exists('b:current_syntax')
+      \ && ! empty(&l:filetype) | syntax enable | endif
 
-" let g:textobj#sentence#abbreviations = [
-"   \ '[ABCDIMPSUabcdegimpsv]', 'ff',
-"   \ 'l[ab]', '[eRr]d', 'Ph', '[Ccp]l', '[Lli]n', '[cn]o',
-"   \ '[Oe]p', '[DJMSh]r', '[MVv]s', '[CFMPScfpw]t',
-"   \ 'alt', '[Ee]tc', 'div', 'es[pt]', '[Ll]td', 'min',
-"   \ '[MD]rs', '[Aa]pt', '[Aa]ve?', '[Ss]tr?',
-"   \ '[Aa]ssn', '[Bb]lvd', '[Dd]ept', 'incl', 'Inst', 'Prof', 'Univ',
-"   \ ]
-
-" augroup textobj_sentence
-"   autocmd!
-"   autocmd FileType tex call textobj#sentence#init()
-" augroup END
+  " The above does not handle reloading via :bufdo edit!, because the
+  " b:current_syntax variable is not cleared by that. During the :bufdo,
+  " 'eventignore' contains "Syntax", so this can be used to detect this
+  " situation when the file is re-read into the buffer. Due to the
+  " 'eventignore', an immediate :syntax enable is ignored, but by clearing
+  " b:current_syntax, the above handler will do this when the reloaded buffer
+  " is displayed in a window again.
+autocmd vim_config BufRead * if exists('syntax_on')
+      \ && exists('b:current_syntax')
+      \ && ! empty(&l:filetype)
+      \ && index(split(&eventignore, ','), 'Syntax') != -1 |
+      \ unlet! b:current_syntax | endif
