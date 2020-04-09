@@ -2,10 +2,11 @@
 
 set -e
 
-
 CLONE='git clone'
+BUNDLE_DIR="$HOME/.vim/pack/bundle/start"
 
 cd "$HOME/.config/nvim/pack/bundle/start"
+
 $CLONE https://bitbucket.org/telemachus/vim-macrons.git
 $CLONE https://bitbucket.org/telemachus/vim-varia.git
 $CLONE https://github.com/dietsche/vim-lastplace.git

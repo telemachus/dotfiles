@@ -1,154 +1,77 @@
-execute pathogen#infect()
-execute pathogen#helptags()
-
+" Configuration for vim
+" Last changed: 2020-04-06
+"
 syntax on
 filetype plugin indent on
-set bs=indent,eol,start     " Backspace over everything in insert mode
+set bs=indent,eol,start
 set history=500
-set scrolloff=0
+set scrolloff=0             " No breathing room
 set number
+set mouse=		    " No mouse capture
 
 set ruler                   " Show the cursor position all the time
-set showcmd                 " Display incomplete commands
+set showcmd
 set showmode
 set ls=2                    " Always show status bar
-set showtabline=2           " Show a tabbar on top, always
-set termencoding=utf-8
-set encoding=utf-8
 
-let g:match_paren_insert_timeout=5
-
-let g:is_posix = 1
 if &shell =~# 'fish$'
     set shell=bash
 endif
 
-set textwidth=79
-set colorcolumn=78
+set wrap linebreak breakindent
+set showbreak=↪
+set nolist
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set autoindent
+" t = autowrap text using textwidth
+" c = autowrap comments using textwidth
+" q = allow formatting of comments with "gq"
+" n = recognize numbered lists for formatting purposes
+" 1 = do not break line after a one-letter word
 set formatoptions=tcqn1
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set expandtab
+set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
 set number
 set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
-" Use TextMate symbols for tabstops and EOLs
-set listchars=tab:▸\ ,trail:·,eol:¬
-set list
+set encoding=utf-8
+set laststatus=2            " Always put a status line in
+set showtabline=2           " Show a tabbar on top, always
 
-let mapleader = ","
-
-set ignorecase
-set smartcase               " Only care about case if I enter capitals
-set gdefault                " Substitutions are global ('g') by default
+set ignorecase              " Ignore case in searches
+set smartcase               " But care about case if I enter capitals
+set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
-set hlsearch                " Highlight all matches in a search
-" An easy way to clear search highlighting
-nnoremap <silent> <leader><space> :noh<cr>
-
-" Indent pastes properly
-nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
-nnoremap <leader>pi p`[v`]=
-
-map Q gq
+set nohlsearch              " Do not hightlight all matches in a search
+set conceallevel=0          " After considerable thought, conceal is evil
 
 set backup
-set backupdir=$HOME/.vim_backups,/tmp
-set directory=/tmp,$HOME/.vim_backups
+set backupdir=$HOME/.nvim_backups,/tmp
+set directory=/tmp,$HOME/.nvim_backups
+
 set undofile
-set undodir=$HOME/.vim_undo,/tmp
+set undodir=$HOME/.nvim_undo,/tmp
 
 set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
 
-set printoptions:paper:letter,header:0,syntax:n
-set printfont:Consolas
+" Use bash-style tab completion: first tab shows longest common string and
+" subsequent tabs list all choices
+set wildmode=longest,list
 
 set hidden
-nnoremap ' `
-nnoremap ` '
 set title
-set shortmess=atI
+set shortmess=atIF
 
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
-nnoremap <silent><leader>l :set list!<CR>
-
-runtime macros/matchit.vim
-
-" From Practical Vim
-"
-"   Use %% to get current buffer's directory for :edit, :write, :saveas and
-"   :find
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
-"
-set wildmode=longest,list
-
-" My header files are C, not C++
-autocmd BufNewFile,BufNew,BufRead *.h setlocal filetype=c
-
-" Git rebase bindings from
-" http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
-augroup vim_config
-    autocmd FileType gitrebase call LoadGitrebaseBindings()
-augroup END
-
-fun! LoadGitrebaseBindings()
-    nnoremap P :Pick
-    nnoremap S :Squash
-    nnoremap C :Cycle
-endfun
-
-autocmd BufNewFile,BufNew,BufRead *.rockspec
-\   setlocal filetype=lua
-
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-
-let g:gist_clip_command='pbcopy'
-let g:github_user = 'telemachus'
-
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-set foldtext=NeatFoldText()
-
-function! SpaceOutParens()
-    let l:winview = winsaveview()
-    normal 0f(cs)(
-    call winrestview(l:winview)
-endfunction
-nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
-
-let g:UltinipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Append modeline, from Vim wiki:
-" http://vim.wikia.com/wiki/Modeline_magic
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
-let g:tex_conceal=""
-let g:tex_flavor="latex"
-
+set termguicolors
+set background=light
 colorscheme PaperColor
+
+set printoptions:paper:letter,header:0,syntax:n
+set printfont:Consolas
+
+" vim: set ts=8 sw=4 tw=78 et :

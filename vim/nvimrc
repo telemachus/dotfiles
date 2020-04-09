@@ -1,3 +1,6 @@
+" Configuration for neovim
+" Last changed: 2020-04-06
+
 syntax on
 filetype plugin indent on
 set bs=indent,eol,start
@@ -11,41 +14,37 @@ set showcmd
 set showmode
 set ls=2                    " Always show status bar
 
-let g:match_paren_insert_timeout=5
-
-let g:is_posix = 1
 if &shell =~# 'fish$'
     set shell=bash
 endif
 
-set wrap linebreak
-set colorcolumn=78
+set wrap linebreak breakindent
+set showbreak=↪
+set list
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 set autoindent
+" t = autowrap text using textwidth
+" c = autowrap comments using textwidth
+" q = allow formatting of comments with "gq"
+" n = recognize numbered lists for formatting purposes
+" 1 = do not break line after a one-letter word
 set formatoptions=tcqn1
-set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set number
 set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
-set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-set list
-
-" set termencoding=utf-8
 set encoding=utf-8
-set laststatus=2            " Always put a status line in, even
-                            " if there is only one window
+set laststatus=2            " Always put a status line in
 set showtabline=2           " Show a tabbar on top, always
 
-set ignorecase
-set smartcase               " Only care about case if I enter capitals
+set ignorecase              " Ignore case in searches
+set smartcase               " But care about case if I enter capitals
 set gdefault                " Subsitutions are global ('g') by default
 set incsearch               " Do incremental searching
 set nohlsearch              " Do not hightlight all matches in a search
 set conceallevel=0          " After considerable thought, conceal is evil
-
-" Make sure neovim knows where to find python
-let g:python3_host_prog = '/usr/local/bin/python3'
 
 set backup
 set backupdir=$HOME/.nvim_backups,/tmp
@@ -57,8 +56,12 @@ set undodir=$HOME/.nvim_undo,/tmp
 set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
 
-set printoptions:paper:letter,header:0,syntax:n
-set printfont:Consolas
+" Use bash-style tab completion: first tab shows longest common string and
+" subsequent tabs list all choices
+set wildmode=longest,list
+set wildignore+=*.o,*.obj,*~
+set wildignore+=*DS_Store*
+set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf
 
 set hidden
 set title
@@ -67,192 +70,9 @@ set shortmess=atIF
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
-" mapleader
-let mapleader = ","
-" Quickly remove highlighting
-nnoremap <silent> <leader><space> :noh<cr>
-
-" Indent pastes properly
-nnoremap <silent> <leader>cp :set paste<cr>"*p`[v`]=:set nopaste<cr><esc>
-nnoremap <silent> <leader>pi p`[v`]=
-
-nnoremap <silent> <leader>sp :call SpaceOutParens()<cr>
-
-nnoremap Q gq
-vnoremap Q gq
-" Seriously, why did I do this?
-" '{mark} jumps to start of line with {mark}.
-" `{mark} goes to the line and column where {mark} is set.
-" I guess I thought I would want the `{mark} behavior more often than '{mark}?
-" Joke is on me: I almost never use marks!
-" nnoremap ' `
-" nnoremap ` '
-nnoremap <silent><leader>l :set list!<CR>
-nnoremap <leader>m :.,/^-- / - d
-
-" From Practical Vim (ed. 2, page 101)
-"
-" Use %% to get current buffer's directory for :edit, :write, :saveas, :read
-" and :find.
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') . '/' : '%%'
-
-" A mapping for the :w !sudo tee % > /dev/null trick
-cnoremap w!! w !sudo tee % > /dev/null
-
-" Use bash-style tab completion: (1) tab shows longest common string and (2)
-" list all choices after that.
-set wildmode=longest,list
-
-" Define an empty augroup, so that I only have to run autocmd! once.
-augroup vim_config
-  autocmd!
-augroup END
-
-" My header files are C, not C++
-autocmd vim_config BufNewFile,BufNew,BufRead *.h setlocal filetype=c
-
-" Git rebase bindings from
-" http://www.blaulabs.de/2012/12/19/hidden-gems-in-vimruntime/
-autocmd vim_config FileType gitrebase call LoadGitrebaseBindings()
-
-function! LoadGitrebaseBindings()
-    nnoremap P :Pick
-    nnoremap S :Squash
-    nnoremap C :Cycle
-endfunction
-
-" From tpope's unimpaired.vim via *Practical Vim*
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
-nnoremap <silent> [t :tabprevious<CR>
-nnoremap <silent> ]t :tabnext<CR>
-nnoremap <silent> [T :tabfirst<CR>
-nnoremap <silent> ]T :tablast<CR>
-nnoremap <silent> [l :lprevious<CR>
-nnoremap <silent> ]l :lnext<CR>
-nnoremap <silent> [L :lclose<CR>
-nnoremap <silent> ]L :lopen<CR>
-nnoremap <silent> [q :cprevious<CR>
-nnoremap <silent> ]q :cnext<CR>
-nnoremap <silent> [Q :cclose<CR>
-nnoremap <silent> ]Q :copen<CR>
-
-autocmd vim_config BufNewFile,BufNew,BufRead *.rockspec
-\   setlocal filetype=lua
-
-let g:html_indent_script1 = "inc"
-let g:html_indent_style1 = "inc"
-
-let g:gist_clip_command='pbcopy'
-let g:gist_show_privates = 1
-let g:gist_detect_filetype = 1
-let g:github_user = 'telemachus'
-
-" Uncomment this if I want files to open with all folds closed.
-" let g:lastplace_open_folds = 0
-
-function! NeatFoldText()
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
-set foldtext=NeatFoldText()
-
-function! SpaceOutParens()
-    let l:winview = winsaveview()
-    normal 0f(cs)(
-    call winrestview(l:winview)
-endfunction
-
-" Append modeline, from Vim wiki:
-" http://vim.wikia.com/wiki/Modeline_magic
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-
-let g:tex_conceal=""
-let g:tex_flavor="latex"
-
 set termguicolors
 set background=light
 colorscheme PaperColor
 
-map <silent> <leader>qc <Plug>ReplaceWithCurly
-map <silent> <leader>qs <Plug>ReplaceWithStraight
-map <silent> <leader>mf <Plug>CharMacronFlip
-map <silent> <leader>mo <Plug>MacronsOn
-map <silent> <leader>nm <Plug>MacronsOff
-
-let g:markdown_fenced_languages = ['html', 'python', 'lua', 'bash=sh']
-let g:markdown_syntax_conceal = 0
-
-" For vim-sandwich
-" nmap s <Nop>
-" xmap s <Nop>
-
-" Configure UltiSnips to easily jump backwards with shift-tab
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Have Goyo engage Limelight
-autocmd vim_config User GoyoEnter Limelight
-autocmd vim_config User GoyoLeave Limelight!
-
-" From :help incsearch—I don't understand why this is not the default!
-autocmd vim_config CmdlineEnter /,\? :set hlsearch
-autocmd vim_config CmdlineLeave /,\? :set nohlsearch
-
-iab hte the
-iab Hte The
-iab teh the
-iab Teh The
-iab taht that
-iab Taht That
-iab tihs this
-iab Tihs This
-iab frist first
-iab Frist First
-iab FIrst First
-iab FRist First
-iab ahve have
-iab Ahve Have
-
-" Enable syntax highlighting when buffers were loaded through :bufdo, which
-" disables the Syntax autocmd event to speed up processing.
-"
-  " Filetype processing does happen, so we can detect a buffer initially
-  " loaded during :bufdo through a set filetype, but missing b:current_syntax.
-  " Also don't do this when the user explicitly turned off syntax highlighting
-  " via :syntax off.  Note: Must allow nesting of autocmds so that the :syntax
-  " enable triggers the ColorScheme event. Otherwise, some highlighting groups
-  " may not be restored properly.
-autocmd vim_config BufWinEnter * nested if exists('syntax_on')
-      \ && ! exists('b:current_syntax')
-      \ && ! empty(&l:filetype) | syntax enable | endif
-
-  " The above does not handle reloading via :bufdo edit!, because the
-  " b:current_syntax variable is not cleared by that. During the :bufdo,
-  " 'eventignore' contains "Syntax", so this can be used to detect this
-  " situation when the file is re-read into the buffer. Due to the
-  " 'eventignore', an immediate :syntax enable is ignored, but by clearing
-  " b:current_syntax, the above handler will do this when the reloaded buffer
-  " is displayed in a window again.
-autocmd vim_config BufRead * if exists('syntax_on')
-      \ && exists('b:current_syntax')
-      \ && ! empty(&l:filetype)
-      \ && index(split(&eventignore, ','), 'Syntax') != -1 |
-      \ unlet! b:current_syntax | endif
+set printoptions:paper:letter,header:0,syntax:n
+set printfont:Consolas
