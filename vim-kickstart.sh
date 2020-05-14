@@ -19,7 +19,7 @@ mkdir -p "$HOME/.vim_backups"
 mkdir -p "$HOME/.vim_undo"
 if [[ ! -f "$HOME/.vimrc" ]]; then
     if [[ -f "$DOTFILES/vim/vimrc" ]]; then
-        ln -s "$DOTFILES/vim/vimrc" "$BASE/.vimrc"
+        ln -s "$DOTFILES/vim/vimrc" "$HOME/.vimrc"
     fi
 fi
 
