@@ -1,6 +1,10 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
+# TODO: rewrite this in python
 
-BUNDLE_HOME="$HOME/.config/nvim/pack/bundle/start"
+set -e
+
+
+START="$HOME/.config/nvim/pack/bundle/start"
 
 info() { printf "$1\n"; }
 
@@ -27,27 +31,27 @@ git_unpushed_changes() {
 	fi
 }
 
-cd "$BUNDLE_HOME"
+cd "$START"
 for item in *
 do
-	if [[ -d "$BUNDLE_HOME/$item" && -d "$BUNDLE_HOME/$item/.git" ]]; then
-		cd "$BUNDLE_HOME/$item"
+	if [[ -d "$START/$item" && -d "$START/$item/.git" ]]; then
+		cd "$START/$item"
 		info "$(get_remote_url)"
 	fi
 done | sort -t' ' -k 2
 
-cd "$BUNDLE_HOME"
+cd "$START"
 for item in *
 do
-	if [[ -d "$BUNDLE_HOME/$item" ]]; then
-		cd "$BUNDLE_HOME/$item"
+	if [[ -d "$START/$item" ]]; then
+		cd "$START/$item"
 		if [[ -d "$PWD/.git" ]]; then
 			git_dirty
 			git_untracked_files
 			git_unpushed_changes
 		else
-			short="$(basename $PWD)"
-			info "$short is not a git repository"
+			BRIEF="$(basename $PWD)"
+			info "$BRIEF is not a git repository"
 		fi
 	fi
 done

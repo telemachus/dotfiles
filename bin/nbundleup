@@ -28,7 +28,7 @@ fi
 cd "$here"
 
 npm install -g neovim
-python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
+/usr/local/bin/python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
 chruby-exec ruby-2.5.3 -- gem install neovim
 cpanm Neovim::Ext
 

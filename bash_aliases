@@ -60,5 +60,8 @@ alias words='wc -w'
 # ctrl-l not working
 alias ""=clear
 
-# quick update pythons
+# quick update python packages
 # alias pup='pip3 install --upgrade cltk setuptools pip wheel neovim'
+
+# neomutt > mutt
+alias mutt=neomutt
