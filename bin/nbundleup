@@ -28,8 +28,8 @@ fi
 cd "$here"
 
 npm install -g neovim
-/usr/local/bin/python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
+python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
 chruby-exec ruby-2.5.3 -- gem install neovim
 cpanm Neovim::Ext
 
-# vim: set ts=8 sw=8 tw=0 noet ft=sh :
+# vim: set ts=8 sw=0 tw=0 noet ft=sh :

@@ -1,26 +1,30 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
-quiet=$1
-here=$(pwd)
-pathogen='https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim'
+here="$(pwd)"
+bundle="$HOME/.vim/pack/bundle"
+start="$bundle/start"
+opt="$bundle/opt"
 
-if [ -d "$HOME/.vim/autoload" ]; then
-	cd "$HOME/.vim/autoload"
-	curl -S -o pathogen.vim "$pathogen"
+if [[ -d "$start" ]]; then
+	for plugin in "$start/"*
+	do
+		if [[ -d "$plugin/.git" ]]; then
+			cd "$plugin"
+			git checkout master && git up
+		fi
+	done
 fi
 
-if [ -d "$HOME/.vim/bundle" ]; then
-	for bundle in "$HOME/.vim/bundle/"*
+if [[ -d "$opt" ]]; then
+	for plugin in "$opt/"*
 	do
-		if [ -d "$bundle/.git" ]; then
-			if [ "$quiet" != "-q" ]; then
-				printf "Working on %s...\n" ${bundle##*/}
-				cd "$bundle"; git pull --update-shallow 2>/dev/null
-			else
-				cd "$bundle"; git pull --update-shallow 2>/dev/null
-			fi
+		if [[ -d "$plugin/.git" ]]; then
+			cd "$plugin"
+			git checkout master && git up
 		fi
 	done
 fi
 
 cd "$here"
+
+# vim: set ts=8 sw=0 tw=0 noet ft=sh :
