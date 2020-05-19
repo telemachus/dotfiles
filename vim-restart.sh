@@ -19,6 +19,7 @@ $CLONE https://github.com/inkarkat/SyntaxAttr.vim.git
 $CLONE https://github.com/junegunn/goyo.vim.git
 $CLONE https://github.com/junegunn/limelight.vim.git
 $CLONE https://github.com/junegunn/seoul256.vim.git
+$CLONE https://github.com/kana/vim-textobj-line.git
 $CLONE https://github.com/kana/vim-textobj-user.git
 $CLONE https://github.com/lambdalisue/suda.vim.git
 $CLONE https://github.com/machakann/vim-sandwich.git
@@ -27,7 +28,6 @@ $CLONE https://github.com/reedes/vim-textobj-quote.git
 $CLONE https://github.com/sainnhe/edge.git
 $CLONE https://github.com/telemachus/vim-bibcite.git
 $CLONE https://github.com/telemachus/vim-dispatch.git
-$CLONE https://github.com/telemachus/vim-textobj-entire.git
 $CLONE https://github.com/tpope/vim-abolish.git
 $CLONE https://github.com/tpope/vim-commentary.git
 $CLONE https://github.com/tpope/vim-markdown.git
