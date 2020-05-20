@@ -46,9 +46,9 @@ $CLONE https://github.com/nvie/vim-flake8.git
 $CLONE https://github.com/reedes/vim-textobj-quote.git
 $CLONE https://github.com/sainnhe/edge.git
 $CLONE https://github.com/telemachus/vim-bibcite.git
-$CLONE https://github.com/telemachus/vim-dispatch.git
 $CLONE https://github.com/tpope/vim-abolish.git
 $CLONE https://github.com/tpope/vim-commentary.git
+$CLONE https://github.com/tpope/vim-dispatch.git
 $CLONE https://github.com/tpope/vim-markdown.git
 $CLONE https://github.com/tpope/vim-repeat.git
 $CLONE https://github.com/vim-scripts/indentpython.vim.git
