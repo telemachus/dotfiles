@@ -55,7 +55,7 @@ export NVIMDATA="$HOME/.local/share/nvim"
 export VISUAL=nvim
 
 # Use CDPATH to make life better
-CDPATH=::$HOME:$HOME/trinity:$HOME/projects
+CDPATH=::$HOME:$HOME/Documents/trinity:$HOME/Documents/git-clones
 INFOPATH=/usr/local/share/info:$INFOPATH
 INFODIR=/usr/local/share/info:$INFODIR
 
