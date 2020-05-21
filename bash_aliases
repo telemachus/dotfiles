@@ -65,3 +65,6 @@ alias ""=clear
 
 # neomutt > mutt
 alias mutt=neomutt
+
+# simple python webserver
+alias webserver='python3 -m http.server'

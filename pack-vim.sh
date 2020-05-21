@@ -6,7 +6,7 @@ set -e
 
 START="$HOME/.vim/pack/bundle/start"
 
-info() { printf "$1\n"; }
+info() { printf "%s\n" "$1"; }
 warn() { info "$1" 1>&2; }
 
 get_remote_url() {
@@ -24,15 +24,15 @@ git_dirty() {
 }
 
 git_untracked_files() {
-	num="$(expr $(git status --porcelain 2>/dev/null | grep "^??" | wc -l))"
-	if [[ $num -gt 0 ]]; then
-		printf "%s untracked files in $PWD\n" "$num"
+	NUM="$(git status --porcelain 2>/dev/null | grep -c "^??")"
+	if [[ $NUM -gt 0 ]]; then
+		printf "%s untracked files in $PWD\n" "$NUM"
 	fi
 }
 
 git_unpushed_changes() {
-	num=$(git rev-list origin..HEAD | wc -l)
-	if [ $num -gt 0 ]; then
+	NUM=$(git rev-list origin..HEAD | wc -l)
+	if [[ $NUM -gt 0 ]]; then
 		warn "Commits that need to be pushed in $PWD"
 	fi
 }
@@ -56,7 +56,7 @@ do
 			git_untracked_files
 			git_unpushed_changes
 		else
-			BRIEF="$(basename $PWD)"
+			BRIEF="$(basename "$PWD")"
 			info "$BRIEF is not a git repository"
 		fi
 	fi

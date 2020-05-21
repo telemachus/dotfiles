@@ -1,21 +1,13 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 set -e
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/Documents/keep/ /Volumes/olympus/cito/documents
+    --exclude "cltk_data" --exclude "Zoom" \
+    $HOME/Documents/ /Volumes/olympus/cito/documents
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/Pictures/pictura/ /Volumes/olympus/cito/pictura
-
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/projects/ /Volumes/olympus/cito/projects
-
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/trinity/ /Volumes/olympus/cito/trinity
-
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/legenda/ /Volumes/olympus/cito/legenda
+    $HOME/Pictures/videnda/ /Volumes/olympus/cito/videnda
 
 rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
     $HOME/.maildir/ /Volumes/olympus/cito/maildir
