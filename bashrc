@@ -27,8 +27,6 @@ bc="$HOME/local/bc/share/bash-completion/bash_completion"
 
 [[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
-# [[ -f $HOME/.amazon_keys ]] && source $HOME/.amazon_keys
-
 ## History settings
 # + keep a very large history
 # + no dups; no lines starting with a space
@@ -124,24 +122,6 @@ fi
 # export CC=gcc-4.2
 # export CXX=g++-4.2
 export RLWRAP_HOME="$HOME/.rlwrap"
-[[ -f $HOME/.lua_config.lua ]] && export LUA_INIT="@$HOME/.lua_config.lua"
-#command -v luarocks >/dev/null && eval "$(luarocks path)"
-
-# Load chruby and gem_home
-if [ -f /usr/local/share/chruby/chruby.sh ]; then
-    source /usr/local/share/chruby/chruby.sh
-    chruby "ruby-2.5.3"
-fi
-
-if [ -f /usr/local/share/gem_home/gem_home.sh ]; then
-    source /usr/local/share/gem_home/gem_home.sh
-fi
-
-# Set PERLBREW_ROOT the way I want it
-export PERLBREW_ROOT="$HOME/.perl5/perlbrew"
-if [ -f "$HOME/.perl5/perlbrew/etc/bashrc" ]; then
-	source "$HOME/.perl5/perlbrew/etc/bashrc"
-fi
 
 # Initialization variables for levee
 # autoindent: supply indentation while in insert mode
@@ -153,3 +133,10 @@ export \
     LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 #export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

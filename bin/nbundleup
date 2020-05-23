@@ -9,7 +9,7 @@ if [[ -d "$start" ]]; then
 	for plugin in "$start/"*
 	do
 		if [[ -d "$plugin/.git" ]]; then
-			cd "$plugin"
+			cd "$plugin" || exit
 			git checkout master && git up
 		fi
 	done
@@ -19,17 +19,17 @@ if [[ -d "$opt" ]]; then
 	for plugin in "$opt/"*
 	do
 		if [[ -d "$plugin/.git" ]]; then
-			cd "$plugin"
+			cd "$plugin" || exit
 			git checkout master && git up
 		fi
 	done
 fi
 
-cd "$here"
+cd "$here" || exit
 
-npm install -g neovim
+# npm install -g neovim
 python3 -m pip install --upgrade setuptools pip wheel cltk pynvim proselint
-chruby-exec ruby-2.5.3 -- gem install neovim
-cpanm Neovim::Ext
+# chruby-exec ruby-2.5.3 -- gem install neovim
+# cpanm Neovim::Ext
 
 # vim: set ts=8 sw=0 tw=0 noet ft=sh :

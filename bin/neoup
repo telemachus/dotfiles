@@ -3,8 +3,8 @@
 set -e
 
 NEO_HOME="$HOME/local/neovim"
-BUILD_ROOT="$HOME/projects"
-BUILD_FULL="$HOME/projects/neovim"
+BUILD_ROOT="$HOME/Documents/git-repos"
+BUILD_FULL="$HOME/Documents/git-repos/neovim"
 
 cd "$BUILD_ROOT"
 if [ ! -d "$BUILD_FULL" ]; then
