@@ -27,7 +27,7 @@ fi
 CLONE="git clone"
 
 cd "$START"
-$CLONE git@telemachus:vim-bibite
+$CLONE git@telemachus:vim-bibcite
 $CLONE git@telemachus:vim-macrons
 $CLONE git@telemachus:vim-varia
 $CLONE https://github.com/NLKNguyen/papercolor-theme.git
