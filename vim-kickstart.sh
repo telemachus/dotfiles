@@ -33,6 +33,7 @@ $CLONE git@telemachus:vim-varia
 $CLONE https://github.com/NLKNguyen/papercolor-theme.git
 $CLONE https://github.com/Pychimp/vim-sol.git
 $CLONE https://github.com/SirVer/ultisnips.git
+$CLONE https://github.com/bps/vim-textobj-python.git
 $CLONE https://github.com/cespare/vim-toml.git
 $CLONE https://github.com/chrisbra/NrrwRgn.git
 $CLONE https://github.com/dietsche/vim-lastplace.git
