@@ -1,21 +1,21 @@
 " Configuration for neovim
-" Last changed: 2020-04-06
-
+set encoding=utf-8
+scriptencoding utf-8
 syntax on
 filetype plugin indent on
-set bs=indent,eol,start
+set backspace=indent,eol,start
 set history=500
-set scrolloff=0		" No breathing room
+set scrolloff=0     " No breathing room
 set number
-set mouse=		" No mouse capture
+set mouse=          " No mouse capture
 
-set ruler		" Show the cursor position all the time
+set ruler           " Show the cursor position all the time
 set showcmd
 set showmode
-set ls=2		" Always show status bar
+set laststatus=2    " Always show status bar
 
 if &shell =~# 'fish$'
-	set shell=bash
+    set shell=bash
 endif
 
 set wrap linebreak breakindent
@@ -35,23 +35,28 @@ set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
-set encoding=utf-8
-set laststatus=2	" Always put a status line in
-set showtabline=2	" Show a tabbar on top, always
+set laststatus=2        " Always put a status line in
+set showtabline=2       " Show a tabbar on top, always
 
-set ignorecase		" Ignore case in searches
-set smartcase		" But care about case if I enter capitals
-set gdefault		" Subsitutions are global ('g') by default
-set incsearch		" Do incremental searching
-set nohlsearch		" Do not hightlight all matches in a search
-set conceallevel=0	" After considerable thought, conceal is evil
+set ignorecase          " Ignore case in searches
+set smartcase           " But care about case if I enter capitals
+set gdefault            " Subsitutions are global ('g') by default
+set incsearch           " Do incremental searching
+set nohlsearch          " Do not hightlight all matches in a search
+set conceallevel=0      " Conceal is evil
 
 set backup
-set backupdir=$HOME/.nvim_backups,/tmp
-set directory=/tmp,$HOME/.nvim_backups
-
 set undofile
-set undodir=$HOME/.nvim_undo,/tmp
+if has('nvim')
+    set backupdir=$HOME/.nvim_backups,/tmp
+    set directory=/tmp,$HOME/.nvim_backups
+    set undodir=$HOME/.nvim_undo,/tmp
+else
+    set backupdir=$HOME/.vim_backups,/tmp
+    set directory=/tmp,$HOME/.vim_backups
+    set undodir=$HOME/.vim_undo,/tmp
+    packadd! matchit
+endif
 
 set grepprg=ack\ --nogroup\ --column
 set grepformat=%f:%l:%c:%m
