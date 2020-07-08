@@ -2,8 +2,24 @@
 
 # Thanks to https://stackoverflow.com/a/28708920/26702.
 
-"""Start local no-cache webserver at $PWD."""
+"""Start local no-cache webserver at argv[1] or $PWD."""
 import http.server
+import os
+from contextlib import contextmanager
+from pathlib import Path
+from sys import argv
+
+@contextmanager
+def managed_cd(path):
+    """Change working directory and return on exit.
+    See https://stackoverflow.com/a/42441759/26702.
+    """
+    old_pwd = Path.cwd()
+    os.chdir(path)
+    try:
+        yield
+    finally:
+        os.chdir(old_pwd)
 
 
 class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
@@ -19,4 +35,10 @@ class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    http.server.test(HandlerClass=NoCacheHTTPRequestHandler)
+    if argv[1]:
+        path = argv[1]
+    else:
+        path = Path.cwd()
+
+    with managed_cd(path) as path:
+        http.server.test(HandlerClass=NoCacheHTTPRequestHandler)
