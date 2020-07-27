@@ -68,3 +68,6 @@ alias mutt=neomutt
 
 # simple python webserver
 alias webserver='python3 -m http.server'
+
+# simple python jsonlint
+alias jsonlint='python3 -m json.tool'
