@@ -77,8 +77,10 @@ set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
 set background=light
+packadd! edge
 let g:edge_style = 'default'
 let g:edge_disable_italic_comment = 1
+" let g:github_colors_soft = 1
 colorscheme edge
 
 set printoptions:paper:letter,header:0,syntax:n
