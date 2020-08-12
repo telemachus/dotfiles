@@ -6,7 +6,8 @@ set -e
 : "${DOTFILES:=/Users/telemachus/Documents/git-repos/dotfiles}"
 
 for item in ".bash_aliases" ".bash_completion" ".bash_functions" \
-	".bashrc" ".profile" ".inputrc" ".hushlogin" ".gitignore_global"
+	".bashrc" ".profile" ".inputrc" ".hushlogin" ".gitignore_global" \
+	".gitconfig"
 do
 	# TODO: fixme
 	# Adapted from https://wiki.ubuntu.com/DashAsBinSh
@@ -21,7 +22,8 @@ do
 done
 
 for item in "bash_aliases" "bash_completion" "bash_functions" \
-	"bashrc" "profile" "inputrc" "hushlogin" "gitignore_global"
+	"bashrc" "profile" "inputrc" "hushlogin" "gitignore_global" \
+	"gitconfig"
 do
 	if [ -e "$DOTFILES/$item" ]; then
 		ln -s $V "$DOTFILES/$item" "$HOME/.$item"
