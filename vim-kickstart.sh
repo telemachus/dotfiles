@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-DOTFILES="$HOME/projects/dotfiles"
+DOTFILES="$HOME/Documents/git-repos/dotfiles"
 BASE="$HOME/.vim"
 PACK="$BASE/pack"
 BUNDLE="$PACK/bundle"
@@ -28,10 +28,10 @@ CLONE="git clone"
 
 cd "$START" || exit
 
-$CLONE https://git.telemachus.me/vim-bibcite
-$CLONE https://git.telemachus.me/vim-macrons
-$CLONE https://git.telemachus.me/vim-textobj-curly
-$CLONE https://git.telemachus.me/vim-varia
+$CLONE git@telemachus:vim-bibcite
+$CLONE git@telemachus:vim-macrons
+$CLONE git@telemachus:vim-textobj-curly
+$CLONE git@telemachus:vim-varia
 $CLONE https://github.com/NLKNguyen/papercolor-theme.git
 $CLONE https://github.com/SirVer/ultisnips.git
 $CLONE https://github.com/bps/vim-textobj-python.git

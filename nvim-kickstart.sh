@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-DOTFILES="$HOME/projects/dotfiles"
+DOTFILES="$HOME/Documents/git-repos/dotfiles"
 BASE="$HOME/.config/nvim"
 PACK="$BASE/pack"
 BUNDLE="$PACK/bundle"
@@ -27,25 +27,26 @@ CLONE="git clone"
 
 cd "$START" || exit
 
-$CLONE https://git.telemachus.me/vim-bibcite
-$CLONE https://git.telemachus.me/vim-macrons
-$CLONE https://git.telemachus.me/vim-textobj-curly
-$CLONE https://git.telemachus.me/vim-varia
+$CLONE git@telemachus:vim-bibcite
+$CLONE git@telemachus:vim-macrons
+$CLONE git@telemachus:vim-textobj-curly
+$CLONE git@telemachus:vim-varia
 $CLONE https://github.com/NLKNguyen/papercolor-theme.git
+$CLONE https://github.com/Pychimp/vim-sol.git
 $CLONE https://github.com/SirVer/ultisnips.git
 $CLONE https://github.com/bps/vim-textobj-python.git
 $CLONE https://github.com/cespare/vim-toml.git
+$CLONE https://github.com/cormacrelf/vim-colors-github.git
 $CLONE https://github.com/dietsche/vim-lastplace.git
 $CLONE https://github.com/inkarkat/SyntaxAttr.vim.git
 $CLONE https://github.com/junegunn/seoul256.vim.git
-$CLONE https://github.com/junegunn/vader.vim
+$CLONE https://github.com/junegunn/vader.vim.git
 $CLONE https://github.com/kana/vim-textobj-entire.git
 $CLONE https://github.com/kana/vim-textobj-line.git
 $CLONE https://github.com/kana/vim-textobj-user.git
 $CLONE https://github.com/lambdalisue/suda.vim.git
 $CLONE https://github.com/machakann/vim-sandwich.git
 $CLONE https://github.com/nice/sweater.git
-$CLONE https://github.com/notpratheek/vim-sol.git
 $CLONE https://github.com/nvie/vim-flake8.git
 $CLONE https://github.com/sainnhe/edge.git
 $CLONE https://github.com/tpope/vim-abolish.git
