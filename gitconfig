@@ -68,3 +68,6 @@
 
 [diff]
 	compactionHeuristic = true
+
+[pull]
+	ff = only
