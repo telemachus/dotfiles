@@ -89,8 +89,8 @@ GIT_PS1_SHOWCOLORHINTS=
 GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWUPSTREAM="auto git"
 
-#export PS1='$(__git_ps1 "{%s $(get_sha)}")\$ '
-export PROMPT_COMMAND='__git_ps1 "\u \W" "\\\$ " "{%s $(get_sha)}"; set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
+# export PS1='$(__git_ps1 "{%s $(get_sha)}")\u \W \$ '
+export PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+[`basename $VIRTUAL_ENV`] }\u \W" "\\\$ " "{%s $(get_sha)}"; set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"'
 
 #export PROMPT_COMMAND='
 #    set_titlebar "$USER@${HOSTNAME%%.*} $(get_dir)"
