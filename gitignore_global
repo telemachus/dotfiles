@@ -79,3 +79,5 @@ tags
 .calc_history
 __pycache__
 venv
+.python-version
+build
