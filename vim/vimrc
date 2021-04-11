@@ -77,7 +77,7 @@ set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
 set background=light
-colorscheme paper
+colorscheme github
 
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
