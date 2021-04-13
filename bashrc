@@ -136,7 +136,7 @@ export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$HOME/.pyenv/bin:$PATH"
+PATH="$HOME/.pyenv/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init -)"
 	eval "$(pyenv virtualenv-init -)"
@@ -145,4 +145,6 @@ fi
 # go
 export GOPATH="/Users/telemachus/go"
 export GOBIN="/Users/telemachus/go/bin"
-export PATH=$PATH:$GOBIN
+PATH=$PATH:$GOBIN
+PATH=$HOME/bin:$PATH
+export PATH
