@@ -1,16 +1,16 @@
-# For testing
-# set -x
-# set -u
-
 ## A few global settings
 # + check the window size after each command and, if necessary,
 #   update the values of LINES and COLUMNS.
 # + learn the damn Emacs bindings at least a little
 # + don't offer command completion on empty lines
+# + tips for cd: https://bit.ly/3n8uWyn and https://bit.ly/3ek6LJm
 # + set MAILDIR for mu
 shopt -s checkwinsize
 set -o emacs
-#shopt -s no_empty_cmd_completion
+shopt -s no_empty_cmd_completion
+complete -d cd
+shopt -s autocd
+shopt -s cdspell
 export MAILDIR=$HOME/.maildir
 
 ## Includes

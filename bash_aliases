@@ -22,8 +22,9 @@ alias mvv='mv -v'
 alias cpr='cp -r'
 
 # Two cd aliases
-alias ..='cd ..'
-alias ...='cd ../../'
+# NOT NEEDED if shopt -s autocd
+# alias ..='cd ..'
+# alias ...='cd ../../'
 
 # Alias to add or edit aliases
 alias realias='$EDITOR ~/.bash_aliases && source ~/.bash_aliases'
