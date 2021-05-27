@@ -6,6 +6,10 @@ NEO_HOME="$HOME/local/neovim"
 BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/neovim"
 
+if [ ! -d "$BUILD_ROOT" ]; then
+	mkdir -p "$BUILD_ROOT"
+fi
+
 cd "$BUILD_ROOT"
 if [ ! -d "$BUILD_FULL" ]; then
 	git clone https://github.com/neovim/neovim.git
