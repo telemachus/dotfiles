@@ -150,3 +150,7 @@ pup() {
 	npm install -g neovim
 	chruby-exec ruby-2.5.3 -- gem install neovim
 }
+
+depsclean() {
+	echo -n "$(pbpaste)" | tr -d ',' | sed 's/ and / /' | pbcopy
+}
