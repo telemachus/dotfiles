@@ -136,9 +136,9 @@ export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-PATH="$HOME/.pyenv/bin:$PATH"
+PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init -)"
+	eval "$(pyenv init --path)"
 	eval "$(pyenv virtualenv-init -)"
 fi
 
