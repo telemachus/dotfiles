@@ -1,0 +1,20 @@
+#!/usr/local/bin/bash
+
+## Borrowed from Kevin Baker: https://bit.ly/3kQ4g4t.
+
+[[ -f $1 ]] && list="$(cat "$1")" || list="$(cat)"
+
+printlist() {
+	printf "%s" "$list"
+}
+
+strikeitem() {
+	printlist | grep -v "^$line$" | gsed -z '$ s/\n$//'
+}
+
+i="$(printlist | wc -l)"
+while [[ $i != -1 ]]; do
+	line="$(printlist | fzf --no-color --layout=reverse)"
+	list="$(strikeitem)"
+	i=$((i-1))
+done

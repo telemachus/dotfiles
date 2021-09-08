@@ -148,3 +148,5 @@ export GOBIN="/Users/telemachus/go/bin"
 PATH=$PATH:$GOBIN
 PATH=$HOME/bin:$PATH
 export PATH
+
+[[ -f $HOME/.fzf.bash ]] && source $HOME/.fzf.bash
