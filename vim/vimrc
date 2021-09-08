@@ -68,9 +68,10 @@ set wildignore+=*.o,*.obj,*~
 set wildignore+=*DS_Store*
 set wildignore+=*.png,*.jpg,*.jpeg,*.gif,*.pdf
 
-set hidden
-set title
-set shortmess=atIF
+set hidden              " No warning, but keep buffers with changes
+set title               " Set window title
+set shortmess=atIF      " Abbreviate and truncate messages; no intro screen;
+                        " don’t display file information on write
 
 set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
