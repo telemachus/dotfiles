@@ -9,7 +9,7 @@ printlist() {
 }
 
 strikeitem() {
-	printlist | grep -v "^$line$" | gsed -z '$ s/\n$//'
+	printlist | grep -v "^$line$" | sed '$ s/\n$//'
 }
 
 i="$(printlist | wc -l)"
