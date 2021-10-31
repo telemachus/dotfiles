@@ -30,6 +30,7 @@ cd "$START" || exit
 
 $CLONE https://git.sr.ht/~telemachus/vim-bibcite
 $CLONE https://git.sr.ht/~telemachus/vim-dotfiles
+$CLONE https://git.sr.ht/~telemachus/vim-go-mini
 $CLONE https://git.sr.ht/~telemachus/vim-macrons
 $CLONE https://git.sr.ht/~telemachus/vim-textobj-curly
 $CLONE https://github.com/SirVer/ultisnips.git
