@@ -75,3 +75,9 @@ alias jsonlint='python3 -m json.tool'
 
 alias ..='cd ..'
 alias ...='cd ../..'
+
+# find executables: see this comment on Stack Overflow.
+# https://bit.ly/3BRvXjT
+# For an alternative, see this answer on Stack Overflow.
+# https://stackoverflow.com/a/4458361/26702
+alias findexecs='find . -type f -perm -a=x'
