@@ -1,47 +1,13 @@
-# Clean up git formulas
+# Clean up brew formulas
 brew-purge()
 {
-    brew rm "$@" && brew cleanup -s
+	brew rm "$@" && brew cleanup -s
 }
 
-# Use ack to search my history file; pipe to less if necessary
-hack()
+# For use when removing brew packages
+depsclean()
 {
-    var=$(history | ack $1 | grep -v 'bin/ack' | wc -l)
-    if (( $var > 22 ))
-    then
-        history | ack $1 | grep -v '; hack' | less
-    else
-        history | ack $1 | grep -v '; hack'
-    fi
-}
-
-# Use ack to search output of ps ax; pipe to less if necessary
-pack()
-{
-    var=$(ps ax | ack $1 | grep -v 'bin/ack' | wc -l)
-    if (( $var > 22 ))
-    then
-        ps ax | ack $1 | grep -v 'bin/ack' | less
-    else
-        ps ax | ack $1 | grep -v 'bin/ack'
-    fi
-}
-
-# start mpd if it's not already running
-mp_start() {
-    count=$(ps -c | grep mpd | wc -l)
-    if (( $count > 0 ))
-    then
-        mpd --no-daemon &
-        # mpdscribble --no-daemon &
-        mpc clear
-    fi
-}
-
-mycc() {
-  output=${2:-"${1%.c}"}
-  clang -Wall -W -pedantic -std=c99 -o "$output" "$1"
+	echo -n "$(pbpaste)" | tr -d ',' | sed 's/ and / /' | pbcopy
 }
 
 # ksh-style "cd old new" for bash
@@ -54,103 +20,119 @@ mycc() {
 # Shamelessly stolen from Learning the Bash Shell (3ed), Cameron Newham
 # & Bill Rosenblatt
 ccd() {
-    case "$#" in
-        0|1)
-            builtin cd $1
-            ;;
-        2)
-            newdir=${PWD//$1/$2}
-	    # FIXME TODO
-	    # If the user enters two wrong variables, they trigger the first
-	    # branch of this case statement. They should trigger a different
-	    # error message.
-            case "$newdir" in
-                $PWD)
-                    printf "ccd: \$PWD is already $PWD\n" >&2
-		    printf "ccd: \$newdir is currently $newdir\n" >&2
-                    return 1
-                    ;;
-                *)
-                    builtin cd "$newdir"
-                    pwd
-                    ;;
-            esac
-            ;;
-        *)
-            printf "ccd: wrong arg count\n" 1>&2
-            return 1
-            ;;
-    esac
+	case "$#" in
+		0|1)
+			builtin cd $1
+			;;
+		2)
+			newdir=${PWD//$1/$2}
+	# FIXME TODO
+	# If the user enters two wrong variables, they trigger the first
+	# branch of this case statement. They should trigger a different
+	# error message.
+	case "$newdir" in
+		$PWD)
+			printf "ccd: \$PWD is already $PWD\n" >&2
+			return 1
+			;;
+		*)
+			builtin cd "$newdir"
+			pwd
+			;;
+		esac
+			;;
+		*)
+			printf "ccd: wrong arg count\n" 1>&2
+			return 1
+			;;
+		esac
 }
 
 ## See https://twitter.com/#!/mlafeldt/status/192195940164173824
 # Get the absolute directory, symlinks resolved
-realdir() {
-    ( cd -P -- "${1:-.}" && pwd )
-}
-
-# Preview a markdown document in bcat
-preview() {
-    markdown "$1" | bcat
+realdir()
+{
+	( cd -P -- "${1:-.}" && pwd )
 }
 
 # Create a directory and cd into it
-mkcd() {
-    mkdir -p "$1" && cd "$1"
+mkcd()
+{
+	mkdir -p "$1" && cd "$1"
 }
 
-colors() {
-    printf "red orange yellow green blue indigo violet\n"
+colors()
+{
+	printf "red orange yellow green blue indigo violet\n"
 }
 
-bumpvim() {
-    brew up
-    brew uninstall vim
-    brew install vim
-}
+# relat() {
+# 	osascript -e 'quit app "Preview"' && make "$1" && \
+# 		open "${1}.pdf"
+# }
 
-shorten() {
-    curl -s --data-urlencode "long_url=${1:-$(pbpaste)}" \
-        http://metamark.net/api/rest/simple | pbcopy
-}
+# rede() {
+# 	osascript -e 'quit app "Preview"' && make descartes && \
+# 		open "descartes.pdf"
+# }
 
-csview () {
- <$1 sed -e 's/,,/, ,/g' | column -s, -t | less -#5 -N -S
-}
+# mytop()
+# {
+#         re='^[0-9]+$'
+#         if ! [[ $1 =~ $re ]] ; then
+#            echo "error: $1 not a number" >&2
+#            return 1
+#         else
+# 	    sed 's/^.*;//' "$HOME/.bash_history" | sed '/^#/d' | \
+# 		awk '{a[$1]++} END {for (i in a) print a[i], i}' | \
+# 		sort -rn | head -n $1
+#         fi
+# }
 
-renvim() {
-	brew-purge neovim && brew install --HEAD neovim && \
-		nbundleup && pup
-}
+# Use ack to search my history file; pipe to less if necessary
+# hack()
+# {
+#     var=$(history | ack $1 | grep -v 'bin/ack' | wc -l)
+#     if (( $var > 22 ))
+#     then
+#         history | ack $1 | grep -v '; hack' | less
+#     else
+#         history | ack $1 | grep -v '; hack'
+#     fi
+# }
 
-relat() {
-	osascript -e 'quit app "Preview"' && make "$1" && \
-		open "${1}.pdf"
-}
+# Use ack to search output of ps ax; pipe to less if necessary
+# pack()
+# {
+#     var=$(ps ax | ack $1 | grep -v 'bin/ack' | wc -l)
+#     if (( $var > 22 ))
+#     then
+#         ps ax | ack $1 | grep -v 'bin/ack' | less
+#     else
+#         ps ax | ack $1 | grep -v 'bin/ack'
+#     fi
+# }
 
-rede() {
-	osascript -e 'quit app "Preview"' && make descartes && \
-		open "descartes.pdf"
-}
+# start mpd if it's not already running
+# mp_start()
+# {
+#     count=$(ps -c | grep mpd | wc -l)
+#     if (( $count > 0 ))
+#     then
+#         mpd --no-daemon &
+#         # mpdscribble --no-daemon &
+#         mpc clear
+#     fi
+# }
 
-mytop() {
-        re='^[0-9]+$'
-        if ! [[ $1 =~ $re ]] ; then
-           echo "error: $1 not a number" >&2
-        else
-	    sed 's/^.*;//' "$HOME/.bash_history" | sed '/^#/d' | \
-		awk '{a[$1]++} END {for (i in a) print a[i], i}' | \
-		sort -rn | head -n $1
-        fi
-}
+# mycc()
+# {
+#   output=${2:-"${1%.c}"}
+#   clang -Wall -W -pedantic -std=c99 -o "$output" "$1"
+# }
 
-pup() {
-	pip2 install --upgrade setuptools pip wheel pynvim
-	pip3 install --upgrade setuptools pip wheel cltk pynvim
-	npm install -g neovim
-	chruby-exec ruby-2.5.3 -- gem install neovim
-}
-
-depsclean() {
-	echo -n "$(pbpaste)" | tr -d ',' | sed 's/ and / /' | pbcopy
-}
+# Preview a markdown document in bcat
+# preview()
+# {
+#     markdown "$1" | bcat
+# }
