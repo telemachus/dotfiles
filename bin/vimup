@@ -1,6 +1,6 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 VIM_HOME="$HOME/local/neovim"
 BUILD_ROOT="$HOME/Downloads/src"
