@@ -1,0 +1,49 @@
+#!/usr/bin/env dash
+
+set -e
+
+VIM_HOME="$HOME/local/neovim"
+BUILD_ROOT="$HOME/Downloads/src"
+BUILD_FULL="$HOME/Downloads/src/vim"
+BUILD_SOURCE="${BUILD_FULL}/src"
+PYTHON_CONFIG_DIR="$HOME/.pyenv/versions/3.10.1/lib/python3.10/config-3.10-darwin/"
+# First, install python via pyenv with
+# env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" \
+# 	pyenv install X.Y.Z
+# See https://github.com/pyenv/pyenv/issues/99#issuecomment-35045985
+# CC=clang is only needed if you have gcc from Homebrew?
+
+if [ ! -d "$BUILD_ROOT" ]; then
+	mkdir -p "$BUILD_ROOT"
+fi
+
+cd "$BUILD_ROOT" || exit 1
+if [ ! -d "$BUILD_FULL" ]; then
+	git clone https://github.com/vim/vim.git
+fi
+
+cd "$BUILD_FULL" || exit 1
+git pull
+
+cd "$BUILD_SOURCE" || exit 1
+make distclean
+./configure --prefix="$HOME/local/vim" \
+	--enable-fail-if-missing \
+	--enable-multibyte \
+	--with-compiledby=peter@aronoff.org \
+	--enable-cscope \
+	--enable-terminal \
+	--enable-gui=no \
+	--without-x \
+	--enable-fontset \
+	--enable-largefile \
+	--disable-nls \
+	--enable-python3interp \
+	--with-python3-config-dir="$PYTHON_CONFIG_DIR"
+
+make || exit 1
+rm -rf "$VIM_HOME"
+make install
+
+vbundleup
+# vim: set ts=8 sw=8 tw=0 noet ft=sh :
