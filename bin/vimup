@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-VIM_HOME="$HOME/local/neovim"
+VIM_HOME="$HOME/local/vim"
 BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/vim"
 BUILD_SOURCE="${BUILD_FULL}/src"
@@ -27,7 +27,7 @@ git pull
 
 cd "$BUILD_SOURCE" || exit 1
 make distclean
-./configure --prefix="$HOME/local/vim" \
+./configure --prefix="$VIM_HOME" \
 	--enable-fail-if-missing \
 	--enable-multibyte \
 	--with-compiledby=peter@aronoff.org \
@@ -38,6 +38,7 @@ make distclean
 	--enable-fontset \
 	--enable-largefile \
 	--disable-nls \
+	--disable-canberra \
 	--enable-python3interp \
 	--with-python3-config-dir="$PYTHON_CONFIG_DIR"
 

@@ -9,7 +9,7 @@ shopt -s checkwinsize
 set -o emacs
 shopt -s no_empty_cmd_completion
 complete -d cd
-shopt -s autocd
+# shopt -s autocd
 shopt -s cdspell
 export MAILDIR=$HOME/.maildir
 
@@ -18,26 +18,42 @@ export MAILDIR=$HOME/.maildir
 
 [[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-bcc="/usr/local/etc/profile.d/bash_completion.sh"
-[[ $PS1 && -r $bcc ]] && source $bcc
+# export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+# bcc="/usr/local/etc/profile.d/bash_completion.sh"
+# [[ $PS1 && -r $bcc ]] && source $bcc
 
-bc="$HOME/local/bc/share/bash-completion/bash_completion"
-[[ $PS1 && -r $bc ]] && source $bc
+# bc="$HOME/local/bc/share/bash-completion/bash_completion"
+# [[ $PS1 && -r $bc ]] && source $bc
 
-[[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
+# [[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
+# bash completion for MacPorts
+if [[ $PS1 && -r /opt/local/etc/profile.d/bash_completion.sh ]]; then
+	source /opt/local/etc/profile.d/bash_completion.sh
+fi
+if [[ $PS1 && -r /opt/local/share/git/contrib/completion/git-prompt.sh ]]; then
+	source /opt/local/share/git/contrib/completion/git-prompt.sh
+fi
+if [[ $PS1 && -r $HOME/local/exercism/share/exercism_completion.bash ]]; then
+	source $HOME/local/exercism/share/exercism_completion.bash
+fi
+if [[ $- == *i* && -r /opt/local/share/fzf/shell/completion.bash ]]; then
+	source /opt/local/share/fzf/shell/completion.bash
+fi
+if [[ $PS1 && -r /opt/local/share/fzf/shell/key-bindings.bash ]]; then
+	source /opt/local/share/fzf/shell/key-bindings.bash
+fi
 
 ## History settings
 # + keep a very large history
 # + no dups; no lines starting with a space
 # + :...; turns the timestamp into a "do-nothing" command
-# + handle multiple sessions sanely
+# + do not append all sessions to ~/.bash_history; last shell closed wins
 # + save multi-line commands as a single line
 export HISTSIZE=1000000
 export HISTFILESIZE=1000000
-export HISTCONTROL=ignoreboth
-export HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S; '
-shopt -s histappend
+export HISTCONTROL=ignoreboth:erasedups
+export HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S %p; '
+shopt -u histappend
 shopt -s cmdhist
 
 ## Editor settings
@@ -54,8 +70,8 @@ export NVIMDATA="$HOME/.local/share/nvim"
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
-INFOPATH=/usr/local/share/info:$INFOPATH
-INFODIR=/usr/local/share/info:$INFODIR
+# INFOPATH=/usr/local/share/info:$INFOPATH
+# INFODIR=/usr/local/share/info:$INFODIR
 
 ## FIGNORE
 # FIGNORE=bst:aux:bbl:blg:pdf:fls:fdb_latexmk
@@ -97,9 +113,9 @@ export PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+[`basename $VIRTUAL_ENV`] }\u \
 #    FIGNORE=bst:aux:bbl:blg:fls:fdb_latexmk
 #'
 
-# if [ "$VIM" ]; then
-#     PS1='\$ '
-# fi
+if [ "$VIM" ]; then
+    PS1='\$ '
+fi
 
 ## Pager stuff
 # MANPAGER=less
@@ -107,21 +123,21 @@ export PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+[`basename $VIRTUAL_ENV`] }\u \
 export PAGER=less
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
-[[ -e /usr/local/bin/lesspipe ]] \
-    && LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
-export LESSOPEN
+# [[ -e /opt/local/bin/lesspipe.sh ]] \
+#     && LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
+# export LESSOPEN
 
-export HOMEBREW_NO_ANALYTICS=1
-if [ -r "$HOME/.HOMEBREW_GITHUB_API_TOKEN"  ]; then
-	source "$HOME/.HOMEBREW_GITHUB_API_TOKEN"
-else
-	export HOMEBREW_NO_GITHUB_API
-fi
+# export HOMEBREW_NO_ANALYTICS=1
+# if [ -r "$HOME/.HOMEBREW_GITHUB_API_TOKEN"  ]; then
+# 	source "$HOME/.HOMEBREW_GITHUB_API_TOKEN"
+# else
+# 	export HOMEBREW_NO_GITHUB_API
+# fi
 # export HOMEBREW_VERBOSE=1
 # export HOMEBREW_USE_GCC=1
 # export CC=gcc-4.2
 # export CXX=g++-4.2
-export RLWRAP_HOME="$HOME/.rlwrap"
+# export RLWRAP_HOME="$HOME/.rlwrap"
 
 # Initialization variables for levee
 # autoindent: supply indentation while in insert mode
@@ -134,9 +150,26 @@ export \
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 #export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
 
+# MacPorts path help
+CPATH=/opt/local/include:${CPATH}
+LD_LIBRARY_PATH=/opt/local/lib:${LD_LIBRARY_PATH}
+PKG_CONFIG_PATH=/opt/lib/pkgconfig:${PKG_CONFIG_PATH}
+C_INCLUDE_PATH=/opt/local/include:${C_INCLUDE_PATH}
+CPLUS_INCLUDE_PATH=/opt/local/include:${CPLUS_INCLUDE_PATH}
+LIBRARY_PATH=/opt/local/lib:${LIBRARY_PATH}
+
+# vim lives in $HOME/local/vim
+PATH="${HOME}/local/vim/bin:${PATH}"
+MANPATH="${HOME}/local/vim/share/man:${MANPATH}"
+
+# passage lives in $HOME/local/passage
+PATH="${PATH}:/${HOME}/local/passage/bin"
+pc="${HOME}/local/passage/share/bash-completion/completions/passage"
+[[ $PS1 && -r $pc ]] && source $pc
+
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
+export PYENV_ROOT="${HOME}/.pyenv"
+PATH="${PYENV_ROOT}/bin:${PATH}"
 if command -v pyenv 1>/dev/null 2>&1; then
 	eval "$(pyenv init --path)"
 	eval "$(pyenv virtualenv-init -)"
@@ -145,8 +178,5 @@ fi
 # go
 export GOPATH="/Users/telemachus/go"
 export GOBIN="/Users/telemachus/go/bin"
-PATH=$PATH:$GOBIN
-PATH=$HOME/bin:$PATH
+PATH="${PATH}:${GOBIN}"
 export PATH
-
-[[ -f $HOME/.fzf.bash ]] && source $HOME/.fzf.bash
