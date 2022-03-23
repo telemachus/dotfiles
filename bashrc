@@ -18,27 +18,26 @@ export MAILDIR=$HOME/.maildir
 
 [[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
 
-# export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-# bcc="/usr/local/etc/profile.d/bash_completion.sh"
-# [[ $PS1 && -r $bcc ]] && source $bcc
+# Local bash completion
+[[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
 
-# bc="$HOME/local/bc/share/bash-completion/bash_completion"
-# [[ $PS1 && -r $bc ]] && source $bc
-
-# [[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
-# bash completion for MacPorts
+# MacPorts bash completion
 if [[ $PS1 && -r /opt/local/etc/profile.d/bash_completion.sh ]]; then
 	source /opt/local/etc/profile.d/bash_completion.sh
 fi
+
 if [[ $PS1 && -r /opt/local/share/git/contrib/completion/git-prompt.sh ]]; then
 	source /opt/local/share/git/contrib/completion/git-prompt.sh
 fi
+
 if [[ $PS1 && -r $HOME/local/exercism/share/exercism_completion.bash ]]; then
 	source $HOME/local/exercism/share/exercism_completion.bash
 fi
+
 if [[ $- == *i* && -r /opt/local/share/fzf/shell/completion.bash ]]; then
 	source /opt/local/share/fzf/shell/completion.bash
 fi
+
 if [[ $PS1 && -r /opt/local/share/fzf/shell/key-bindings.bash ]]; then
 	source /opt/local/share/fzf/shell/key-bindings.bash
 fi
@@ -70,13 +69,6 @@ export NVIMDATA="$HOME/.local/share/nvim"
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
-# INFOPATH=/usr/local/share/info:$INFOPATH
-# INFODIR=/usr/local/share/info:$INFODIR
-
-## FIGNORE
-# FIGNORE=bst:aux:bbl:blg:pdf:fls:fdb_latexmk
-#FIGNORE=.SO:.so:.o:.O
-
 ## The prompt below gets ideas from the following:
 # http://briancarper.net/blog/570/git-info-in-your-zsh-prompt
 # http://github.com/adamv/dotfiles/blob/master/bashrc
@@ -123,20 +115,7 @@ fi
 export PAGER=less
 LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export LESS
-# [[ -e /opt/local/bin/lesspipe.sh ]] \
-#     && LESSOPEN='| /opt/local/bin/lesspipe.sh %s'
-# export LESSOPEN
 
-# export HOMEBREW_NO_ANALYTICS=1
-# if [ -r "$HOME/.HOMEBREW_GITHUB_API_TOKEN"  ]; then
-# 	source "$HOME/.HOMEBREW_GITHUB_API_TOKEN"
-# else
-# 	export HOMEBREW_NO_GITHUB_API
-# fi
-# export HOMEBREW_VERBOSE=1
-# export HOMEBREW_USE_GCC=1
-# export CC=gcc-4.2
-# export CXX=g++-4.2
 # export RLWRAP_HOME="$HOME/.rlwrap"
 
 # Initialization variables for levee
@@ -147,7 +126,10 @@ export LESS
 # ignorecase: searches ignore alphabetic case 
 export \
     LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
+
+# Set PARINIT for par. How did I pick these values?
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
+
 #export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
 
 # MacPorts path help
@@ -160,12 +142,16 @@ LIBRARY_PATH=/opt/local/lib:${LIBRARY_PATH}
 
 # vim lives in $HOME/local/vim
 PATH="${HOME}/local/vim/bin:${PATH}"
-MANPATH="${HOME}/local/vim/share/man:${MANPATH}"
+# MANPATH="${HOME}/local/vim/share/man:${MANPATH}"
 
 # passage lives in $HOME/local/passage
-PATH="${PATH}:/${HOME}/local/passage/bin"
+PATH="${PATH}:${HOME}/local/passage/bin"
 pc="${HOME}/local/passage/share/bash-completion/completions/passage"
 [[ $PS1 && -r $pc ]] && source $pc
+
+# neovim lives in $HOME/local/neovim
+PATH="${PATH}:${HOME}/local/neovim/bin"
+# MANPATH="${HOME}/local/neovim/share/man:${MANPATH}"
 
 # pyenv
 export PYENV_ROOT="${HOME}/.pyenv"
@@ -179,4 +165,8 @@ fi
 export GOPATH="/Users/telemachus/go"
 export GOBIN="/Users/telemachus/go/bin"
 PATH="${PATH}:${GOBIN}"
+
+# postgres
+PATH="${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin"
+PATH="${PATH}:${HOME}/.local/bin"
 export PATH

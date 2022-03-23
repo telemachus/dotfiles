@@ -1,28 +1,23 @@
 #!/usr/bin/env bash
+
+# As of 2022-03-23, this is out of date. I need to rethink this whole thing.
 set -x
 
 START_DIR="$(pwd)"
-BREW_INSTALL="/usr/local/bin/brew install"
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$BREW_INSTALL --with-curl --with-openssl git
-$BREW_INSTALL abook aspell bash bash-completion@2 bats cmake csvprintf \
-	ctags discount ed elinks git gnupg isync less lua luarocks mawk \
-	mercurial moreutils mpack mpc mpd mpack msmtp mu neatvi neomutt par \
-	pass pkg-config python@3.8 rename shellcheck tarsnap urlview vim w3m wget
-$BREW_INSTALL --HEAD neovim
+# First, I need to install MacPorts.
 
 if [ ! -d "$HOME/Documents/git-repos" ]; then
-    mkdir -p "$HOME/Documents/git-repos"
+	mkdir -p "$HOME/Documents/git-repos"
 fi
 
 # TODO: I need to make sure that ssh keys are set before I can do these clones.
 cd "$HOME/Documents/git-repos" || exit
 if [ ! -d "$HOME/Documents/git-repos" ]; then
-    git clone git@telemachus:dotfiles
+	git clone git@telemachus:dotfiles
 else
-    cd "$HOME/projects/dotfiles" || exit
-    git pull origin master
+	cd "$HOME/projects/dotfiles" || exit
+	git pull origin master
 fi
 cd "$HOME" || exit
 

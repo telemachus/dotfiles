@@ -1,18 +1,22 @@
-" Configuration for neovim
 set encoding=utf-8
 scriptencoding utf-8
-syntax on
+
+" You need to set the background *before* you enable syntax.
+" See :help 'background'.
+set background=light
+syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
 set history=500
 set scrolloff=0     " No breathing room
-set number
+set nonumber
 set mouse=          " No mouse capture
 
 set ruler           " Show the cursor position all the time
 set showcmd
 set showmode
-set laststatus=2    " Always show status bar
+set ttimeout
+set ttimeoutlen=100
 
 if &shell =~# 'fish$'
     set shell=bash
@@ -30,13 +34,12 @@ set autoindent
 " 1 = do not break line after a one-letter word
 set formatoptions=tcqn1
 set tabstop=8 softtabstop=0 shiftwidth=8 noexpandtab
-set number
 set foldmarker={{{,}}}
 set foldlevel=0
 set foldmethod=marker
 
 set laststatus=2        " Always put a status line in
-set showtabline=2       " Show a tabbar on top, always
+set showtabline=1       " Show a tabbar only if there are at least two tabs
 
 set ignorecase          " Ignore case in searches
 set smartcase           " But care about case if I enter capitals
@@ -55,11 +58,15 @@ else
     set backupdir=$HOME/.vim_backups,/tmp
     set directory=/tmp,$HOME/.vim_backups
     set undodir=$HOME/.vim_undo,/tmp
-    packadd! matchit
+    if has('syntax') && has('eval')
+        packadd! matchit
+    endif
 endif
 
-set grepprg=ack\ --nogroup\ --column
-set grepformat=%f:%l:%c:%m
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+    set grepformat=%f:%l:%c:%m
+endif
 
 " Use bash-style tab completion:
 " first tab shows longest common string, and subsequent tabs list all choices
@@ -77,8 +84,15 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
-set background=light
-colorscheme github
+colorscheme off
+set colorcolumn=89
 
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
+
+set iskeyword+=-
+
+let g:mapleader=','
+
+" Testing these out before adding them to vim-dotfiles
+let g:black_virtualenv = '~/.local/pipx/venvs/black'

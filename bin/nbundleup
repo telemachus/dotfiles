@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 here="$(pwd)"
 bundle="$HOME/.config/nvim/pack/bundle"
@@ -26,10 +26,5 @@ if [[ -d "$opt" ]]; then
 fi
 
 cd "$here" || exit
-
-# npm install -g neovim
-python3 -m pip install --upgrade setuptools pip wheel pynvim pylint flake8 black
-# chruby-exec ruby-2.5.3 -- gem install neovim
-# cpanm Neovim::Ext
 
 # vim: set ts=8 sw=0 tw=0 noet ft=sh :

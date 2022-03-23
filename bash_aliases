@@ -22,9 +22,9 @@ alias mvv='mv -v'
 alias cpr='cp -r'
 
 # Two cd aliases
-# NOT NEEDED if shopt -s autocd
-# alias ..='cd ..'
-# alias ...='cd ../../'
+# There's also `shopt -s autocd`, but I like these, and I'm used to them.
+alias ..='cd ..'
+alias ...='cd ../../'
 
 # Alias to add or edit aliases
 alias realias='$EDITOR ~/.bash_aliases && source ~/.bash_aliases'
@@ -61,9 +61,6 @@ alias words='wc -w'
 # ctrl-l not working
 alias ""=clear
 
-# quick update python packages
-# alias pup='pip3 install --upgrade cltk setuptools pip wheel neovim'
-
 # neomutt > mutt
 alias mutt=neomutt
 
@@ -73,11 +70,10 @@ alias webserver='python3 -m http.server'
 # simple python jsonlint
 alias jsonlint='python3 -m json.tool'
 
-alias ..='cd ..'
-alias ...='cd ../..'
-
 # find executables: see this comment on Stack Overflow.
 # https://bit.ly/3BRvXjT
 # For an alternative, see this answer on Stack Overflow.
 # https://stackoverflow.com/a/4458361/26702
 alias findexecs='find . -type f -perm -a=x'
+
+# vim: set ts=8 sw=8 tw=0 noet ft=sh :
