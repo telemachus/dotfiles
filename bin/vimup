@@ -6,7 +6,7 @@ VIM_HOME="$HOME/local/vim"
 BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/vim"
 BUILD_SOURCE="${BUILD_FULL}/src"
-PYTHON_CONFIG_DIR="$HOME/.pyenv/versions/3.10.2/lib/python3.10/config-3.10-darwin/"
+PYTHON_CONFIG_DIR="$HOME/.pyenv/versions/3.10.4/lib/python3.10/config-3.10-darwin/"
 # First, install python via pyenv with
 # env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" \
 # 	pyenv install X.Y.Z

@@ -1,4 +1,4 @@
-#!/opt/local/bin/bash
+#!/usr/bin/env bash
 exec &> >(while read line; do echo "$(date -R) $line"; done;)
 
 # which -s mbsync

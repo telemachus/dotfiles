@@ -7,6 +7,9 @@ local g = vim.g
 local map = vim.keymap.set
 local opt = vim.opt
 
+g.mapleader = ','
+g.localmapleader = '\\'
+
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
 -- g.python_host_skip_check = 1
@@ -137,13 +140,32 @@ opt.statusline = "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column
 
 opt.termguicolors = true
 cmd('colorscheme off')
+-- require("github-theme").setup({
+--   theme_style = 'light_colorblind',
+--   sidebars = {'qf', 'vista_kind', 'terminal', 'packer'},
+--   comment_style = 'NONE',
+--   keyword_style = 'NONE',
+--   function_style = 'NONE',
+--   variable_style = 'NONE',
+-- })
 opt.colorcolumn = '89'
 
 opt.iskeyword = opt.iskeyword + '-'
-g.mapleader = ','
-g.localmapleader = '\\'
 
 opt.grepprg = 'rg --hidden --vimgrep --smart-case --'
+
+local snippy = require('snippy')
+snippy.setup({
+    mappings = {
+        is = {
+            ['<Tab>'] = 'expand_or_advance',
+            ['<S-Tab>'] = 'previous',
+        },
+        nx = {
+            ['<Tab>'] = 'cut_text',
+        },
+    },
+})
 
 require('go').setup({
     -- auto commands
@@ -158,56 +180,3 @@ require('go').setup({
     -- lint_prompt_style: qf (quickfix), vt (virtual text)
     lint_prompt_style = 'qf',
 })
-
-local function prequire(...)
-local status, lib = pcall(require, ...)
-if (status) then return lib end
-    return nil
-end
-
-local luasnip = prequire('luasnip')
-
-luasnip.config.set_config {
-    history = true,
-    updateevents = "TextChanged,TextChangedI",
-    enable_autosnippets = false,
-}
-
-local t = function(str)
-    return api.nvim_replace_termcodes(str, true, true, true)
-end
-
-map(
-    {'i', 's'},
-    '<C-K>',
-    function()
-        if luasnip and luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-        end
-    end,
-    {silent = true}
-)
-
-map(
-    {'i', 's'},
-    '<C-J>',
-    function()
-        if luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-        end
-    end,
-    {silent = true}
-)
-
-map(
-    'i',
-    '<C-L>',
-    function()
-        if luasnip.choice_active() then
-            luasnip.change_choice(1)
-        end
-    end,
-    {silent = true}
-)
-
--- require('luasnip.loaders.from_snipmate').lazy_load()
