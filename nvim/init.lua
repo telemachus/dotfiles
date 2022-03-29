@@ -27,7 +27,7 @@ local dont_load = {
     'gzip',
     'logipat',
     'logiPat',
-    'matchparen',
+    -- 'matchparen',
     'netrwFileHandlers',
     'netrwPlugin',
     'netrwSettings',
@@ -45,7 +45,6 @@ for _, plugin in pairs(dont_load) do
     g['loaded_' .. plugin] = 1
 end
 
-opt.background = 'light'
 cmd('syntax enable')
 cmd('filetype plugin indent on')
 opt.autoindent = true
@@ -60,7 +59,7 @@ opt.showcmd = true
 opt.showmode = true
 opt.laststatus = 2
 
-opt.shell = bash
+opt.shell = 'bash'
 
 opt.wrap = true
 opt.linebreak = true
@@ -89,6 +88,7 @@ opt.expandtab = false
 opt.foldmarker = '{{{,}}}'
 opt.foldlevel = 0
 opt.foldmethod = 'marker'
+opt.foldenable = false
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -96,6 +96,7 @@ opt.gdefault = true
 opt.incsearch = true
 opt.hlsearch = false
 opt.conceallevel = 0
+opt.concealcursor = ""
 
 opt.backup = true
 opt.backupcopy = 'yes'
@@ -139,15 +140,26 @@ opt.shortmess = 'atIF'
 opt.statusline = "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column: %c %P]%)"
 
 opt.termguicolors = true
-cmd('colorscheme off')
--- require("github-theme").setup({
---   theme_style = 'light_colorblind',
---   sidebars = {'qf', 'vista_kind', 'terminal', 'packer'},
---   comment_style = 'NONE',
---   keyword_style = 'NONE',
---   function_style = 'NONE',
---   variable_style = 'NONE',
--- })
+opt.background = 'light'
+-- cmd('colorscheme off')
+require("github-theme").setup({
+    theme_style = 'light',
+    sidebars = {'qf', 'lf'},
+    comment_style = 'NONE',
+    keyword_style = 'NONE',
+    function_style = 'NONE',
+    variable_style = 'NONE',
+    hide_end_of_buffer = false,
+    hide_inactive_statusline = false,
+    dark_float = true,
+    dark_sidebar = true,
+    transparent = true,
+    overrides = function(c)
+        return {
+            Conceal = {fg = c.fg}
+        }
+    end
+})
 opt.colorcolumn = '89'
 
 opt.iskeyword = opt.iskeyword + '-'
@@ -167,7 +179,8 @@ snippy.setup({
     },
 })
 
-require('go').setup({
+local go = require('go')
+go.setup({
     -- auto commands
     auto_format = true,
     -- formatter: goimports, gofmt, gofumpt
@@ -179,4 +192,56 @@ require('go').setup({
     linter_flags = {},
     -- lint_prompt_style: qf (quickfix), vt (virtual text)
     lint_prompt_style = 'qf',
+})
+
+
+local treesitterConfigs = require('nvim-treesitter.configs')
+treesitterConfigs.setup({
+    ensure_installed = {'go', 'lua', 'python', 'c'},
+    sync_install = false,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
+            },
+        },
+        move = {
+            enable = true,
+            set_jumps = true, -- place jumps in the jumplist
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+            },
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+            },
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+            },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+            },
+        },
+    },
+    textsubjects = {
+        enable = true,
+        prev_selection = ',', -- Optional: select the previous selection
+        keymaps = {
+            ['.'] = 'textsubjects-smart',
+            [';'] = 'textsubjects-container-outer',
+            ['i;'] = 'textsubjects-container-inner',
+        },
+    },
+})
+
+local indentBlankline = require('indent_blankline')
+indentBlankline.setup({
+    show_current_context = true,
+    show_current_context_start = true,
 })
