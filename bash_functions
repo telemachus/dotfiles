@@ -7,35 +7,36 @@
 #
 # Shamelessly stolen from Learning the Bash Shell (3ed), Cameron Newham
 # & Bill Rosenblatt
-ccd() {
+
+ccd()
+{
 	case "$#" in
 		0|1)
 			builtin cd $1
 			;;
 		2)
 			newdir=${PWD//$1/$2}
-	# FIXME TODO
-	# If the user enters two wrong variables, they trigger the first
-	# branch of this case statement. They should trigger a different
-	# error message.
-	case "$newdir" in
-		$PWD)
-			printf "ccd: \$PWD is already $PWD\n" >&2
-			return 1
-			;;
-		*)
-			builtin cd "$newdir"
-			pwd
-			;;
-		esac
+			# FIXME TODO
+			# If the user enters two wrong variables, they trigger the first
+			# branch of this case statement. They should trigger a different
+			# error message.
+			case "$newdir" in
+				$PWD)
+					printf "ccd: \$PWD is already $PWD\n" >&2
+					return 1
+					;;
+				*)
+					builtin cd "$newdir"
+					pwd
+					;;
+			esac
 			;;
 		*)
 			printf "ccd: wrong arg count\n" 1>&2
 			return 1
 			;;
-		esac
+	esac
 }
-
 ## See https://twitter.com/#!/mlafeldt/status/192195940164173824
 # Get the absolute directory, symlinks resolved
 realdir()

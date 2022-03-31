@@ -1,5 +1,5 @@
-# Enable color support of ls and also add handy aliases
-alias l='ls'
+# Disable color support of ls and also add handy aliases
+alias l='ls --color=none'
 alias ll='ls -l'
 alias la='ls -A'
 alias lf='ls -CF'
