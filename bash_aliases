@@ -1,11 +1,11 @@
-# Disable color support of ls and also add handy aliases
+# Disable color on ls and also add handy aliases
 alias l='ls --color=none'
-alias ll='ls -l'
-alias la='ls -A'
-alias lf='ls -CF'
-alias l.='ls -d .[^.]* 2>/dev/null'
-alias l.f='l. -F'
-alias l.l='ls -ld .[^.]* 2>/dev/null'
+alias ll='l -l'
+alias la='l -A'
+alias lf='l -CF'
+alias l.='l -d .[^.]* 2>/dev/null'
+alias l.f='l -F -d .[^.]* 2>/dev/null'
+alias l.l='l -ld .[^.]* 2>/dev/null'
 
 # Aliases for safety
 alias rmi='rm -i'
