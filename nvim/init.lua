@@ -197,7 +197,7 @@ go.setup({
 
 local treesitterConfigs = require('nvim-treesitter.configs')
 treesitterConfigs.setup({
-    ensure_installed = {'go', 'lua', 'python', 'c'},
+    ensure_installed = {'go', 'lua', 'python', 'c', 'query'},
     sync_install = false,
     highlight = {
         enable = true,
@@ -208,8 +208,9 @@ treesitterConfigs.setup({
             enable = true,
             lookahead = true,
             keymaps = {
-                ['af'] = '@function.outer',
-                ['if'] = '@function.inner',
+                ['aF'] = '@myfunction.outerpluscomment',
+                ['af'] = '@myfunction.outer',
+                ['if'] = '@myfunction.inner',
             },
         },
         move = {
@@ -236,6 +237,24 @@ treesitterConfigs.setup({
             ['.'] = 'textsubjects-smart',
             [';'] = 'textsubjects-container-outer',
             ['i;'] = 'textsubjects-container-inner',
+        },
+    },
+    playground = {
+        enable = true,
+        disable = {},
+        updatetime = 25,
+        persist_queries = false, -- Whether the query persists across vim sessions
+        keybindings = {
+            toggle_query_editor = 'o',
+            toggle_hl_groups = 'i',
+            toggle_injected_languages = 't',
+            toggle_anonymous_nodes = 'a',
+            toggle_language_display = 'I',
+            focus_language = 'f',
+            unfocus_language = 'F',
+            update = 'R',
+            goto_node = '<cr>',
+            show_help = '?',
         },
     },
 })
