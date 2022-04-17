@@ -146,7 +146,7 @@ PATH="${HOME}/local/vim/bin:${PATH}"
 
 # passage lives in $HOME/local/passage
 PATH="${PATH}:${HOME}/local/passage/bin"
-pc="${HOME}/local/passage/share/bash-completion/completions/passage"
+pc="${HOME}/local/passage/share/completions/passage.bash"
 [[ $PS1 && -r $pc ]] && source $pc
 
 # neovim lives in $HOME/local/neovim
@@ -170,3 +170,5 @@ PATH="${PATH}:${GOBIN}"
 PATH="${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin"
 PATH="${PATH}:${HOME}/.local/bin"
 export PATH
+
+[[ $PS1 && -r $HOME/.cargo/env ]] && source $HOME/.cargo/env

@@ -1,27 +1,38 @@
 #!/usr/bin/env dash
 
-set -e
+set -u
 
 NEO_HOME="$HOME/local/neovim"
 BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/neovim"
 
+for DEP in ninja libtool automake cmake pkg-config gettext curl git
+do
+	hash $DEP 2>/dev/null || \
+		{ printf >&2 "Early exit: %s not installed\n" $DEP ; exit 1 ; }
+done
+
 if [ ! -d "$BUILD_ROOT" ]; then
-	mkdir -p "$BUILD_ROOT"
+	mkdir -p "$BUILD_ROOT" || \
+		{ printf >&2 "Early exit: can't create %s\n" "$BUILD_ROOT" ; exit 1 ; }
 fi
 
 cd "$BUILD_ROOT"
 if [ ! -d "$BUILD_FULL" ]; then
-	git clone https://github.com/neovim/neovim.git
+	git clone https://github.com/neovim/neovim.git || \
+		{ printf >&2 "Early exit: can't clone neovim\n" ; exit 1 ; }
 fi
 
-cd "$BUILD_FULL"
-git pull
+cd "$BUILD_FULL" || \
+	{ printf >&2 "Early exit: can't cd into %s\n" "$BUILD_FULL" ; exit 1 ; }
+git pull || { printf >&2 "Early exit: can't 'git pull'\n" ; exit 1 ; }
 # If I need to reset the BUILD_TYPE, uncomment the line below or do it
 # manually.
 # rm -rf ./build/
-make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$NEO_HOME"
-rm -rf "$NEO_HOME"
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$NEO_HOME" || \
+	{ printf >&2 "Early exit: can't build neovim\n" ; exit 1 ; }
+rm -rf "$NEO_HOME" || \
+	{ printf >&2 "Early exit: can't remove old %s\n" "$NEO_HOME" ; exit 1 ; }
 make install
 
 nbundleup

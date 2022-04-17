@@ -7,8 +7,8 @@ local g = vim.g
 local map = vim.keymap.set
 local opt = vim.opt
 
-g.mapleader = ','
-g.localmapleader = '\\'
+g.mapleader = ' '
+g.localmapleader = ' '
 
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
@@ -19,6 +19,10 @@ g.loaded_python_provider = 0
 g.loaded_node_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
+
+-- Experiment with filetype.lua and shut off filetype.vim
+g.do_filetype_lua = 1
+g.did_load_filetypes = 0
 
 local dont_load = {
     '2html_plugin',
@@ -164,7 +168,7 @@ opt.colorcolumn = '89'
 
 opt.iskeyword = opt.iskeyword + '-'
 
-opt.grepprg = 'rg --hidden --vimgrep --smart-case --'
+opt.grepprg = 'rg --vimgrep --smart-case --'
 
 local snippy = require('snippy')
 snippy.setup({
@@ -179,22 +183,6 @@ snippy.setup({
     },
 })
 
-local go = require('go')
-go.setup({
-    -- auto commands
-    auto_format = true,
-    -- formatter: goimports, gofmt, gofumpt
-    formatter = 'goimports',
-    auto_lint = true,
-    -- linters: revive, errcheck, staticcheck, golangci-lint
-    linter = 'revive',
-    -- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}
-    linter_flags = {},
-    -- lint_prompt_style: qf (quickfix), vt (virtual text)
-    lint_prompt_style = 'qf',
-})
-
-
 local treesitterConfigs = require('nvim-treesitter.configs')
 treesitterConfigs.setup({
     ensure_installed = {'go', 'lua', 'python', 'c', 'query'},
@@ -208,9 +196,9 @@ treesitterConfigs.setup({
             enable = true,
             lookahead = true,
             keymaps = {
-                ['aF'] = '@myfunction.outerpluscomment',
-                ['af'] = '@myfunction.outer',
-                ['if'] = '@myfunction.inner',
+                ['aF'] = '@fullfunction',
+                ['af'] = '@function.outer',
+                ['if'] = '@function.inner',
             },
         },
         move = {
@@ -230,15 +218,6 @@ treesitterConfigs.setup({
             },
         },
     },
-    textsubjects = {
-        enable = true,
-        prev_selection = ',', -- Optional: select the previous selection
-        keymaps = {
-            ['.'] = 'textsubjects-smart',
-            [';'] = 'textsubjects-container-outer',
-            ['i;'] = 'textsubjects-container-inner',
-        },
-    },
     playground = {
         enable = true,
         disable = {},
@@ -253,7 +232,7 @@ treesitterConfigs.setup({
             focus_language = 'f',
             unfocus_language = 'F',
             update = 'R',
-            goto_node = '<cr>',
+            goto_node = '<CR>',
             show_help = '?',
         },
     },
@@ -264,3 +243,6 @@ indentBlankline.setup({
     show_current_context = true,
     show_current_context_start = true,
 })
+
+require('autocommands')
+require('filetypes')

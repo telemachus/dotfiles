@@ -20,7 +20,7 @@ mkdir -p "$START"
 mkdir -p "$HOME/.nvim_backups"
 mkdir -p "$HOME/.nvim_undo"
 if [[ ! -f "$BASE/init.vim" ]]; then
-	ln -s "$DOTFILES/vim/vimrc" "$BASE/init.vim"
+	ln -f -s "$DOTFILES/nvim/init.lua" "$BASE/init.lua"
 fi
 
 cd "$START" || exit

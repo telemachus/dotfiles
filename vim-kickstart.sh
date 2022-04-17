@@ -28,22 +28,25 @@ CLONE="git clone"
 
 cd "$START" || exit
 
-$CLONE https://git.sr.ht/~telemachus/vim-dotfiles
-$CLONE https://git.sr.ht/~telemachus/vim-go-mini
-$CLONE https://git.sr.ht/~telemachus/vim-textobj-curly
-$CLONE https://github.com/SirVer/ultisnips.git
-$CLONE https://github.com/benizi/vim-automkdir.git
-$CLONE https://github.com/bps/vim-textobj-python.git
-$CLONE https://github.com/cespare/vim-toml.git
-$CLONE https://github.com/cormacrelf/vim-colors-github.git
-$CLONE https://github.com/dietsche/vim-lastplace.git
-$CLONE https://github.com/inkarkat/SyntaxAttr.vim.git
-$CLONE https://github.com/kana/vim-textobj-entire.git
-$CLONE https://github.com/kana/vim-textobj-line.git
-$CLONE https://github.com/kana/vim-textobj-user.git
-$CLONE https://github.com/lambdalisue/suda.vim.git
-$CLONE https://github.com/machakann/vim-sandwich.git
-$CLONE https://github.com/tpope/vim-abolish.git
-$CLONE https://github.com/tpope/vim-commentary.git
-$CLONE https://github.com/tpope/vim-markdown.git
-$CLONE https://github.com/tpope/vim-repeat.git
+git clone https://git.sr.ht/~telemachus/vim-dotfiles
+git clone https://git.sr.ht/~telemachus/vim-go-mini
+git clone https://git.sr.ht/~telemachus/vim-textobj-curly
+git clone https://github.com/EgZvor/vim-black.git
+git clone https://github.com/SirVer/ultisnips.git
+git clone https://github.com/bps/vim-textobj-python.git
+git clone https://github.com/cespare/vim-toml.git
+git clone https://github.com/cormacrelf/vim-colors-github.git
+git clone https://github.com/dietsche/vim-lastplace.git
+git clone https://github.com/inkarkat/SyntaxAttr.vim.git
+git clone https://github.com/junegunn/vader.vim.git
+git clone https://github.com/kana/vim-textobj-entire.git
+git clone https://github.com/kana/vim-textobj-function.git
+git clone https://github.com/kana/vim-textobj-line.git
+git clone https://github.com/kana/vim-textobj-user.git
+git clone https://github.com/lambdalisue/suda.vim.git
+git clone https://github.com/machakann/vim-sandwich.git
+git clone https://github.com/pbrisbin/vim-colors-off.git
+git clone https://github.com/tpope/vim-commentary.git
+git clone https://github.com/tpope/vim-markdown.git
+git clone https://github.com/tpope/vim-repeat.git
+git clone https://github.com/ds26gte/neoscmindent.git
