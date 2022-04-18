@@ -19,8 +19,9 @@ mkdir -p "$OPT"
 mkdir -p "$START"
 mkdir -p "$HOME/.nvim_backups"
 mkdir -p "$HOME/.nvim_undo"
+# TODO: I want maybe to link this file and others unconditionally.
 if [[ ! -f "$BASE/init.vim" ]]; then
-	ln -f -s "$DOTFILES/nvim/init.lua" "$BASE/init.lua"
+	ln -f -s "$DOTFILES/config/nvim/init.lua" "$BASE/init.lua"
 fi
 
 cd "$START" || exit
