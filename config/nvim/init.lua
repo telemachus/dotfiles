@@ -143,6 +143,8 @@ opt.title = true
 opt.shortmess = 'atIF'
 opt.statusline = "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column: %c %P]%)"
 
+opt.spelllang = 'en_us'
+
 opt.termguicolors = true
 opt.background = 'light'
 -- cmd('colorscheme off')
