@@ -246,5 +246,6 @@ indentBlankline.setup({
     show_current_context_start = true,
 })
 
-require('autocommands')
 require('filetypes')
+require('usercommands')
+require('autocommands')

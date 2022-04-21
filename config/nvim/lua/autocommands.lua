@@ -36,17 +36,7 @@ end
 
 autocmd('BufWritePre', {
     pattern = '*.go',
-    callback = goimports,
-    group = telemachus_augroup,
-})
-
-local gofumpt = function()
-    format('gofumpt', {'-w'})
-end
-
-autocmd('BufRead', {
-    pattern = '*.go',
-    callback = gofumpt,
+    command = 'Goimports',
     group = telemachus_augroup,
 })
 
