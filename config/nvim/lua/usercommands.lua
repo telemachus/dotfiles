@@ -11,7 +11,7 @@ command('Gofumpt',
     function(_)
         require('refinery').format('gofumpt', {'-w'})
     end,
-    { desc = 'Format current file with goimports', bar = true, }
+    { desc = 'Format current file with gofumpt', bar = true, }
 )
 
 command('Golines',
