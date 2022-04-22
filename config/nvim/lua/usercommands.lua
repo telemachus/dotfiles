@@ -16,7 +16,13 @@ command('Gofumpt',
 
 command('Golines',
     function(_)
-        require('refinery').format('golines', {'-w', '--base-formatter=gofumpt'})
+        require('refinery').format('golines', {
+            '--write-output',
+            '--base-formatter=gofumpt',
+            '--tab-len=4',
+            '--max-len=100',
+            '--no-reformat-tags',
+        })
     end,
-    { desc = 'Format current file with goimports', bar = true, }
+    { desc = 'Format current file with goimports and gofumpt', bar = true, }
 )
