@@ -76,7 +76,7 @@ opt.listchars = {
     trail = '•',
     precedes = '⟨',
     extends = '⟩',
-    nbsp = '␣'
+    nbsp = '␣',
 }
 
 -- t = Autowrap text using textwidth.
@@ -100,7 +100,7 @@ opt.gdefault = true
 opt.incsearch = true
 opt.hlsearch = false
 opt.conceallevel = 0
-opt.concealcursor = ""
+opt.concealcursor = ''
 
 opt.backup = true
 opt.backupcopy = 'yes'
@@ -108,7 +108,7 @@ opt.backupdir = HOME .. '/.nvim_backups'
 opt.undofile = true
 opt.undodir = HOME .. '/.nvim_undo'
 
-opt.wildmode = {'longest', 'list'}
+opt.wildmode = { 'longest', 'list' }
 opt.wildignore = {
     '__pycache__',
     '*~',
@@ -141,16 +141,17 @@ opt.wildignore = {
 opt.hidden = true
 opt.title = true
 opt.shortmess = 'atIF'
-opt.statusline = "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column: %c %P]%)"
+opt.statusline =
+    "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column: %c %P]%)"
 
 opt.spelllang = 'en'
 
 opt.termguicolors = true
 opt.background = 'light'
 -- cmd('colorscheme off')
-require("github-theme").setup({
+require('github-theme').setup({
     theme_style = 'light',
-    sidebars = {'qf', 'lf'},
+    sidebars = { 'qf', 'lf' },
     comment_style = 'NONE',
     keyword_style = 'NONE',
     function_style = 'NONE',
@@ -162,9 +163,9 @@ require("github-theme").setup({
     transparent = true,
     overrides = function(c)
         return {
-            Conceal = {fg = c.fg}
+            Conceal = { fg = c.fg },
         }
-    end
+    end,
 })
 opt.colorcolumn = '89'
 
@@ -187,7 +188,7 @@ snippy.setup({
 
 local treesitterConfigs = require('nvim-treesitter.configs')
 treesitterConfigs.setup({
-    ensure_installed = {'go', 'lua', 'python', 'c', 'query'},
+    ensure_installed = { 'go', 'lua', 'python', 'c', 'query' },
     sync_install = false,
     highlight = {
         enable = true,
@@ -207,16 +208,16 @@ treesitterConfigs.setup({
             enable = true,
             set_jumps = true, -- place jumps in the jumplist
             goto_next_start = {
-                ["]m"] = "@function.outer",
+                [']m'] = '@function.outer',
             },
             goto_next_end = {
-                ["]M"] = "@function.outer",
+                [']M'] = '@function.outer',
             },
             goto_previous_start = {
-                ["[m"] = "@function.outer",
+                ['[m'] = '@function.outer',
             },
             goto_previous_end = {
-                ["[M"] = "@function.outer",
+                ['[M'] = '@function.outer',
             },
         },
     },
@@ -249,3 +250,4 @@ indentBlankline.setup({
 require('filetypes')
 require('usercommands')
 require('autocommands')
+require('mappings')

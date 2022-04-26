@@ -7,13 +7,17 @@ local telemachus_augroup = augroup('TelemachusAugroup', { clear = true })
 
 -- From :help incsearch. This should be the default.
 autocmd('CmdlineEnter', {
-    pattern = {'/', '?'},
-    callback = function() opt.hlsearch = true end,
+    pattern = { '/', '?' },
+    callback = function()
+        opt.hlsearch = true
+    end,
     group = telemachus_augroup,
 })
 autocmd('CmdlineLeave', {
-    pattern = {'/', '?'},
-    callback = function() opt.hlsearch = false end,
+    pattern = { '/', '?' },
+    callback = function()
+        opt.hlsearch = false
+    end,
     group = telemachus_augroup,
 })
 
@@ -31,7 +35,7 @@ autocmd('FocusGained', {
 
 local format = require('refinery').format
 local goimports = function()
-    format('goimports', {'-w'})
+    format('goimports', { '-w' })
 end
 
 autocmd('BufWritePre', {
@@ -48,12 +52,16 @@ autocmd('User', {
 
 autocmd('QuickFixCmdPost', {
     pattern = '[^l]*',
-    callback = function() cmd('cwindow') end,
+    callback = function()
+        cmd('cwindow')
+    end,
     group = telemachus_augroup,
 })
 
 autocmd('QuickFixCmdPost', {
     pattern = 'l*',
-    callback = function() cmd('lwindow') end,
+    callback = function()
+        cmd('lwindow')
+    end,
     group = telemachus_augroup,
 })
