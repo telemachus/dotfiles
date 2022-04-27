@@ -24,6 +24,9 @@ g.loaded_perl_provider = 0
 g.do_filetype_lua = 1
 g.did_load_filetypes = 0
 
+-- Stop vim-sandwich from stomping on s (sentence) text objects.
+g.textobj_sandwich_no_default_key_mappings = 1
+
 local dont_load = {
     '2html_plugin',
     'getscript',
