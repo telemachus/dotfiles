@@ -1,6 +1,6 @@
 local keymap_set = vim.keymap.set
 local default_opts = { remap = false, silent = true }
-local extended_opts = { remap = false, silent = true, expr = true } 
+local extended_opts = { remap = false, silent = true, expr = true }
 local g = vim.g
 local fn = vim.fn
 
@@ -8,14 +8,14 @@ local fn = vim.fn
 keymap_set('n', '<Leader>t', ':+1,$d<CR>', default_opts)
 
 -- Use |ib| and |ab| for vim-sandwich mappings because *b* reminds me of bun.↲
-keymap_set({'x', 'o'}, 'ib', '<Plug>(textobj-sandwich-auto-i', default_opts)
-keymap_set({'x', 'o'}, 'ab', '<Plug>(textobj-sandwich-auto-a', default_opts)
+keymap_set({ 'x', 'o' }, 'ib', '<Plug>(textobj-sandwich-auto-i', default_opts)
+keymap_set({ 'x', 'o' }, 'ab', '<Plug>(textobj-sandwich-auto-a', default_opts)
 
 -- Properly indent yanked text.
 keymap_set('n', '<Leader>pi', 'p`[v`]=`', default_opts)
 
 -- Use Q for gq.
-keymap_set({'n', 'v'}, 'Q', 'gq', default_opts)
+keymap_set({ 'n', 'v' }, 'Q', 'gq', default_opts)
 
 -- From Practical Vim (ed. 2, page 101):
 --
@@ -56,7 +56,7 @@ keymap_set('n', '<Leader>y', '"+y$', default_opts)
 -- Yank the entire current line into the system clipboard.
 -- keymap_set('n', '<Leader>Y', '0"+y$', default_opts)
 keymap_set('n', '<Leader>Y', function()
-    fn.setreg('+',  fn.getline('.'))
+    fn.setreg('+', fn.getline('.'))
 end, default_opts)
 
 -- Yank the visual selection into the system clipboard.
