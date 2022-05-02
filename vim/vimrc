@@ -92,7 +92,8 @@ set printfont:Consolas
 
 set iskeyword+=-
 
-let g:mapleader=','
+let g:mapleader=' '
+let g:localleader=' '
 
 " Testing these out before adding them to vim-dotfiles
 let g:black_virtualenv = '~/.local/pipx/venvs/black'
