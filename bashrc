@@ -56,16 +56,14 @@ shopt -u histappend
 shopt -s cmdhist
 
 ## Editor settings
-export SVN_EDITOR=vim
-export GIT_EDITOR=vim
-export EDITOR=vim
-export VISUAL=vim
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 export VIMCONFIG="$HOME/.vim"
 export VIMDATA="$HOME/.vim"
 
-export NVIMCONFIG="$HOME/.config/nvim"
-export NVIMDATA="$HOME/.local/share/nvim"
+# export NVIMCONFIG="$HOME/.config/nvim"
+# export NVIMDATA="$HOME/.local/share/nvim"
 
 # Use CDPATH to make life better
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
