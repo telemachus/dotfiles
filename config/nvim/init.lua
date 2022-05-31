@@ -107,9 +107,9 @@ opt.concealcursor = ''
 
 opt.backup = true
 opt.backupcopy = 'yes'
--- opt.backupdir = HOME .. '/.nvim_backups'
+opt.backupdir = HOME .. '/.local/share/nvim/backups'
 opt.undofile = true
--- opt.undodir = HOME .. '/.nvim_undo'
+-- opt.undodir = HOME .. '/.local/share/nvim/undo'
 
 opt.wildmode = { 'longest', 'list' }
 opt.wildignore = {
