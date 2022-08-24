@@ -21,8 +21,8 @@ g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
 
 -- Experiment with filetype.lua and shut off filetype.vim
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
+-- g.do_filetype_lua = 1
+-- g.did_load_filetypes = 0
 
 -- Stop vim-sandwich from stomping on s (sentence) text objects.
 g.textobj_sandwich_no_default_key_mappings = 1
@@ -109,7 +109,7 @@ opt.backup = true
 opt.backupcopy = 'yes'
 opt.backupdir = HOME .. '/.local/share/nvim/backups'
 opt.undofile = true
--- opt.undodir = HOME .. '/.local/share/nvim/undo'
+opt.undodir = HOME .. '/.local/share/nvim/undo'
 
 opt.wildmode = { 'longest', 'list' }
 opt.wildignore = {

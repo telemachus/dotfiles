@@ -152,12 +152,15 @@ PATH="${PATH}:${HOME}/local/neovim/bin"
 # MANPATH="${HOME}/local/neovim/share/man:${MANPATH}"
 
 # pyenv
-export PYENV_ROOT="${HOME}/.pyenv"
-PATH="${PYENV_ROOT}/bin:${PATH}"
-if command -v pyenv 1>/dev/null 2>&1; then
-	eval "$(pyenv init --path)"
-	eval "$(pyenv virtualenv-init -)"
-fi
+# export PYENV_ROOT="${HOME}/.pyenv"
+# PATH="${PYENV_ROOT}/bin:${PATH}"
+# if command -v pyenv 1>/dev/null 2>&1; then
+# 	eval "$(pyenv init --path)"
+# 	eval "$(pyenv virtualenv-init -)"
+# fi
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 # go
 export GOPATH="/Users/telemachus/go"
