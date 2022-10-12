@@ -10,6 +10,7 @@ PYTHON_CONFIG_DIR="/opt/local/Library/Frameworks/Python.framework/Versions/3.10/
 # I can no longer get pyenv, macOS, MacPorts, and vim to get along.
 # For the time being, I’ve stopped using pyenv. I’ll experiment with
 # just MacPorts, virtual environments, and pipx.
+# PYTHON_CONFIG_DIR="/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/config-3.10-darwin"
 # First, install python via pyenv with
 # env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" \
 # 	pyenv install X.Y.Z
