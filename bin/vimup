@@ -6,16 +6,11 @@ VIM_HOME="$HOME/local/vim"
 BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/vim"
 BUILD_SOURCE="${BUILD_FULL}/src"
-PYTHON_CONFIG_DIR="/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib"
-# I can no longer get pyenv, macOS, MacPorts, and vim to get along.
-# For the time being, I’ve stopped using pyenv. I’ll experiment with
-# just MacPorts, virtual environments, and pipx.
-# PYTHON_CONFIG_DIR="/opt/local/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/config-3.10-darwin"
-# First, install python via pyenv with
-# env PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang" \
-# 	pyenv install X.Y.Z
-# See https://github.com/pyenv/pyenv/issues/99#issuecomment-35045985
-# CC=clang is only needed if you have gcc from Homebrew?
+
+# I can no longer get pyenv, macOS, MacPorts, and vim to get along. For the
+# time being, I’ve stopped using pyenv. I’ll experiment with just MacPorts,
+# virtual environments, and pipx.
+PYTHON_CONFIG_DIR="$(python-config --configdir)"
 
 if [ ! -d "$BUILD_ROOT" ]; then
 	mkdir -p "$BUILD_ROOT"
@@ -30,7 +25,7 @@ cd "$BUILD_FULL" || exit 1
 git pull
 
 cd "$BUILD_SOURCE" || exit 1
-make distclean
+make clean distclean
 ./configure --prefix="$VIM_HOME" \
 	--enable-fail-if-missing \
 	--enable-multibyte \

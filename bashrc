@@ -151,11 +151,6 @@ pc="${HOME}/local/passage/share/completions/passage.bash"
 PATH="${PATH}:${HOME}/local/neovim/bin"
 # MANPATH="${HOME}/local/neovim/share/man:${MANPATH}"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # go
 export GOPATH="/Users/telemachus/go"
 export GOBIN="/Users/telemachus/go/bin"
