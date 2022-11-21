@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+port selfupdate && \
+	port upgrade outdated && \
+	port uninstall inactive
+
+port diagnose
+
+# vim: set ts=8 sw=8 tw=0 noet ft=sh :
