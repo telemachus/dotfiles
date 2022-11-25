@@ -5,13 +5,15 @@
 # + don't offer command completion on empty lines
 # + tips for cd: https://bit.ly/3n8uWyn and https://bit.ly/3ek6LJm
 # + set MAILDIR for mu
+# + set NO_COLOR
 shopt -s checkwinsize
 set -o emacs
 shopt -s no_empty_cmd_completion
 complete -d cd
-# shopt -s autocd
+shopt -s autocd
 shopt -s cdspell
 export MAILDIR=$HOME/.maildir
+export NO_COLOR=1
 
 ## Includes
 [[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
