@@ -1,0 +1,238 @@
+author: Author full name? Peter Aronoff
+projFull: Project full name? NewProject
+projShort: Project short name? {{stringstolower .projFull}}
+projRepo: Repo URL? git.sr.ht/~telemachus/{{.projShort}}
+pkg: Application package name? cli
+goVersion: Go version? 1.19
+projDesc: Project description?
+-- {{.projRepo}}/README.md --
+# {{.projFull}}: {{.projDesc}}
+
+**TODO**: expand this README.
+-- {{.projRepo}}/LICENSE.txt --
+BSD 3-Clause License
+
+Copyright (c) {{ timenow.Format "2006" }}, {{ .author }}
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-- {{.projRepo}}/{{.pkg}}/run.go --
+// Package cli organizes and implements a command line program.
+package {{.pkg}}
+
+const (
+	exitSuccess = 0
+	exitFailure = 1
+	appName     = "{{.projShort}}"
+	appVersion  = "v0.0.1"
+	appUsage    = `usage: {{.projShort}} // TODO: write usage.`
+)
+
+// Run creates an App, performs the App's taks, and returns an exit value.
+func Run(args []string) int {
+	app := &App{ExitValue: exitSuccess}
+	/* TODO: choose one of the following and delete the other.
+	cfg := app.ParseFlags(args)
+	app.ParseFlags(args)
+	*/
+
+	// TODO: write the app.
+
+	return app.ExitValue
+}
+-- {{.projRepo}}/{{.pkg}}/app.go --
+package {{.pkg}}
+
+import (
+	"flag"
+	"fmt"
+	"io"
+	"os"
+)
+
+// App stores information about the application's state.
+type App struct {
+	ExitValue     int
+	HelpWanted    bool
+	VersionWanted bool
+	// TODO: add other fields to App as needed.
+}
+
+// NoOp determines whether an App should bail out.
+func (app *App) NoOp() bool {
+	return app.ExitValue != exitSuccess || app.HelpWanted || app.VersionWanted
+}
+/*
+// Cfg stores the program's configuration.
+type Cfg struct {
+	TODO: define or delete Cfg
+}
+*/
+
+// ParseFlags handles flags and options in my finicky way.
+func (app *App) ParseFlags(args []string) {
+	flags := flag.NewFlagSet(appName, flag.ContinueOnError)
+	// Contrary to Go's defaults, I want usage to go to stdout if the user
+	// explicitly asks for help. Therefore, I need to handle the `-help` flag
+	// manually.
+	// See https://github.com/golang/go/issues/41523 for discussion.
+	flags.SetOutput(io.Discard)
+	// The final argument to these functions contains the flag's usage string.
+	// However, I define a custom usage message, so I don't need to define
+	// usage here.
+	// flag treats "-h" like "-help" by default, so I need to catch that too.
+	flags.BoolVar(&app.HelpWanted, "h", false, "")
+	flags.BoolVar(&app.HelpWanted, "help", false, "")
+	flags.BoolVar(&app.VersionWanted, "version", false, "")
+
+	/* TODO: define flags for configuration here or delete this section.
+	var cfg Cfg
+	*/
+
+	err := flags.Parse(args)
+
+	switch {
+	case err != nil:
+		fmt.Fprintf(os.Stderr, "%s: %s\n%s\n", appName, err, appUsage)
+
+		app.ExitValue = exitFailure
+	case app.HelpWanted:
+		fmt.Println(appUsage)
+	case app.VersionWanted:
+		fmt.Printf("%s: %s\n", appName, appVersion)
+	// TODO: add other case statements as needed.
+	}
+
+	/* TODO: return the configuration or delete this block.
+	return &cfg
+	*/
+}
+-- {{.projRepo}}/go.mod --
+module {{.projRepo}}
+
+go {{.goVersion}}
+-- {{.projRepo}}/main.go --
+package main
+
+import (
+	"os"
+
+	"{{.projRepo}}/{{.pkg}}"
+)
+
+func main() {
+	os.Exit({{.pkg}}.Run(os.Args[1:]))
+}
+-- {{.projRepo}}/Makefile --
+.DEFAULT_GOAL := build
+
+fmt:
+	go fmt ./...
+
+lint: fmt
+	golangci-lint run
+
+build: lint
+	go build .
+
+install: build
+	go install .
+
+test:
+	go test -shuffle on ./...
+
+testv:
+	go test -shuffle on -v ./...
+
+clean:
+	$(RM) {{.projShort}}
+
+.PHONY: fmt lint build install test testv clean
+-- {{.projRepo}}/.golangci.yml --
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+  goconst:
+    min-len: 2
+    min-occurrences: 3
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - experimental
+      - opinionated
+      - performance
+      - style
+    disabled-checks:
+      - yodaStyleExpr
+  gomnd:
+    ignored-numbers:
+      '0o644'
+  govet:
+    check-shadowing: true
+  nolintlint:
+    require-explanation: true
+    require-specific: true
+
+linters:
+  disable-all: true
+  enable:
+    - bodyclose
+    - cyclop
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - exhaustive
+    - goconst
+    - gocritic
+    - gofmt
+    - goimports
+    - gomnd
+    - gocyclo
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nolintlint
+    - nakedret
+    - prealloc
+    - predeclared
+    - revive
+    - staticcheck
+    - stylecheck
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+    - wsl
+
+run:
+  issues-exit-code: 1
