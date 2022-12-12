@@ -84,7 +84,7 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
-colorscheme off
+colorscheme github
 set colorcolumn=89
 
 set printoptions:paper:letter,header:0,syntax:n
