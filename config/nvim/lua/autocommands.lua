@@ -33,14 +33,15 @@ autocmd('FocusGained', {
     group = telemachus_augroup,
 })
 
-local format = require('refinery').format
-local goimports = function()
-    format('goimports', { '-w' })
-end
-
 autocmd('BufWritePre', {
     pattern = '*.go',
     command = 'Goimports',
+    group = telemachus_augroup,
+})
+
+autocmd('BufWritePre', {
+    pattern = '*.lua',
+    command = 'Stylua',
     group = telemachus_augroup,
 })
 
