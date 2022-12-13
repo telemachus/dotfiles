@@ -26,7 +26,7 @@ end, { desc = 'Format current file with golines', bar = true })
 
 command('Revive', function(_)
     local old_make = buf_opt.makeprg
-    buf_opt.makeprg = 'revive'
+    buf_opt.makeprg = 'revive -config ~/.revive.toml'
     cmd('silent make')
     buf_opt.makeprg = old_make
 end, { desc = 'Lint with revive', bar = true })
