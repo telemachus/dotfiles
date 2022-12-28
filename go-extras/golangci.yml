@@ -1,6 +1,7 @@
 linters-settings:
   errcheck:
     check-type-assertions: true
+    check-blank: true
   goconst:
     min-len: 2
     min-occurrences: 3
@@ -13,9 +14,6 @@ linters-settings:
       - style
     disabled-checks:
       - yodaStyleExpr
-  gomnd:
-    ignored-numbers:
-      '0o644'
   govet:
     check-shadowing: true
   nolintlint:
@@ -26,19 +24,21 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - cyclop
     - depguard
     - dogsled
     - dupl
     - errcheck
+    - errchkjson
+    - errname
+    - errorlint
     - exportloopref
     - exhaustive
     - goconst
     - gocritic
     - gofmt
+    - gofumpt
     - goimports
     - gomnd
-    - gocyclo
     - gosec
     - gosimple
     - govet
@@ -46,9 +46,9 @@ linters:
     - misspell
     - nolintlint
     - nakedret
+    - nlreturn
     - prealloc
     - predeclared
-    - revive
     - staticcheck
     - stylecheck
     - thelper
@@ -58,7 +58,6 @@ linters:
     - unparam
     - unused
     - whitespace
-    - wsl
 
 run:
   issues-exit-code: 1

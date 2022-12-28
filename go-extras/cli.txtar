@@ -150,9 +150,13 @@ func main() {
 .DEFAULT_GOAL := build
 
 fmt:
-	go fmt ./...
+	golangci-lint run --disable-all --no-config -Egofmt --fix
+	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
-lint: fmt
+revive: fmt
+	revive config $(HOME)/go/extras/revive.toml
+
+lint: revive
 	golangci-lint run
 
 build: lint
@@ -175,6 +179,7 @@ clean:
 linters-settings:
   errcheck:
     check-type-assertions: true
+    check-blank: true
   goconst:
     min-len: 2
     min-occurrences: 3
@@ -187,9 +192,6 @@ linters-settings:
       - style
     disabled-checks:
       - yodaStyleExpr
-  gomnd:
-    ignored-numbers:
-      '0o644'
   govet:
     check-shadowing: true
   nolintlint:
@@ -200,19 +202,20 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - cyclop
     - depguard
     - dogsled
     - dupl
     - errcheck
+    - errchkjson
+    - errname
+    - errorlint
     - exportloopref
     - exhaustive
     - goconst
     - gocritic
-    - gofmt
+    - gofumpt
     - goimports
     - gomnd
-    - gocyclo
     - gosec
     - gosimple
     - govet
@@ -222,7 +225,6 @@ linters:
     - nakedret
     - prealloc
     - predeclared
-    - revive
     - staticcheck
     - stylecheck
     - thelper

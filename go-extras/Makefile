@@ -1,9 +1,13 @@
 .DEFAULT_GOAL := build
 
 fmt:
-	go fmt ./...
+	golangci-lint run --disable-all --no-config -Egofmt --fix
+	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
-lint: fmt
+revive: fmt
+	revive -config $(HOME)/go/extras/revive.toml
+
+lint: revive
 	golangci-lint run
 
 build: lint

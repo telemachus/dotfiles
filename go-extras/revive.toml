@@ -37,5 +37,6 @@ warningCode = 0
 [rule.flag-parameter]
 [rule.modifies-value-receiver]
 [rule.unhandled-error]
+  arguments = ["fmt.Fprintf", "fmt.Fprintln", "fmt.Printf", "fmt.Println"]
 [rule.early-return]
 [rule.defer]
