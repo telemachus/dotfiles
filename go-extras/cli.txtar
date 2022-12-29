@@ -51,7 +51,7 @@ const (
 	appUsage    = `usage: {{.projShort}} // TODO: write usage.`
 )
 
-// Run creates an App, performs the App's taks, and returns an exit value.
+// Run creates an App, performs the App's tasks, and returns an exit value.
 func Run(args []string) int {
 	app := &App{ExitValue: exitSuccess}
 	/* TODO: choose one of the following and delete the other.
@@ -154,7 +154,7 @@ fmt:
 	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
 revive: fmt
-	revive config $(HOME)/go/extras/revive.toml
+	revive -config $(HOME)/go/extras/revive.toml
 
 lint: revive
 	golangci-lint run
