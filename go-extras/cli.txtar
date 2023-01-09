@@ -1,7 +1,7 @@
 author: Author full name? Peter Aronoff
 projFull: Project full name? NewProject
 projShort: Project short name? {{stringstolower .projFull}}
-projRepo: Repo URL? git.sr.ht/~telemachus/{{.projShort}}
+projRepo: Repo URL? github.com/telemachus/{{.projShort}}
 pkg: Application package name? cli
 goVersion: Go version? 1.19
 projDesc: Project description?
