@@ -76,4 +76,7 @@ alias jsonlint='python3 -m json.tool'
 # https://stackoverflow.com/a/4458361/26702
 alias findexecs='find . -type f -perm -a=x'
 
+# daily updates
+alias morning='sudo portup ; neoup ; vimup'
+
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :
