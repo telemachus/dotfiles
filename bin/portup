@@ -4,7 +4,8 @@ set -euo pipefail
 
 port selfupdate && \
 	port upgrade outdated && \
-	port uninstall inactive
+	port uninstall inactive && \
+	port_cutleaves
 
 port diagnose
 
