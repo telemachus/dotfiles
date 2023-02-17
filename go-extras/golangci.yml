@@ -12,8 +12,6 @@ linters-settings:
       - opinionated
       - performance
       - style
-    disabled-checks:
-      - yodaStyleExpr
   govet:
     check-shadowing: true
   nolintlint:
