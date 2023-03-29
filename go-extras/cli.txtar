@@ -3,7 +3,7 @@ projFull: Project full name? NewProject
 projShort: Project short name? {{stringstolower .projFull}}
 projRepo: Repo URL? github.com/telemachus/{{.projShort}}
 pkg: Application package name? cli
-goVersion: Go version? 1.19
+goVersion: Go version? 1.20
 projDesc: Project description?
 -- {{.projRepo}}/README.md --
 # {{.projFull}}: {{.projDesc}}
