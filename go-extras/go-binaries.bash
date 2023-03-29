@@ -11,3 +11,4 @@ go install golang.org/x/tools/cmd/gorename@latest || exit 1
 go install github.com/fatih/motion@latest || exit 1
 go install mvdan.cc/gofumpt@latest || exit 1
 go install github.com/segmentio/golines@latest || exit 1
+go install golang.org/x/tools/cmd/godoc@latest || exit 1
