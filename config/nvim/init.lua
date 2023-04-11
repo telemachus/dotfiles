@@ -153,12 +153,11 @@ opt.termguicolors = true
 opt.background = 'light'
 -- cmd('colorscheme off')
 require('github-theme').setup({
-    theme_style = 'light',
-    sidebars = { 'qf', 'lf' },
     comment_style = 'NONE',
     keyword_style = 'NONE',
     function_style = 'NONE',
     variable_style = 'NONE',
+    sidebars = { 'qf', 'lf' },
     hide_end_of_buffer = false,
     hide_inactive_statusline = false,
     dark_float = true,
@@ -170,6 +169,7 @@ require('github-theme').setup({
         }
     end,
 })
+cmd('colorscheme github_light')
 opt.colorcolumn = '89'
 
 opt.iskeyword = opt.iskeyword + '-'
