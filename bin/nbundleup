@@ -5,20 +5,26 @@ bundle="$HOME/.config/nvim/pack/bundle"
 start="$bundle/start"
 opt="$bundle/opt"
 
-if [[ -d "$start" ]]; then
+if [[ -d $start ]]; then
 	for plugin in "$start/"*
 	do
-		if [[ -d "$plugin/.git" ]]; then
+		# I've pinned github-nvim-theme to v0.0.7 for the time being,
+		# and so we should skip it when updating.
+		if [[ $plugin == $start/github-nvim-theme ]]; then
+			continue
+		fi
+
+		if [[ -d $plugin/.git ]]; then
 			cd "$plugin" || exit
 			git up
 		fi
 	done
 fi
 
-if [[ -d "$opt" ]]; then
+if [[ -d $opt ]]; then
 	for plugin in "$opt/"*
 	do
-		if [[ -d "$plugin/.git" ]]; then
+		if [[ -d $plugin/.git ]]; then
 			cd "$plugin" || exit
 			git up
 		fi

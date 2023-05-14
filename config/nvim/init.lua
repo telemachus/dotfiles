@@ -153,24 +153,17 @@ opt.termguicolors = true
 opt.background = 'light'
 -- cmd('colorscheme off')
 require('github-theme').setup({
-    options = {
-        transparent = false,
-        hide_end_of_buffer = true,
-        hide_nc_statusline = false,
-        styles = {
-            comments = 'NONE',
-            functions = 'NONE',
-            keywords = 'NONE',
-            variables = 'NONE',
-        },
-        darken = {
-            floats = true,
-            sidebars = {
-                enable = true,
-                list = { 'qf', 'lf' },
-            },
-        },
-    },
+    theme_style = 'light',
+    sidebars = { 'qf', 'lf' },
+    comment_style = 'NONE',
+    keyword_style = 'NONE',
+    function_style = 'NONE',
+    variable_style = 'NONE',
+    hide_end_of_buffer = false,
+    hide_inactive_statusline = false,
+    dark_float = true,
+    dark_sidebar = true,
+    transparent = true,
     overrides = function(c)
         return {
             Conceal = { fg = c.fg },
