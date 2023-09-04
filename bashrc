@@ -164,3 +164,8 @@ PATH="${PATH}:${HOME}/.local/bin"
 export PATH
 
 [[ $PS1 && -r $HOME/.cargo/env ]] && source $HOME/.cargo/env
+
+# go lives in $HOME/local/go
+if [[ $PS1 && -d $HOME/local/go/bin ]]; then
+	PATH="${HOME}/local/go/bin:${PATH}"
+fi

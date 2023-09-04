@@ -156,10 +156,10 @@ fmt:
 	golangci-lint run --disable-all --no-config -Egofmt --fix
 	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
-revive: fmt
-	revive -config $(HOME)/go/extras/revive.toml
+vet: fmt
+	go vet ./...
 
-lint: revive
+lint: vet
 	golangci-lint run
 
 build: lint
@@ -175,14 +175,42 @@ testv:
 	go test -shuffle on -v ./...
 
 clean:
-	$(RM) {{.projShort}}
+	go clean -i -r -cache
 
-.PHONY: fmt lint build install test testv clean
+.PHONY: fmt vet lint build install test testv clean
 -- {{.projRepo}}/.golangci.yml --
+run:
+  timeout: 2m
+  issues-exit-code: 1
+  modules-download-mode: readonly
+  format: line-number,stderr
+  skip-dirs:
+    - internal
+
 linters-settings:
+  cyclop:
+    max-complexity: 10
+    package-average: 5
+    skip-tests: false
+  depguard:
+    rules:
+      main:
+        files:
+          - $all
+        deny:
+          - pkg: reflect
+            desc: "avoid reflect"
+      test:
+        files:
+          - $all
+        deny:
+          - pkg: reflect
+            desc: "avoid reflect"
   errcheck:
     check-type-assertions: true
     check-blank: true
+  exhaustive:
+    default-signifies-exhaustive: true
   goconst:
     min-len: 2
     min-occurrences: 3
@@ -193,10 +221,10 @@ linters-settings:
       - opinionated
       - performance
       - style
-    disabled-checks:
-      - yodaStyleExpr
   govet:
     check-shadowing: true
+    shadow:
+      strict: true
   nolintlint:
     require-explanation: true
     require-specific: true
@@ -205,6 +233,7 @@ linters:
   disable-all: true
   enable:
     - bodyclose
+    - cyclop
     - depguard
     - dogsled
     - dupl
@@ -216,28 +245,32 @@ linters:
     - exhaustive
     - goconst
     - gocritic
+    - gofmt
     - gofumpt
     - goimports
-    - gomnd
     - gosec
     - gosimple
     - govet
     - ineffassign
     - misspell
-    - nolintlint
     - nakedret
+    - nilnil
+    - nolintlint
+    - paralleltest
     - prealloc
     - predeclared
+    - reassign
     - staticcheck
     - stylecheck
+    - tagalign
     - thelper
-    - tparallel
-    - typecheck
     - unconvert
     - unparam
-    - unused
+    - usestdlibvars
     - whitespace
-    - wsl
+    - wrapcheck
 
-run:
-  issues-exit-code: 1
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0

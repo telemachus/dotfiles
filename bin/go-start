@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+cp -v "$HOME/Documents/git-repos/dotfiles/go-extras/Makefile" "$PWD"
+cp -v "$HOME/Documents/git-repos/dotfiles/go-extras/golangci.yml" \
+	"$PWD/.golangci.yml"
+
+# If there's no $1, then the default for `go mod init` is fine.
+go mod init "$1"

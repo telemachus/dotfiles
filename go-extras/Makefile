@@ -4,10 +4,7 @@ fmt:
 	golangci-lint run --disable-all --no-config -Egofmt --fix
 	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
-revive: fmt
-	revive -config $(HOME)/go/extras/revive.toml
-
-lint: revive
+lint: fmt
 	golangci-lint run
 
 build: lint
@@ -22,4 +19,7 @@ test:
 testv:
 	go test -shuffle on -v ./...
 
-.PHONY: fmt lint build install test testv
+clean:
+	go clean -i -r -cache
+
+.PHONY: fmt lint build install test testv clean
