@@ -233,7 +233,10 @@ indentBlankline.setup({
     show_current_context_start = true,
 })
 
+require('autoclose').setup()
+
 require('filetypes')
 require('usercommands')
+require('lsp')
 require('autocommands')
 require('mappings')

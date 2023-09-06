@@ -3,6 +3,7 @@ local default_opts = { remap = false, silent = true }
 local extended_opts = { remap = false, silent = true, expr = true }
 local g = vim.g
 local fn = vim.fn
+local diagnostic = vim.diagnostic
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set('n', '<Leader>t', ':+1,$d<CR>', default_opts)
@@ -72,3 +73,9 @@ keymap_set('i', '<C-U>', '<Esc>bgUiWea', default_opts)
 
 -- Make WORD under cursor all uppercase while in normal mode.
 keymap_set('n', '<Leader>u', 'gUiW', default_opts)
+
+-- Mappings for diagnostics.
+keymap_set('n', '[d', diagnostic.goto_prev, default_opts)
+keymap_set('n', ']d', diagnostic.goto_next, default_opts)
+keymap_set('n', '<Leader>do', diagnostic.open_float, default_opts)
+keymap_set('n', '<Leader>dq', diagnostic.setqflist, default_opts)
