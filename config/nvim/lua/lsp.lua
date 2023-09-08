@@ -4,8 +4,9 @@ local cmd = vim.cmd
 local _border = 'single'
 local highlight = vim.api.nvim_set_hl
 
--- Shut off inline diagnostic text.
-diagnostic.config({ virtual_text = false })
+-- Make diagnostics much less noisy by default.
+-- TODO: write a function to toggle (some of?) these settings.
+diagnostic.config({ virtual_text = false, underline = false, signs = false })
 
 -- Add borders to floating windows in the LSP.
 -- Thanks to this post for the code: https://vi.stackexchange.com/a/39075.
