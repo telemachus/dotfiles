@@ -83,23 +83,13 @@ autocmd('FileType', {
         local client = lsp.start({
             name = 'gopls',
             cmd = { 'gopls', 'serve' },
-            filetypes = { 'go', 'gomod' },
+            filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
             root_dir = root_dir,
             single_file_support = true,
             on_attach = on_attach,
-            gofumpt = true,
-            staticcheck = true,
             settings = {
                 gopls = {
-                    analyses = {
-                        nilness = true,
-                        shadow = true,
-                        unreachable = true,
-                        unusedparams = true,
-                        unusedvariable = true,
-                        unusedwrite = true,
-                        useany = true,
-                    },
+                    gofumpt = true,
                 },
             },
         })
