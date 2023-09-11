@@ -68,11 +68,11 @@ autocmd('QuickFixCmdPost', {
 local keymap_set = vim.keymap.set
 local keymap_opts = { remap = false, silent = true, buffer = 0 }
 local on_attach = function(client, bufnr)
-    keymap_set('n', 'gD', lsp.buf.declaration, keymap_opts)
     keymap_set('n', 'gd', lsp.buf.definition, keymap_opts)
     keymap_set('n', 'gs', '<C-w>]', keymap_opts)
     keymap_set('n', 'K', lsp.buf.hover, keymap_opts)
-    keymap_set('n', 'rn', lsp.buf.rename, keymap_opts)
+    keymap_set('n', 'R', lsp.buf.rename, keymap_opts)
+    keymap_set('n', 'T', lsp.buf.type_definition, keymap_opts)
 end
 
 autocmd('FileType', {
@@ -82,7 +82,7 @@ autocmd('FileType', {
         local root_dir = dirname(d)
         local client = lsp.start({
             name = 'gopls',
-            cmd = { 'gopls', 'serve' },
+            cmd = { 'gopls' },
             filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
             root_dir = root_dir,
             single_file_support = true,
@@ -120,6 +120,25 @@ autocmd('BufWritePre', {
     callback = function()
         goimports()
         lsp.buf.format({ async = false })
+    end,
+    group = telemachus_augroup,
+})
+
+-- github.com/VonHeikemen/nvim-lsp-sans-plugins/blob/main/lua/lsp/init.lua
+autocmd('ModeChanged', {
+    pattern = {'n:i', 'v:s'},
+    desc = 'Disable diagnostics while typing',
+    callback = function()
+        diagnostic.disable(0)
+    end,
+    group = telemachus_augroup,
+})
+
+autocmd('ModeChanged', {
+    pattern = {'i:n'},
+    desc = 'Enagle diagnostics after leaving insert mode',
+    callback = function()
+        diagnostic.enable(0)
     end,
     group = telemachus_augroup,
 })
