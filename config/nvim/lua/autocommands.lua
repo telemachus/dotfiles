@@ -6,19 +6,20 @@ local find = vim.fs.find
 local dirname = vim.fs.dirname
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
+local keymap_set = vim.keymap.set
 
-local telemachus_augroup = augroup('TelemachusAugroup', { clear = true })
+local telemachus_augroup = augroup("TelemachusAugroup", { clear = true })
 
 -- From :help incsearch. This should be the default.
-autocmd('CmdlineEnter', {
-    pattern = { '/', '?' },
+autocmd("CmdlineEnter", {
+    pattern = { "/", "?" },
     callback = function()
         opt.hlsearch = true
     end,
     group = telemachus_augroup,
 })
-autocmd('CmdlineLeave', {
-    pattern = { '/', '?' },
+autocmd("CmdlineLeave", {
+    pattern = { "/", "?" },
     callback = function()
         opt.hlsearch = false
     end,
@@ -26,117 +27,94 @@ autocmd('CmdlineLeave', {
 })
 
 -- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
-autocmd('FocusGained', {
-    pattern = '*',
+autocmd("FocusGained", {
+    pattern = "*",
     callback = function()
         opt.cursorline = true
-        cmd('redraw')
-        cmd('sleep 600m')
+        cmd("redraw")
+        cmd("sleep 600m")
         opt.cursorline = false
     end,
     group = telemachus_augroup,
 })
 
-autocmd('BufWritePre', {
-    pattern = '*.lua',
-    command = 'Stylua',
-    group = telemachus_augroup,
-})
-
-autocmd('User', {
-    pattern = 'RefineryFormatPost',
-    command = 'IndentBlanklineRefresh',
-    group = telemachus_augroup,
-})
-
-autocmd('QuickFixCmdPost', {
-    pattern = '[^l]*',
-    callback = function()
-        cmd('cwindow')
+autocmd("BufWritePre", {
+    pattern = { "*.go", "*.lua", "*.rockspec" },
+    callback = function(args)
+        require("conform").format({ bufnr = args.buf })
     end,
     group = telemachus_augroup,
 })
 
-autocmd('QuickFixCmdPost', {
-    pattern = 'l*',
+autocmd("QuickFixCmdPost", {
+    pattern = "[^l]*",
     callback = function()
-        cmd('lwindow')
+        cmd("cwindow")
     end,
     group = telemachus_augroup,
 })
 
-local keymap_set = vim.keymap.set
-local keymap_opts = { remap = false, silent = true, buffer = 0 }
-local on_attach = function(client, bufnr)
-    keymap_set('n', 'gd', lsp.buf.definition, keymap_opts)
-    keymap_set('n', 'gs', '<C-w>]', keymap_opts)
-    keymap_set('n', 'K', lsp.buf.hover, keymap_opts)
-    keymap_set('n', 'R', lsp.buf.rename, keymap_opts)
-    keymap_set('n', 'T', lsp.buf.type_definition, keymap_opts)
-end
-
-autocmd('FileType', {
-    pattern = 'go',
+autocmd("QuickFixCmdPost", {
+    pattern = "l*",
     callback = function()
-        local d = find({ 'go.mod', 'go.work', '.git' }, { upward = true })[1]
-        local root_dir = dirname(d)
-        local client = lsp.start({
-            name = 'gopls',
-            cmd = { 'gopls' },
-            filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-            root_dir = root_dir,
-            single_file_support = true,
-            on_attach = on_attach,
-            settings = {
-                gopls = {
-                    gofumpt = true,
-                },
-            },
-        })
-        lsp.buf_attach_client(0, client)
+        cmd("lwindow")
     end,
     group = telemachus_augroup,
 })
 
+autocmd("LspAttach", {
+    callback = function(ev)
+        local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
+        keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
+        keymap_set("n", "gs", "<C-w>]", keymap_opts)
+        keymap_set("n", "K", lsp.buf.hover, keymap_opts)
+        keymap_set("n", "R", lsp.buf.rename, keymap_opts)
+        keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
+    end,
+})
+
+-- If wait_ms is nil, vim.lsp.buf_request_sync defaults to 1000ms.
 local goimports = function(wait_ms)
-    wait_ms = wait_ms or 1000
-    local params = lsp.util.make_range_params()
-    params.context = { only = { 'source.organizeImports' } }
+    local params = vim.lsp.util.make_range_params()
+    params.context = { only = { "source.organizeImports" } }
     local result =
-        lsp.buf_request_sync(0, 'textDocument/codeAction', params, wait_ms)
-    for _, res in pairs(result or {}) do
+        vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+    for cid, res in pairs(result or {}) do
         for _, r in pairs(res.result or {}) do
             if r.edit then
-                lsp.util.apply_workspace_edit(r.edit, 'UTF-8')
-            else
-                lsp.buf.execute_command(r.command)
+                local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding
+                    or "utf-16"
+                vim.lsp.util.apply_workspace_edit(r.edit, enc)
             end
         end
     end
 end
 
-autocmd('BufWritePre', {
-    pattern = '*.go',
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*.go",
     callback = function()
+        -- goimports defaults to a 1000ms timeout. Depending on your machine and
+        -- codebase, you may want longer. Add an argument (e.g., 2000 or more) if
+        -- you find that you have to write the file twice for changes to be saved.
         goimports()
-        lsp.buf.format({ async = false })
+        -- lsp.buf.format({ async = false })
     end,
     group = telemachus_augroup,
 })
 
 -- github.com/VonHeikemen/nvim-lsp-sans-plugins/blob/main/lua/lsp/init.lua
-autocmd('ModeChanged', {
-    pattern = {'n:i', 'v:s'},
-    desc = 'Disable diagnostics while typing',
+autocmd("ModeChanged", {
+    pattern = { "n:i", "v:s" },
+    desc = "Disable diagnostics while typing",
     callback = function()
         diagnostic.disable(0)
     end,
     group = telemachus_augroup,
 })
 
-autocmd('ModeChanged', {
-    pattern = {'i:n'},
-    desc = 'Enagle diagnostics after leaving insert mode',
+autocmd("ModeChanged", {
+    pattern = { "i:n" },
+    desc = "Enagle diagnostics after leaving insert mode",
     callback = function()
         diagnostic.enable(0)
     end,

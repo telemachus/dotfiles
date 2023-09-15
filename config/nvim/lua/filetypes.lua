@@ -5,11 +5,11 @@ filetype({
     extension = {
         -- Taken from https://bit.ly/3xyaUEr
         h = function(_, _)
-            if search('\\C^#include <[^>.]\\+>$', 'nw') ~= 0 then
-                return 'cpp'
+            if search("\\C^#include <[^>.]\\+>$", "nw") ~= 0 then
+                return "cpp"
             end
-            return 'c'
+            return "c"
         end,
-        rockspec = 'lua',
+        rockspec = "lua",
     },
 })
