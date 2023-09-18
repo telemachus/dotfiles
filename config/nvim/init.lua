@@ -25,7 +25,7 @@ g.loaded_perl_provider = 0
 -- g.did_load_filetypes = 0
 
 -- Stop vim-sandwich from stomping on s (sentence) text objects.
-g.textobj_sandwich_no_default_key_mappings = 1
+-- g.textobj_sandwich_no_default_key_mappings = 1
 
 local dont_load = {
     "2html_plugin",
@@ -51,6 +51,32 @@ local dont_load = {
 for _, plugin in pairs(dont_load) do
     g["loaded_" .. plugin] = 1
 end
+
+require("paq")({
+    "savq/paq-nvim",
+    "dcampos/nvim-snippy",
+    "dstein64/vim-startuptime",
+    "farmergreg/vim-lastplace",
+    "kylechui/nvim-surround",
+    "lambdalisue/suda.vim",
+    "lukas-reineke/indent-blankline.nvim",
+    "m4xshen/autoclose.nvim",
+    "neovim/nvim-lspconfig",
+    "numToStr/Comment.nvim",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-treesitter/nvim-treesitter",
+    {
+        "https://github.com/telemachus/github-nvim-theme",
+        branch = "pinned",
+        pin = true,
+    },
+    "https://github.com/stevearc/conform.nvim",
+    "https://github.com/tpope/vim-markdown",
+    "https://github.com/tpope/vim-repeat",
+})
+
+-- https://github.com/dstein64/vim-startuptime
+g.startuptime_tries = 10
 
 cmd("syntax enable")
 cmd("filetype plugin indent on")
@@ -192,7 +218,20 @@ require("snippy").setup({
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 require("nvim-treesitter.configs").setup({
-    ensure_installed = { "go", "lua", "python", "c", "query" },
+    ensure_installed = {
+        "c",
+        "css",
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
+        "html",
+        "lua",
+        "python",
+        "query",
+        "vim",
+        "vimdoc",
+    },
     sync_install = false,
     highlight = {
         enable = true,
@@ -203,7 +242,7 @@ require("nvim-treesitter.configs").setup({
             enable = true,
             lookahead = true,
             keymaps = {
-                ["aF"] = "@fullfunction",
+                ["aF"] = "@fullfunc",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
             },
@@ -230,7 +269,6 @@ require("nvim-treesitter.configs").setup({
 -- https://github.com/lukas-reineke/indent-blankline.nvim.git
 require("indent_blankline").setup({
     show_current_context = true,
-    show_current_context_start = true,
 })
 
 -- https://github.com/stevearc/conform.nvim.git
@@ -243,13 +281,23 @@ require("conform").setup({
 
 -- https://github.com/neovim/nvim-lspconfig.git
 require("lspconfig").gopls.setup({
-    settings = {
-        gofumpt = true,
-    },
+    settings = { gofumpt = true },
 })
 
 -- https://github.com/m4xshen/autoclose.nvim.git
-require("autoclose").setup()
+require("autoclose").setup({ options = { disable_command_mode = true } })
+
+-- https://github.com/numToStr/Comment.nvim.git
+require("Comment").setup({})
+
+-- https://github.com/kylechui/nvim-surround.git
+require("nvim-surround").setup({
+    keymaps = {
+        normal = "sa",
+        delete = "sd",
+        change = "sr",
+    },
+})
 
 require("filetypes")
 require("lsp")
