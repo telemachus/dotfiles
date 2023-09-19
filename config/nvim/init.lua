@@ -52,28 +52,8 @@ for _, plugin in pairs(dont_load) do
     g["loaded_" .. plugin] = 1
 end
 
-require("paq")({
-    "savq/paq-nvim",
-    "dcampos/nvim-snippy",
-    "dstein64/vim-startuptime",
-    "farmergreg/vim-lastplace",
-    "kylechui/nvim-surround",
-    "lambdalisue/suda.vim",
-    "lukas-reineke/indent-blankline.nvim",
-    "m4xshen/autoclose.nvim",
-    "neovim/nvim-lspconfig",
-    "numToStr/Comment.nvim",
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/nvim-treesitter",
-    {
-        "https://github.com/telemachus/github-nvim-theme",
-        branch = "pinned",
-        pin = true,
-    },
-    "https://github.com/stevearc/conform.nvim",
-    "https://github.com/tpope/vim-markdown",
-    "https://github.com/tpope/vim-repeat",
-})
+packages = require("packages")
+require("paq")(packages)
 
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10

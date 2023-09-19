@@ -1,0 +1,21 @@
+return {
+    "dcampos/nvim-snippy",
+    "dstein64/vim-startuptime",
+    "farmergreg/vim-lastplace",
+    "kylechui/nvim-surround",
+    "lambdalisue/suda.vim",
+    "lukas-reineke/indent-blankline.nvim",
+    "m4xshen/autoclose.nvim",
+    "neovim/nvim-lspconfig",
+    "numToStr/Comment.nvim",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-treesitter/nvim-treesitter",
+    {
+        "https://github.com/telemachus/github-nvim-theme",
+        branch = "pinned",
+        pin = true,
+    },
+    "https://github.com/stevearc/conform.nvim",
+    "https://github.com/tpope/vim-markdown",
+    "https://github.com/tpope/vim-repeat",
+}
