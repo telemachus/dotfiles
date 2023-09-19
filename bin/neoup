@@ -35,5 +35,8 @@ rm -rf "$NEO_HOME" || \
 	{ printf >&2 "Early exit: can't remove old %s\n" "$NEO_HOME" ; exit 1 ; }
 make install
 
-nbundleup
+# nbundleup
+nvim --headless -u NONE -c 'lua require("headless").install()'
+nvim --headless -u NONE -c 'lua require("headless").update()'
+nvim --headless -u NONE -c 'lua require("headless").clean()'
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :

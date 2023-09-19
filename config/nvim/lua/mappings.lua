@@ -5,6 +5,12 @@ local g = vim.g
 local fn = vim.fn
 local diagnostic = vim.diagnostic
 
+-- Text objects for lines.
+keymap_set("x", "il", "g_o^", default_opts)
+keymap_set("o", "il", ":normal vil<CR>", default_opts)
+keymap_set("x", "al", "$o0", default_opts)
+keymap_set("o", "al", ":normal val<CR>", default_opts)
+
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 

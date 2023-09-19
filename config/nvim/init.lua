@@ -199,6 +199,7 @@ require("snippy").setup({
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
+        "bash",
         "c",
         "css",
         "go",
