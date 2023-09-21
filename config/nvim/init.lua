@@ -20,32 +20,15 @@ g.loaded_node_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
 
--- Experiment with filetype.lua and shut off filetype.vim
--- g.do_filetype_lua = 1
--- g.did_load_filetypes = 0
-
--- Stop vim-sandwich from stomping on s (sentence) text objects.
--- g.textobj_sandwich_no_default_key_mappings = 1
-
 local dont_load = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
     "gzip",
-    "logipat",
-    "logiPat",
-    -- 'matchparen',
-    "netrwFileHandlers",
+    "matchit",
+    "matchparen",
     "netrwPlugin",
-    "netrwSettings",
-    "rrhelper",
-    "sql_completion",
-    "syntaxcompletion",
-    "loaded_tar",
-    "loaded_tarPlugin",
-    "loaded_vimball",
-    "loaded_vimballPlugin",
-    "zip",
+    "rplugin",
+    "tarPlugin",
+    "tohtml",
+    "tutor",
     "zipPlugin",
 }
 for _, plugin in pairs(dont_load) do

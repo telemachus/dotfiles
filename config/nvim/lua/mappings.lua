@@ -17,7 +17,8 @@ keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 -- Use |ib| and |ab| for vim-sandwich mappings because *b* reminds me of bun.↲
 -- keymap_set({ "x", "o" }, "ib", "<Plug>(textobj-sandwich-auto-i)", default_opts)
 -- keymap_set({ "x", "o" }, "ab", "<Plug>(textobj-sandwich-auto-a)", default_opts)
--- Properly indent yanked text. keymap_set("n", "<Leader>pi", "p`[v`]=`", default_opts)
+-- Properly indent yanked text.
+keymap_set("n", "<Leader>pi", "p`[v`]=`", default_opts)
 
 -- Use Q for gq.
 keymap_set({ "n", "v" }, "Q", "gq", default_opts)
