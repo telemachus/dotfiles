@@ -11,12 +11,20 @@ keymap_set("o", "il", ":normal vil<CR>", default_opts)
 keymap_set("x", "al", "$o0", default_opts)
 keymap_set("o", "al", ":normal val<CR>", default_opts)
 
+-- Text objects for the entire document.
+keymap_set(
+    "x",
+    "ie",
+    ":<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z",
+    default_opts
+)
+keymap_set("o", "ie", ":<C-u>normal vie<CR>", default_opts)
+keymap_set("x", "ae", "GoggV", default_opts)
+keymap_set("o", "ae", ":<C-u>normal vae<CR>", default_opts)
+
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 
--- Use |ib| and |ab| for vim-sandwich mappings because *b* reminds me of bun.↲
--- keymap_set({ "x", "o" }, "ib", "<Plug>(textobj-sandwich-auto-i)", default_opts)
--- keymap_set({ "x", "o" }, "ab", "<Plug>(textobj-sandwich-auto-a)", default_opts)
 -- Properly indent yanked text.
 keymap_set("n", "<Leader>pi", "p`[v`]=`", default_opts)
 
