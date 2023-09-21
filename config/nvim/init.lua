@@ -261,9 +261,7 @@ require("conform").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig.git
-require("lspconfig").gopls.setup({
-    settings = { gofumpt = true },
-})
+require("lspconfig").gopls.setup({ settings = { gofumpt = true } })
 
 -- https://github.com/m4xshen/autoclose.nvim.git
 require("autoclose").setup({ options = { disable_command_mode = true } })
