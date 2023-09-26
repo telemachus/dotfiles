@@ -41,19 +41,19 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
-cmd("syntax enable")
-cmd("filetype plugin indent on")
-opt.autoindent = true
-opt.backspace = "indent,eol,start"
-opt.history = 500
+-- cmd("syntax enable")
+-- cmd("filetype plugin indent on")
+-- opt.autoindent = true
+-- opt.backspace = "indent,eol,start"
+-- opt.history = 500
 opt.scrolloff = 0
 opt.number = false
 opt.mouse = ""
 
-opt.ruler = true
+-- opt.ruler = true
 opt.showcmd = true
 opt.showmode = true
-opt.laststatus = 2
+-- opt.laststatus = 2
 
 opt.shell = "bash"
 
@@ -130,7 +130,7 @@ opt.wildignore = {
     "*/build/*",
 }
 
-opt.hidden = true
+-- opt.hidden = true
 opt.title = true
 opt.shortmess = "atIF"
 opt.statusline =
@@ -247,7 +247,25 @@ require("conform").setup({
 require("lspconfig").gopls.setup({ settings = { gofumpt = true } })
 
 -- https://github.com/m4xshen/autoclose.nvim.git
-require("autoclose").setup({ options = { disable_command_mode = true } })
+require("autoclose").setup({
+    options = {
+        -- disable_command_mode = true,
+    },
+    keys = {
+        ["“"] = {
+            close = true,
+            escape = false,
+            pair = { "“", "”" },
+            enabled_filetypes = { "markdown", "text", "mail" },
+        },
+        ["”"] = {
+            close = false,
+            escape = true,
+            pair = { "“", "”" },
+            enabled_filetypes = { "markdown", "text", "mail" },
+        },
+    },
+})
 
 -- https://github.com/numToStr/Comment.nvim.git
 require("Comment").setup({})
