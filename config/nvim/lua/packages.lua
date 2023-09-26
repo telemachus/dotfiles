@@ -5,12 +5,16 @@ return {
     "kylechui/nvim-surround",
     "lambdalisue/suda.vim",
     "lukas-reineke/indent-blankline.nvim",
-    "m4xshen/autoclose.nvim",
+    -- "m4xshen/autoclose.nvim",
     "neovim/nvim-lspconfig",
     "numToStr/Comment.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter",
     "stevearc/conform.nvim",
+    {
+        "telemachus/autoclose.nvim",
+        branch = "multibyte",
+    },
     {
         "telemachus/github-nvim-theme",
         branch = "pinned",
