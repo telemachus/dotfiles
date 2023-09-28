@@ -180,6 +180,7 @@ require("snippy").setup({
 })
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
+-- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 require("nvim-treesitter.configs").setup({
     ensure_installed = {
         "bash",
