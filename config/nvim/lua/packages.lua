@@ -4,7 +4,10 @@ return {
     "farmergreg/vim-lastplace",
     "kylechui/nvim-surround",
     "lambdalisue/suda.vim",
-    "lukas-reineke/indent-blankline.nvim",
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        pin = true,
+    },
     -- "m4xshen/autoclose.nvim",
     "neovim/nvim-lspconfig",
     "numToStr/Comment.nvim",
