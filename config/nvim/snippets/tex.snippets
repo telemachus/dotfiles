@@ -1,0 +1,76 @@
+snippet begin "\begin{}…\end{}" b
+	\begin{${1:something}}
+		${2:${VISUAL}}
+	\end{$1}$0
+snippet enum "\begin{enumerate}…\end{enumerate}" b
+	\begin{enumerate}
+		\item $1
+	\end{enumerate}$0
+snippet itemize "\begin{itemize}…\end{itemize}" b
+	\begin{itemize}
+		\item $1
+	\end{itemize}$0
+snippet desc "\begin{description}…\end{description}" b
+	\begin{description}
+		\item[$1] $2
+	\end{description}$0
+snippet item "\item" b
+	\item $0
+snippet chapter "\chapter{}" b
+	\chapter{${1:chapter name}}$0
+snippet up "\usepackage" b
+	\usepackage[${1:options}]{${2:package}}$0
+snippet it "\textit{}" w
+	\textit{${1:${VISUAL}}}$0
+snippet bf "\textbf{}" w
+	\textbf{${1:${VISUAL}}}$0
+snippet gr "\textgreek{}" w
+	\textgreek{${1:${VISUAL}}}$0
+snippet section "\section{}" b
+	\section{${1:${VISUAL:section name}}}$0
+snippet section* "\section*{}" b
+	\section*{${1:${VISUAL:section name}}}$0
+snippet subsec "\subsection{}" b
+	\subsection{${1:${VISUAL:subsection name}}}$0
+snippet subsec* "\subsection*{}" b
+	\subsection*{${1:${VISUAL:subsection name}}}%
+snippet ssubsec "\subsubsection{}" b
+	\subsubsection{${1:${VISUAL:subsubsection name}}}$0
+snippet ssubsec* "\subsubsection*{}" b
+	\subsubsection*{${1:${VISUAL:subsubsection name}}}$0
+snippet fc "\footcite[][]{}" w
+	\footcite[${1:pre text}][${2:post text}]{${3:citation}}${0}
+snippet fn "\footnote" w
+	\footnote{${1}}${0}
+snippet fold "Make a fold [[-,-]]" b
+	% [[- ${1:label}
+	${2:${VISUAL}}
+	% -]] $1$0
+snippet foldsec "Make a fold with a section [[-,-]]" b
+	% [[- ${1:label}
+	\section{$1}
+
+	${2:${VISUAL}}
+	% -]] $1$0
+snippet foldsubsec "Make a fold with a subsection [[-,-]]" b
+	% [[- ${1:label}
+	\subsection{$1}
+
+	${2:${VISUAL}}
+	% -]] $1$0
+snippet foldsec* "Make a fold with a section* [[-,-]]" b
+	% [[- ${1:label}
+	\section*{$1}
+
+	${2:${VISUAL}}
+	% -]] $1$0
+snippet foldsubsec* "Make a fold with a subsection* [[-,-]]" b
+	% [[- ${1:label}
+	\subsection*{$1}
+
+	${2:${VISUAL}}
+	% -]] $1$0
+snippet tq "\textquote[<citation>][<punctuation>]{<quote>}" w
+	\textquote[${2:citation}][${3:punctuation}]{${1:quote${VISUAL}}}$0
+snippet eq "\enquote{<quote>}" w
+	\enquote{${1:quote${VISUAL}}}$0

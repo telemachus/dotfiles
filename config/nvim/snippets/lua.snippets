@@ -1,0 +1,60 @@
+snippet #!
+	#!/usr/bin/env lua
+snippet l=
+	local ${1:x} = ${0:1}
+snippet func
+	function ${1:fname}(${2})
+		${3:-- body}
+	end
+snippet lfunc
+	local function ${1:name}(${2})
+		${3:-- body}
+	end
+snippet lfunc=
+	local ${1:name} = function(${2})
+		${3:-- body}
+	end
+snippet mirror
+	local ${1:name} = $1
+snippet for
+	for ${1:i}=${2:1},${3:10} do
+		${4:-- body}
+	end
+snippet fori
+	for ${1:i},${2:v} in ipairs(${3:table}) do
+		${4:-- body}
+	end
+snippet forp
+	for ${1:i},${2:v} in pairs(${3:table}) do
+		${4:-- body}
+	end
+snippet fors
+	for ${1:i}=${2:1}, ${3:10}, ${4:step} do
+		${5:-- body}
+	end
+snippet if
+	if ${1:condition} then
+		${2:-- body}
+	end
+snippet ife
+	if ${1:condition} then
+		${2:-- if condition}
+	else
+		${3:-- else}
+	end
+snippet elif
+	elseif ${1:condition} then
+		${0:--body}
+snippet print
+	print('${1:string}')
+snippet r=
+	local ${2:name} = require('${1:module}')
+snippet repeat
+	repeat
+		${1:--body}
+	until ${0:condition}
+snippet while
+	while ${1:condition} do
+		${2:--body}
+	end
+# vim:ft=snippets:

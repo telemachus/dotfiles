@@ -1,0 +1,192 @@
+# package {main}
+snippet pkg "package {main}"
+	package ${1:main}
+# shorthand variable declaration
+snippet : "v := value" b
+	$1 := $2
+# full variable declaration
+snippet var "var name type = expression" b
+	var ${1:name} ${2:type} = ${3:exp}
+# defer
+snippet df "defer someFunction()"
+	defer ${1:func}(${2}) b
+snippet fmt "import fmt" b
+	import "fmt"
+# import
+snippet import "import ( ... )" b
+	import (
+		"$1"$2
+	)
+# string literal
+snippet " "string literal"
+	"$1"$2
+# condition-only for loop (i.e., a while loop)
+snippet while "for condition { ... }" b
+	for ${1:condition} {
+		${2:${VISUAL}}
+	}
+# three-part for loop
+snippet fori "for i := 0; i < N; i++ { ... }" b
+	for ${1:i} := ${2:0}; ${3:$1} ${4:<} ${5:N}; ${6:$1++} {
+		${7:${VISUAL}}
+	}
+
+# three-part for loop with two variables
+snippet forij "for i,j := 0, N; i < N; i, j = x, y { ... }" b
+	for ${1:i}, ${3:j} := ${2:0}, ${4:0}; ${6:$1} ${5:<} ${7:N}; ${8:$1}, ${9:$3} = ${10:$1+1}, ${11:$3-1} {
+		${12:${VISUAL}}
+	}
+# for range loop
+snippet forr "for index, value := range items { ... }" b
+	for ${2:index}, ${3:value} := range ${1} {
+		${4:${VISUAL}}
+	}
+# infinite for loop (i.e., while true)
+snippet forever "for { ... }" b
+	for {
+		$1
+	}
+# map
+snippet map "map[Type]Type"
+	map[${1:string}]${2:int}
+# main()
+snippet main "func main() { ... }" b
+	func main() {
+		${1}
+	}${0}
+snippet cons "constants declaration" b
+	const (
+		${1:constant} ${2:type} = ${3:value}
+	)
+snippet con "constant declaration" b
+	const ${1:name} ${2:type} = ${3:value}
+
+snippet interface "interface declaration" b
+	type ${1:name} interface {
+		$2
+	}
+snippet iota "iota constant generator" b
+	const (
+		${1:constant} ${2:type} = iota
+	)
+snippet if "if statement" b
+	if ${1:condition} {
+		${2:${VISUAL}}
+	}
+snippet switch "switch statement" b
+	switch ${1:expression} {
+	case $2
+	}
+snippet struct "struct declaration" b
+	type ${1:name} struct {
+		$2
+	}
+# define a function
+snippet func "func name(...) [error] { ... }" b
+	func ${1:name}(${2}) ${3} {
+		${4:${VISUAL}}
+	}
+# define a method
+snippet meth "func (self Type) Method(...) [error] { ... }" b
+	func (${1:receiver} ${2:type}) ${3:name}(${4:params}) ${5} {
+		${6:${VISUAL}}
+	}
+# assign an anonymous function to a variable
+# (I need a better name here, but this is brief.)
+snippet anon "name := func(...) [error] { ... }"
+	${1:name} := func(${2:params}) ${3:returns} {
+		${4:${VISUAL}}
+	}
+# error handling
+snippet err "simple error handling" b
+	if err != nil {
+		${1:FIXME}
+	}
+# if with inline error
+snippet ife "if with inline error"
+	if err := ${1:condition}; err != nil {
+		$2
+	}
+# if with inline error and t.Fatalf
+snippet iferrtf "if err: = <something>; err != nil { t.Fatalf }"
+	if err := ${1:condition}; err != nil {
+		t.Fatalf(${2})
+	}
+# init()
+snippet init "func init() { ... }" b
+	func init() {
+		$1
+	}
+# t.Error("message")
+snippet terr "t.Error(...)" b
+	t.Error("${1:message}")
+# t.Errorf("message", args,...)
+snippet terrf "t.Errorf(...)" b
+	t.Errorf("${1:message}", ${2:args,...})
+# t.Fatal("message")
+snippet tfat "t.Fatal(...)" b
+	t.Fatal("${1:message}")
+# t.Fatalf("message", args,...)
+snippet tfatf "t.Fatalf(...)" b
+	t.Fatalf("${1:message}", ${2:args,...})
+# test function
+snippet test "func TestXYZ(t *testing.T) { ... }"
+	func Test${1:Something}(t *testing.T) {
+		t.Parallel()
+		$2
+	}
+# write a helper function for tests
+snippet testHelper "func Name(t testing.TB) { ... }"
+	func ${1:name}(t testing.TB) {
+		${2:t.Helper()}
+		${3:code}
+	}
+# create a map[string]struct of test cases
+snippet testCases "testCases := map[string]struct{ ... }{ ... }" b
+	${1:testCases} := map[string]struct {
+		${2:field} ${3:type}
+	}{
+		${4:message}: {${5:struct}},
+	}
+# call t.Run with an anonymous function
+snippet trun "t.Run(message, func(t *testing.T) { ... })"
+	t.Run(${1:"${2:message}"}, func(t *testing.T) {
+		$3
+	})
+# call t.Run with a named function
+snippet trunn "t.Run(message, functionName)"
+	t.Run(${1:"${2:message}"}, ${3:funcName})${0}
+# benchmark function
+snippet bench "func BenchmarkXYZ(b *testing.B) { ... }"
+	func Benchmark${1:Something}(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			$2
+		}
+	}
+# got != want
+snippet gotwant "if got != want { t.Errorf(...) }"
+	if ${1:got} != ${2:want} {
+		t.Errorf("${3:Function() = [%+v]}; want %${4:[%+v]}", ${1:got}, ${2:want})
+	}
+# do something when a key is not present in a map
+snippet nok "if <key>, ok := <map>[<value>]; !ok { ... }"
+	if ${1:key}, ok := ${2:map}[${3:value}]; !ok {
+		${4}
+	}
+# do something if a key is present in a map
+snippet ok "if <key>, ok := <map>[<value>]; ok { ... }"
+	if ${1:key}, ok := ${2:map}[${3:value}]; ok {
+		${4}
+	}
+# reminder for Go's reference time
+snippet timeref "// 01/02 03:04:05PM '06 -0700" b
+	// Reference time: 01/02 03:04:05PM '06 -0700, aka January 2, 15:04:05, 2006
+# ymd for Go's reference time
+snippet ymd "20060202" w
+	"20060102"
+# y-m-d for Go's reference time
+snippet y-m-d "2006-01-02" w
+	"2006-01-02"
+# End of snippets
+
+# vim:ft=snippets:

@@ -1,0 +1,63 @@
+snippet book "book entry" b
+	@book{ ${1:citation},
+		author = {${2:Last, First}},
+		title = {${3:title}},
+		shorttitle = {${4:short title}},
+		publisher = {${5:publisher}},
+		year = {${6:year}},
+		address = {${7:address}},
+		keywords = {${8:keywords}},
+	}$0
+snippet edbook "edbook entry" b
+	@book{ ${1:citation},
+		editor = {${2:editor}},
+		title = {${3:title}},
+		shorttitle = {${4:short title}},
+		publisher = {${5:publisher}},
+		year = {${6:year}},
+		address = {${7:address}},
+		keywords = {${8:keywords}},
+	}$0
+snippet article "article entry" b
+	@article{ ${1:citation},
+		author = {${2:Last, First}},
+		title = {${3:title}},
+		shorttitle = {${4:short title}},
+		journal = {${5:journal}},
+		year = {${6:year}},
+		volume = {${7:volume}},
+		number = {${8:number}},
+		pages = {${9:pages}},
+		keywords = {${10:keywords}},
+	}$0
+snippet incollection "incollection entry" b
+	@incollection{ ${1:citation},
+		author = {${2:Last, First}},
+		title = {${3:title}},
+		shorttitle = {${4:short title}},
+		pages = {${7:pages}},
+		crossref = {${8:crossref}},
+		keywords = {${9:keywords}},
+	}$0
+snippet misc "misc entry" b
+	@misc { ${1:citation},
+		author = {${2:Last, First}},
+		title = {${3:title}},
+		shorttitle = {${4:short title}},
+		note = {${5:note}},
+		year = ${6:year}},
+		keywords = {${7:keywords}},
+	}$0
+snippet kw "keywords = {},"
+	keywords = {${1:primary}},$0
+snippet cr "crossref = {},"
+	crossref = {${1:crossref}},$0
+snippet st "shorttitle = {},"
+	shortitle = {${1:short title}},$0
+snippet ed "editor = {},"
+	editor = {${1:Last, First}},$0
+snippet en "edition = {},"
+	edition = {${1:edition}},$0
+snippet nt "note = {},"
+	note = {${1:note}},$0
+# vim:ft=snippets:

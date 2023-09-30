@@ -1,0 +1,18 @@
+snippet it "\italics"
+	*${1:${VISUAL}}*
+snippet bf "\bold"
+	**${1:${VISUAL}}**
+snippet cd "\code"
+	\`${1:${VISUAL}}\`
+snippet ` "`code`"
+	\`${1:${VISUAL}}\`
+snippet fcd "\fencedcode" b
+	\`\`\`${1:type}
+	${2:${VISUAL}}
+	\`\`\`$0
+snippet day "\day" b
+	+ In class
+		+ ${1}
+	+ Homework
+		+ ${2}
+# vim:ft=snippets:

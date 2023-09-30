@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 
 set -u
-DOTFILES="${HOME}/Documents/git-repos/dotfiles"
-BASE="${HOME}/.config/nvim"
 
-ln -f -s "${DOTFILES}/config/nvim/init.lua" "${BASE}/init.lua"
+NVIM_DOTFILES="${HOME}/Documents/git-repos/dotfiles/config/nvim"
+NVIM_LINK="${HOME}/.config/nvim"
 
-rm "${BASE}/lua/"*
+if [ ! -d "$NVIM_DOTFILES" ]; then
+	{ printf >&2 "nvim-link: early exit: no [%s]\n" $NVIM_DOTFILES ; exit 1 ; }
+fi
 
-for ITEM in autocommands.lua filetypes.lua headless.lua lsp.lua mappings.lua \
-	packages.lua
-do
-	# Create a symbolic link from x to y. If y already exists, delete it
-	# and create a new symbolic link.
-	ln -f -s "${DOTFILES}/config/nvim/lua/${ITEM}" "${BASE}/lua/${ITEM}"
-done
+# Create a symbolic link from x to y. If y already exists, delete it and create
+# a new symbolic link.
+ln -f -s "$NVIM_DOTFILES" "$NVIM_LINK"

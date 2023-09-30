@@ -1,0 +1,6 @@
+snippet student "a new student entry" b
+	"${1:firstname}.${2:lastname}${3:year}@trinityschoolnyc.org": {
+		"first_name": "${4:${1/.*/\u\0/}}",
+		"last_name": "${5:${2/.*/\u\0/}}"
+	}${6:,}
+# vim:ft=snippets:
