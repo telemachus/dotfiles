@@ -13,6 +13,7 @@ return {
     "numToStr/Comment.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter",
+    "savq/paq-nvim",
     "stevearc/conform.nvim",
     {
         "telemachus/autoclose.nvim",
@@ -23,8 +24,6 @@ return {
         branch = "pinned",
         pin = true,
     },
-    "telemachus/nvim-dotfiles",
-    "tpope/vim-markdown",
     "tpope/vim-repeat",
     "uga-rosa/utf8.nvim",
 }
