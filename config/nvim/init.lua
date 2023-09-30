@@ -209,7 +209,6 @@ require("nvim-treesitter.configs").setup({
             enable = true,
             lookahead = true,
             keymaps = {
-                ["aF"] = "@fullfunc",
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
             },
