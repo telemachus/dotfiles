@@ -191,6 +191,8 @@ require("nvim-treesitter.configs").setup({
         "gosum",
         "gowork",
         "html",
+        "markdown",
+        "markdown_inline",
         "lua",
         "python",
         "query",
