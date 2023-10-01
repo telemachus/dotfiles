@@ -141,7 +141,25 @@ opt.spelllang = "en"
 opt.termguicolors = true
 opt.background = "light"
 -- cmd('colorscheme off')
-require("github-theme").setup({
+
+local safe_require = function(m)
+    ok, loaded_m = pcall(require, m)
+    if not ok then
+        vim.notify(vim.fn.printf("init.lua: error loading %s: %s", m, ok))
+    end
+    return ok, loaded_m
+end
+
+local safe_setup = function(plugin, t)
+    local ok, loaded_p = safe_require(plugin)
+    if not ok then
+        return
+    end
+    loaded_p.setup(t)
+    return ok
+end
+
+local ok = safe_setup("github-theme", {
     theme_style = "light",
     sidebars = { "qf", "lf" },
     comment_style = "NONE",
@@ -159,7 +177,28 @@ require("github-theme").setup({
         }
     end,
 })
-cmd("colorscheme github_light")
+
+-- require("github-theme").setup({
+--     theme_style = "light",
+--     sidebars = { "qf", "lf" },
+--     comment_style = "NONE",
+--     keyword_style = "NONE",
+--     function_style = "NONE",
+--     variable_style = "NONE",
+--     hide_end_of_buffer = false,
+--     hide_inactive_statusline = false,
+--     dark_float = true,
+--     dark_sidebar = true,
+--     transparent = true,
+--     overrides = function(c)
+--         return {
+--             Conceal = { fg = c.fg },
+--         }
+--     end,
+-- })
+if ok then
+    cmd("colorscheme github_light")
+end
 opt.colorcolumn = "89"
 
 opt.iskeyword = opt.iskeyword + "-"
@@ -167,7 +206,7 @@ opt.iskeyword = opt.iskeyword + "-"
 opt.grepprg = "rg --vimgrep --smart-case --"
 
 -- https://github.com/dcampos/nvim-snippy.git
-require("snippy").setup({
+safe_setup("snippy", {
     mappings = {
         is = {
             ["<Tab>"] = "expand_or_advance",
@@ -181,7 +220,7 @@ require("snippy").setup({
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-require("nvim-treesitter.configs").setup({
+safe_setup("nvim-treesitter.configs", {
     ensure_installed = {
         "bash",
         "c",
@@ -233,12 +272,45 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- https://github.com/lukas-reineke/indent-blankline.nvim.git
-require("indent_blankline").setup({
-    show_current_context = true,
+safe_setup("ibl", {
+    indent = { char = "│", tab_char = "│" },
+    scope = {
+        show_start = false,
+        show_end = false,
+        injected_languages = true,
+        highlight = { "IndentBlanklineContextChar" },
+        priority = 1024,
+        include = {
+            node_type = {
+                ["*"] = {
+                    "argument",
+                    "expression",
+                    "for",
+                    "if",
+                    "import",
+                    "type",
+                    "arguments",
+                    "block",
+                    "bracket",
+                    "declaration",
+                    "field",
+                    "func_literal",
+                    "function",
+                    "import_spec_list",
+                    "list",
+                    "return_statement",
+                    "short_var_declaration",
+                    "statement",
+                    "switch_body",
+                    "try",
+                    "block_mapping_pair",
+                },
+            },
+        },
+    },
 })
-
 -- https://github.com/stevearc/conform.nvim.git
-require("conform").setup({
+safe_setup("conform", {
     formatters_by_ft = {
         lua = { "stylua" },
         go = { "gofumpt" },
@@ -246,10 +318,13 @@ require("conform").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig.git
-require("lspconfig").gopls.setup({ settings = { gofumpt = true } })
+local ok, lspconfig = safe_require("lspconfig")
+if ok then
+    lspconfig.gopls.setup({ settings = { gofumpt = true } })
+end
 
 -- https://github.com/m4xshen/autoclose.nvim.git
-require("autoclose").setup({
+safe_setup("autoclose", {
     options = {
         -- disable_command_mode = true,
     },
@@ -270,10 +345,10 @@ require("autoclose").setup({
 })
 
 -- https://github.com/numToStr/Comment.nvim.git
-require("Comment").setup({})
+safe_setup("Comment", {})
 
 -- https://github.com/kylechui/nvim-surround.git
-require("nvim-surround").setup({
+safe_setup("nvim-surround", {
     keymaps = {
         normal = "sa",
         delete = "sd",
@@ -281,7 +356,7 @@ require("nvim-surround").setup({
     },
 })
 
-require("filetypes")
-require("lsp")
-require("autocommands")
-require("mappings")
+safe_require("filetypes")
+safe_require("lsp")
+safe_require("autocommands")
+safe_require("mappings")
