@@ -2,7 +2,6 @@ local lsp = vim.lsp
 local diagnostic = vim.diagnostic
 local cmd = vim.cmd
 local _border = "rounded"
-local highlight = vim.api.nvim_set_hl
 
 -- Make diagnostics much less noisy by default.
 -- TODO: write a function to toggle (some of?) these settings.

@@ -2,8 +2,6 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local opt = vim.opt
 local cmd = vim.cmd
-local find = vim.fs.find
-local dirname = vim.fs.dirname
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
 local keymap_set = vim.keymap.set
@@ -39,7 +37,7 @@ autocmd("FocusGained", {
 })
 
 autocmd("BufWritePre", {
-    pattern = { "*.go", "*.lua", "*.rockspec" },
+    pattern = { "*.go", "*.lua", "*.rockspec", ".luacheckrc" },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
     end,

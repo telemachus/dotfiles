@@ -1,10 +1,7 @@
 -- Lua configuration for neovim
 local HOME = os.getenv("HOME")
-local api = vim.api
 local cmd = vim.cmd
-local fn = vim.fn
 local g = vim.g
-local map = vim.keymap.set
 local opt = vim.opt
 
 g.mapleader = " "
@@ -35,7 +32,7 @@ for _, plugin in pairs(dont_load) do
     g["loaded_" .. plugin] = 1
 end
 
-packages = require("packages")
+local packages = require("packages")
 require("paq")(packages)
 
 -- https://github.com/dstein64/vim-startuptime
@@ -143,7 +140,7 @@ opt.background = "light"
 -- cmd('colorscheme off')
 
 local safe_require = function(m)
-    ok, loaded_m = pcall(require, m)
+    local ok, loaded_m = pcall(require, m)
     if not ok then
         vim.notify(vim.fn.printf("init.lua: error loading %s: %s", m, ok))
     end
@@ -313,7 +310,8 @@ safe_setup("conform", {
 })
 
 -- https://github.com/neovim/nvim-lspconfig.git
-local ok, lspconfig = safe_require("lspconfig")
+local lspconfig
+ok, lspconfig = safe_require("lspconfig")
 if ok then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
 end

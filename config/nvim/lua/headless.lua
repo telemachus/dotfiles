@@ -36,7 +36,7 @@ local function install()
             cmd("quit")
         end,
     })
-    paq, first_install = bootstrap_paq()
+    local paq, first_install = bootstrap_paq()
     -- Read and install packages
     if first_install then
         notify("Installing plugins... If prompted, hit Enter to continue.")
@@ -61,7 +61,7 @@ local function update()
 end
 
 -- paq.clean() is not async, so we don't need an autocommand.
-local function clean(paq)
+local function clean()
     local paq = require("paq")
     local packages = require("packages")
     paq(packages)

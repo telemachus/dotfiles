@@ -1,7 +1,6 @@
 local keymap_set = vim.keymap.set
 local default_opts = { remap = false, silent = true }
 local extended_opts = { remap = false, silent = true, expr = true }
-local g = vim.g
 local fn = vim.fn
 local diagnostic = vim.diagnostic
 
@@ -35,7 +34,7 @@ keymap_set({ "n", "v" }, "Q", "gq", default_opts)
 --
 -- Use %% to get current buffer's directory for :edit, :write, :saveas, :read
 -- and :find.
-cmd = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
+local cmd = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
 keymap_set("c", "%%", cmd, extended_opts)
 
 -- A mapping for the :w !sudo tee % > /dev/null trick.
@@ -60,7 +59,7 @@ keymap_set("n", "[Q", ":cfirst<CR>", default_opts)
 keymap_set("n", "]Q", ":clast<CR>", default_opts)
 
 -- Use my bitly command to shorten URLs.
-local cmd =
+cmd =
     [[c<C-R>=trim(system(['bitly', '-stdout', '-url', trim(getreg('*'))], getreg('"')))<CR><ESC>]]
 keymap_set("v", "<Leader>b", cmd, default_opts)
 
