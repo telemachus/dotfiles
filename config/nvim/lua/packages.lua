@@ -21,6 +21,5 @@ return {
         branch = "pinned",
         pin = true,
     },
-    "tpope/vim-repeat",
     "uga-rosa/utf8.nvim",
 }
