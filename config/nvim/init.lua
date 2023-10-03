@@ -277,9 +277,7 @@ safe_setup("ibl", {
     scope = {
         show_start = false,
         show_end = false,
-        injected_languages = true,
         highlight = { "IndentBlanklineContextChar" },
-        priority = 1024,
         include = {
             node_type = {
                 ["*"] = {
