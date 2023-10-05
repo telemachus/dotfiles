@@ -18,7 +18,6 @@ return {
     },
     {
         "telemachus/github-nvim-theme",
-        branch = "pinned",
         pin = true,
     },
     "uga-rosa/utf8.nvim",
