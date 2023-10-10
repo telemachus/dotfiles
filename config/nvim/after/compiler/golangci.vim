@@ -12,7 +12,7 @@ CompilerSet errorformat=%A%f:%l:%c:\ %m,%-G%.%#
 " %-G = ignore this message
 " %.  = equivalent to . in a regex, meaning any one character
 " %#  = equivalent to * in a regex, meaning any number of times
-" Thus %.%# is errorformat for .* in a regex.
+"       Thus %.%# is errorformat for .* in a regex.
 "
 " In a nutshell, this errorformat says “Grab the first line of output from
-" golangci-lint, and ignore everything else.”
+" each message that golangci-lint produces, and ignore everything else.”

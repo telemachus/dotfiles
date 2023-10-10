@@ -20,5 +20,9 @@ return {
         "telemachus/github-nvim-theme",
         pin = true,
     },
+    {
+        "telemachus/refinery.nvim",
+        branch = "a-new-hope",
+    },
     "uga-rosa/utf8.nvim",
 }
