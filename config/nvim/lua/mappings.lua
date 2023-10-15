@@ -1,14 +1,15 @@
 local keymap_set = vim.keymap.set
 local default_opts = { remap = false, silent = true }
 local extended_opts = { remap = false, silent = true, expr = true }
+local cmd = vim.cmd
 local fn = vim.fn
 local diagnostic = vim.diagnostic
 
 -- Text objects for lines.
 keymap_set("x", "il", "g_o^", default_opts)
-keymap_set("o", "il", ":normal vil<CR>", default_opts)
+keymap_set("o", "il", ":normal! vil<CR>", default_opts)
 keymap_set("x", "al", "$o0", default_opts)
-keymap_set("o", "al", ":normal val<CR>", default_opts)
+keymap_set("o", "al", ":normal! val<CR>", default_opts)
 
 -- Text objects for the entire document.
 keymap_set(
@@ -17,15 +18,19 @@ keymap_set(
     ":<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z",
     default_opts
 )
-keymap_set("o", "ie", ":<C-u>normal vie<CR>", default_opts)
+keymap_set("o", "ie", ":<C-u>normal! vie<CR>", default_opts)
 keymap_set("x", "ae", "GoggV", default_opts)
-keymap_set("o", "ae", ":<C-u>normal vae<CR>", default_opts)
+keymap_set("o", "ae", ":<C-u>normal! vae<CR>", default_opts)
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 
 -- Properly indent yanked text.
-keymap_set("n", "<Leader>pi", "p`[v`]=`", default_opts)
+keymap_set("n", "<Leader>pi", function()
+    cmd(":normal! p`[v`]=`")
+    local bufnr = vim.api.nvim_get_current_buf()
+    require("ibl").debounced_refresh(bufnr)
+end, default_opts)
 
 -- Use Q for gq.
 keymap_set({ "n", "v" }, "Q", "gq", default_opts)
@@ -34,8 +39,8 @@ keymap_set({ "n", "v" }, "Q", "gq", default_opts)
 --
 -- Use %% to get current buffer's directory for :edit, :write, :saveas, :read
 -- and :find.
-local cmd = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
-keymap_set("c", "%%", cmd, extended_opts)
+local ternary_op = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
+keymap_set("c", "%%", ternary_op, extended_opts)
 
 -- A mapping for the :w !sudo tee % > /dev/null trick.
 keymap_set("c", "w!!", "w !sudo tee % > /dev/null", default_opts)
@@ -59,9 +64,9 @@ keymap_set("n", "[Q", ":cfirst<CR>", default_opts)
 keymap_set("n", "]Q", ":clast<CR>", default_opts)
 
 -- Use my bitly command to shorten URLs.
-cmd =
+local bitly_cmd =
     [[c<C-R>=trim(system(['bitly', '-stdout', '-url', trim(getreg('*'))], getreg('"')))<CR><ESC>]]
-keymap_set("v", "<Leader>b", cmd, default_opts)
+keymap_set("v", "<Leader>b", bitly_cmd, default_opts)
 
 -- Yank the rest of the current line into the system clipboard.
 keymap_set("n", "<Leader>y", '"+y$', default_opts)
@@ -87,7 +92,7 @@ keymap_set("i", "<C-U>", "<Esc>bgUiWea", default_opts)
 keymap_set("n", "<Leader>u", "gUiW", default_opts)
 
 -- Mappings for diagnostics.
-keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
-keymap_set("n", "]d", diagnostic.goto_next, default_opts)
-keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
-keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
+-- keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
+-- keymap_set("n", "]d", diagnostic.goto_next, default_opts)
+-- keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
+-- keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
