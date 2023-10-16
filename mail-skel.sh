@@ -8,7 +8,7 @@ do
 done
 
 YEAR="$(date +%Y)"
-for YYYY in $(seq 2009 $YEAR)
+for YYYY in $(seq 2009 "$YEAR")
 do
 	mkdir -v -p "$HOME"/.maildir/archive/"${YYYY}"/{cur,new,tmp}
 done

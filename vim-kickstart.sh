@@ -8,7 +8,7 @@ BUNDLE="$PACK/bundle"
 OPT="$BUNDLE/opt"
 START="$BUNDLE/start"
 
-if [[ -d "$PACK" ]]; then
+if [[ -d $PACK ]]; then
 	printf "Backing up current %s directory to %s/old-vim…\n" \
 		"$PACK" "$HOME"
 	mv -v "$PACK" "$HOME/old-vim"
@@ -19,12 +19,10 @@ mkdir -p "$START"
 mkdir -p "$HOME/.vim_backups"
 mkdir -p "$HOME/.vim_undo"
 if [[ ! -f "$HOME/.vimrc" ]]; then
-    if [[ -f "$DOTFILES/vim/vimrc" ]]; then
-        ln -s "$DOTFILES/vim/vimrc" "$HOME/.vimrc"
-    fi
+	if [[ -f "$DOTFILES/vim/vimrc" ]]; then
+		ln -s "$DOTFILES/vim/vimrc" "$HOME/.vimrc"
+	fi
 fi
-
-CLONE="git clone"
 
 cd "$START" || exit
 
