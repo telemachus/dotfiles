@@ -319,7 +319,7 @@ end
 -- https://github.com/m4xshen/autoclose.nvim.git
 safe_setup("autoclose", {
     options = {
-        -- disable_command_mode = true,
+        disable_command_mode = true,
     },
     keys = {
         ["“"] = {
