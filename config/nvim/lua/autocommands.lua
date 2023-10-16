@@ -3,7 +3,6 @@ local autocmd = vim.api.nvim_create_autocmd
 local opt = vim.opt
 local cmd = vim.cmd
 local lsp = vim.lsp
-local diagnostic = vim.diagnostic
 local keymap_set = vim.keymap.set
 
 local telemachus_augroup = augroup("TelemachusAugroup", { clear = true })
@@ -44,19 +43,9 @@ autocmd("BufWritePre", {
     group = telemachus_augroup,
 })
 
-autocmd("QuickFixCmdPost", {
-    pattern = "[^l]*",
-    callback = function()
-        cmd("cwindow")
-    end,
-    group = telemachus_augroup,
-})
-
-autocmd("QuickFixCmdPost", {
-    pattern = "l*",
-    callback = function()
-        cmd("lwindow")
-    end,
+autocmd("User", {
+    pattern = "RefineryQuickFixCmdPost",
+    command = "cwindow",
     group = telemachus_augroup,
 })
 
@@ -71,50 +60,23 @@ autocmd("LspAttach", {
     end,
 })
 
--- If wait_ms is nil, vim.lsp.buf_request_sync defaults to 1000ms.
-local goimports = function(wait_ms)
-    local params = lsp.util.make_range_params()
-    params.context = { only = { "source.organizeImports" } }
-    local result =
-        lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
-    for cid, res in pairs(result or {}) do
-        for _, r in pairs(res.result or {}) do
-            if r.edit then
-                local enc = (lsp.get_client_by_id(cid) or {}).offset_encoding
-                    or "utf-16"
-                lsp.util.apply_workspace_edit(r.edit, enc)
-            end
-        end
-    end
-end
-
-vim.api.nvim_create_autocmd("BufWritePre", {
+autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
-        -- goimports defaults to a 1000ms timeout. Depending on your machine and
-        -- codebase, you may want longer. Add an argument (e.g., 2000 or more) if
-        -- you find that you have to write the file twice for changes to be saved.
-        goimports()
+        local params = lsp.util.make_range_params()
+        params.context = { only = { "source.organizeImports" } }
+        local result =
+            lsp.buf_request_sync(0, "textDocument/codeAction", params)
+        for cid, res in pairs(result or {}) do
+            for _, r in pairs(res.result or {}) do
+                if r.edit then
+                    local client = lsp.get_client_by_id(cid) or {}
+                    local enc = client.offset_encoding or "utf-16"
+                    lsp.util.apply_workspace_edit(r.edit, enc)
+                end
+            end
+        end
         -- lsp.buf.format({ async = false })
-    end,
-    group = telemachus_augroup,
-})
-
--- github.com/VonHeikemen/nvim-lsp-sans-plugins/blob/main/lua/lsp/init.lua
-autocmd("ModeChanged", {
-    pattern = { "n:i", "v:s" },
-    desc = "Disable diagnostics while typing",
-    callback = function()
-        diagnostic.disable(0)
-    end,
-    group = telemachus_augroup,
-})
-
-autocmd("ModeChanged", {
-    pattern = { "i:n" },
-    desc = "Enagle diagnostics after leaving insert mode",
-    callback = function()
-        diagnostic.enable(0)
     end,
     group = telemachus_augroup,
 })
