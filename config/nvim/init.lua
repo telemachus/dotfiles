@@ -257,27 +257,13 @@ safe_setup("ibl", {
     scope = {
         show_start = false,
         show_end = false,
-        highlight = { "IndentBlanklineContextChar" },
         include = {
             node_type = {
+                -- These two provide visual cues for complex Lua tables, which
+                -- are everywhere in neovim configuration.
                 ["*"] = {
                     "arguments",
-                    "block",
-                    "bracket",
-                    "declaration",
-                    "expression_list",
                     "field",
-                    "for",
-                    "func_literal",
-                    "function",
-                    "if",
-                    "import",
-                    "list",
-                    "return_statement",
-                    "short_var_declaration",
-                    "switch_body",
-                    "try",
-                    "type",
                 },
             },
         },
