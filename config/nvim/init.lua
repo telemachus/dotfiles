@@ -137,7 +137,6 @@ opt.spelllang = "en"
 
 opt.termguicolors = true
 opt.background = "light"
--- cmd('colorscheme off')
 
 local safe_require = function(m)
     local ok, loaded_m = pcall(require, m)
@@ -174,28 +173,12 @@ local ok = safe_setup("github-theme", {
         }
     end,
 })
-
--- require("github-theme").setup({
---     theme_style = "light",
---     sidebars = { "qf", "lf" },
---     comment_style = "NONE",
---     keyword_style = "NONE",
---     function_style = "NONE",
---     variable_style = "NONE",
---     hide_end_of_buffer = false,
---     hide_inactive_statusline = false,
---     dark_float = true,
---     dark_sidebar = true,
---     transparent = true,
---     overrides = function(c)
---         return {
---             Conceal = { fg = c.fg },
---         }
---     end,
--- })
 if ok then
     cmd("colorscheme github_light")
+else
+    cmd("colorscheme off")
 end
+
 opt.colorcolumn = "89"
 
 opt.iskeyword = opt.iskeyword + "-"

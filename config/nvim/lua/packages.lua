@@ -24,5 +24,6 @@ return {
         "telemachus/refinery.nvim",
         branch = "a-new-hope",
     },
+    "telemachus/vim-colors-off",
     "uga-rosa/utf8.nvim",
 }
