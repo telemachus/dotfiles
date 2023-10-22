@@ -81,7 +81,7 @@ opt.expandtab = false
 opt.foldmarker = "{{{,}}}"
 opt.foldlevel = 0
 opt.foldmethod = "marker"
-opt.foldenable = false
+opt.foldenable = true
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -317,6 +317,16 @@ safe_setup("nvim-surround", {
         change = "sr",
     },
 })
+
+-- https://github.com/telemachus/refinery.nvim.git
+vim.g.refinery = {
+    linters = {
+        golangcilint = {},
+        luacheck = {},
+        shellcheck = {},
+        vint = {},
+    },
+}
 
 safe_require("filetypes")
 safe_require("lsp")

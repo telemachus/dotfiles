@@ -1,5 +1,5 @@
 " A few things to get MacVim just right
 set columns=85 lines=40
-set go-=T
-set go-=r
+set guioptions=T
+set guioptions=r
 set guifont=Fantasque\ Sans\ Mono\ Regular:h16
