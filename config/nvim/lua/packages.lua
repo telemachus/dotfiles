@@ -22,7 +22,7 @@ return {
     },
     {
         "telemachus/refinery.nvim",
-        branch = "a-new-hope",
+        branch = "jobstart",
     },
     "telemachus/vim-colors-off",
     "uga-rosa/utf8.nvim",

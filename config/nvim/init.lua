@@ -320,12 +320,7 @@ safe_setup("nvim-surround", {
 
 -- https://github.com/telemachus/refinery.nvim.git
 vim.g.refinery = {
-    linters = {
-        golangcilint = {},
-        luacheck = {},
-        shellcheck = {},
-        vint = {},
-    },
+    linters = { "golangcilint", "luacheck", "shellcheck", "vint" },
 }
 
 safe_require("filetypes")
