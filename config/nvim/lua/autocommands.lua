@@ -49,6 +49,12 @@ autocmd("User", {
     group = telemachus_augroup,
 })
 
+autocmd("User", {
+    pattern = "PaqDone*",
+    command = ":helptags ALL",
+    group = telemachus_augroup,
+})
+
 autocmd("LspAttach", {
     callback = function(ev)
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
