@@ -1,3 +1,7 @@
+vim.opt_local.foldenable = false
+vim.opt_local.foldcolumn = "0"
+vim.opt_local.number = false
+vim.opt_local.relativenumber = false
 vim.opt_local.comments = ""
 vim.opt_local.formatoptions = "1tn"
 vim.opt_local.textwidth = 72

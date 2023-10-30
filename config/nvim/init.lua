@@ -44,7 +44,8 @@ g.startuptime_tries = 10
 -- opt.backspace = "indent,eol,start"
 -- opt.history = 500
 opt.scrolloff = 0
-opt.number = false
+opt.number = true
+opt.relativenumber = true
 opt.mouse = ""
 
 -- opt.ruler = true
@@ -78,10 +79,13 @@ opt.tabstop = 8
 opt.softtabstop = 0
 opt.shiftwidth = 8
 opt.expandtab = false
-opt.foldmarker = "{{{,}}}"
-opt.foldlevel = 0
-opt.foldmethod = "marker"
 opt.foldenable = true
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+opt.foldlevelstart = 0
+opt.foldcolumn = "2"
+opt.fillchars = [[eob: ,fold: ,foldopen:-,foldsep: ,foldclose:+]]
 
 opt.ignorecase = true
 opt.smartcase = true
