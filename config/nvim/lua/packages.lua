@@ -18,7 +18,6 @@ return {
     },
     {
         "telemachus/github-nvim-theme",
-        pin = true,
     },
     {
         "telemachus/refinery.nvim",
