@@ -8,16 +8,16 @@ START_DIR="$(pwd)"
 # First, I need to install MacPorts.
 
 if [ ! -d "$HOME/Documents/git-repos" ]; then
-	mkdir -p "$HOME/Documents/git-repos"
+    mkdir -p "$HOME/Documents/git-repos"
 fi
 
 # TODO: I need to make sure that ssh keys are set before I can do these clones.
 cd "$HOME/Documents/git-repos" || exit
 if [ ! -d "$HOME/Documents/git-repos" ]; then
-	git clone git@telemachus:dotfiles
+    git clone git@telemachus:dotfiles
 else
-	cd "$HOME/projects/dotfiles" || exit
-	git pull origin master
+    cd "$HOME/projects/dotfiles" || exit
+    git pull origin master
 fi
 cd "$HOME" || exit
 

@@ -9,9 +9,9 @@ OPT="$BUNDLE/opt"
 START="$BUNDLE/start"
 
 if [[ -d $PACK ]]; then
-	printf "Backing up current %s directory to %s/old-vim…\n" \
-		"$PACK" "$HOME"
-	mv -v "$PACK" "$HOME/old-vim"
+    printf "Backing up current %s directory to %s/old-vim…\n" \
+        "$PACK" "$HOME"
+    mv -v "$PACK" "$HOME/old-vim"
 fi
 
 mkdir -p "$OPT"
@@ -19,9 +19,9 @@ mkdir -p "$START"
 mkdir -p "$HOME/.vim_backups"
 mkdir -p "$HOME/.vim_undo"
 if [[ ! -f "$HOME/.vimrc" ]]; then
-	if [[ -f "$DOTFILES/vim/vimrc" ]]; then
-		ln -s "$DOTFILES/vim/vimrc" "$HOME/.vimrc"
-	fi
+    if [[ -f "$DOTFILES/vim/vimrc" ]]; then
+        ln -s "$DOTFILES/vim/vimrc" "$HOME/.vimrc"
+    fi
 fi
 
 cd "$START" || exit

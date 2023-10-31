@@ -8,7 +8,6 @@ GO_EXTRAS="${GO_BASE}/extras"
 
 mkdir -p "${GO_BASE}/"{extras,notes,src} || exit 1
 
-for extra in "${DOTFILES}/go-extras/"*
-do
-	ln -s -i "$extra" "${GO_EXTRAS}/${extra##*/}"
+for extra in "${DOTFILES}/go-extras/"*; do
+    ln -s -i "$extra" "${GO_EXTRAS}/${extra##*/}"
 done

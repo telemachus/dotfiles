@@ -25,23 +25,23 @@ export NO_COLOR=1
 
 # MacPorts bash completion
 if [[ $PS1 && -r /opt/local/etc/profile.d/bash_completion.sh ]]; then
-	source /opt/local/etc/profile.d/bash_completion.sh
+    source /opt/local/etc/profile.d/bash_completion.sh
 fi
 
 if [[ $PS1 && -r /opt/local/share/git/contrib/completion/git-prompt.sh ]]; then
-	source /opt/local/share/git/contrib/completion/git-prompt.sh
+    source /opt/local/share/git/contrib/completion/git-prompt.sh
 fi
 
 if [[ $PS1 && -r $HOME/local/exercism/share/exercism_completion.bash ]]; then
-	source $HOME/local/exercism/share/exercism_completion.bash
+    source $HOME/local/exercism/share/exercism_completion.bash
 fi
 
 if [[ $- == *i* && -r /opt/local/share/fzf/shell/completion.bash ]]; then
-	source /opt/local/share/fzf/shell/completion.bash
+    source /opt/local/share/fzf/shell/completion.bash
 fi
 
 if [[ $PS1 && -r /opt/local/share/fzf/shell/key-bindings.bash ]]; then
-	source /opt/local/share/fzf/shell/key-bindings.bash
+    source /opt/local/share/fzf/shell/key-bindings.bash
 fi
 
 ## History settings
@@ -76,7 +76,7 @@ CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME
 
 set_titlebar() {
     case $TERM in
-        *xterm*|ansi|rxvt)
+        *xterm* | ansi | rxvt)
             printf "\033]0;%s\007" "$*"
             ;;
     esac
@@ -123,14 +123,14 @@ export LESS
 # autowrite: automatically write out changes before :next, :prev
 # magic: use regular expressions in searches
 # wrapscan: searches wrap around end of buffer
-# ignorecase: searches ignore alphabetic case 
+# ignorecase: searches ignore alphabetic case
 export \
     LVRC='autoindent autowrite magic wrapscan ignorecase nooverwrite nobell'
 
 # Set PARINIT for par. How did I pick these values?
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 
-#export neatvi='set noshape | set ai | set aw | set ic | set nohl' 
+#export neatvi='set noshape | set ai | set aw | set ic | set nohl'
 
 # MacPorts path help
 CPATH=/opt/local/include:${CPATH}
@@ -167,5 +167,12 @@ export PATH
 
 # go lives in $HOME/local/go
 if [[ $PS1 && -d $HOME/local/go/bin ]]; then
-	PATH="${HOME}/local/go/bin:${PATH}"
+    PATH="${HOME}/local/go/bin:${PATH}"
+fi
+
+# lua lives in $HOME/local/lua
+if [[ $PS1 && -d $HOME/local/lua/bin ]]; then
+    export LUA_PATH='/Users/telemachus/local/lua/share/lua/5.1/?.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/Users/telemachus/.luarocks/share/lua/5.1/?.lua;/Users/telemachus/.luarocks/share/lua/5.1/?/init.lua;/Users/telemachus/local/lua/share/lua/5.1/?/init.lua'
+    export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/Users/telemachus/.luarocks/lib/lua/5.1/?.so;/Users/telemachus/local/lua/lib/lua/5.1/?.so'
+    PATH="${HOME}/local/lua/bin:${PATH}"
 fi
