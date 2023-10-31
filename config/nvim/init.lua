@@ -264,8 +264,15 @@ safe_setup("ibl", {
 -- https://github.com/stevearc/conform.nvim.git
 safe_setup("conform", {
     formatters_by_ft = {
-        lua = { "stylua" },
         go = { "gofumpt" },
+        lua = { "stylua" },
+        python = { "isort", "black" },
+        sh = { "shfmt" },
+    },
+    formatters = {
+        shfmt = {
+            prepend_args = { "-ci", "-s", "-i", "4" },
+        },
     },
 })
 

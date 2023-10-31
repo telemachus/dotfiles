@@ -36,7 +36,7 @@ autocmd("FocusGained", {
 })
 
 autocmd("BufWritePre", {
-    pattern = { "*.go", "*.lua", "*.rockspec", ".luacheckrc" },
+    pattern = { "*" },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
     end,
