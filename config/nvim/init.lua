@@ -72,13 +72,7 @@ opt.tabstop = 8
 opt.softtabstop = 0
 opt.shiftwidth = 8
 opt.expandtab = false
-opt.foldenable = true
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevel = 99
-opt.foldlevelstart = 0
-opt.foldcolumn = "2"
-opt.fillchars = [[eob: ,fold: ,foldopen:-,foldsep: ,foldclose:+]]
+opt.foldenable = false
 
 opt.ignorecase = true
 opt.smartcase = true
