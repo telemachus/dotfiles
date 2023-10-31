@@ -9,8 +9,6 @@ g.localmapleader = " "
 
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
--- g.python_host_skip_check = 1
--- g.python3_host_prog = fn.fnamemodify('~/', ':p') .. '.pyenv/shims/python'
 g.loaded_python_provider = 0
 g.loaded_python3_provider = 0
 g.loaded_node_provider = 0
@@ -38,11 +36,6 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
--- cmd("syntax enable")
--- cmd("filetype plugin indent on")
--- opt.autoindent = true
--- opt.backspace = "indent,eol,start"
--- opt.history = 500
 opt.scrolloff = 0
 opt.number = true
 opt.relativenumber = true
