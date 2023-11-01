@@ -43,6 +43,18 @@ autocmd("BufWritePre", {
     group = telemachus_augroup,
 })
 
+autocmd("QuickFixCmdPost", {
+    pattern = "cgetexpr",
+    command = ":cwindow",
+    group = telemachus_augroup,
+})
+
+autocmd("QuickFixCmdPost", {
+    pattern = "lgetexpr",
+    command = ":lwindow",
+    group = telemachus_augroup,
+})
+
 autocmd("User", {
     pattern = "RefineryQuickFixCmdPost",
     command = "cwindow",
