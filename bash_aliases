@@ -58,9 +58,6 @@ alias words='wc -w'
 # Everything old is new again
 # alias vi='nvim'
 
-# ctrl-l not working
-alias ""=clear
-
 # neomutt > mutt
 alias mutt=neomutt
 
@@ -77,6 +74,6 @@ alias jsonlint='python3 -m json.tool'
 alias findexecs='find . -type f -perm -a=x'
 
 # daily updates
-alias morning='sudo portup ; neoup ; vimup'
+alias morning='sudo portup ; neoup'
 
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :
