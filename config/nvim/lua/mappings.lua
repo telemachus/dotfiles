@@ -42,9 +42,6 @@ keymap_set({ "n", "v" }, "Q", "gq", default_opts)
 local ternary_op = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
 keymap_set("c", "%%", ternary_op, extended_opts)
 
--- A mapping for the :w !sudo tee % > /dev/null trick.
-keymap_set("c", "w!!", "w !sudo tee % > /dev/null", default_opts)
-
 -- From tpope's unimpaired.vim via Practical Vim. NB: I've changed a few.
 keymap_set("n", "[b", ":bprevious<CR>", default_opts)
 keymap_set("n", "]b", ":bnext<CR>", default_opts)

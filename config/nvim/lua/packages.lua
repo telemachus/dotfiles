@@ -16,12 +16,10 @@ return {
         "telemachus/autoclose.nvim",
         branch = "multibyte",
     },
-    {
-        "telemachus/github-nvim-theme",
-    },
+    "telemachus/github-nvim-theme",
     {
         "telemachus/refinery.nvim",
-        branch = "jobstart",
+        branch = "vimsystem-again",
     },
     "telemachus/vim-colors-off",
     "uga-rosa/utf8.nvim",

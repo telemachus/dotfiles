@@ -132,7 +132,7 @@ opt.background = "light"
 local safe_require = function(m)
     local ok, loaded_m = pcall(require, m)
     if not ok then
-        vim.notify(vim.fn.printf("init.lua: error loading %s: %s", m, ok))
+        vim.notify(vim.fn.printf("init.lua: error loading %s", m))
     end
     return ok, loaded_m
 end
@@ -281,6 +281,41 @@ local lspconfig
 ok, lspconfig = safe_require("lspconfig")
 if ok then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
+    lspconfig.lua_ls.setup({
+        on_init = function(client)
+            local path = client.workspace_folders[1].name
+            if
+                not vim.uv.fs_stat(path .. "/.luarc.json")
+                and not vim.uv.fs_stat(path .. "/.luarc.jsonc")
+            then
+                client.config.settings =
+                    vim.tbl_deep_extend("force", client.config.settings, {
+                        Lua = {
+                            runtime = {
+                                version = "LuaJIT",
+                            },
+                            workspace = {
+                                checkThirdParty = false,
+                                library = {
+                                    vim.env.VIMRUNTIME,
+                                    "${3rd}/luv/library",
+                                    "${3rd}/busted/library",
+                                },
+                                -- This pulls in all of 'runtimepath', and it
+                                -- is much slower. Use with caution.
+                                -- library = vim.api.nvim_get_runtime_file("", true)
+                            },
+                        },
+                    })
+
+                client.notify(
+                    "workspace/didChangeConfiguration",
+                    { settings = client.config.settings }
+                )
+            end
+            return true
+        end,
+    })
 end
 
 -- https://github.com/m4xshen/autoclose.nvim.git
@@ -319,6 +354,14 @@ safe_setup("nvim-surround", {
 -- https://github.com/telemachus/refinery.nvim.git
 g.refinery = {
     linters = { "golangcilint", "luacheck", "shellcheck", "vint" },
+    -- For testing refinery.nvim
+    -- linters = {
+    --     golangcilint = {},
+    --     shellcheck = { executable = HOME .. "/bin/shellcheck" },
+    --     luacheck = {},
+    --     vint = {},
+    --     foobar = {},
+    -- },
 }
 
 safe_require("filetypes")

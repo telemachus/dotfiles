@@ -38,6 +38,23 @@
 	logallrefupdates = true
 	whitespace = space-before-tab, trailing-space
 
+[diff]
+	tool = nvimdiff2
+
+[difftool "nvimdiff2"]
+	trustExitCode = true
+	cmd = nvim -d $LOCAL $REMOTE
+
+[merge]
+	tool = nvimdiff4
+
+[mergetool "nvimdiff4"]
+	trustExitCode = true
+	cmd = nvim -d $LOCAL $BASE $REMOVE $MERGED -c '$wincmd w' -c 'wincmd J'
+
+[commit]
+	verbose = true
+
 [color "diff"]
 	meta = blue bold
 	frag = magenta bold
