@@ -68,8 +68,6 @@ autocmd("User", {
 })
 
 local smart_tab = function(direction)
-    local tabs = { "<Tab>", "<S-Tab>" }
-    local completions = { "<C-n>", "<C-p>" }
     if vim.fn.pumvisible() == 0 then
         if direction == -1 then
             return "<S-Tab>"
@@ -89,7 +87,7 @@ local hover_close = function(base_win_id)
         if win_id ~= base_win_id then
             local win_cfg = vim.api.nvim_win_get_config(win_id)
             if win_cfg.relative == "win" and win_cfg.win == base_win_id then
-                vim.api.nvim_win_close(win_id, {})
+                vim.api.nvim_win_close(win_id, false)
                 break
             end
         end
@@ -119,12 +117,6 @@ autocmd("LspAttach", {
     end,
 })
 
-autocmd("LspDetach", {
-    callback = function(ev)
-        vim.command("redraw!")
-    end,
-})
-
 autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
@@ -143,4 +135,10 @@ autocmd("BufWritePre", {
         end
     end,
     group = telemachus_augroup,
+})
+
+autocmd("VimLeave", {
+    callback = function()
+        vim.cmd(":sleep 1m")
+    end,
 })

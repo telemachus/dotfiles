@@ -146,7 +146,7 @@ local safe_setup = function(plugin, t)
     return ok
 end
 
-local ok = safe_setup("github-theme", {
+local theme_loaded = safe_setup("github-theme", {
     theme_style = "light",
     sidebars = { "qf", "lf" },
     comment_style = "NONE",
@@ -164,7 +164,7 @@ local ok = safe_setup("github-theme", {
         }
     end,
 })
-if ok then
+if theme_loaded then
     cmd("colorscheme github_light")
 else
     cmd("colorscheme off")
@@ -263,6 +263,7 @@ safe_setup("ibl", {
 
 -- https://github.com/stevearc/conform.nvim.git
 safe_setup("conform", {
+    -- log_level = vim.log.levels.DEBUG,
     formatters_by_ft = {
         go = { "gofumpt" },
         lua = { "stylua" },
@@ -277,9 +278,8 @@ safe_setup("conform", {
 })
 
 -- https://github.com/neovim/nvim-lspconfig.git
-local lspconfig
-ok, lspconfig = safe_require("lspconfig")
-if ok then
+local lsp_loaded, lspconfig = safe_require("lspconfig")
+if lsp_loaded then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
     lspconfig.lua_ls.setup({
         on_init = function(client)

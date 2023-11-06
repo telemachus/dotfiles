@@ -71,7 +71,8 @@ keymap_set("n", "<Leader>y", '"+y$', default_opts)
 -- Yank the entire current line into the system clipboard.
 -- keymap_set('n', '<Leader>Y', '0"+y$', default_opts)
 keymap_set("n", "<Leader>Y", function()
-    fn.setreg("+", fn.getline("."))
+    local line = fn.line(".")
+    fn.setreg("+", fn.getline(line))
 end, default_opts)
 
 -- Yank the visual selection into the system clipboard.
@@ -89,7 +90,7 @@ keymap_set("i", "<C-U>", "<Esc>bgUiWea", default_opts)
 keymap_set("n", "<Leader>u", "gUiW", default_opts)
 
 -- Mappings for diagnostics.
--- keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
--- keymap_set("n", "]d", diagnostic.goto_next, default_opts)
--- keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
--- keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
+keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
+keymap_set("n", "]d", diagnostic.goto_next, default_opts)
+keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
+keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
