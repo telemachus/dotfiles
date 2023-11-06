@@ -141,7 +141,6 @@ autocmd("BufWritePre", {
                 end
             end
         end
-        -- lsp.buf.format({ async = false })
     end,
     group = telemachus_augroup,
 })
