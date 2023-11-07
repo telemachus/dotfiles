@@ -7,7 +7,8 @@ local keymap_set = vim.keymap.set
 
 local telemachus_augroup = augroup("TelemachusAugroup", { clear = true })
 
--- From :help incsearch. This should be the default.
+-- Highlight searches while searching, but not while moving over matches.
+-- Taken from :help incsearch. This should be the default.
 autocmd("CmdlineEnter", {
     pattern = { "/", "?" },
     callback = function()
@@ -23,6 +24,8 @@ autocmd("CmdlineLeave", {
     group = telemachus_augroup,
 })
 
+-- Highlight cursor line briefly when neovim regains focus.  This helps to
+-- reorient the user and tell them where they are in the buffer.
 -- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
 autocmd("FocusGained", {
     pattern = "*",
@@ -35,6 +38,7 @@ autocmd("FocusGained", {
     group = telemachus_augroup,
 })
 
+-- For conform.nvim: format on save.
 autocmd("BufWritePre", {
     pattern = { "*" },
     callback = function(args)
@@ -43,24 +47,28 @@ autocmd("BufWritePre", {
     group = telemachus_augroup,
 })
 
+-- Open quickfix window automatically. TODO: add items to pattern.
 autocmd("QuickFixCmdPost", {
     pattern = "cgetexpr",
     command = ":cwindow",
     group = telemachus_augroup,
 })
 
+-- Open location list window automatically. TODO: add items to pattern.
 autocmd("QuickFixCmdPost", {
     pattern = "lgetexpr",
     command = ":lwindow",
     group = telemachus_augroup,
 })
 
+-- Open quickfix window after refinery.nvim adds items to it.
 autocmd("User", {
     pattern = "RefineryQuickFixCmdPost",
     command = ":cwindow",
     group = telemachus_augroup,
 })
 
+-- Update helptags after Paq installs or updates plugins.
 autocmd("User", {
     pattern = "PaqDone*",
     command = ":helptags ALL",
@@ -104,6 +112,7 @@ local hover_close = function(base_win_id)
     end
 end
 
+-- Add keybindings to a buffer when LSP attaches.
 autocmd("LspAttach", {
     callback = function(ev)
         vim.g.hover_open = false
@@ -127,6 +136,7 @@ autocmd("LspAttach", {
     end,
 })
 
+-- Call goimports via gopls on write.
 autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
@@ -147,8 +157,11 @@ autocmd("BufWritePre", {
     group = telemachus_augroup,
 })
 
-autocmd("VimLeave", {
+-- Sleep for one millisecond to avoid a current neovim bug.
+-- https://github.com/neovim/neovim/issues/21856
+-- TODO: remove this when the bug is fixed.
+autocmd("VimLeavePre", {
     callback = function()
-        vim.cmd(":sleep 1m")
+        vim.cmd.sleep({ args = { "1m" } })
     end,
 })

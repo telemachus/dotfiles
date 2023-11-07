@@ -3,6 +3,8 @@ local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.cmd
 local notify = vim.notify
 
+---Clone Paq if it is not already present.
+---@return boolean # Was Paq already installed?
 local function clone_paq()
     local path = fn.stdpath("data") .. "/site/pack/paqs/start/paq-nvim"
     local is_installed = fn.empty(vim.fn.glob(path)) == 0
@@ -16,18 +18,26 @@ local function clone_paq()
         })
         return true
     end
+    return false
 end
 
+---Install paq itself if needed and return paq object to install other plugins.
+---@return table|nil paq Paq module
+---@return boolean first_install Whether or not Paq itself was installed
 local function bootstrap_paq()
     local first_install = clone_paq()
     cmd.packadd("paq-nvim")
-    local paq = require("paq")
-    local packages = require("packages")
+    local paq_loaded, paq = pcall(require, "paq")
+    local packages_loaded, packages = pcall(require, "packages")
+    if not paq_loaded or not packages_loaded then
+        return nil, false
+    end
     paq(packages)
     return paq, first_install
 end
 
--- paq.install() is async; use autocommand to wait until it's done.
+---Bootstrap Paq if necessary and install plugins with Paq.
+---paq.install() is async; use autocommand to wait until it's done.
 local function install()
     autocmd("User", {
         pattern = "PaqDoneInstall",
@@ -37,15 +47,17 @@ local function install()
         end,
     })
     local paq, first_install = bootstrap_paq()
-    -- Read and install packages
+    if paq == nil then
+        return
+    end
     if first_install then
         notify("Installing plugins... If prompted, hit Enter to continue.")
     end
     paq.install()
-    return paq
 end
 
--- paq.update() is async; use autocommand to wait until it's done.
+---Update plugins with Paq.
+---paq.update() is async; use autocommand to wait until it's done.
 local function update()
     autocmd("User", {
         pattern = "PaqDoneUpdate",
@@ -54,16 +66,23 @@ local function update()
             cmd("quit")
         end,
     })
-    local paq = require("paq")
-    local packages = require("packages")
+    local paq_loaded, paq = pcall(require, "paq")
+    local packages_loaded, packages = pcall(require, "packages")
+    if not paq_loaded or not packages_loaded then
+        return
+    end
     paq(packages)
     paq.update()
 end
 
--- paq.clean() is not async, so we don't need an autocommand.
+---Remove unregistered plugins with Paq.
+---paq.clean() is not async, so we don't need an autocommand.
 local function clean()
-    local paq = require("paq")
-    local packages = require("packages")
+    local paq_loaded, paq = pcall(require, "paq")
+    local packages_loaded, packages = pcall(require, "packages")
+    if not paq_loaded or not packages_loaded then
+        return
+    end
     paq(packages)
     paq.clean()
     notify(" headless: clean done\n")
