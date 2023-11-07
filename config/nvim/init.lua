@@ -41,10 +41,8 @@ opt.number = true
 opt.relativenumber = true
 opt.mouse = ""
 
--- opt.ruler = true
 opt.showcmd = true
 opt.showmode = true
--- opt.laststatus = 2
 
 opt.shell = "bash"
 
@@ -129,20 +127,27 @@ opt.spelllang = "en"
 opt.termguicolors = true
 opt.background = "light"
 
+---Safely require a module.
+---@param m string
+---@return boolean ok
+---@return table loaded_m
 local safe_require = function(m)
     local ok, loaded_m = pcall(require, m)
     if not ok then
-        vim.notify(vim.fn.printf("init.lua: error loading %s", m))
+        vim.notify(string.format("init.lua: error loading %s", m))
     end
     return ok, loaded_m
 end
 
+---Safely call setup on a plugin.
+---@param plugin string
+---@param t table
+---@return boolean
 local safe_setup = function(plugin, t)
     local ok, loaded_p = safe_require(plugin)
-    if not ok then
-        return
+    if ok then
+        loaded_p.setup(t)
     end
-    loaded_p.setup(t)
     return ok
 end
 
