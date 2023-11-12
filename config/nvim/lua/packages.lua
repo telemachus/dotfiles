@@ -19,7 +19,7 @@ return {
     "telemachus/github-nvim-theme",
     {
         "telemachus/refinery.nvim",
-        branch = "vimsystem-again",
+        branch = "setup",
     },
     "telemachus/vim-colors-off",
     "uga-rosa/utf8.nvim",

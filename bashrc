@@ -16,12 +16,12 @@ export MAILDIR=$HOME/.maildir
 export NO_COLOR=1
 
 ## Includes
-[[ -f $HOME/.bash_aliases ]] && source $HOME/.bash_aliases
+[[ -f $HOME/.bash_aliases ]] && source "$HOME/.bash_aliases"
 
-[[ -f $HOME/.bash_functions ]] && source $HOME/.bash_functions
+[[ -f $HOME/.bash_functions ]] && source "$HOME/.bash_functions"
 
 # Local bash completion
-[[ $PS1 && -f $HOME/.bash_completion ]] && source $HOME/.bash_completion
+[[ $PS1 && -f $HOME/.bash_completion ]] && source "$HOME/.bash_completion"
 
 # MacPorts bash completion
 if [[ $PS1 && -r /opt/local/etc/profile.d/bash_completion.sh ]]; then
@@ -30,18 +30,6 @@ fi
 
 if [[ $PS1 && -r /opt/local/share/git/contrib/completion/git-prompt.sh ]]; then
     source /opt/local/share/git/contrib/completion/git-prompt.sh
-fi
-
-if [[ $PS1 && -r $HOME/local/exercism/share/exercism_completion.bash ]]; then
-    source $HOME/local/exercism/share/exercism_completion.bash
-fi
-
-if [[ $- == *i* && -r /opt/local/share/fzf/shell/completion.bash ]]; then
-    source /opt/local/share/fzf/shell/completion.bash
-fi
-
-if [[ $PS1 && -r /opt/local/share/fzf/shell/key-bindings.bash ]]; then
-    source /opt/local/share/fzf/shell/key-bindings.bash
 fi
 
 ## History settings
@@ -147,7 +135,7 @@ PATH="${HOME}/local/vim/bin:${PATH}"
 # passage lives in $HOME/local/passage
 PATH="${PATH}:${HOME}/local/passage/bin"
 pc="${HOME}/local/passage/share/completions/passage.bash"
-[[ $PS1 && -r $pc ]] && source $pc
+[[ $PS1 && -r $pc ]] && source "$pc"
 
 # neovim lives in $HOME/local/neovim
 PATH="${PATH}:${HOME}/local/neovim/bin"
@@ -163,7 +151,7 @@ PATH="${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin"
 PATH="${PATH}:${HOME}/.local/bin"
 export PATH
 
-[[ $PS1 && -r $HOME/.cargo/env ]] && source $HOME/.cargo/env
+[[ $PS1 && -r $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
 
 # go lives in $HOME/local/go
 if [[ $PS1 && -d $HOME/local/go/bin ]]; then
@@ -176,3 +164,7 @@ if [[ $PS1 && -d $HOME/local/lua/bin ]]; then
     export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/Users/telemachus/.luarocks/lib/lua/5.1/?.so;/Users/telemachus/local/lua/lib/lua/5.1/?.so'
     PATH="${HOME}/local/lua/bin:${PATH}"
 fi
+
+# :-$LANG prevents the export setting from breaking iTerm2.
+export LANG="${LC_ALL:-$LANG}"
+unset LC_ALL
