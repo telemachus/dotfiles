@@ -1,3 +1,8 @@
+if [ -n "$GHOSTTY_RESOURCES_DIR" ]; then
+    builtin source \
+        "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
+fi
+
 ## A few global settings
 # + check the window size after each command and, if necessary,
 #   update the values of LINES and COLUMNS.
@@ -156,6 +161,11 @@ export PATH
 # go lives in $HOME/local/go
 if [[ $PS1 && -d $HOME/local/go/bin ]]; then
     PATH="${HOME}/local/go/bin:${PATH}"
+fi
+
+# zig lives in $HOME/local/zig
+if [[ $PS1 && -r $HOME/local/zig/zig ]]; then
+    PATH="${HOME}/local/zig:${PATH}"
 fi
 
 # lua lives in $HOME/local/lua
