@@ -1,0 +1,70 @@
+import:
+ - ~/.config/alacritty/themes/themes/github_light_colorblind.yaml
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+# env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  #TERM: alacritty
+
+window:
+  padding:
+   x: 10
+   y: 10
+  dimensions:
+    columns: 85
+    lines: 26
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+font:
+  normal:
+    family: Consolas
+    style: Regular
+  bold:
+    family: Consolas
+    style: Bold
+  italic:
+    family: Consolas
+    style: Italic
+  bold_italic:
+    family: Consolas
+    style: Bold Italic
+  size: 16.0
+use_thin_strokes: true
+
+bell:
+  animation: EaseOutExpo
+
+  # A `duration` of `0` will disable the visual bell animation.
+  duration: 300
+  color: '0xffffff'
+
+selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+  # When set to `true`, selected text will be copied to the primary
+  # clipboard.
+  save_to_clipboard: true
+
+cursor:
+  style:
+    shape: Block
+    unfocused_hollow: true
+    blinking: Never
+
+key_bindings:
+  - { key: Return, mods: Command|Shift, action: SpawnNewInstance }
+
+live_config_reload: true
