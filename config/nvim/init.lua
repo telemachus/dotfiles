@@ -289,7 +289,7 @@ if lsp_loaded then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
     lspconfig.lua_ls.setup({
         on_init = function(client)
-            local path = client.workspace_folders[1].name
+            local path = vim.fn.getcwd(vim.api.nvim_get_current_win())
             if
                 not vim.uv.fs_stat(path .. "/.luarc.json")
                 and not vim.uv.fs_stat(path .. "/.luarc.jsonc")
