@@ -39,6 +39,7 @@ g.startuptime_tries = 10
 opt.scrolloff = 0
 opt.number = true
 opt.relativenumber = true
+opt.completeopt = "menuone,noinsert,preview"
 opt.signcolumn = "yes"
 opt.mouse = ""
 

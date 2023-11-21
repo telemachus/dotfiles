@@ -94,3 +94,6 @@ keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
 keymap_set("n", "]d", diagnostic.goto_next, default_opts)
 keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
 keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
+
+-- Kickstart omni-completion.
+keymap_set("i", "<C-o>", "<C-x><C-o>", default_opts)
