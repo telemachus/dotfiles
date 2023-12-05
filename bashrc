@@ -27,10 +27,10 @@ export NO_COLOR=1
 # + :...; turns the timestamp into a "do-nothing" command
 # + do not append all sessions to ~/.bash_history; last shell closed wins
 # + save multi-line commands as a single line
-export HISTSIZE=1000000
-export HISTFILESIZE=1000000
-export HISTCONTROL=ignoreboth:erasedups
-export HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S %p; '
+HISTSIZE=1000000
+HISTFILESIZE=1000000
+HISTCONTROL=ignoreboth:erasedups
+HISTTIMEFORMAT=': %Y-%m-%d %I:%M:%S %p; '
 shopt -u histappend
 shopt -s cmdhist
 
@@ -64,7 +64,7 @@ GIT_PS1_SHOWCOLORHINTS=
 GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWUPSTREAM="auto git"
 
-export PS1='$(__git_ps1 "{%s $(get_sha)}")\u \W \$ '
+PS1='\u \W $(__git_ps1 "{%s $(get_sha)}")\$ '
 
 if [[ $VIM ]]; then
     PS1='\$ '
