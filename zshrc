@@ -40,7 +40,7 @@ setopt CASE_MATCH
 
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
 
-setopt PROMPT_SUBST
+# setopt PROMPT_SUBST
 # add-zsh-hook precmd vcs_info
 #
 # # Style the vcs_info message
@@ -66,7 +66,10 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_DESCRIBE_STYLE="branch"
 GIT_PS1_SHOWUPSTREAM="auto git"
 
-PROMPT='%3~ $(__git_ps1 "{%s $(get_sha)}")%# '
+precmd() {
+    __git_ps1 '%3~ ' '%# ' "{%s $(get_sha)}"
+}
+# PROMPT='%3~ $(__git_ps1 "{%s $(get_sha)}")%# '
 
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
