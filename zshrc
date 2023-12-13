@@ -31,6 +31,7 @@ bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
 setopt AUTO_CD
+setopt CD_SILENT
 setopt AUTO_LIST
 setopt NO_AUTO_MENU
 setopt NO_MENU_COMPLETE
