@@ -126,8 +126,8 @@ opt.statusline =
 
 opt.spelllang = "en"
 
-opt.termguicolors = true
-opt.background = "light"
+-- opt.termguicolors = true
+-- opt.background = "light"
 
 ---Safely require a module.
 ---@param m string

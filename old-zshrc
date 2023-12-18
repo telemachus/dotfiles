@@ -1,6 +1,7 @@
 fpath=($HOME/.zfunctions $HOME/.zcompletions $fpath)
 autoload -Uz compinit && compinit
 autoload -Uz add-zsh-hook
+# autoload -Uz vcs_info
 
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000
@@ -38,6 +39,81 @@ setopt CASE_GLOB
 setopt CASE_MATCH
 
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
+
+# # Style the vcs_info message
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:*' max-exports 3
+# zstyle ':vcs_info:git*' formats '%b' '%u%c' '%.8i'
+# # Format when the repo is in an action (merge, rebase, etc)
+# zstyle ':vcs_info:git*' actionformats '{%*}'
+# # check-for-changes can be slow on large repos.
+# zstyle ':vcs_info:git*' check-for-changes true
+# zstyle ':vcs_info:git*' get-revision true
+# zstyle ':vcs_info:git*' unstagedstr '*'
+# zstyle ':vcs_info:git*' stagedstr '+'
+#
+# function _update_vcs_info_msg() {
+#     vcs_info
+#
+#     if [[ -z ${vcs_info_msg_0_} ]]; then
+#         PROMPT='%3~ %# '
+#     else
+#         local -a messages
+#         local git_info
+#
+#         local remote_status=''
+#         local base=$(git merge-base HEAD @{u} 2>/dev/null)
+#         local aref=$(git rev-parse HEAD 2>/dev/null)
+#         local bref=$(git rev-parse @{u} 2>/dev/null)
+#         if [[ $aref == $bref ]]; then
+#             remote_status='='
+#         elif [[ $aref == $base ]]; then
+#             remote_status='<'
+#         elif [[ $bref == $base ]]; then
+#             remote_status='>'
+#         else
+#             remote_status='<>'
+#         fi
+#
+#         if [[ -n "$(git ls-files --others --exclude-standard 2>/dev/null)" ]]
+#         then
+#             untracked='%%'
+#         else
+#             untracked=''
+#         fi
+#
+#         messages+="${vcs_info_msg_0_}"
+#         vcs_info_msg_1_="${vcs_info_msg_1_}${untracked}"
+#         if [[ -n "$vcs_info_msg_1_" ]]; then 
+#             messages+="${vcs_info_msg_1_}${remote_status}"
+#         else
+#             messages+="${remote_status}"
+#         fi
+#         messages+="${vcs_info_msg_2_}"
+#
+#         git_info="${(j: :)messages}"
+#
+#         PROMPT="%3~ {${git_info}}%# "
+#     fi
+# }
+# add-zsh-hook precmd _update_vcs_info_msg
+
+# PROMPT='%3~ ${vcs_info_msg_0_}%# '
+# source /opt/local/share/git/contrib/completion/git-prompt.sh
+# get_sha() {
+#     git rev-parse --short HEAD 2>/dev/null
+# }
+#
+# GIT_PS1_SHOWDIRTYSTATE=1
+# GIT_PS1_SHOWSTASHSTATE=1
+# GIT_PS1_SHOWUNTRACKEDFILES=1
+# GIT_PS1_DESCRIBE_STYLE="branch"
+# GIT_PS1_SHOWUPSTREAM="auto git"
+#
+# precmd() {
+#     __git_ps1 '%3~ ' '%# ' "{%s $(get_sha)}"
+# }
+# PROMPT='%3~ $(__git_ps1 "{%s $(get_sha)}")%# '
 
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
@@ -125,6 +201,8 @@ alias findexecs='find . -type f -perm -a=x'
 # daily updates
 alias morning='sudo portup ; neoup'
 
+# eval "$(starship init zsh)"
+
 ZSH_GIT_PROMPT_SHOW_STASH=1
 # ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
 
@@ -133,3 +211,4 @@ source ~/.config/zsh/git-prompt.zsh/git-prompt.zsh
 source ~/Downloads/src/zsh-prompt-benchmark/zsh-prompt-benchmark.plugin.zsh
 
 # vim: set ts=8 sw=4 et tw=80 ft=zsh :
+
