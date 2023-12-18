@@ -102,7 +102,7 @@ alias gp='git push'
 alias nlist='mpc playlist | cat -n -'
 
 # Lock my screen quickly
-alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+alias lock="osascript -e 'tell application \"System Events\" to keystroke \"q\" using {command down,control down}'"
 
 # reindex spotlight
 alias respotlight='sudo mdutil -E /'
