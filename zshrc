@@ -132,4 +132,12 @@ PROMPT='%3~ $(gitprompt)%# '
 source ~/.config/zsh/git-prompt.zsh/git-prompt.zsh
 source ~/Downloads/src/zsh-prompt-benchmark/zsh-prompt-benchmark.plugin.zsh
 
+(( $+aliases[run-help] )) && unalias run-help
+autoload -Uz run-help
+autoload -Uz run-help-git
+autoload -Uz run-help-sudo
+alias help=run-help
+HELPDIR="/usr/share/zsh/$(zsh --version | cut -d' ' -f2)/help"
+bindkey -M viins '^h' run-help
+
 # vim: set ts=8 sw=4 et tw=80 ft=zsh :
