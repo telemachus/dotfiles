@@ -36,6 +36,9 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
+opt.runtimepath:append(
+    ",/Applications/Ghostty.app/Contents/Resources/vim/vimfiles"
+)
 opt.scrolloff = 0
 opt.number = true
 opt.relativenumber = true
