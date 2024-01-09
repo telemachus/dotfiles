@@ -36,12 +36,10 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
-opt.runtimepath:append(
-    ",/Applications/Ghostty.app/Contents/Resources/vim/vimfiles"
-)
 opt.scrolloff = 0
 opt.number = true
 opt.relativenumber = true
+opt.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} "
 opt.completeopt = "menuone,noinsert,preview"
 opt.signcolumn = "yes"
 opt.mouse = ""
@@ -203,6 +201,7 @@ safe_setup("snippy", {
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 safe_setup("nvim-treesitter.configs", {
     ensure_installed = {
+        "awk",
         "bash",
         "c",
         "css",

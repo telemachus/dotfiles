@@ -3,6 +3,7 @@ opt_local.foldenable = false
 opt_local.foldcolumn = "0"
 opt_local.number = false
 opt_local.relativenumber = false
+opt_local.statuscolumn = ""
 opt_local.comments = ""
 opt_local.formatoptions = "1tn"
 opt_local.textwidth = 72

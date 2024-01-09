@@ -1,4 +1,5 @@
 fpath=($HOME/.zfunctions $HOME/.zcompletions $fpath)
+
 autoload -Uz compinit && compinit
 autoload -Uz add-zsh-hook
 
@@ -41,6 +42,9 @@ CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME
 
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
+
+zstyle ':completion:*:(ssh|scp|rsync):*' hosts $hosts
+zstyle ':completion:*:(ssh|scp|rsync):*' users $users
 
 # if [[ -d $HOME/.fzf/shell ]]; then
 #     source "$HOME/.fzf/shell/completion.zsh"
@@ -130,6 +134,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
 
 PROMPT='%3~ $(gitprompt)%# '
 source ~/.config/zsh/git-prompt.zsh/git-prompt.zsh
+# source ~/.config/zsh/test-git-prompt.zsh
 source ~/Downloads/src/zsh-prompt-benchmark/zsh-prompt-benchmark.plugin.zsh
 
 (( $+aliases[run-help] )) && unalias run-help
