@@ -130,6 +130,18 @@ opt.spelllang = "en"
 -- opt.termguicolors = true
 -- opt.background = "light"
 
+vim.filetype.add({
+    extension = {
+        zsh = "sh",
+        sh = "sh",
+    },
+    filename = {
+        [".zshrc"] = "sh",
+        ["zshrc"] = "sh",
+        [".zshenv"] = "sh",
+        ["zshenv"] = "sh",
+    },
+})
 ---Safely require a module.
 ---@param m string
 ---@return boolean ok
@@ -290,6 +302,7 @@ safe_setup("conform", {
 local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
+    lspconfig.bashls.setup({})
     lspconfig.lua_ls.setup({
         on_init = function(client)
             local path = vim.fn.getcwd(vim.api.nvim_get_current_win())
@@ -307,8 +320,9 @@ if lsp_loaded then
                                 checkThirdParty = false,
                                 library = {
                                     vim.env.VIMRUNTIME,
-                                    "${3rd}/luv/library",
-                                    "${3rd}/busted/library",
+                                    vim.fn.expand(
+                                        "~/local/lua/lib/luarocks/rocks-5.1"
+                                    ),
                                 },
                                 -- This pulls in all of 'runtimepath', and it
                                 -- is much slower. Use with caution.

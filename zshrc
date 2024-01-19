@@ -144,5 +144,3 @@ autoload -Uz run-help-sudo
 alias help=run-help
 HELPDIR="/usr/share/zsh/$(zsh --version | cut -d' ' -f2)/help"
 bindkey -M viins '^h' run-help
-
-# vim: set ts=8 sw=4 et tw=80 ft=zsh :

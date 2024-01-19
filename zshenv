@@ -64,8 +64,8 @@ if [[ -d $HOME/local/lua ]]; then
 fi
 
 # fzf probably lives in $HOME/.fzf
-if [[ -d  $HOME/.fzf/bin ]]; then
-	PATH=${PATH}:$HOME/.fzf/bin
+if [[ -d $HOME/.fzf/bin ]]; then
+    PATH=${PATH}:$HOME/.fzf/bin
 fi
 
 export PATH
