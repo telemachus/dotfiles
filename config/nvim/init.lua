@@ -130,18 +130,6 @@ opt.spelllang = "en"
 -- opt.termguicolors = true
 -- opt.background = "light"
 
-vim.filetype.add({
-    extension = {
-        zsh = "sh",
-        sh = "sh",
-    },
-    filename = {
-        [".zshrc"] = "sh",
-        ["zshrc"] = "sh",
-        [".zshenv"] = "sh",
-        ["zshenv"] = "sh",
-    },
-})
 ---Safely require a module.
 ---@param m string
 ---@return boolean ok

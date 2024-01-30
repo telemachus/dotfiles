@@ -97,10 +97,10 @@ keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
 
 -- Kickstart omni-completion.
 keymap_set("i", "<C-o>", "<C-x><C-o>", default_opts)
-
 -- Automatically put blank lines into the black-hole register
+-- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
 keymap_set("n", "dd", function()
-    if fn.getline(".") == "" then
+    if fn.getline("."):find("^%s*$") then
         return '"_dd'
     end
     return "dd"
