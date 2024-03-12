@@ -75,28 +75,6 @@ autocmd("User", {
     group = telemachus_augroup,
 })
 
----Use <Tab> for <C-n> and <S-Tab> for <C-p> if in a popup menu.
----@alias key "<S-Tab>"|"<Tab>"|"<C-p>"|"<C-n>"
----@param direction -1|1
----@return key
-local smart_tab = function(direction)
-    -- Return original key if the popup menu is not visible
-    if vim.fn.pumvisible() == 0 then
-        if direction == -1 then
-            return "<S-Tab>"
-        else
-            return "<Tab>"
-        end
-    -- If the popup menu is visible, move up and down <S-Tab> and <Tab>.
-    else
-        if direction == -1 then
-            return "<C-p>"
-        else
-            return "<C-n>"
-        end
-    end
-end
-
 ---Close open floating window with one keystroke.
 ---@param base_win_id integer
 local hover_close = function(base_win_id)
@@ -127,12 +105,6 @@ autocmd("LspAttach", {
         keymap_set("n", ";", function()
             hover_close(vim.api.nvim_get_current_win())
         end, keymap_opts)
-        keymap_set("i", "<Tab>", function()
-            return smart_tab(1)
-        end, extended_keymap_opts)
-        keymap_set("i", "<S-Tab>", function()
-            return smart_tab(-1)
-        end, extended_keymap_opts)
     end,
 })
 
