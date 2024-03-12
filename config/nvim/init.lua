@@ -290,7 +290,6 @@ safe_setup("conform", {
 local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
-    lspconfig.bashls.setup({})
     lspconfig.lua_ls.setup({
         on_init = function(client)
             local path = vim.fn.getcwd(vim.api.nvim_get_current_win())
