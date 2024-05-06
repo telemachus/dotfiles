@@ -12,7 +12,3 @@ vim.opt_local.spell = true
 
 -- Treesitter highlights quotes as text; I prefer the dimness of Comment.
 vim.api.nvim_set_hl(0, "@markup.quote", { link = "Comment" })
-
--- Treesitter highlights strong and emphasis as text; I prefer bold and italic.
-vim.api.nvim_set_hl(0, "@markup.strong", { link = "Bold" })
-vim.api.nvim_set_hl(0, "@markup.italic", { link = "Italic" })

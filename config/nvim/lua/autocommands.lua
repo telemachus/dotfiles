@@ -93,10 +93,7 @@ end
 -- Add keybindings to a buffer when LSP attaches.
 autocmd("LspAttach", {
     callback = function(ev)
-        vim.g.hover_open = false
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
-        local extended_keymap_opts =
-            { remap = false, silent = true, buffer = ev.buf, expr = true }
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
         keymap_set("n", "gs", "<C-w>]", keymap_opts)
         keymap_set("n", "K", lsp.buf.hover, keymap_opts)
