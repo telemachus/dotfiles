@@ -42,6 +42,8 @@ palette = 7=#c0c0c0
 # white
 palette = 15=#ffffff
 
+shell-integration-features = no-cursor,sudo,title
+
 # Base colors and cursor styles.
 background = ffffff
 foreground= 090909
