@@ -148,6 +148,11 @@ snippet testCases "testCases := map[string]struct{ ... }{ ... }" b
 	}{
 		${4:message}: {${5:struct}},
 	}
+# compare want and got using cmp.Diff
+snippet cmpDiff "if diff := cmp.Diff(want, got)..." b
+	if diff := cmp.Diff(${1:want}, ${2:got}); diff != "" {
+		t.Errorf("${3:funcSig} mismatch(-${4:$1}, +${5:$2}):\n%s", diff)
+	}$0
 # call t.Run with an anonymous function
 snippet trun "t.Run(message, func(t *testing.T) { ... })"
 	t.Run(${1:"${2:message}"}, func(t *testing.T) {
