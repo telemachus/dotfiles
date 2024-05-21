@@ -7,9 +7,9 @@ local diagnostic = vim.diagnostic
 
 -- Text objects for lines.
 keymap_set("x", "il", "g_o^", default_opts)
-keymap_set("o", "il", ":normal! vil<CR>", default_opts)
+keymap_set("o", "il", ":normal vil<CR>", default_opts)
 keymap_set("x", "al", "$o0", default_opts)
-keymap_set("o", "al", ":normal! val<CR>", default_opts)
+keymap_set("o", "al", ":normal val<CR>", default_opts)
 
 -- Text objects for the entire document.
 keymap_set(
@@ -18,16 +18,16 @@ keymap_set(
     ":<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z",
     default_opts
 )
-keymap_set("o", "ie", ":<C-u>normal! vie<CR>", default_opts)
+keymap_set("o", "ie", ":<C-u>normal vie<CR>", default_opts)
 keymap_set("x", "ae", "GoggV", default_opts)
-keymap_set("o", "ae", ":<C-u>normal! vae<CR>", default_opts)
+keymap_set("o", "ae", ":<C-u>normal vae<CR>", default_opts)
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 
 -- Properly indent yanked text.
 keymap_set("n", "<Leader>pi", function()
-    cmd(":normal! p`[v`]=`")
+    cmd(":normal p`[v`]=`")
     local bufnr = vim.api.nvim_get_current_buf()
     require("ibl").debounced_refresh(bufnr)
 end, default_opts)
