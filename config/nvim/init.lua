@@ -350,7 +350,7 @@ safe_setup("autoclose", {
 })
 
 -- https://github.com/numToStr/Comment.nvim.git
-safe_setup("Comment", {})
+-- safe_setup("Comment", {})
 
 -- https://github.com/kylechui/nvim-surround.git
 safe_setup("nvim-surround", {
