@@ -23,23 +23,23 @@ snippet " "string literal"
 # condition-only for loop (i.e., a while loop)
 snippet while "for condition { ... }" b
 	for ${1:condition} {
-		${2:${VISUAL}}
+		${2:${TM_SELECTED_TEXT}}
 	}
 # three-part for loop
 snippet fori "for i := 0; i < N; i++ { ... }" b
 	for ${1:i} := ${2:0}; ${3:$1} ${4:<} ${5:N}; ${6:$1++} {
-		${7:${VISUAL}}
+		${7:${TM_SELECTED_TEXT}}
 	}
 
 # three-part for loop with two variables
 snippet forij "for i,j := 0, N; i < N; i, j = x, y { ... }" b
 	for ${1:i}, ${3:j} := ${2:0}, ${4:0}; ${6:$1} ${5:<} ${7:N}; ${8:$1}, ${9:$3} = ${10:$1+1}, ${11:$3-1} {
-		${12:${VISUAL}}
+		${12:${TM_SELECTED_TEXT}}
 	}
 # for range loop
 snippet forr "for index, value := range items { ... }" b
 	for ${2:index}, ${3:value} := range ${1} {
-		${4:${VISUAL}}
+		${4:${TM_SELECTED_TEXT}}
 	}
 # infinite for loop (i.e., while true)
 snippet forever "for { ... }" b
@@ -71,7 +71,7 @@ snippet iota "iota constant generator" b
 	)
 snippet if "if statement" b
 	if ${1:condition} {
-		${2:${VISUAL}}
+		${2:${TM_SELECTED_TEXT}}
 	}
 snippet switch "switch statement" b
 	switch ${1:expression} {
@@ -84,18 +84,18 @@ snippet struct "struct declaration" b
 # define a function
 snippet func "func name(...) [error] { ... }" b
 	func ${1:name}(${2}) ${3} {
-		${4:${VISUAL}}
+		${4:${TM_SELECTED_TEXT}}
 	}
 # define a method
 snippet meth "func (self Type) Method(...) [error] { ... }" b
 	func (${1:receiver} ${2:type}) ${3:name}(${4:params}) ${5} {
-		${6:${VISUAL}}
+		${6:${TM_SELECTED_TEXT}}
 	}
 # assign an anonymous function to a variable
 # (I need a better name here, but this is brief.)
 snippet anon "name := func(...) [error] { ... }"
 	${1:name} := func(${2:params}) ${3:returns} {
-		${4:${VISUAL}}
+		${4:${TM_SELECTED_TEXT}}
 	}
 # error handling
 snippet err "simple error handling" b

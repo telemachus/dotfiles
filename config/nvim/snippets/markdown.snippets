@@ -1,14 +1,14 @@
 snippet it "\italics"
-	*${1:${VISUAL}}*
+	*${1:${TM_SELECTED_TEXT}}*
 snippet bf "\bold"
-	**${1:${VISUAL}}**
+	**${1:${TM_SELECTED_TEXT}}**
 snippet cd "\code"
-	\`${1:${VISUAL}}\`
+	\`${1:${TM_SELECTED_TEXT}}\`
 snippet ` "`code`"
-	\`${1:${VISUAL}}\`
+	\`${1:${TM_SELECTED_TEXT}}\`
 snippet fcd "\fencedcode" b
 	\`\`\`${1:type}
-	${2:${VISUAL}}
+	${2:${TM_SELECTED_TEXT}}
 	\`\`\`$0
 snippet day "\day" b
 	+ In class
