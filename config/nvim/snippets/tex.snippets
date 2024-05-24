@@ -1,6 +1,6 @@
 snippet begin "\begin{}…\end{}" b
 	\begin{${1:something}}
-		${2:${TM_SELECTED_TEXT}}
+		${2:${TM_SELECTED_TEXT:text}}
 	\end{$1}$0
 snippet enum "\begin{enumerate}…\end{enumerate}" b
 	\begin{enumerate}
@@ -21,11 +21,11 @@ snippet chapter "\chapter{}" b
 snippet up "\usepackage" b
 	\usepackage[${1:options}]{${2:package}}$0
 snippet it "\textit{}" w
-	\textit{${1:${TM_SELECTED_TEXT}}}$0
+	\textit{${1:${TM_SELECTED_TEXT:text}}}$0
 snippet bf "\textbf{}" w
-	\textbf{${1:${TM_SELECTED_TEXT}}}$0
+	\textbf{${1:${TM_SELECTED_TEXT:text}}}$0
 snippet gr "\textgreek{}" w
-	\textgreek{${1:${TM_SELECTED_TEXT}}}$0
+	\textgreek{${1:${TM_SELECTED_TEXT:text}}}$0
 snippet section "\section{}" b
 	\section{${1:${TM_SELECTED_TEXT:section name}}}$0
 snippet section* "\section*{}" b
@@ -44,33 +44,33 @@ snippet fn "\footnote" w
 	\footnote{${1}}${0}
 snippet fold "Make a fold [[-,-]]" b
 	% [[- ${1:label}
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:fold content}}
 	% -]] $1$0
 snippet foldsec "Make a fold with a section [[-,-]]" b
 	% [[- ${1:label}
 	\section{$1}
 
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:fold content}}
 	% -]] $1$0
 snippet foldsubsec "Make a fold with a subsection [[-,-]]" b
 	% [[- ${1:label}
 	\subsection{$1}
 
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:fold content}}
 	% -]] $1$0
 snippet foldsec* "Make a fold with a section* [[-,-]]" b
 	% [[- ${1:label}
 	\section*{$1}
 
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:fold content}}
 	% -]] $1$0
 snippet foldsubsec* "Make a fold with a subsection* [[-,-]]" b
 	% [[- ${1:label}
 	\subsection*{$1}
 
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:fold content}}
 	% -]] $1$0
 snippet tq "\textquote[<citation>][<punctuation>]{<quote>}" w
-	\textquote[${2:citation}][${3:punctuation}]{${1:quote${TM_SELECTED_TEXT}}}$0
+	\textquote[${2:citation}][${3:punctuation}]{${1:${TM_SELECTED_TEXT:quote}}}$0
 snippet eq "\enquote{<quote>}" w
-	\enquote{${1:quote${TM_SELECTED_TEXT}}}$0
+	\enquote{${1:${TM_SELECTED_TEXT:quote}}}$0

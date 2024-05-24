@@ -1,60 +1,62 @@
 snippet #!
 	#!/usr/bin/env lua
-snippet l=
+snippet r= "local require"
+	local ${2:name} = require('${1:module}')
+snippet l= "local variable assignment"
 	local ${1:x} = ${0:1}
-snippet func
+snippet func "function declaration"
 	function ${1:fname}(${2})
-		${3:-- body}
+		${3:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet lfunc
+snippet lfunc "local function declaration"
 	local function ${1:name}(${2})
-		${3:-- body}
+		${3:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet lfunc=
+snippet lfunc= "local assignment of anonymous function"
 	local ${1:name} = function(${2})
-		${3:-- body}
+		${3:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet mirror
+snippet mirror "local x = x idiom"
 	local ${1:name} = $1
-snippet for
+snippet for "lua equivalent of three-part for loop"
 	for ${1:i}=${2:1},${3:10} do
-		${4:-- body}
+		${4:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet fori
-	for ${1:i},${2:v} in ipairs(${3:table}) do
-		${4:-- body}
-	end
-snippet forp
-	for ${1:i},${2:v} in pairs(${3:table}) do
-		${4:-- body}
-	end
-snippet fors
+snippet fors "three-part for loop with step"
 	for ${1:i}=${2:1}, ${3:10}, ${4:step} do
-		${5:-- body}
+		${5:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet if
-	if ${1:condition} then
-		${2:-- body}
+snippet fori "for loop with ipairs"
+	for ${1:i},${2:v} in ipairs(${3:table}) do
+		${4:${TM_SELECTED_TEXT:-- body}}
 	end
-snippet ife
+snippet forp "for loop with pairs"
+	for ${1:i},${2:v} in pairs(${3:table}) do
+		${4:${TM_SELECTED_TEXT:-- body}}
+	end
+snippet if "if statement"
 	if ${1:condition} then
-		${2:-- if condition}
+		${2:${TM_SELECTED_TEXT:-- body}}
+	end
+snippet ife "if...else statement"
+	if ${1:condition} then
+		${2:${TM_SELECTED_TEXT:-- body}}
 	else
 		${3:-- else}
 	end
-snippet elif
+snippet elif "elseif statement"
 	elseif ${1:condition} then
 		${0:--body}
-snippet print
-	print('${1:string}')
-snippet r=
-	local ${2:name} = require('${1:module}')
-snippet repeat
+snippet p "print a string"
+	print("${1:string}")
+snippet pv "print a variable"
+	print(${1:variable})
+snippet repeat "repeat...until statement"
 	repeat
-		${1:--body}
+		${1:${TM_SELECTED_TEXT:-- body}}
 	until ${0:condition}
-snippet while
+snippet while "while...do statement"
 	while ${1:condition} do
-		${2:--body}
+		${2:${TM_SELECTED_TEXT:-- body}}
 	end
 # vim:ft=snippets:

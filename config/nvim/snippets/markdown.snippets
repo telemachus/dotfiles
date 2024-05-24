@@ -1,18 +1,15 @@
-snippet it "\italics"
-	*${1:${TM_SELECTED_TEXT}}*
-snippet bf "\bold"
-	**${1:${TM_SELECTED_TEXT}}**
-snippet cd "\code"
-	\`${1:${TM_SELECTED_TEXT}}\`
-snippet ` "`code`"
-	\`${1:${TM_SELECTED_TEXT}}\`
-snippet fcd "\fencedcode" b
+extends blog,syllabus
+
+snippet it "emphatic text"
+	*${1:${TM_SELECTED_TEXT:text}}*$0
+snippet em "emphatic text"
+	*${1:${TM_SELECTED_TEXT:text}}*$0
+snippet st "strong text"
+	**${1:${TM_SELECTED_TEXT:text}}**
+snippet cd "inline code"
+	\`${1:${TM_SELECTED_TEXT:code}}\`
+snippet fcd "fenced code block" b
 	\`\`\`${1:type}
-	${2:${TM_SELECTED_TEXT}}
+	${2:${TM_SELECTED_TEXT:code}}
 	\`\`\`$0
-snippet day "\day" b
-	+ In class
-		+ ${1}
-	+ Homework
-		+ ${2}
 # vim:ft=snippets:

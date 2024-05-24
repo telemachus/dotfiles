@@ -1,19 +1,21 @@
-# ifs
-snippet if
-	if $1:
-		${0:${TM_SELECTED_TEXT}}
-snippet el
+snippet if "if statement"
+	if ${1:condition}:
+		${0:${TM_SELECTED_TEXT:pass}}
+snippet el "else statement"
 	else:
-		${0:${TM_SELECTED_TEXT}}
-snippet ei
-	elif $1:
-		${0:${TM_SELECTED_TEXT}}
-		self._$1 = value
-snippet try "try…except"
+		${0:${TM_SELECTED_TEXT:pass}}
+snippet else "else statement"
+	else:
+		${0:${TM_SELECTED_TEXT:pass}}
+snippet ei "elif statement"
+	elif ${1:condition}:
+		${0:${TM_SELECTED_TEXT:pass}}
+snippet elif "elif statement"
+	elif ${1:condition}:
+		${0:${TM_SELECTED_TEXT:pass}}
+snippet try "try…except block"
 	try:
-		${1:${TM_SELECTED_TEXT}}
+		${1:${TM_SELECTED_TEXT:pass}}
 	except ${2:Exception} as ${3:e}:
 		${0:raise $3}
-# End of snippets
-
 # vim:ft=snippets:

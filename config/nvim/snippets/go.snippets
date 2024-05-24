@@ -3,7 +3,7 @@ snippet pkg "package {main}"
 	package ${1:main}
 # shorthand variable declaration
 snippet : "v := value" b
-	$1 := $2
+	$1 := $0
 # full variable declaration
 snippet var "var name type = expression" b
 	var ${1:name} ${2:type} = ${3:exp}
@@ -15,31 +15,28 @@ snippet fmt "import fmt" b
 # import
 snippet import "import ( ... )" b
 	import (
-		"$1"$2
+		"$1"
 	)
-# string literal
-snippet " "string literal"
-	"$1"$2
 # condition-only for loop (i.e., a while loop)
 snippet while "for condition { ... }" b
 	for ${1:condition} {
-		${2:${TM_SELECTED_TEXT}}
+		${2:${TM_SELECTED_TEXT:// body}}
 	}
 # three-part for loop
 snippet fori "for i := 0; i < N; i++ { ... }" b
 	for ${1:i} := ${2:0}; ${3:$1} ${4:<} ${5:N}; ${6:$1++} {
-		${7:${TM_SELECTED_TEXT}}
+		${7:${TM_SELECTED_TEXT:// body}}
 	}
 
 # three-part for loop with two variables
 snippet forij "for i,j := 0, N; i < N; i, j = x, y { ... }" b
 	for ${1:i}, ${3:j} := ${2:0}, ${4:0}; ${6:$1} ${5:<} ${7:N}; ${8:$1}, ${9:$3} = ${10:$1+1}, ${11:$3-1} {
-		${12:${TM_SELECTED_TEXT}}
+		${12:${TM_SELECTED_TEXT:// body}}
 	}
 # for range loop
 snippet forr "for index, value := range items { ... }" b
 	for ${2:index}, ${3:value} := range ${1} {
-		${4:${TM_SELECTED_TEXT}}
+		${4:${TM_SELECTED_TEXT:// body}}
 	}
 # infinite for loop (i.e., while true)
 snippet forever "for { ... }" b
@@ -53,14 +50,13 @@ snippet map "map[Type]Type"
 snippet main "func main() { ... }" b
 	func main() {
 		${1}
-	}${0}
-snippet cons "constants declaration" b
+	}$0
+snippet con "single constant declaration" b
+	const ${1:name} ${2:type} = ${3:value}
+snippet cons "multiple constants declaration" b
 	const (
 		${1:constant} ${2:type} = ${3:value}
 	)
-snippet con "constant declaration" b
-	const ${1:name} ${2:type} = ${3:value}
-
 snippet interface "interface declaration" b
 	type ${1:name} interface {
 		$2
@@ -71,7 +67,7 @@ snippet iota "iota constant generator" b
 	)
 snippet if "if statement" b
 	if ${1:condition} {
-		${2:${TM_SELECTED_TEXT}}
+		${2:${TM_SELECTED_TEXT:// body}}
 	}
 snippet switch "switch statement" b
 	switch ${1:expression} {
@@ -84,18 +80,18 @@ snippet struct "struct declaration" b
 # define a function
 snippet func "func name(...) [error] { ... }" b
 	func ${1:name}(${2}) ${3} {
-		${4:${TM_SELECTED_TEXT}}
+		${4:${TM_SELECTED_TEXT:// body}}
 	}
 # define a method
 snippet meth "func (self Type) Method(...) [error] { ... }" b
 	func (${1:receiver} ${2:type}) ${3:name}(${4:params}) ${5} {
-		${6:${TM_SELECTED_TEXT}}
+		${6:${TM_SELECTED_TEXT:// body}}
 	}
 # assign an anonymous function to a variable
 # (I need a better name here, but this is brief.)
 snippet anon "name := func(...) [error] { ... }"
 	${1:name} := func(${2:params}) ${3:returns} {
-		${4:${TM_SELECTED_TEXT}}
+		${4:${TM_SELECTED_TEXT:// body}}
 	}
 # error handling
 snippet err "simple error handling" b
@@ -152,7 +148,7 @@ snippet testCases "testCases := map[string]struct{ ... }{ ... }" b
 snippet cmpDiff "if diff := cmp.Diff(want, got)..." b
 	if diff := cmp.Diff(${1:want}, ${2:got}); diff != "" {
 		t.Errorf("${3:funcSig} mismatch(-${4:$1}, +${5:$2}):\n%s", diff)
-	}$0
+	}
 # call t.Run with an anonymous function
 snippet trun "t.Run(message, func(t *testing.T) { ... })"
 	t.Run(${1:"${2:message}"}, func(t *testing.T) {
@@ -173,25 +169,23 @@ snippet gotwant "if got != want { t.Errorf(...) }"
 	if ${1:got} != ${2:want} {
 		t.Errorf("${3:Function() = [%+v]}; want %${4:[%+v]}", ${1:got}, ${2:want})
 	}
+# do something when a key is present in a map
+snippet ok "if <key>, ok := <map>[<value>]; ok { ... }"
+	if ${1:key}, ok := ${2:map}[${3:value}]; ok {
+		${4}
+	}
 # do something when a key is not present in a map
 snippet nok "if <key>, ok := <map>[<value>]; !ok { ... }"
 	if ${1:key}, ok := ${2:map}[${3:value}]; !ok {
-		${4}
-	}
-# do something if a key is present in a map
-snippet ok "if <key>, ok := <map>[<value>]; ok { ... }"
-	if ${1:key}, ok := ${2:map}[${3:value}]; ok {
 		${4}
 	}
 # reminder for Go's reference time
 snippet timeref "// 01/02 03:04:05PM '06 -0700" b
 	// Reference time: 01/02 03:04:05PM '06 -0700, aka January 2, 15:04:05, 2006
 # ymd for Go's reference time
-snippet ymd "20060202" w
+snippet ymd "ymd for Go" w
 	"20060102"
 # y-m-d for Go's reference time
-snippet y-m-d "2006-01-02" w
+snippet y-m-d "YYYY-MM-DD for Go" w
 	"2006-01-02"
-# End of snippets
-
 # vim:ft=snippets:
