@@ -1,0 +1,34 @@
+snippet describe "create a describe block"
+	describe("${1:a test}", function()
+		${2:-- tests go here}
+	end)
+snippet it "create an it block"
+	it("${1:a test}", function()
+		${2:${TM_SELECTED_TEXT:--tests go here }}
+	end)
+snippet is "assert.is
+	assert.is(${1:--is this true?})
+snippet isnot "assert.is_not"
+	assert.is_not(${1:--is this false?})
+snippet equals "assert.equals"
+	assert.equals(${1:--thing one}, ${2:--thing two})
+snippet isnil "assert.is_nil"
+	assert.is_nil(${1:--is this nil?})
+snippet isnotnil "assert.is_not_nil"
+	assert.is_not_nil(${:--is this not nil?})
+snippet same "assert.same"
+	assert.same(${1:--thing one}, ${2:--thing two})
+snippet istrue "assert.true"
+	assert.true(${1:--is this true})
+snippet istruthy "assert.truthy"
+	assert.truthy(${1:--is this truthy})
+snippet isfalse "assert.false"
+	assert.true(${1:--is this false})
+snippet isfalsy "assert.falsy"
+	assert.falsy(${1:--is this falsy})
+snippet haserror "assert.has_error(func)"
+	assert.has_error(${1:--function})
+snippet haserrormsg "assert.has_error(func, msg)"
+	assert.has_error(${1:--function}, ${2:-err})
+snippet hasnoerror "assert.has_no.error(func)"
+	assert.has_no.error(${1:--function})

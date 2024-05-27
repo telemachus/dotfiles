@@ -16,6 +16,10 @@ snippet lfunc= "local assignment of anonymous function"
 	local ${1:name} = function(${2})
 		${3:${TM_SELECTED_TEXT:-- body}}
 	end
+snippet anonfunc "anonymous function"
+	function($1)
+		${2:${TM_SELECTED_TEXT:--body}}
+	end
 snippet mirror "local x = x idiom"
 	local ${1:name} = $1
 snippet for "lua equivalent of three-part for loop"
