@@ -1,4 +1,5 @@
 -- Lua configuration for neovim
+vim.loader.enable()
 local HOME = os.getenv("HOME")
 local cmd = vim.cmd
 local g = vim.g
@@ -186,6 +187,14 @@ opt.grepprg = "rg --vimgrep --smart-case --"
 
 -- https://github.com/dcampos/nvim-snippy.git
 safe_setup("snippy", {
+    scopes = {
+        lua = function(scopes)
+            if vim.api.nvim_buf_get_name(0):find("_spec.lua$") then
+                table.insert(scopes, "busted")
+            end
+            return scopes
+        end,
+    },
     mappings = {
         is = {
             ["<Tab>"] = "expand_or_advance",
@@ -195,6 +204,12 @@ safe_setup("snippy", {
             ["<Tab>"] = "cut_text",
         },
     },
+    -- virtual_markers = {
+    --     enabled = true,
+    --     default = "⚡",
+    --     empty = "⚡",
+    --     hl_group = "SnippyPlaceholder",
+    -- },
 })
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
@@ -348,9 +363,6 @@ safe_setup("autoclose", {
         },
     },
 })
-
--- https://github.com/numToStr/Comment.nvim.git
--- safe_setup("Comment", {})
 
 -- https://github.com/kylechui/nvim-surround.git
 safe_setup("nvim-surround", {

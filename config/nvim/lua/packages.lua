@@ -7,7 +7,6 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     -- "m4xshen/autoclose.nvim",
     "neovim/nvim-lspconfig",
-    -- "numToStr/Comment.nvim",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter",
     "savq/paq-nvim",
