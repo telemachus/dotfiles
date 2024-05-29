@@ -4,6 +4,7 @@ local opt = vim.opt
 local cmd = vim.cmd
 local lsp = vim.lsp
 local keymap_set = vim.keymap.set
+local defer_fn = vim.defer_fn
 
 local telemachus_augroup = augroup("TelemachusAugroup", { clear = true })
 
@@ -32,8 +33,9 @@ autocmd("FocusGained", {
     callback = function()
         opt.cursorline = true
         cmd("redraw")
-        cmd("sleep 600m")
-        opt.cursorline = false
+        defer_fn(function()
+            opt.cursorline = false
+        end, 600)
     end,
     group = telemachus_augroup,
 })
