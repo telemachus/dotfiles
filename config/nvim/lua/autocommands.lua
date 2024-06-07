@@ -130,9 +130,9 @@ autocmd("BufWritePre", {
 
 -- Sleep for one millisecond to avoid a current neovim bug.
 -- https://github.com/neovim/neovim/issues/21856
--- TODO: remove this when the bug is fixed.
-autocmd("VimLeavePre", {
-    callback = function()
-        vim.cmd.sleep({ args = { "1m" } })
-    end,
-})
+-- The issue is closed as fixed. Let's turn this off and see.
+-- autocmd("VimLeavePre", {
+--     callback = function()
+--         vim.cmd.sleep({ args = { "1m" } })
+--     end,
+-- })
