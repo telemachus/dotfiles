@@ -101,7 +101,7 @@ autocmd("LspAttach", {
         keymap_set("n", "K", lsp.buf.hover, keymap_opts)
         keymap_set("n", "R", lsp.buf.rename, keymap_opts)
         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
-        keymap_set("n", ";", function()
+        keymap_set("n", "<Leader>;", function()
             hover_close(vim.api.nvim_get_current_win())
         end, keymap_opts)
     end,
