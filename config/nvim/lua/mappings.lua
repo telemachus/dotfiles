@@ -62,9 +62,7 @@ keymap_set("n", "[Q", ":cfirst<CR>", default_opts)
 keymap_set("n", "]Q", ":clast<CR>", default_opts)
 
 -- Use my bitly command to shorten URLs.
-local bitly_cmd =
-    [[c<C-R>=trim(system(['bitly', '-stdout', '-url', trim(getreg('*'))], getreg('"')))<CR><ESC>]]
-keymap_set("v", "<Leader>b", bitly_cmd, default_opts)
+keymap_set("v", "<Leader>b", require("bitly").shorten, default_opts)
 
 -- Yank the rest of the current line into the system clipboard.
 keymap_set("n", "<Leader>y", '"+y$', default_opts)
