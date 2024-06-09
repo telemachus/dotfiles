@@ -2,7 +2,8 @@ local keymap_set = vim.keymap.set
 local default_opts = { remap = false, silent = true }
 local extended_opts = { remap = false, silent = true, expr = true }
 local cmd = vim.cmd
-local fn = vim.fn
+local set_register = vim.fn.setreg
+local get_line = vim.fn.getline
 local diagnostic = vim.diagnostic
 
 -- Text objects for lines.
@@ -69,10 +70,8 @@ keymap_set("v", "<Leader>b", bitly_cmd, default_opts)
 keymap_set("n", "<Leader>y", '"+y$', default_opts)
 
 -- Yank the entire current line into the system clipboard.
--- keymap_set('n', '<Leader>Y', '0"+y$', default_opts)
 keymap_set("n", "<Leader>Y", function()
-    local line = fn.line(".")
-    fn.setreg("+", fn.getline(line))
+    set_register("+", get_line("."))
 end, default_opts)
 
 -- Yank the visual selection into the system clipboard.
@@ -95,13 +94,14 @@ keymap_set("n", "]d", diagnostic.goto_next, default_opts)
 keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
 keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
 
--- Kickstart omni-completion.
+-- Start omni-completion with fewer keystrokes.
 keymap_set("i", "<C-o>", "<C-x><C-o>", default_opts)
+
 -- Automatically put blank lines into the black-hole register
 -- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
 keymap_set("n", "dd", function()
-    if fn.getline("."):find("^%s*$") then
+    if get_line("."):find("^%s*$") then
         return '"_dd'
     end
     return "dd"
-end, { expr = true })
+end, extended_opts)
