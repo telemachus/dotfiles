@@ -1,11 +1,27 @@
 -- bitly.lua provides a function to shorten URLs using a local bitly command.
 local system = vim.fn.system
 local trim = vim.fn.trim
-local replace_termcodes = vim.api.nvim_replace_termcodes
-local feedkeys = vim.api.nvim_feedkeys
+local mode = vim.fn.mode
 local getpos = vim.fn.getpos
 local getregion = vim.fn.getregion
 local buf_set_text = vim.api.nvim_buf_set_text
+local replace_termcodes = vim.api.nvim_replace_termcodes
+local feedkeys = vim.api.nvim_feedkeys
+
+local _should_swap = function(start_pos, end_pos)
+    -- 1. If start_pos is on a line below end_pos, they are reversed.
+    if start_pos[2] > end_pos[2] then
+        return true
+    end
+    -- 2. If start_pos and end_pos are on the same line, and start_pos
+    --    is in a later column, they are reversed.
+    if start_pos[2] == end_pos[2] and start_pos[3] > end_pos[3] then
+        return true
+    end
+    -- 3. If start_pos is on an earlier line than end_pos or the same line
+    --    but an earlier column, they are not reversed.
+    return false
+end
 
 local _bitly_cmd = function(url)
     url = system({ "bitly", "-stdout", "-url", url })
@@ -14,11 +30,13 @@ end
 
 --- Shorten a visually selected URL.
 local shorten = function()
+    if mode() ~= "v" then
+        return
+    end
+
     local start_pos = getpos("v")
     local end_pos = getpos(".")
-    -- If the cursor is at the start of the visual selection, start_pos
-    -- and end_pos will be reversed. Swap them if that's the case.
-    if start_pos[3] > end_pos[3] then
+    if _should_swap(start_pos, end_pos) then
         start_pos, end_pos = end_pos, start_pos
     end
 
