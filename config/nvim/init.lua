@@ -364,13 +364,9 @@ safe_setup("autoclose", {
     },
 })
 
--- https://github.com/kylechui/nvim-surround.git
-safe_setup("nvim-surround", {
-    keymaps = {
-        normal = "sa",
-        delete = "sd",
-        change = "sr",
-    },
+-- https://github.com/echasnovski/mini.surround
+safe_setup("mini.surround", {
+    silent = true,
 })
 
 -- https://github.com/telemachus/refinery.nvim.git
