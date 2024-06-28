@@ -5,6 +5,7 @@ local cmd = vim.cmd
 local set_register = vim.fn.setreg
 local get_line = vim.fn.getline
 local diagnostic = vim.diagnostic
+local get_current_buf = vim.api.nvim_get_current_buf
 
 -- Text objects for lines.
 keymap_set("x", "il", "g_o^", default_opts)
@@ -13,6 +14,7 @@ keymap_set("x", "al", "$o0", default_opts)
 keymap_set("o", "al", ":normal val<CR>", default_opts)
 
 -- Text objects for the entire document.
+-- TODO: improve the ie object.
 keymap_set(
     "x",
     "ie",
@@ -29,7 +31,7 @@ keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 -- Properly indent yanked text.
 keymap_set("n", "<Leader>pi", function()
     cmd(":normal p`[v`]=`")
-    local bufnr = vim.api.nvim_get_current_buf()
+    local bufnr = get_current_buf()
     require("ibl").debounced_refresh(bufnr)
 end, default_opts)
 
@@ -79,21 +81,12 @@ keymap_set("v", "<Leader>y", '"+y', default_opts)
 keymap_set("n", "<Leader>ev", ":split $MYVIMRC<CR>", default_opts)
 keymap_set("n", "<Leader>sv", ":source $MYVIMRC<CR>", default_opts)
 
--- Make a WORD all uppercase after the fact while in insert mode.
--- (I took this from Steve Losh's *Learn Vimscript the Hard Way*.)
-keymap_set("i", "<C-U>", "<Esc>bgUiWea", default_opts)
-
--- Make WORD under cursor all uppercase while in normal mode.
-keymap_set("n", "<Leader>u", "gUiW", default_opts)
-
 -- Mappings for diagnostics.
+-- TODO: remove these? Check, but I think these are now built-in.
 keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
 keymap_set("n", "]d", diagnostic.goto_next, default_opts)
 keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
 keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
-
--- Start omni-completion with fewer keystrokes.
-keymap_set("i", "<C-o>", "<C-x><C-o>", default_opts)
 
 -- Automatically put blank lines into the black-hole register
 -- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
@@ -103,3 +96,5 @@ keymap_set("n", "dd", function()
     end
     return "dd"
 end, extended_opts)
+
+keymap_set("i", "<C-CR>", require("in-and-out").in_and_out, default_opts)

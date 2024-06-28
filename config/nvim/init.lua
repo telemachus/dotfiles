@@ -3,7 +3,10 @@ vim.loader.enable()
 local HOME = os.getenv("HOME")
 local cmd = vim.cmd
 local g = vim.g
-local opt = vim.opt
+local o = vim.o
+local join = table.concat
+local fmt = string.format
+local notify = vim.notify
 
 g.mapleader = " "
 g.localmapleader = " "
@@ -37,61 +40,61 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
-opt.scrolloff = 0
-opt.number = true
-opt.relativenumber = true
-opt.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} "
-opt.completeopt = "menuone,noinsert,preview"
-opt.signcolumn = "yes"
-opt.mouse = ""
+o.scrolloff = 0
+o.number = true
+o.relativenumber = true
+o.statuscolumn = "%=%{v:relnum?v:relnum:v:lnum} "
+o.completeopt = "menuone,noinsert,preview"
+o.signcolumn = "yes"
+o.mouse = ""
 
-opt.showcmd = true
-opt.showmode = true
+o.showcmd = true
+o.showmode = true
 
-opt.shell = "bash"
+o.shell = "bash"
 
-opt.wrap = true
-opt.linebreak = true
-opt.breakindent = true
-opt.showbreak = "↪"
-opt.list = true
-opt.listchars = {
-    eol = "↲",
-    tab = "»·",
-    trail = "•",
-    precedes = "⟨",
-    extends = "⟩",
-    nbsp = "␣",
-}
+o.wrap = true
+o.linebreak = true
+o.breakindent = true
+o.showbreak = "↪"
+o.list = true
+o.listchars = join({
+    "eol:↲",
+    "tab:»·",
+    "trail:•",
+    "precedes:⟨",
+    "extends:⟩",
+    "nbsp:␣",
+}, ",")
 
 -- t = Autowrap text using textwidth.
 -- c = Autowrap comments using textwidth.
 -- q = Allow formatting of comments with 'gq'.
 -- n = Recognize numbered lists for formatting purposes.
 -- 1 = Do not break line after a one-letter word.
-opt.formatoptions = "tcqn1"
-opt.tabstop = 8
-opt.softtabstop = 0
-opt.shiftwidth = 8
-opt.expandtab = false
-opt.foldenable = false
+o.formatoptions = "tcqn1"
+o.tabstop = 8
+o.softtabstop = 0
+o.shiftwidth = 8
+o.expandtab = false
+o.foldenable = false
 
-opt.ignorecase = true
-opt.smartcase = true
-opt.gdefault = true
-opt.incsearch = true
-opt.hlsearch = false
-opt.conceallevel = 0
-opt.concealcursor = ""
+o.ignorecase = true
+o.smartcase = true
+o.gdefault = true
+o.incsearch = true
+o.hlsearch = false
+o.conceallevel = 0
+o.concealcursor = ""
 
-opt.backup = true
-opt.backupcopy = "yes"
-opt.backupdir = HOME .. "/.local/share/nvim/backups"
-opt.undofile = true
-opt.undodir = HOME .. "/.local/share/nvim/undo"
+o.backup = true
+o.backupcopy = "yes"
+o.backupdir = HOME .. "/.local/share/nvim/backups"
+o.undofile = true
+o.undodir = HOME .. "/.local/share/nvim/undo"
 
-opt.wildmode = { "longest", "list" }
-opt.wildignore = {
+o.wildmode = join({ "longest", "list" }, ",")
+o.wildignore = join({
     "__pycache__",
     "*~",
     "*DS_Store*",
@@ -118,18 +121,15 @@ opt.wildignore = {
     "*/.ist",
     "*/.fdb_latexmk",
     "*/build/*",
-}
+}, ",")
 
--- opt.hidden = true
-opt.title = true
-opt.shortmess = "atIF"
-opt.statusline =
+o.hidden = true
+o.title = true
+o.shortmess = "atIF"
+o.statusline =
     "[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h%=%([Line: %l Column: %c %P]%)"
 
-opt.spelllang = "en"
-
--- opt.termguicolors = true
--- opt.background = "light"
+o.spelllang = "en"
 
 ---Safely require a module.
 ---@param m string
@@ -138,16 +138,17 @@ opt.spelllang = "en"
 local safe_require = function(m)
     local ok, loaded_m = pcall(require, m)
     if not ok then
-        vim.notify(string.format("init.lua: error loading %s", m))
+        notify(fmt([[init.lua: error loading "%s"]], m))
     end
     return ok, loaded_m
 end
 
 ---Safely call setup on a plugin.
 ---@param plugin string
----@param t table
+---@param t table|nil
 ---@return boolean
 local safe_setup = function(plugin, t)
+    t = t or {}
     local ok, loaded_p = safe_require(plugin)
     if ok then
         loaded_p.setup(t)
@@ -155,6 +156,7 @@ local safe_setup = function(plugin, t)
     return ok
 end
 
+-- TODO: remove this dependency and create a simpler theme for myself.
 local theme_loaded = safe_setup("github-theme", {
     theme_style = "light",
     sidebars = { "qf", "lf" },
@@ -179,11 +181,11 @@ else
     cmd("colorscheme off")
 end
 
-opt.colorcolumn = "89"
+o.colorcolumn = "89"
 
-opt.iskeyword = opt.iskeyword + "-"
+o.iskeyword = o.iskeyword .. ",-"
 
-opt.grepprg = "rg --vimgrep --smart-case --"
+o.grepprg = "rg --vimgrep --smart-case --"
 
 -- https://github.com/dcampos/nvim-snippy.git
 safe_setup("snippy", {
@@ -204,12 +206,6 @@ safe_setup("snippy", {
             ["<Tab>"] = "cut_text",
         },
     },
-    -- virtual_markers = {
-    --     enabled = true,
-    --     default = "⚡",
-    --     empty = "⚡",
-    --     hl_group = "SnippyPlaceholder",
-    -- },
 })
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
@@ -306,44 +302,26 @@ local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
     lspconfig.gopls.setup({ settings = { gofumpt = true } })
     lspconfig.lua_ls.setup({
-        on_init = function(client)
-            local path = vim.fn.getcwd(vim.api.nvim_get_current_win())
-            if
-                not vim.uv.fs_stat(path .. "/.luarc.json")
-                and not vim.uv.fs_stat(path .. "/.luarc.jsonc")
-            then
-                client.config.settings =
-                    vim.tbl_deep_extend("force", client.config.settings, {
-                        Lua = {
-                            runtime = {
-                                version = "LuaJIT",
-                            },
-                            workspace = {
-                                checkThirdParty = false,
-                                library = {
-                                    vim.env.VIMRUNTIME,
-                                    vim.fn.expand(
-                                        "~/local/lua/lib/luarocks/rocks-5.1"
-                                    ),
-                                },
-                                -- This pulls in all of 'runtimepath', and it
-                                -- is much slower. Use with caution.
-                                -- library = vim.api.nvim_get_runtime_file("", true)
-                            },
-                        },
-                    })
-
-                client.notify(
-                    "workspace/didChangeConfiguration",
-                    { settings = client.config.settings }
-                )
-            end
-            return true
-        end,
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                },
+                workspace = {
+                    checkThirdParty = false,
+                    library = {
+                        vim.env.VIMRUNTIME,
+                    },
+                },
+                format = {
+                    enable = false,
+                },
+            },
+        },
     })
 end
 
--- https://github.com/m4xshen/autoclose.nvim.git
+-- https://github.com/telemachus/autoclose.nvim.git
 safe_setup("autoclose", {
     options = {
         disable_command_mode = true,
@@ -381,6 +359,35 @@ safe_setup("refinery", {
     --     foobar = {},
     -- },
 })
+
+-- https://github.com/ysmb-wtsg/in-and-out.nvim
+safe_setup("in-and-out", {
+    additional_targets = { "|", "“", "”" },
+})
+
+-- https://github.com/hrsh7th/nvim-cmp
+local cmp_loaded, cmp = safe_require("cmp")
+if cmp_loaded then
+    cmp.setup.filetype({ "markdown", "mail", "text" }, {
+        mapping = cmp.mapping.preset.insert({
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<C-y>"] = cmp.mapping.confirm({
+                behavior = cmp.ConfirmBehavior.Insert,
+                select = true,
+            }),
+            ["C-n"] = cmp.mapping.select_next_item({
+                behavior = cmp.SelectBehavior.Insert,
+            }),
+            ["C-p"] = cmp.mapping.select_prev_item({
+                behavior = cmp.SelectBehavior.Insert,
+            }),
+        }),
+        completion = { keyword_length = 4 },
+        sources = cmp.config.sources({ { name = "buffer" } }),
+        window = { documentation = cmp.config.disable },
+    })
+end
 
 safe_require("filetypes")
 safe_require("lsp")

@@ -1,26 +1,27 @@
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-local opt = vim.opt
+local create_augroup = vim.api.nvim_create_augroup
+local create_autocmd = vim.api.nvim_create_autocmd
+local o = vim.o
+local bo = vim.bo
 local cmd = vim.cmd
 local lsp = vim.lsp
 local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
 
-local telemachus_augroup = augroup("TelemachusAugroup", { clear = true })
+local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
 -- Highlight searches while searching, but not while moving over matches.
 -- Taken from :help incsearch. This should be the default.
-autocmd("CmdlineEnter", {
+create_autocmd("CmdlineEnter", {
     pattern = { "/", "?" },
     callback = function()
-        opt.hlsearch = true
+        o.hlsearch = true
     end,
     group = telemachus_augroup,
 })
-autocmd("CmdlineLeave", {
+create_autocmd("CmdlineLeave", {
     pattern = { "/", "?" },
     callback = function()
-        opt.hlsearch = false
+        o.hlsearch = false
     end,
     group = telemachus_augroup,
 })
@@ -28,20 +29,21 @@ autocmd("CmdlineLeave", {
 -- Highlight cursor line briefly when neovim regains focus.  This helps to
 -- reorient the user and tell them where they are in the buffer.
 -- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
-autocmd("FocusGained", {
+create_autocmd("FocusGained", {
     pattern = "*",
     callback = function()
-        opt.cursorline = true
+        o.cursorline = true
         cmd("redraw")
         defer_fn(function()
-            opt.cursorline = false
+            o.cursorline = false
+            cmd("redraw")
         end, 600)
     end,
     group = telemachus_augroup,
 })
 
 -- For conform.nvim: format on save.
-autocmd("BufWritePre", {
+create_autocmd("BufWritePre", {
     pattern = { "*" },
     callback = function(args)
         require("conform").format({ bufnr = args.buf })
@@ -50,28 +52,28 @@ autocmd("BufWritePre", {
 })
 
 -- Open quickfix window automatically. TODO: add items to pattern.
-autocmd("QuickFixCmdPost", {
+create_autocmd("QuickFixCmdPost", {
     pattern = "cgetexpr",
     command = ":cwindow",
     group = telemachus_augroup,
 })
 
 -- Open location list window automatically. TODO: add items to pattern.
-autocmd("QuickFixCmdPost", {
+create_autocmd("QuickFixCmdPost", {
     pattern = "lgetexpr",
     command = ":lwindow",
     group = telemachus_augroup,
 })
 
 -- Open quickfix window after refinery.nvim adds items to it.
-autocmd("User", {
+create_autocmd("User", {
     pattern = "RefineryQuickFixCmdPost",
     command = ":cwindow",
     group = telemachus_augroup,
 })
 
 -- Update helptags after Paq installs or updates plugins.
-autocmd("User", {
+create_autocmd("User", {
     pattern = "PaqDone*",
     command = ":helptags ALL",
     group = telemachus_augroup,
@@ -93,8 +95,13 @@ local hover_close = function(base_win_id)
 end
 
 -- Add keybindings to a buffer when LSP attaches.
-autocmd("LspAttach", {
+create_autocmd("LspAttach", {
     callback = function(ev)
+        -- Do not let the LSP set formatexpr since some LSPs don't support
+        -- reformatting comments.
+        bo[ev.buf].formatexpr = nil
+
+        -- TODO: remove any of these that are now defaults.
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
         keymap_set("n", "gs", "<C-w>]", keymap_opts)
@@ -108,7 +115,7 @@ autocmd("LspAttach", {
 })
 
 -- Call goimports via gopls on write.
-autocmd("BufWritePre", {
+create_autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
         local params = lsp.util.make_range_params()
@@ -127,12 +134,3 @@ autocmd("BufWritePre", {
     end,
     group = telemachus_augroup,
 })
-
--- Sleep for one millisecond to avoid a current neovim bug.
--- https://github.com/neovim/neovim/issues/21856
--- The issue is closed as fixed. Let's turn this off and see.
--- autocmd("VimLeavePre", {
---     callback = function()
---         vim.cmd.sleep({ args = { "1m" } })
---     end,
--- })

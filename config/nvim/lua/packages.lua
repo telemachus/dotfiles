@@ -2,9 +2,10 @@ return {
     "dcampos/nvim-snippy",
     "dstein64/vim-startuptime",
     "farmergreg/vim-lastplace",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/nvim-cmp",
     "lambdalisue/suda.vim",
     "lukas-reineke/indent-blankline.nvim",
-    "echasnovski/mini.surround",
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter",
@@ -15,6 +16,14 @@ return {
         branch = "multibyte",
     },
     "telemachus/github-nvim-theme",
+    {
+        "telemachus/in-and-out.nvim",
+        branch = "configuration",
+    },
+    {
+        "telemachus/mini.surround",
+        branch = "highlight",
+    },
     {
         "telemachus/refinery.nvim",
         branch = "setup",
