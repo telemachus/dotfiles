@@ -18,7 +18,7 @@ return {
     "telemachus/github-nvim-theme",
     {
         "telemachus/in-and-out.nvim",
-        branch = "configuration",
+        branch = "config",
     },
     {
         "telemachus/mini.surround",
