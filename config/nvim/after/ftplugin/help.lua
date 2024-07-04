@@ -1,1 +1,3 @@
-vim.opt_local.conceallevel = 0
+local wo = vim.wo
+
+wo.conceallevel = 0

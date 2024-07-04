@@ -1,5 +1,8 @@
-vim.opt_local.tabstop = 8
-vim.opt_local.softtabstop = 4
-vim.opt_local.shiftwidth = 4
-vim.opt_local.expandtab = true
-vim.opt_local.colorcolumn = "81"
+local bo = vim.bo
+local wo = vim.wo
+
+bo.tabstop = 8
+bo.softtabstop = 4
+bo.shiftwidth = 4
+bo.expandtab = true
+wo.colorcolumn = "81"

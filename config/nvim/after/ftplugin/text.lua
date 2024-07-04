@@ -1,8 +1,11 @@
-vim.opt_local.comments = ""
-vim.opt_local.formatoptions = "1tnw"
-vim.opt_local.textwidth = 80
-vim.opt_local.colorcolumn = "81"
-vim.opt_local.list = true
-vim.opt_local.spell = true
-vim.opt_local.formatprg = "par -w80q"
+local bo = vim.bo
+local wo = vim.wo
+
+bo.comments = ""
+bo.formatoptions = "1tnw"
+bo.textwidth = 80
+wo.list = true
+wo.spell = true
+bo.formatprg = "par -w80q"
+wo.colorcolumn = "81"
 vim.b.match_words = { '":"', "':'", "(:)", "[:]", "<:>", "“:”", "‘:’" }

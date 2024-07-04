@@ -1,10 +1,14 @@
-vim.opt_local.tabstop = 4
-vim.opt_local.softtabstop = 4
-vim.opt_local.shiftwidth = 4
-vim.opt_local.expandtab = true
-vim.opt_local.textwidth = 88
-vim.opt_local.colorcolumn = "89"
-vim.opt_local.encoding = "utf-8"
+local o = vim.o
+local bo = vim.bo
+local wo = vim.wo
+
+bo.tabstop = 4
+bo.softtabstop = 4
+bo.shiftwidth = 4
+bo.expandtab = true
+bo.textwidth = 88
+wo.colorcolumn = "89"
+o.encoding = "utf-8"
 
 local ns = vim.api.nvim_create_namespace("myPython")
 vim.api.nvim_set_hl_ns(ns)
