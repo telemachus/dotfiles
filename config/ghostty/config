@@ -49,7 +49,7 @@ background = ffffff
 foreground= 090909
 cursor-color = 090909
 cursor-text = ffffff
-cursor-style = block
+cursor-style = bar
 cursor-style-blink = true
 
 font-family = Consolas
