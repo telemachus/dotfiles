@@ -25,6 +25,12 @@ keymap_set("o", "ie", ":<C-u>normal vie<CR>", default_opts)
 keymap_set("x", "ae", "GoggV", default_opts)
 keymap_set("o", "ae", ":<C-u>normal vae<CR>", default_opts)
 
+-- Open parent directory in current window.
+keymap_set("n", "-", "<CMD>Oil<CR>", default_opts)
+
+-- From the Vim wiki: https://bit.ly/4eLAARp.
+keymap_set("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
+
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
 
@@ -83,8 +89,12 @@ keymap_set("n", "<Leader>sv", ":source $MYVIMRC<CR>", default_opts)
 
 -- Mappings for diagnostics.
 -- TODO: remove these? Check, but I think these are now built-in.
-keymap_set("n", "[d", diagnostic.goto_prev, default_opts)
-keymap_set("n", "]d", diagnostic.goto_next, default_opts)
+keymap_set("n", "[d", function()
+    diagnostic.jump({ count = -1, float = true })
+end, default_opts)
+keymap_set("n", "]d", function()
+    diagnostic.jump({ count = 1, float = true })
+end, default_opts)
 keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
 keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
 
@@ -97,4 +107,7 @@ keymap_set("n", "dd", function()
     return "dd"
 end, extended_opts)
 
-keymap_set("i", "<C-CR>", require("in-and-out").in_and_out, default_opts)
+-- Make i_CTRL-U behave (in insert mode) like `cc` or `S` in normal mode.
+keymap_set("i", "<C-u>", "<C-o>cc", default_opts)
+
+keymap_set("i", "<C-CR>", require("pairs").leap, default_opts)

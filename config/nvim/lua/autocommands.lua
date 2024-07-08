@@ -6,6 +6,7 @@ local cmd = vim.cmd
 local lsp = vim.lsp
 local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
+local nvim_get_current_win = vim.api.nvim_get_current_win
 
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
@@ -109,7 +110,7 @@ create_autocmd("LspAttach", {
         keymap_set("n", "R", lsp.buf.rename, keymap_opts)
         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
         keymap_set("n", "<Leader>;", function()
-            hover_close(vim.api.nvim_get_current_win())
+            hover_close(nvim_get_current_win())
         end, keymap_opts)
     end,
 })

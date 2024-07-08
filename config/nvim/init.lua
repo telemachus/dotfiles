@@ -40,6 +40,9 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
+o.cpo = o.cpo .. "J"
+o.joinspaces = true
+
 o.scrolloff = 0
 o.number = true
 o.relativenumber = true
@@ -81,8 +84,10 @@ o.foldenable = false
 
 o.ignorecase = true
 o.smartcase = true
-o.gdefault = true
 o.incsearch = true
+o.inccommand = "split"
+o.gdefault = true
+o.infercase = true
 o.hlsearch = false
 o.conceallevel = 0
 o.concealcursor = ""
@@ -92,6 +97,7 @@ o.backupcopy = "yes"
 o.backupdir = HOME .. "/.local/share/nvim/backups"
 o.undofile = true
 o.undodir = HOME .. "/.local/share/nvim/undo"
+o.titlestring = '%{fnamemodify(getcwd(), ":~")} :: %{expand("%:t")}'
 
 o.wildmode = join({ "longest", "list" }, ",")
 o.wildignore = join({
@@ -100,6 +106,9 @@ o.wildignore = join({
     "*DS_Store*",
     "*.o",
     "*.obj",
+    "*.a",
+    "*.lib",
+    "*.elf",
     "*.png",
     "*.jpg",
     "*.jpeg",
@@ -311,7 +320,10 @@ if lsp_loaded then
                     checkThirdParty = false,
                     library = {
                         vim.env.VIMRUNTIME,
+                        "/Users/telemachus/Downloads/src/LLS-Addons",
                     },
+                    -- TODO: find out why this does not work.
+                    userThirdParty = {},
                 },
                 format = {
                     enable = false,
@@ -360,34 +372,29 @@ safe_setup("refinery", {
     -- },
 })
 
--- https://github.com/ysmb-wtsg/in-and-out.nvim
-safe_setup("in-and-out", {
-    additional_targets = { "|", "“", "”" },
-})
-
--- https://github.com/hrsh7th/nvim-cmp
-local cmp_loaded, cmp = safe_require("cmp")
-if cmp_loaded then
-    cmp.setup.filetype({ "markdown", "mail", "text" }, {
-        mapping = cmp.mapping.preset.insert({
-            ["<C-Space>"] = cmp.mapping.complete(),
-            ["<C-e>"] = cmp.mapping.abort(),
-            ["<C-y>"] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true,
-            }),
-            ["C-n"] = cmp.mapping.select_next_item({
-                behavior = cmp.SelectBehavior.Insert,
-            }),
-            ["C-p"] = cmp.mapping.select_prev_item({
-                behavior = cmp.SelectBehavior.Insert,
-            }),
-        }),
-        completion = { keyword_length = 4 },
-        sources = cmp.config.sources({ { name = "buffer" } }),
-        window = { documentation = cmp.config.disable },
-    })
+-- https://github.com/echasnovski/mini.icons
+local mini_icons_loaded, mini_icons = safe_require("mini.icons")
+if mini_icons_loaded then
+    mini_icons.setup()
+    mini_icons.mock_nvim_web_devicons()
 end
+
+-- https://github.com/stevearc/oil.nvim
+safe_setup("oil", {
+    columns = { "icon" },
+    keymaps = { ["<C-h>"] = false },
+    default_file_explorer = true,
+    delete_to_trash = true,
+    skip_confirm_for_simple_edits = true,
+    view_options = {
+        show_hidden = true,
+        natural_order = true,
+        is_always_hidden = function(name, _)
+            return name == ".." or name == ".git"
+        end,
+    },
+    win_options = { wrap = true },
+})
 
 safe_require("filetypes")
 safe_require("lsp")

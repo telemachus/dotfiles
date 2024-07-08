@@ -45,6 +45,11 @@ if [[ -d /Applications/Postgres.app ]]; then
     PATH="${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin"
 fi
 
+# lua-language-server
+if [[ -d $HOME/local/lua-language-server/bin ]]; then
+    PATH="${HOME}/local/lua-language-server/bin:${PATH}"
+fi
+
 # pipx
 if [[ -d ${HOME}/.local/bin ]]; then
     PATH="${PATH}:${HOME}/.local/bin"
