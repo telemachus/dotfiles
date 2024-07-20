@@ -1,44 +1,44 @@
 # The syntax is "key = value". Whitespace doesn't matter.
 
-# Define colors as a sixteen-item palatte. The docs describe pairs (e.g., 0 and
-# 8) as regular and bold. I find it easier to think of them in terms of their
-# defualt names. I.e., 0 is black and 8 is grey.
+# Define colors as a sixteen-item palatte. The docs describe pairs (e.g.,
+# 0 and 8) as regular and bold. I find it easier to think of them in terms of
+# their color names. I.e., 0 is black and 8 is dark grey.
 #
-# See defaults at https://www.ditig.com/publications/256-colors-cheat-sheet
-#
-# I am using "List of 20 Simple, Distinct Colors."
+# I took many of these colors from Sasha Trubetskoy.
 # https://sashamaps.net/docs/resources/20-colors
+
+# See also https://www.ditig.com/publications/256-colors-cheat-sheet.
 #
 # black
-palette = 0=#090909
-# grey
-palette = 8=#a9a9a9
-# maroon
+palette = 0=#000000
+# dark red
 palette = 1=#800000
-# red
-palette = 9=#e6194b
-# green
-palette = 2=#3cb44b
-# lime
-palette = 10=#bfef45
-# olive
+# dark green
+palette = 2=#194a1f
+# dark yellow
 palette = 3=#808000
+# dark blue
+palette = 4=#000075
+# dark magenta
+palette = 5=#8b008b
+# dark cyan
+palette = 6=#469990
+# grey
+palette = 7=#c5c6c8
+# dark grey
+palette = 8=#737373
+# red
+palette = 9=#d20f2c
+# green
+palette = 10=#3cb44d
 # yellow
 palette = 11=#ffe119
-# navy
-palette = 4=#000075
 # blue
 palette = 12=#4363d8
-# purple
-palette = 5=#911eb4
-# fuchsia (magenta)
+# magenta
 palette = 13=#f032e6
-# teal
-palette = 6=#469990
-# aqua (cyan)
+# cyan
 palette = 14=#42d4f4
-# silver
-palette = 7=#c0c0c0
 # white
 palette = 15=#ffffff
 
@@ -69,3 +69,6 @@ confirm-close-surface = false
 
 # Enable URL matching
 link-url = true
+
+# Right Option = Meta
+macos-option-as-alt = right
