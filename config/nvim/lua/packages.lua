@@ -13,9 +13,8 @@ return {
     "stevearc/oil.nvim",
     {
         "telemachus/autoclose.nvim",
-        branch = "multibyte",
+        branch = "mapcheck",
     },
-    "telemachus/github-nvim-theme",
     {
         "telemachus/mini.surround",
         branch = "highlight",
