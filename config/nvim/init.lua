@@ -11,6 +11,16 @@ local notify = vim.notify
 g.mapleader = " "
 g.localmapleader = " "
 
+if g.neovide then
+    g.neovide_theme = "light"
+    o.guifont = "Consolas:h16"
+    g.neovide_hide_mouse_when_typing = true
+    g.neovide_input_macos_option_key_is_meta = "only_right"
+    g.neovide_cursor_animation_length = 0
+    g.neovide_cursor_animate_in_insert_mode = false
+    g.neovide_cursor_animate_command_line = false
+end
+
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
 g.loaded_python_provider = 0
