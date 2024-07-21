@@ -181,6 +181,17 @@ local highlight_groups = {
     ["diffOldFile"] = { link = "DiffChange" },
     ["diffChanged"] = { link = "DiffChange" },
     ["diffRemoved"] = { link = "DiffDelete" },
+    ["mailHeader"] = { bold = false },
+    ["mailHeaderKey"] = { link = "mailHeader" },
+    ["mailURL"] = { underline = true },
+    ["mailEmail"] = { link = "mailURL" },
+    ["mailQuoted"] = { link = "Comment" },
+    ["mailQuoted1"] = { link = "mailQuoted" },
+    ["mailQuoted3"] = { link = "mailQuoted" },
+    ["mailQuoted5"] = { link = "mailQuoted" },
+    ["mailQuoted2"] = { fg = colors.blue, bg = colors.white },
+    ["mailQuoted4"] = { link = "mailQuoted2" },
+    ["mailQuoted6"] = { link = "mailQuoted2" },
 
     -- Tree-sitter (:help treesitter-highlight-groups)
     ["@variable"] = { fg = colors.near_black },
