@@ -140,6 +140,30 @@ o.wildignore = join({
     "*/.ist",
     "*/.fdb_latexmk",
     "*/build/*",
+    "blue.vim",
+    "darkblue.vim",
+    "delek.vim",
+    "desert.vim",
+    "elflord.vim",
+    "evening.vim",
+    "habamax.vim",
+    "industry.vim",
+    "koehler.vim",
+    "lunaperche.vim",
+    "morning.vim",
+    "murphy.vim",
+    "pablo.vim",
+    "peachpuff.vim",
+    "quiet.vim",
+    "retrobox.vim",
+    "ron.vim",
+    "shine.vim",
+    "slate.vim",
+    "sorbet.vim",
+    "torte.vim",
+    "wildcharm.vim",
+    "zaibatsu.vim",
+    "zellner.vim",
 }, ",")
 
 o.hidden = true
@@ -175,31 +199,7 @@ local safe_setup = function(plugin, t)
     return ok
 end
 
--- TODO: remove this dependency and create a simpler theme for myself.
-local theme_loaded = safe_setup("github-theme", {
-    theme_style = "light",
-    sidebars = { "qf", "lf" },
-    comment_style = "NONE",
-    keyword_style = "NONE",
-    function_style = "NONE",
-    variable_style = "NONE",
-    hide_end_of_buffer = false,
-    hide_inactive_statusline = false,
-    dark_float = true,
-    dark_sidebar = true,
-    transparent = true,
-    overrides = function(c)
-        return {
-            Conceal = { fg = c.fg },
-        }
-    end,
-})
-if theme_loaded then
-    cmd("colorscheme github_light")
-else
-    cmd("colorscheme off")
-end
-
+cmd("colorscheme minimum")
 o.colorcolumn = "89"
 
 o.iskeyword = o.iskeyword .. ",-"
