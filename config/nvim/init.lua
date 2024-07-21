@@ -316,11 +316,27 @@ safe_setup("conform", {
     },
 })
 
+---Disable semantic highlighting for a given `client`.
+---
+---Idea and code taken from https://bit.ly/3Y7bA0V.
+---@param client vim.lsp.Client
+local function disable_semantic_highlighting(client)
+    client.server_capabilities.semanticTokensProvider = nil
+end
+
 -- https://github.com/neovim/nvim-lspconfig.git
 local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
-    lspconfig.gopls.setup({ settings = { gofumpt = true } })
+    lspconfig.gopls.setup({
+        on_init = function(client)
+            disable_semantic_highlighting(client)
+        end,
+        settings = { gofumpt = true },
+    })
     lspconfig.lua_ls.setup({
+        on_init = function(client)
+            disable_semantic_highlighting(client)
+        end,
         settings = {
             Lua = {
                 runtime = {
