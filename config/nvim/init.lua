@@ -308,6 +308,7 @@ safe_setup("conform", {
         lua = { "stylua" },
         python = { "isort", "black" },
         sh = { "shfmt" },
+        sql = { "sleek" },
     },
     formatters = {
         shfmt = {
