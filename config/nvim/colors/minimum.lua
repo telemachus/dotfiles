@@ -11,9 +11,9 @@ end
 g.colors_name = "minimum"
 
 local colors = {
-    -- Terminal palette in 0-15 order
-    -- I took most of these from
-    -- https://sashamaps.net/docs/resources/20-colors/.
+    -- Terminal palette in 0-15 order.
+    -- I took most of these from the following site:
+    -- https://sashamaps.net/docs/resources/20-colors/
     black = "#000000",
     dark_red = "#800000",
     dark_green = "#194a1f",
@@ -40,8 +40,6 @@ local colors = {
     light_blue = "#d5e5f6",
 }
 
--- Terminal colors (from https://sashamaps.net/docs/resources/20-colors)
--- black
 g.terminal_color_0 = colors.black
 g.terminal_color_1 = colors.dark_red
 g.terminal_color_2 = colors.dark_green
