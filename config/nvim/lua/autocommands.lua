@@ -27,6 +27,18 @@ create_autocmd("CmdlineLeave", {
     group = telemachus_augroup,
 })
 
+-- Use only absolute line numbers when browsing help files.
+create_autocmd("Filetype", {
+    pattern = { "help" },
+    callback = function()
+        o.number = false
+        o.relativenumber = false
+        o.statuscolumn = ""
+        -- TODO: add a namespace for highlighting line numbers here.
+    end,
+    group = telemachus_augroup,
+})
+
 -- Highlight cursor line briefly when neovim regains focus.  This helps to
 -- reorient the user and tell them where they are in the buffer.
 -- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
