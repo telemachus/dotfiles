@@ -328,12 +328,15 @@ end
 -- https://github.com/neovim/nvim-lspconfig.git
 local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
+    -- gopls: https://github.com/golang/tools/tree/master/gopls
     lspconfig.gopls.setup({
         on_init = function(client)
             disable_semantic_highlighting(client)
         end,
         settings = { gofumpt = true },
     })
+
+    -- lua-language-server: https://luals.github.io
     lspconfig.lua_ls.setup({
         on_init = function(client)
             disable_semantic_highlighting(client)
