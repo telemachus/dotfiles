@@ -118,7 +118,6 @@ create_autocmd("LspAttach", {
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
         keymap_set("n", "gs", "<C-w>]", keymap_opts)
-        keymap_set("n", "K", lsp.buf.hover, keymap_opts)
         keymap_set("n", "R", lsp.buf.rename, keymap_opts)
         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
         keymap_set("n", "<Leader>;", function()
