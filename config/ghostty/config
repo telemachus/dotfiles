@@ -49,7 +49,8 @@ background = ffffff
 foreground= 090909
 cursor-color = 090909
 cursor-text = ffffff
-cursor-style = bar
+cursor-invert-fg-bg = true
+cursor-style = block
 cursor-style-blink = true
 
 font-family = Consolas
