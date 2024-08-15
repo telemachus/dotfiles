@@ -144,7 +144,7 @@ local highlight_groups = {
     ["Define"] = { link = "PreProc" },
     ["Macro"] = { link = "PreProc" },
     ["PreCondit"] = { link = "PreProc" },
-    ["Type"] = { bold = true },
+    ["Type"] = { link = "PreProc" },
     ["StorageClass"] = { link = "Type" },
     ["Structure"] = { link = "Type" },
     ["Typedef"] = { link = "Type" },
