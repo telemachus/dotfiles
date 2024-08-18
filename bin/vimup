@@ -7,11 +7,6 @@ BUILD_ROOT="$HOME/Downloads/src"
 BUILD_FULL="$HOME/Downloads/src/vim"
 BUILD_SOURCE="${BUILD_FULL}/src"
 
-# I can no longer get pyenv, macOS, MacPorts, and vim to get along. For the
-# time being, I’ve stopped using pyenv. I’ll experiment with just MacPorts,
-# virtual environments, and pipx.
-PYTHON_CONFIG_DIR="$(python-config --configdir)"
-
 if [ ! -d "$BUILD_ROOT" ]; then
 	mkdir -p "$BUILD_ROOT"
 fi
@@ -29,17 +24,20 @@ make clean distclean
 ./configure --prefix="$VIM_HOME" \
 	--enable-fail-if-missing \
 	--enable-multibyte \
-	--with-compiledby=peter@aronoff.org \
+	--with-compiledby="Peter Aronoff <peteraronoff@fastmail.com>" \
 	--enable-cscope \
 	--enable-terminal \
 	--enable-gui=no \
 	--without-x \
 	--enable-fontset \
 	--enable-largefile \
+	--disable-smack \
+	--disable-selinux \
+	--disable-xattr \
+	--disable-xsmp \
+	--disable-xsmp-interact \
 	--disable-nls \
 	--disable-canberra \
-	--enable-python3interp \
-	--with-python3-config-dir="$PYTHON_CONFIG_DIR"
 
 make || exit 1
 rm -rf "$VIM_HOME"

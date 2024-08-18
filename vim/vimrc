@@ -9,7 +9,8 @@ filetype plugin indent on
 set backspace=indent,eol,start
 set history=500
 set scrolloff=0     " No breathing room
-set nonumber
+set number
+set relativenumber
 set mouse=          " No mouse capture
 
 set ruler           " Show the cursor position all the time
@@ -84,7 +85,7 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
-colorscheme github
+colorscheme minimum
 set colorcolumn=89
 
 set printoptions:paper:letter,header:0,syntax:n
