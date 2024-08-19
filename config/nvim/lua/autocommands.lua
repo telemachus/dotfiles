@@ -7,6 +7,7 @@ local lsp = vim.lsp
 local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
 local nvim_get_current_win = vim.api.nvim_get_current_win
+local on_yank = vim.highlight.on_yank
 
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
@@ -143,6 +144,15 @@ create_autocmd("BufWritePre", {
                 end
             end
         end
+    end,
+    group = telemachus_augroup,
+})
+
+-- Highlight on yank!
+create_autocmd("TextYankPost", {
+    pattern = "*",
+    callback = function()
+        on_yank({ higroup = "Visual", timeout = 300 })
     end,
     group = telemachus_augroup,
 })
