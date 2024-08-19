@@ -212,27 +212,6 @@ o.iskeyword = o.iskeyword .. ",-"
 
 o.grepprg = "rg --vimgrep --smart-case --"
 
--- https://github.com/dcampos/nvim-snippy.git
-safe_setup("snippy", {
-    scopes = {
-        lua = function(scopes)
-            if vim.api.nvim_buf_get_name(0):find("_spec.lua$") then
-                table.insert(scopes, "busted")
-            end
-            return scopes
-        end,
-    },
-    mappings = {
-        is = {
-            ["<Tab>"] = "expand_or_advance",
-            ["<S-Tab>"] = "previous",
-        },
-        nx = {
-            ["<Tab>"] = "cut_text",
-        },
-    },
-})
-
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 safe_setup("nvim-treesitter.configs", {

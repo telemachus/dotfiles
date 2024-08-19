@@ -107,7 +107,20 @@ keymap_set("n", "dd", function()
     return "dd"
 end, extended_opts)
 
--- Make i_CTRL-U behave (in insert mode) like `cc` or `S` in normal mode.
-keymap_set("i", "<C-u>", "<C-o>cc", default_opts)
+-- Lazy mappings for nvim-snippy
+keymap_set({ "i", "s" }, "<tab>", function()
+    if require("snippy").can_expand_or_advance() then
+        return "<Plug>(snippy-expand-or-advance)"
+    end
+    return "<Tab>"
+end, extended_opts)
+keymap_set({ "i", "s" }, "<s-tab>", function()
+    if require("snippy").can_jump(-1) then
+        return "<Plug>(snippy-previous)"
+    end
+    return "<S-Tab>"
+end, extended_opts)
+keymap_set("x", "<Tab>", "<Plug>(snippy-cut-text)")
+keymap_set("n", "g<Tab>", "<Plug>(snippy-cut-text)")
 
 keymap_set("i", "<C-CR>", require("pairs").leap, default_opts)
