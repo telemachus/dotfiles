@@ -50,6 +50,7 @@ require("paq")(packages)
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
 
+o.background = "light"
 o.cpo = o.cpo .. "J"
 o.joinspaces = true
 
@@ -199,6 +200,11 @@ local safe_setup = function(plugin, t)
     return ok
 end
 
+o.guicursor = join({
+    "n-v-c-sm:block",
+    "i-ci-ve:ver100-Cursor-blinkwait300-blinkon200-blinkoff150",
+    "r-cr-o:hor20",
+}, ",")
 cmd("colorscheme minimum")
 o.colorcolumn = "89"
 
