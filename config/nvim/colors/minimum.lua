@@ -60,9 +60,9 @@ g.terminal_color_15 = colors.white
 local highlight_groups = {
     -- Editor (:help highlight-groups)
     ["ColorColumn"] = { bg = colors.light_grey },
-    ["Conceal"] = { fg = colors.near_black, link = "NONE" },
+    ["Conceal"] = { fg = "NONE", bg = "NONE", link = "NONE" },
     ["CurSearch"] = { link = "Visual" },
-    ["Cursor"] = { reverse = true },
+    ["Cursor"] = { fg = "bg", bg = "fg" },
     ["lCursor"] = { link = "Cursor" },
     ["CursorIM"] = { link = "Cursor" },
     ["CursorColumn"] = { link = "ColorColumn" },
@@ -86,8 +86,10 @@ local highlight_groups = {
     ["LineNrBelow"] = { link = "LineNrAbove" },
     ["MatchParen"] = { fg = colors.near_black, bold = true },
     ["ModeMsg"] = { fg = colors.near_black, bold = true },
+    ["MoreMsg"] = { fg = colors.dark_grey },
     ["Normal"] = { fg = colors.near_black, bg = colors.white },
     ["NormalFloat"] = { link = "Normal" },
+    ["NonText"] = { fg = colors.light_grey },
     ["FloatBorder"] = { fg = colors.near_black },
     ["FloatTitle"] = { link = "Title" },
     ["FloatFooter"] = { link = "FloatTitle" },
@@ -321,6 +323,10 @@ local highlight_groups = {
     ["IblIndent"] = { fg = colors.grey },
     ["IblWhitespace"] = { link = "IblIndent" },
     ["IblScope"] = { fg = colors.near_black },
+
+    -- oil.nvim
+    -- https://github.com/stevearc/oil.nvim
+    ["OilDir"] = { fg = colors.blue },
 }
 
 local highlight = vim.api.nvim_set_hl
