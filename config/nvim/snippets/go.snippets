@@ -1,6 +1,6 @@
 # package {main}
-snippet pkg "package {main}"
-	package ${1:main}
+snippet pkg "package {main}" b
+	package ${1:main}$0
 # shorthand variable declaration
 snippet : "v := value" b
 	$1 := $0
@@ -47,7 +47,7 @@ snippet forever "for { ... }" b
 snippet map "map[Type]Type"
 	map[${1:string}]${2:int}
 # main()
-snippet main "func main() { ... }" b
+snippet mn "func main() { ... }" b
 	func main() {
 		${1}
 	}$0
