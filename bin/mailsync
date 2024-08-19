@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
-exec &> >(while read line; do echo "$(date -R) $line"; done;)
-
-# which -s mbsync
-# if [[ $? -ne 0 ]]; then
-#     brew install isync
-# fi
-
-# which -s mu
-# if [[ $? -ne 0 ]]; then
-#     brew install mu
-#     maildir init
-# fi
+exec &> >(while read line; do echo "$(date -R) $line"; done)
 
 echo Mail Sync &&
     mbsync -Va &&
