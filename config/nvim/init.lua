@@ -387,16 +387,9 @@ safe_setup("refinery", {
     -- },
 })
 
--- https://github.com/echasnovski/mini.icons
-local mini_icons_loaded, mini_icons = safe_require("mini.icons")
-if mini_icons_loaded then
-    mini_icons.setup()
-    mini_icons.mock_nvim_web_devicons()
-end
-
 -- https://github.com/stevearc/oil.nvim
 safe_setup("oil", {
-    columns = { "icon" },
+    columns = {},
     keymaps = { ["<C-h>"] = false },
     default_file_explorer = true,
     delete_to_trash = true,

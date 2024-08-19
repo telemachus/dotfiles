@@ -1,7 +1,6 @@
 return {
     "dcampos/nvim-snippy",
     "dstein64/vim-startuptime",
-    "echasnovski/mini.icons",
     "farmergreg/vim-lastplace",
     "lambdalisue/suda.vim",
     "lukas-reineke/indent-blankline.nvim",
