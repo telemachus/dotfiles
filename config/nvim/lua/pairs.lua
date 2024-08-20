@@ -1,3 +1,5 @@
+-- This is a simplified version of in-and-out.nvim.
+-- https://github.com/ysmb-wtsg/in-and-out.nvim
 local function escape_lua_pattern(s)
     local matches = {
         ["^"] = "%^",

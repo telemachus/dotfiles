@@ -123,4 +123,6 @@ end, extended_opts)
 keymap_set("x", "<Tab>", "<Plug>(snippy-cut-text)")
 keymap_set("n", "g<Tab>", "<Plug>(snippy-cut-text)")
 
+-- Simplify getting out of pairs like `()`, `[]`, and so on.
+-- Enter CTRL-CR, and it will move out of common pair endings.
 keymap_set("i", "<C-CR>", require("pairs").leap, default_opts)
