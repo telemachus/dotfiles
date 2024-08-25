@@ -3,7 +3,7 @@ projFull: Project full name? NewProject
 projShort: Project short name? {{stringstolower .projFull}}
 projRepo: Repo URL? github.com/telemachus/{{.projShort}}
 pkg: Application package name? cli
-goVersion: Go version? 1.20
+goVersion: Go version? 1.23
 projDesc: Project description?
 -- {{.projRepo}}/README.md --
 # {{.projFull}}: {{.projDesc}}
@@ -150,16 +150,13 @@ func main() {
 	os.Exit({{.pkg}}.Run(os.Args[1:]))
 }
 -- {{.projRepo}}/Makefile --
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := test
 
 fmt:
 	golangci-lint run --disable-all --no-config -Egofmt --fix
 	golangci-lint run --disable-all --no-config -Egofumpt --fix
 
-vet: fmt
-	go vet ./...
-
-lint: vet
+lint: fmt
 	golangci-lint run
 
 build: lint
@@ -177,44 +174,42 @@ testv:
 clean:
 	go clean -i -r -cache
 
-.PHONY: fmt vet lint build install test testv clean
--- {{.projRepo}}/.golangci.yml --
-run:
-  timeout: 2m
-  issues-exit-code: 1
-  modules-download-mode: readonly
-  format: line-number,stderr
-  skip-dirs:
-    - internal
+bench:
+	go test -bench=. -benchmem -benchtime=5s -count=3 -run=NONE
 
+.PHONY: fmt lint build install test testv clean bench
+-- {{.projRepo}}/.golangci.yml --
 linters-settings:
-  cyclop:
-    max-complexity: 10
-    package-average: 5
-    skip-tests: false
   depguard:
-    rules:
-      main:
-        files:
-          - $all
-        deny:
-          - pkg: reflect
-            desc: "avoid reflect"
-      test:
-        files:
-          - $all
-        deny:
-          - pkg: reflect
-            desc: "avoid reflect"
+      rules:
+        main:
+          files:
+            - $all
+          deny:
+            - pkg: reflect
+              desc: "avoid reflect"
+        test:
+          files:
+            - $all
+          deny:
+            - pkg: reflect
+              desc: "avoid reflect"
   errcheck:
     check-type-assertions: true
     check-blank: true
+    exclude-functions:
+      - fmt.Printf
+      - fmt.Println
+      - fmt.Fprintf
+      - fmt.Fprintln
   exhaustive:
     default-signifies-exhaustive: true
   goconst:
     min-len: 2
     min-occurrences: 3
   gocritic:
+    disabled-checks:
+      - hugeParam
     enabled-tags:
       - diagnostic
       - experimental
@@ -222,7 +217,7 @@ linters-settings:
       - performance
       - style
   govet:
-    check-shadowing: true
+    enable-all: true
     shadow:
       strict: true
   nolintlint:
@@ -233,7 +228,7 @@ linters:
   disable-all: true
   enable:
     - bodyclose
-    - cyclop
+    - copyloopvar
     - depguard
     - dogsled
     - dupl
@@ -241,36 +236,32 @@ linters:
     - errchkjson
     - errname
     - errorlint
-    - exportloopref
     - exhaustive
     - goconst
     - gocritic
-    - gofmt
-    - gofumpt
-    - goimports
     - gosec
     - gosimple
     - govet
     - ineffassign
     - misspell
-    - nakedret
-    - nilnil
     - nolintlint
+    - nakedret
     - paralleltest
     - prealloc
     - predeclared
-    - reassign
     - staticcheck
     - stylecheck
-    - tagalign
     - thelper
+    - tparallel
+    - typecheck
     - unconvert
     - unparam
-    - usestdlibvars
+    - unused
     - whitespace
-    - wrapcheck
+
+run:
+  issues-exit-code: 1
 
 issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
+  exclude-dirs:
+    - internal
