@@ -1,0 +1,31 @@
+"ui.background" = "white"
+"ui.text" = "near_black"
+
+[palette]
+# Terminal palette in 0-15 order.
+# I took most of these from the following site:
+# https://sashamaps.net/docs/resources/20-colors/
+black = "#000000",
+dark_red = "#800000",
+dark_green = "#194a1f",
+dark_yellow = "#808000",
+dark_blue = "#000075",
+dark_magenta = "#8b008b",
+dark_cyan = "#469990",
+grey = "#c5c6c8",
+dark_grey = "#737373",
+red = "#d20f2c",
+green = "#3cb44d",
+yellow = "#ffe119",
+blue = "#4363d8",
+magenta = "#f032e6",
+cyan = "#42d4f4",
+white = "#ffffff",
+-- Additional colors
+near_black = "#090909",
+light_grey = "#f0f1f3",
+light_red = "#fabed4",
+light_green = "#aaffc3",
+light_yellow = "#fffac8",
+light_blue = "#d5e5f6",
+
