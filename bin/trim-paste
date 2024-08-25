@@ -1,3 +1,0 @@
-#!/usr/bin/env dash
-
-pbpaste | tr -d '+' | tr '\n' ' ' | tr -s [:space:] | pbcopy
