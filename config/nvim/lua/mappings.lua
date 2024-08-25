@@ -108,21 +108,30 @@ keymap_set("n", "dd", function()
 end, extended_opts)
 
 -- Lazy mappings for nvim-snippy
-keymap_set({ "i", "s" }, "<tab>", function()
+keymap_set({ "i", "s" }, "<Tab>", function()
     if require("snippy").can_expand_or_advance() then
         return "<Plug>(snippy-expand-or-advance)"
     end
     return "<Tab>"
 end, extended_opts)
-keymap_set({ "i", "s" }, "<s-tab>", function()
+keymap_set({ "i", "s" }, "<S-Tab>", function()
     if require("snippy").can_jump(-1) then
         return "<Plug>(snippy-previous)"
     end
     return "<S-Tab>"
 end, extended_opts)
-keymap_set("x", "<Tab>", "<Plug>(snippy-cut-text)")
-keymap_set("n", "g<Tab>", "<Plug>(snippy-cut-text)")
+keymap_set("x", "<Leader>x", "<Plug>(snippy-cut-text)", default_opts)
+keymap_set("n", "<Leader>x", "<Plug>(snippy-cut-text)", default_opts)
 
 -- Simplify getting out of pairs like `()`, `[]`, and so on.
 -- Enter CTRL-CR, and it will move out of common pair endings.
 keymap_set("i", "<C-CR>", require("pairs").leap, default_opts)
+
+-- TODO: paste from the unnamed register without overwriting the contents of
+-- that register.
+keymap_set(
+    "x",
+    "<Leader>p",
+    [[p:if v:register == '"'<Bar>let @@=@0<Bar>endif<CR>]],
+    default_opts
+)
