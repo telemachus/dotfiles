@@ -43,6 +43,7 @@ make || exit 1
 rm -rf "$VIM_HOME"
 make install
 
-vbundleup
+vim -es -u ${HOME}/.vim/headless-plug.vim -i NONE \
+	-c "PlugInstall" -c "PlugUpdate" -c "PlugClean" -c "qa"
 
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :

@@ -85,8 +85,8 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
+set colorcolumn=79
 colorscheme minimum
-set colorcolumn=89
 
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
@@ -95,6 +95,3 @@ set iskeyword+=-
 
 let g:mapleader=' '
 let g:localleader=' '
-
-" Testing these out before adding them to vim-dotfiles
-let g:black_virtualenv = '~/.local/pipx/venvs/black'
