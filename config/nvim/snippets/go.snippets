@@ -152,7 +152,8 @@ snippet cmpDiff "if diff := cmp.Diff(want, got)..." b
 # call t.Run with an anonymous function
 snippet trun "t.Run(message, func(t *testing.T) { ... })"
 	t.Run(${1:"${2:message}"}, func(t *testing.T) {
-		$3
+		t.Parallel()
+		${3:${TM_SELECTED_TEXT:// body}}
 	})
 # call t.Run with a named function
 snippet trunn "t.Run(message, functionName)"
