@@ -6,10 +6,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter-textobjects",
-    {
-        "nvim-treesitter/nvim-treesitter",
-        branch = "fix/matches",
-    },
+    "nvim-treesitter/nvim-treesitter",
     "savq/paq-nvim",
     "stevearc/conform.nvim",
     "stevearc/oil.nvim",
