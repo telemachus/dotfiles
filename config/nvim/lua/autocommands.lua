@@ -93,21 +93,6 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
----Close open floating window with one keystroke.
----@param base_win_id integer
-local hover_close = function(base_win_id)
-    local windows = vim.api.nvim_tabpage_list_wins(0)
-    for _, win_id in ipairs(windows) do
-        if win_id ~= base_win_id then
-            local win_cfg = vim.api.nvim_win_get_config(win_id)
-            if win_cfg.relative == "win" and win_cfg.win == base_win_id then
-                vim.api.nvim_win_close(win_id, false)
-                break
-            end
-        end
-    end
-end
-
 -- Add keybindings to a buffer when LSP attaches.
 create_autocmd("LspAttach", {
     callback = function(ev)
@@ -117,13 +102,14 @@ create_autocmd("LspAttach", {
 
         -- TODO: remove any of these that are now defaults.
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
+        -- Jump to definition of item under cursor.
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
+        -- Jump to definition of item under cursor, but in a split.
         keymap_set("n", "gs", "<C-w>]", keymap_opts)
+        -- Start rename action for item under cursor.
         keymap_set("n", "R", lsp.buf.rename, keymap_opts)
+        -- Go to the definition of the type under cursor.
         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
-        keymap_set("n", "<Leader>;", function()
-            hover_close(nvim_get_current_win())
-        end, keymap_opts)
     end,
 })
 
