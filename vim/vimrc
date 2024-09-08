@@ -3,7 +3,6 @@ scriptencoding utf-8
 
 " You need to set the background *before* you enable syntax.
 " See :help 'background'.
-set background=light
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -85,8 +84,15 @@ set statusline=[%<%.20f][%{&fenc==''?&enc:&fenc}]%y%m%r%h
 set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
+set background=light
 set colorcolumn=79
 colorscheme minimum
+
+if has('gui')
+    set guicursor=n-v-c-sm:block-blinkwait900-blinkoff900-blinkon900,i-ci-ve:ver25-Cursor-blinkwait900-blinkoff900-blinkon900
+    set guifont=Consolas:h16
+    set rows=40 columns=90
+endif
 
 set printoptions:paper:letter,header:0,syntax:n
 set printfont:Consolas
