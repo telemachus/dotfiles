@@ -101,3 +101,15 @@ set iskeyword+=-
 
 let g:mapleader=' '
 let g:localleader=' '
+
+" Put things here that eventually belong in vim-dotfiles if I keep them.
+let chars = {
+        \ '"': v:true,
+        \ "'": v:true,
+        \ ')': v:true,
+        \ '}': v:true,
+        \ }
+inoremap <silent> <expr> <C-CR>
+        \ get(chars, strpart(getline('.'), col('.')-1, 1), v:false)
+        \ ? '<Right>'
+        \ : '<C-CR>'
