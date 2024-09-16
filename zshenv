@@ -50,11 +50,6 @@ if [[ -d $HOME/local/lua-language-server/bin ]]; then
     PATH="${HOME}/local/lua-language-server/bin:${PATH}"
 fi
 
-# pipx
-if [[ -d ${HOME}/.local/bin ]]; then
-    PATH="${PATH}:${HOME}/.local/bin"
-fi
-
 # rust
 [[ -r $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
 
@@ -68,9 +63,12 @@ if [[ -d $HOME/local/lua ]]; then
     PATH="${HOME}/local/lua/bin:${PATH}"
 fi
 
-# fzf probably lives in $HOME/.fzf
-if [[ -d $HOME/.fzf/bin ]]; then
-    PATH=${PATH}:$HOME/.fzf/bin
+# pipx, rust-analyzer and (possibly) others live in ~/.local/bin
+# I need this to end up *before* the cargo/rustup PATH.
+# See the following discussion on GitHub for why:  https://bit.ly/3MESyZ3.
+# TODO: investigate what ~/.cargo/env does to PATH.
+if [[ -d ${HOME}/.local/bin ]]; then
+    PATH="${HOME}/.local/bin:${PATH}"
 fi
 
 export PATH
