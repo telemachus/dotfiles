@@ -6,9 +6,7 @@ local cmd = vim.cmd
 local lsp = vim.lsp
 local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
-local nvim_get_current_win = vim.api.nvim_get_current_win
 local on_yank = vim.highlight.on_yank
-
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
 -- Highlight searches while searching, but not while moving over matches.
