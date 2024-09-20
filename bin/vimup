@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
-set -euo pipefail
+set -u
 
 VIM_HOME="$HOME/local/vim"
 BUILD_ROOT="$HOME/Downloads/src"
@@ -8,42 +8,97 @@ BUILD_FULL="$HOME/Downloads/src/vim"
 BUILD_SOURCE="${BUILD_FULL}/src"
 
 if [ ! -d "$BUILD_ROOT" ]; then
-	mkdir -p "$BUILD_ROOT"
+    mkdir -p "$BUILD_ROOT" ||
+        {
+            printf >&2 "Early exit: mkdir -p %s failed\n" "$BUILD_ROOT"
+            exit 1
+        }
 fi
 
-cd "$BUILD_ROOT" || exit 1
+cd "$BUILD_ROOT" ||
+    {
+        printf >&2 "Early exit: cd into %s failed\n" "$BUILD_ROOT"
+        exit 1
+    }
+
 if [ ! -d "$BUILD_FULL" ]; then
-	git clone https://github.com/vim/vim.git
+    git clone https://github.com/vim/vim.git ||
+        {
+            printf >&2 "Early exit: git clone failed\n"
+            exit 1
+        }
 fi
 
-cd "$BUILD_FULL" || exit 1
-git pull
+cd "$BUILD_FULL" ||
+    {
+        printf >&2 "Early exit: cd into %s failed\n" "$BUILD_FULL"
+        exit 1
+    }
+git pull ||
+    {
+        printf >&2 "Early exit: git pull failed\n"
+        exit 1
+    }
 
-cd "$BUILD_SOURCE" || exit 1
-make clean distclean
+cd "$BUILD_SOURCE" ||
+    {
+        printf >&2 "Early exit: cd %s failed\n" "$BUILD_SOURCE"
+        exit 1
+    }
+
+if [ X"$1" = X"--clean" ]; then
+    make clean ||
+        {
+            printf >&2 "Early exit: make clean failed\n"
+            exit 1
+        }
+fi
+
 ./configure --prefix="$VIM_HOME" \
-	--enable-fail-if-missing \
-	--enable-multibyte \
-	--with-compiledby="Peter Aronoff <peteraronoff@fastmail.com>" \
-	--enable-cscope \
-	--enable-terminal \
-	--enable-gui=no \
-	--without-x \
-	--enable-fontset \
-	--enable-largefile \
-	--disable-smack \
-	--disable-selinux \
-	--disable-xattr \
-	--disable-xsmp \
-	--disable-xsmp-interact \
-	--disable-nls \
-	--disable-canberra \
+    --enable-fail-if-missing \
+    --enable-multibyte \
+    --with-compiledby="Peter Aronoff <peteraronoff@fastmail.com>" \
+    --enable-cscope \
+    --enable-terminal \
+    --enable-gui=no \
+    --without-x \
+    --enable-fontset \
+    --enable-largefile \
+    --disable-smack \
+    --disable-selinux \
+    --disable-xattr \
+    --disable-xsmp \
+    --disable-xsmp-interact \
+    --disable-nls \
+    --disable-canberra ||
+    {
+        printf >&2 "Early exit: ./configure failed\n"
+        exit 1
+    }
 
-make || exit 1
-rm -rf "$VIM_HOME"
-make install
+make ||
+    {
+        printf >&2 "Early exit: make failed\n"
+        exit 1
+    }
 
-vim -es -u ${HOME}/.vim/headless-plug.vim -i NONE \
-	-c "PlugInstall" -c "PlugUpdate" -c "PlugClean" -c "qa"
+rm -rf "$VIM_HOME" ||
+    {
+        printf >&2 "Early exit: rm -rf %s failed\n" "$VIM_HOME"
+        exit 1
+    }
 
-# vim: set ts=8 sw=8 tw=0 noet ft=sh :
+make install ||
+    {
+        printf >&2 "Early exit: make install failed\n"
+        exit 1
+    }
+
+vim -es -u "${HOME}/.vim/headless-plug.vim" -i NONE \
+    -c "PlugInstall" -c "PlugUpdate" -c "PlugClean" -c "qa" ||
+    {
+        printf >&2 "Early exit: headless-plug.vim failed\n"
+        exit 1
+    }
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
