@@ -1,8 +1,7 @@
 local bo = vim.bo
 local wo = vim.wo
 
-bo.textwidth = 78
-wo.colorcolumn = "79"
+bo.textwidth = 80
 wo.list = true
 wo.showbreak = "↪"
 bo.tabstop = 8

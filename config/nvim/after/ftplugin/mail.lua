@@ -7,7 +7,6 @@ wo.statuscolumn = ""
 bo.comments = ""
 bo.formatoptions = "1tn"
 bo.textwidth = 72
-wo.colorcolumn = "73"
 wo.list = true
 wo.spell = true
 wo.signcolumn = "no"

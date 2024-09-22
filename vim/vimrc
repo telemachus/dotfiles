@@ -85,7 +85,7 @@ set statusline+=%=%([Line:\ %l\ Column:\ %c\ %P]%)
 
 set termguicolors
 set background=light
-set colorcolumn=79
+set colorcolumn=+1
 colorscheme minimum
 
 if has('gui')

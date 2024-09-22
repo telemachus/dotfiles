@@ -1,5 +1,4 @@
 local bo = vim.bo
-local wo = vim.wo
 local create_namespace = vim.api.nvim_create_namespace
 local set_highlight_namespace = vim.api.nvim_set_hl_ns
 local matchadd = vim.fn.matchadd
@@ -10,7 +9,6 @@ bo.softtabstop = 4
 bo.shiftwidth = 4
 bo.expandtab = true
 bo.textwidth = 88
-wo.colorcolumn = "89"
 
 local ns = create_namespace("myPython")
 set_highlight_namespace(ns)

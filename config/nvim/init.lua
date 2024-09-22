@@ -206,7 +206,7 @@ o.guicursor = join({
     "r-cr-o:hor20",
 }, ",")
 cmd("colorscheme minimum")
-o.colorcolumn = "89"
+o.colorcolumn = "+1"
 
 o.iskeyword = o.iskeyword .. ",-"
 
