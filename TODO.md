@@ -1,11 +1,10 @@
 # TODO
 
-## 2023-11-16
+## 2024-09-22
 
 ### Immediate
 
-+ Revise nvim-link.sh. Link the entire config directory to ~/.config.
-+ Polish and clean up init.lua.
++ Add `-h|-?|--help` options with a brief usage message to neoup and vimup.
 
 ### Eventually
 
@@ -13,5 +12,3 @@
   others.
 + Add better error handling in all shell scripts.
 + Use shellcheck on all shell scripts.
-+ Reconsider macOS.sh.  Do I want that at all anymore?
-+ Investigate how to get matchit support for curly quotes.
