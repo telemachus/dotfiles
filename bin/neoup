@@ -2,72 +2,43 @@
 
 set -u
 
-NEO_HOME="$HOME/local/neovim"
-BUILD_ROOT="$HOME/Downloads/src"
-BUILD_FULL="$HOME/Downloads/src/neovim"
-
-for DEP in ninja cmake gettext curl git; do
-    hash "$DEP" 2>/dev/null ||
-        {
-            printf >&2 "Early exit: %s not installed\n" "$DEP"
-            exit 1
-        }
-done
-
-if [ ! -d "$BUILD_ROOT" ]; then
-    mkdir -p "$BUILD_ROOT" ||
-        {
-            printf >&2 "Early exit: can't create %s\n" "$BUILD_ROOT"
-            exit 1
-        }
-fi
-
-cd "$BUILD_ROOT" ||
-    {
-        printf >&2 "Early exit: can't cd into %s\n" "$BUILD_ROOT"
-        exit 1
-    }
-if [ ! -d "$BUILD_FULL" ]; then
-    git clone https://github.com/neovim/neovim.git ||
-        {
-            printf >&2 "Early exit: can't clone neovim\n"
-            exit 1
-        }
-fi
-
-cd "$BUILD_FULL" ||
-    {
-        printf >&2 "Early exit: can't cd into %s\n" "$BUILD_FULL"
-        exit 1
-    }
-git pull || {
-    printf >&2 "Early exit: can't 'git pull'\n"
+die() {
+    printf >&2 '%s: %s\n' "${0##*/}" "$1"
     exit 1
 }
 
-if [ X"$1" = X"--clean" ]; then
-    make distclean ||
-        {
-            printf >&2 "Early exit: can't 'make distclean'\n"
-            exit 1
-        }
+BUILD_ROOT="${HOME}/Downloads/src"
+BUILD_FULL="${BUILD_ROOT}/neovim"
+GIT_REPO='https://github.com/neovim/neovim.git'
+INSTALL_DIR="${HOME}/local/neovim"
+
+for DEP in ninja cmake gettext curl git; do
+    hash "$DEP" 2>/dev/null || die "$(printf 'missing requirement: %s' "$DEP")"
+done
+
+if [ ! -d "$BUILD_ROOT" ]; then
+    mkdir -p "$BUILD_ROOT" || die "$(printf '`mkdir -p %s` failed' "$BUILD_ROOT")"
 fi
+cd "$BUILD_ROOT" || die "$(printf '`cd %s` failed' "$BUILD_ROOT")"
 
-make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$NEO_HOME" ||
-    {
-        printf >&2 "Early exit: can't build neovim\n"
-        exit 1
-    }
-rm -rf "$NEO_HOME" ||
-    {
-        printf >&2 "Early exit: can't remove old %s\n" "$NEO_HOME"
-        exit 1
-    }
-make install
+if [ ! -d "$BUILD_FULL" ]; then
+    git clone "$GIT_REPO" || die "$(printf '`git clone %s` failed' "$GIT_REPO")"
+fi
+cd "$BUILD_FULL" || die "$(printf '`cd %s` failed' "$BUILD_FULL")"
+git pull || die '`git pull` failed'
 
-# nbundleup
-nvim --headless -u NONE -c 'lua require("headless").install()'
-nvim --headless -u NONE -c 'lua require("headless").update()'
-nvim --headless -u NONE -c 'lua require("headless").clean()'
+if [ X"${1:-}" = X"--clean" ]; then
+    make distclean || die '`make distclean` failed'
+fi
+make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$INSTALL_DIR" ||
+    die '`make` failed'
+rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
+make install || die '`make install` failed'
+
+{
+    nvim --headless -u NONE -c 'lua require("headless").install()'
+    nvim --headless -u NONE -c 'lua require("headless").update()'
+    nvim --headless -u NONE -c 'lua require("headless").clean()'
+} || die 'paq failed'
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
