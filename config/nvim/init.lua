@@ -303,14 +303,6 @@ safe_setup("conform", {
     },
 })
 
----Disable semantic highlighting for a given `client`.
----
----Idea and code taken from https://bit.ly/3Y7bA0V.
----@param client vim.lsp.Client
-local function disable_semantic_highlighting(client)
-    client.server_capabilities.semanticTokensProvider = nil
-end
-
 -- Fix a bug for ENOENT with gopls+workspaces.
 -- Code taken from https://bit.ly/3ZykMw9.
 local make_client_capabilities = vlsp.protocol.make_client_capabilities
@@ -329,7 +321,7 @@ if lsp_loaded then
     -- gopls: https://github.com/golang/tools/tree/master/gopls
     lspconfig.gopls.setup({
         on_init = function(client)
-            disable_semantic_highlighting(client)
+            client.server_capabilities.semanticTokensProvider = nil
         end,
         settings = { gofumpt = true },
     })
@@ -337,7 +329,7 @@ if lsp_loaded then
     -- lua-language-server: https://luals.github.io
     lspconfig.lua_ls.setup({
         on_init = function(client)
-            disable_semantic_highlighting(client)
+            client.server_capabilities.semanticTokensProvider = nil
         end,
         settings = {
             Lua = {
