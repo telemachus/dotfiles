@@ -7,6 +7,7 @@ local o = vim.o
 local join = table.concat
 local fmt = string.format
 local notify = vim.notify
+local vlsp = vim.lsp
 
 g.mapleader = " "
 g.localmapleader = " "
@@ -308,6 +309,18 @@ safe_setup("conform", {
 ---@param client vim.lsp.Client
 local function disable_semantic_highlighting(client)
     client.server_capabilities.semanticTokensProvider = nil
+end
+
+-- Fix a bug for ENOENT with gopls+workspaces.
+-- Code taken from https://bit.ly/3ZykMw9.
+local make_client_capabilities = vlsp.protocol.make_client_capabilities
+function vlsp.protocol.make_client_capabilities()
+    local caps = make_client_capabilities()
+    if caps.workspace and caps.workspace.didChangeWatchedFiles then
+        caps.workspace.didChangeWatchedFiles = nil
+    end
+
+    return caps
 end
 
 -- https://github.com/neovim/nvim-lspconfig.git
