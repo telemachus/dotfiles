@@ -422,3 +422,13 @@ safe_require("lsp")
 safe_require("autocommands")
 safe_require("mappings")
 safe_require("commands")
+
+-- Argh: stupid and unhelpful warnings on nightly.
+-- Keep this until https://github.com/neovim/neovim/pull/30382 is merged.
+local old_notify = vim.notify
+function vim.notify(msg, level)
+    if msg:find("WARNING: vim.treesitter.get_parser") then
+        return
+    end
+    old_notify(msg, level)
+end
