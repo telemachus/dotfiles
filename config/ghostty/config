@@ -78,3 +78,6 @@ window-width = 90
 
 # auto-update = { check, download, off }
 auto-update = download
+
+# Hide the mouse immediately when typing.
+mouse-hide-while-typing = true
