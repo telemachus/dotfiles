@@ -20,6 +20,25 @@ local win_close = vim.api.nvim_win_close
 local o = vim.o
 local keymap_set = vim.keymap.set
 
+-- Fix a bug for ENOENT with gopls+workspaces.
+-- Code taken from https://bit.ly/3ZykMw9.
+--
+-- I am also using this to completely stop semantic token highlighting. This is
+-- probably overkill, but so what?
+local make_client_capabilities = vim.lsp.protocol.make_client_capabilities
+function vim.lsp.protocol.make_client_capabilities()
+    local caps = make_client_capabilities()
+    if caps.workspace then
+        caps.workspace.didChangeWatchedFiles = nil
+        caps.workspace.semanticTokens = nil
+    end
+    if caps.textDocument then
+        caps.textDocument.semanticTokens = nil
+    end
+
+    return caps
+end
+
 -- Turn off diagnostics altogether.
 -- TODO: write a function to toggle this.
 -- lsp.handlers["textDocument/publishDiagnostics"] = function() end

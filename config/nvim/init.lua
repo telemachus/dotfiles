@@ -7,7 +7,6 @@ local o = vim.o
 local join = table.concat
 local fmt = string.format
 local notify = vim.notify
-local vlsp = vim.lsp
 
 g.mapleader = " "
 g.localmapleader = " "
@@ -303,34 +302,22 @@ safe_setup("conform", {
     },
 })
 
--- Fix a bug for ENOENT with gopls+workspaces.
--- Code taken from https://bit.ly/3ZykMw9.
-local make_client_capabilities = vlsp.protocol.make_client_capabilities
-function vlsp.protocol.make_client_capabilities()
-    local caps = make_client_capabilities()
-    if caps.workspace and caps.workspace.didChangeWatchedFiles then
-        caps.workspace.didChangeWatchedFiles = nil
-    end
-
-    return caps
-end
-
 -- https://github.com/neovim/nvim-lspconfig.git
+-- Require my LSP tweaks here since some LSP setup seems order dependent.
+safe_require("lsp")
 local lsp_loaded, lspconfig = safe_require("lspconfig")
 if lsp_loaded then
+    lspconfig.util.default_config.on_init = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+    end
+
     -- gopls: https://github.com/golang/tools/tree/master/gopls
     lspconfig.gopls.setup({
-        on_init = function(client)
-            client.server_capabilities.semanticTokensProvider = nil
-        end,
         settings = { gofumpt = true },
     })
 
     -- lua-language-server: https://luals.github.io
     lspconfig.lua_ls.setup({
-        on_init = function(client)
-            client.server_capabilities.semanticTokensProvider = nil
-        end,
         settings = {
             Lua = {
                 runtime = {
@@ -410,7 +397,6 @@ safe_setup("oil", {
 })
 
 safe_require("filetypes")
-safe_require("lsp")
 safe_require("autocommands")
 safe_require("mappings")
 safe_require("commands")
