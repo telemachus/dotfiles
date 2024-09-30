@@ -294,6 +294,7 @@ safe_setup("conform", {
         python = { "isort", "black" },
         sh = { "shfmt" },
         sql = { "sleek" },
+        rust = { "rustfmt" },
     },
     formatters = {
         shfmt = {
@@ -338,6 +339,9 @@ if lsp_loaded then
             },
         },
     })
+
+    -- rust-analyzer: https://github.com/rust-lang/rust-analyzer
+    lspconfig.rust_analyzer.setup({})
 end
 
 -- https://github.com/telemachus/autoclose.nvim.git
