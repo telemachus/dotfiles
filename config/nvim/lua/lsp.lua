@@ -17,7 +17,6 @@ local buf_call = vim.api.nvim_buf_call
 local nvim_cmd = vim.api.nvim_cmd
 local exec_autocmds = vim.api.nvim_exec_autocmds
 local win_close = vim.api.nvim_win_close
-local o = vim.o
 local keymap_set = vim.keymap.set
 
 -- Fix a bug for ENOENT with gopls+workspaces.
@@ -67,6 +66,7 @@ diagnostic.config({ float = { border = _border } })
 -- + https://github.com/folke/noice.nvim
 -- + https://bit.ly/3ZkGCmD
 -- + https://github.com/neovim/neovim/issues/27288
+-- + https://github.com/neovim/neovim/issues/20146
 
 --- Return the height of the buffer in the window
 ---@param win_id integer
@@ -155,8 +155,8 @@ local float_handler = function(handler, focusable)
             vim.tbl_deep_extend("force", cfg or {}, {
                 border = "rounded",
                 focusable = focusable,
-                max_height = math.floor(o.lines * 0.5),
-                max_width = math.floor(o.columns * 0.4),
+                -- max_height = math.floor(vim.o.lines * 0.5),
+                -- max_width = math.floor(vim.o.columns * 0.85),
             })
         )
 
@@ -165,8 +165,10 @@ local float_handler = function(handler, focusable)
             return
         end
 
-        -- Set the window's scrolloffset to 0.
+        -- Don't add screen lines above or below the cursor, and don't indicate
+        -- wrapping with the 'showbreak' character.
         wo[win_id].scrolloff = 0
+        wo[win_id].showbreak = "NONE"
 
         -- Turn off conceal.
         -- TODO: decide how I want to handle conceal here.

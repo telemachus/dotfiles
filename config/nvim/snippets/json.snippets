@@ -1,1 +1,7 @@
 extends student
+
+snippet repo "repo object for a gitmirror.json file" b
+	{
+		"url": "$1",
+		"name": "${2:${1/\(.*\)\/\(.*\)/\2/}}"
+	}${0:,}
