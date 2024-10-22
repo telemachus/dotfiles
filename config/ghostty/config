@@ -80,4 +80,7 @@ window-width = 90
 auto-update = download
 
 # Hide the mouse immediately when typing.
-mouse-hide-while-typing = true
+mouse-hide-while-typing = false
+
+keybind="ctrl+tab=next_tab"
+keybind="ctrl+shift+tab=previous_tab"
