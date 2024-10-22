@@ -1,14 +1,26 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
-go install github.com/kisielk/errcheck@latest || exit 1
-go install github.com/rogpeppe/godef@latest || exit 1
-go install golang.org/x/tools/cmd/goimports@latest || exit 1
-go install github.com/mgechev/revive@latest || exit 1
-go install golang.org/x/tools/gopls@latest || exit 1
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest || exit 1
-go install honnef.co/go/tools/cmd/staticcheck@latest || exit 1
-go install golang.org/x/tools/cmd/gorename@latest || exit 1
-go install github.com/fatih/motion@latest || exit 1
-go install mvdan.cc/gofumpt@latest || exit 1
-go install github.com/segmentio/golines@latest || exit 1
-go install golang.org/x/tools/cmd/godoc@latest || exit 1
+warn() {
+    printf >&2 '%s: %s\n' "${0##*/}" "$1"
+}
+
+go install github.com/kisielk/errcheck@latest ||
+    warn "failed to install errcheck"
+go install github.com/rogpeppe/godef@latest ||
+    warn "failed to install godef"
+go install golang.org/x/tools/cmd/goimports@latest ||
+    warn "failed to install goimports"
+go install github.com/mgechev/revive@latest ||
+    warn "failed to install revive"
+go install golang.org/x/tools/gopls@latest ||
+    warn "failed to install gopls"
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest ||
+    warn "failed to install golangci-lint"
+go install honnef.co/go/tools/cmd/staticcheck@latest ||
+    warn "failed to install staticcheck"
+go install mvdan.cc/gofumpt@latest ||
+    warn "failed to install gofumpt"
+go install github.com/segmentio/golines@latest ||
+    warn "failed to install golines"
+go install golang.org/x/tools/cmd/godoc@latest ||
+    warn "failed to install godoc"
