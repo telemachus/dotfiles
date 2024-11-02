@@ -62,7 +62,7 @@ o.completeopt = "menuone,noinsert,preview"
 o.signcolumn = "yes"
 o.mouse = ""
 
-o.showcmd = true
+o.showcmd = false
 o.showmode = true
 
 o.shell = "bash"
