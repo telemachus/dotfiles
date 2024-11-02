@@ -10,7 +10,7 @@ local on_yank = vim.highlight.on_yank
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
 -- Highlight searches while searching, but not while moving over matches.
--- Taken from :help incsearch. This should be the default.
+-- Taken from :help incsearch.  This should be the default.
 create_autocmd("CmdlineEnter", {
     pattern = { "/", "?" },
     callback = function()
@@ -40,7 +40,7 @@ create_autocmd("Filetype", {
 
 -- Highlight cursor line briefly when neovim regains focus.  This helps to
 -- reorient the user and tell them where they are in the buffer.
--- Stolen from https://developer.ibm.com/tutorials/l-vim-script-5
+-- See https://developer.ibm.com/tutorials/l-vim-script-5 for the inspiration.
 create_autocmd("FocusGained", {
     pattern = "*",
     callback = function()
@@ -54,7 +54,7 @@ create_autocmd("FocusGained", {
     group = telemachus_augroup,
 })
 
--- For conform.nvim: format on save.
+-- Format on save using conform.nvim.
 create_autocmd("BufWritePre", {
     pattern = { "*" },
     callback = function(args)
@@ -63,14 +63,14 @@ create_autocmd("BufWritePre", {
     group = telemachus_augroup,
 })
 
--- Open quickfix window automatically. TODO: add items to pattern.
+-- Open quickfix window automatically.  TODO: add items to pattern.
 create_autocmd("QuickFixCmdPost", {
     pattern = "cgetexpr",
     command = ":cwindow",
     group = telemachus_augroup,
 })
 
--- Open location list window automatically. TODO: add items to pattern.
+-- Open location list window automatically.  TODO: add items to pattern.
 create_autocmd("QuickFixCmdPost", {
     pattern = "lgetexpr",
     command = ":lwindow",
@@ -98,7 +98,6 @@ create_autocmd("LspAttach", {
         -- reformatting comments.
         bo[ev.buf].formatexpr = nil
 
-        -- TODO: remove any of these that are now defaults.
         local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
         -- Jump to definition of item under cursor.
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
@@ -109,6 +108,7 @@ create_autocmd("LspAttach", {
         -- Go to the definition of the type under cursor.
         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
     end,
+    group = telemachus_augroup,
 })
 
 -- Call goimports via gopls on write.

@@ -1,6 +1,4 @@
-local lsp = vim.lsp
 local diagnostic = vim.diagnostic
-local _border = "rounded"
 local win_get_buf = vim.api.nvim_win_get_buf
 local wo = vim.wo
 local buf_line_count = vim.api.nvim_buf_line_count
@@ -19,12 +17,17 @@ local exec_autocmds = vim.api.nvim_exec_autocmds
 local win_close = vim.api.nvim_win_close
 local keymap_set = vim.keymap.set
 
+-- Make diagnostics much less noisy.
+-- TODO: write a function to toggle (some of?) these settings.
+diagnostic.config({ signs = false, underline = false, virtual_text = false })
+
 -- Fix a bug for ENOENT with gopls+workspaces.
 -- Code taken from https://bit.ly/3ZykMw9.
 --
--- I am also using this to completely stop semantic token highlighting. This is
+-- I am also using this to completely stop semantic token highlighting.  This is
 -- probably overkill, but so what?
 local make_client_capabilities = vim.lsp.protocol.make_client_capabilities
+---@diagnostic disable-next-line: duplicate-set-field
 function vim.lsp.protocol.make_client_capabilities()
     local caps = make_client_capabilities()
     if caps.workspace then
@@ -38,37 +41,18 @@ function vim.lsp.protocol.make_client_capabilities()
     return caps
 end
 
--- Turn off diagnostics altogether.
--- TODO: write a function to toggle this.
--- lsp.handlers["textDocument/publishDiagnostics"] = function() end
-
--- Make diagnostics much less noisy by default.
--- TODO: write a function to toggle (some of?) these settings.
-diagnostic.config({ signs = true, underline = false, virtual_text = false })
-
--- Add borders to floating windows in the LSP.
--- Thanks to this post for the code: https://vi.stackexchange.com/a/39075.
-lsp.handlers["textDocument/hover"] =
-    lsp.with(lsp.handlers.hover, { border = _border })
-
-lsp.handlers["textDocument/signatureHelp"] =
-    lsp.with(lsp.handlers.signature_help, { border = _border })
-
-diagnostic.config({ float = { border = _border } })
-
--- Wrap neovim's vim.lsp.handlers.hover. This allows us to change some of its
--- default settings and add keymaps that require information we can't easily get
--- at otherwise.
+-- Wrap neovim's floating windows.  This allows us to change some settings
+-- and add keymaps that require information we can't get at otherwise.
 --
--- The code comes from noice.nvim, a user's dotfiles, and a GitHub issue—all
--- are linked below.
+-- The code was inspired by noice.nvim, a user's dotfiles, and two GitHub
+-- issues.  See links below for details.
 --
 -- + https://github.com/folke/noice.nvim
--- + https://bit.ly/3ZkGCmD
+-- + https://bit.ly/3YyX54v
 -- + https://github.com/neovim/neovim/issues/27288
 -- + https://github.com/neovim/neovim/issues/20146
 
---- Return the height of the buffer in the window
+---Return the height of the buffer in the window.
 ---@param win_id integer
 ---@return integer
 local win_buf_height = function(win_id)
@@ -87,6 +71,7 @@ local win_buf_height = function(win_id)
     for _, line in ipairs(lines) do
         height = height + math.max(1, (math.ceil(str_width(line) / width)))
     end
+
     return height
 end
 
@@ -94,25 +79,27 @@ local escape_keycodes = function(str)
     return replace_termcodes(str, true, true, true)
 end
 
---- Scroll the window by delta lines
+---Scroll the window by a given number of lines.
 ---@param win_id integer
----@param delta integer
-local scroll = function(win_id, delta)
+---@param num integer
+local scroll = function(win_id, num)
+    -- Delete the keymaps on "<C-f>" and "<C-b>" after the hover closes.
     if not win_is_valid(win_id) then
         keymap_del("n", "<C-f>", { buffer = true })
         keymap_del("n", "<C-b>", { buffer = true })
-        if delta > 0 then
+        if num > 0 then
             feedkeys(escape_keycodes("<C-f>"))
         else
             feedkeys(escape_keycodes("<C-b>"))
         end
+
         return
     end
 
     local info = get_win_info(win_id)[1] or {}
     local top = info.topline or 1
     local buf = win_get_buf(win_id)
-    top = top + delta
+    top = top + num
     top = math.max(top, 1)
     top = math.min(top, win_buf_height(win_id) - info.height + 1)
 
@@ -134,35 +121,28 @@ end
 ---Close a floating window without entering it.
 ---@param win_id integer
 local close_window = function(win_id)
+    -- Delete the keymap on "<Leader>;" after the hover closes.
     if not win_is_valid(win_id) then
         keymap_del("n", "<Leader>;", { buffer = true })
         feedkeys(escape_keycodes("<Leader>;"))
+
         return
     end
+
     win_close(win_id, false)
 end
 
---- Wrap the default LSP floating window handlers in order to customize them.
----@param handler fun(err: any, res: any, ctx: any, cfg: any): integer?, integer?
----@param focusable boolean
----@return fun(err: any, result: any, ctx: any, cfg: any)
-local float_handler = function(handler, focusable)
-    return function(err, result, ctx, cfg)
-        local buf_id, win_id = handler(
-            err,
-            result,
-            ctx,
-            vim.tbl_deep_extend("force", cfg or {}, {
-                border = "rounded",
-                focusable = focusable,
-                -- max_height = math.floor(vim.o.lines * 0.5),
-                -- max_width = math.floor(vim.o.columns * 0.85),
-            })
-        )
+---Wrap the function that opens floating windows in order to customize them.
+---@param opener fun(contents: table, syntax: string, opts: table): integer?, integer?
+---@return fun(contents: table, syntax: string, opts: table): integer?, integer?
+local float_wrapper = function(opener)
+    return function(contents, syntax, opts)
+        opts = vim.tbl_deep_extend("force", opts, { border = "rounded" })
+        local buf_id, win_id = opener(contents, syntax, opts)
 
         -- Return if the buffer or window is not created.
         if not buf_id or not win_id then
-            return
+            return buf_id, win_id
         end
 
         -- Don't add screen lines above or below the cursor, and don't indicate
@@ -170,11 +150,15 @@ local float_handler = function(handler, focusable)
         wo[win_id].scrolloff = 0
         wo[win_id].showbreak = "NONE"
 
-        -- Turn off conceal.
         -- TODO: decide how I want to handle conceal here.
-        wo[win_id].concealcursor = "n"
         -- wo[win_id].conceallevel = 0
+        wo[win_id].concealcursor = "n"
 
+        -- Add custom keymaps: Ctrl-F and Ctrl-B for scrolling the hover window
+        -- and <Leader>; to close the hover window.
+        --
+        -- The inner functions delete the keymaps once the window id is no
+        -- longer valid.
         keymap_set("n", "<C-f>", function()
             scroll(win_id, 4)
         end, { silent = true, buffer = true })
@@ -184,9 +168,11 @@ local float_handler = function(handler, focusable)
         keymap_set("n", "<Leader>;", function()
             close_window(win_id)
         end, { silent = true, buffer = true })
+
+        return buf_id, win_id
     end
 end
 
-lsp.handlers["textDocument/hover"] = float_handler(lsp.handlers.hover, true)
-lsp.handlers["textDocument/signatureHelp"] =
-    float_handler(lsp.handlers.signature_help, false)
+local default_opener = vim.lsp.util.open_floating_preview
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.util.open_floating_preview = float_wrapper(default_opener)
