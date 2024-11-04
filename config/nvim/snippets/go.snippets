@@ -6,7 +6,12 @@ snippet : "v := value" b
 	$1 := $0
 # full variable declaration
 snippet var "var name type = expression" b
-	var ${1:name} ${2:type} = ${3:exp}
+	var ${1:name} = ${2:exp}
+# var ( ... )
+snippet vars "var ( ... )" b
+	var (
+		${1:name} = ${2:exp}
+	)
 # defer
 snippet df "defer someFunction()"
 	defer ${1:func}(${2}) b
@@ -52,10 +57,10 @@ snippet mn "func main() { ... }" b
 		${1}
 	}$0
 snippet con "single constant declaration" b
-	const ${1:name} ${2:type} = ${3:value}
+	const ${1:name} = ${2:value}
 snippet cons "multiple constants declaration" b
 	const (
-		${1:constant} ${2:type} = ${3:value}
+		${1:constant} = ${2:value}
 	)
 snippet interface "interface declaration" b
 	type ${1:name} interface {
