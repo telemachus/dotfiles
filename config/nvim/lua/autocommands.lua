@@ -26,9 +26,9 @@ create_autocmd("CmdlineLeave", {
     group = telemachus_augroup,
 })
 
--- Use only absolute line numbers when browsing help files.
+-- Use only absolute line numbers when browsing help and man files.
 create_autocmd("Filetype", {
-    pattern = { "help" },
+    pattern = { "help", "man" },
     callback = function()
         o.number = false
         o.relativenumber = false
