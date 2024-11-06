@@ -1,12 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
 
-set -euo pipefail
+# Only upgrade if the selfupdate succeeds.
+port selfupdate && port upgrade outdated
 
-port selfupdate && \
-	port upgrade outdated && \
-	port uninstall inactive && \
-	port_cutleaves
+# Unconditionally remove inactive ports and clean up ones I didn't request.
+port uninstall inactive
+port_cutleaves
 
+# Show the state of the port system.
 port diagnose
 
 # vim: set ts=8 sw=8 tw=0 noet ft=sh :
