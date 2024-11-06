@@ -22,5 +22,4 @@ return {
         "telemachus/refinery.nvim",
         branch = "setup",
     },
-    "telemachus/vim-colors-off",
 }
