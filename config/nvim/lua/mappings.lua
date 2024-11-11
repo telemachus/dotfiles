@@ -137,7 +137,11 @@ keymap_set(
 )
 
 -- Paste a characterwise yank as if it were linewise.
-keymap_set("n", "[p", require("paste").linewise_above, default_opts)
-keymap_set("n", "]p", require("paste").linewise_below, default_opts)
-keymap_set("n", "[c", require("paste").charwise_above, default_opts)
-keymap_set("n", "]c", require("paste").charwise_below, default_opts)
+keymap_set("n", "[p", function()
+    vim.go.operatorfunc = "v:lua.require'paste'.linewise_above"
+    return "g@l"
+end, extended_opts)
+keymap_set("n", "]p", function()
+    vim.go.operatorfunc = "v:lua.require'paste'.linewise_below"
+    return "g@l"
+end, extended_opts)
