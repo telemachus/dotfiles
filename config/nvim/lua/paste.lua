@@ -19,8 +19,8 @@ local charwise_above = function()
     adjust_paste(vim.v.register, "v", "P")
 end
 
-local charwise_above = function()
-    adjust_paste(vim.v.register, "v", "P")
+local charwise_below = function()
+    adjust_paste(vim.v.register, "v", "p")
 end
 
 return {
