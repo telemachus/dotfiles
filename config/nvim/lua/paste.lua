@@ -17,9 +17,11 @@ end
 local adjust_paste = function(reg_name, paste_type, paste_cmd, count)
     local reg_type = vim.fn.getregtype(reg_name)
     local body = vim.fn.getreg(reg_name)
-    -- By adding [ to the paste command, we get automatic indentation.
-    -- See `help [p`.
-    paste_cmd = "[" .. paste_cmd
+    if paste_cmd == "p" or paste_cmd == "P" then
+        -- By adding ] to the paste command, we get automatic indentation.
+        -- See `help ]p`.
+        paste_cmd = "]" .. paste_cmd
+    end
     vim.fn.setreg(reg_name, body, paste_type)
     vim.cmd('normal! "' .. reg_name .. count .. paste_cmd)
     vim.fn.setreg(reg_name, body, reg_type)
