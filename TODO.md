@@ -4,6 +4,7 @@
 
 ### Immediate
 
++ Add Root command to neovim.
 + Add `-h|-?|--help` options with a brief usage message to neoup and vimup.
 
 ### Eventually
