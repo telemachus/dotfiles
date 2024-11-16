@@ -51,24 +51,6 @@ keymap_set({ "n", "v" }, "Q", "gq", default_opts)
 local ternary_op = [[getcmdtype() == ':' ? expand('%:h') . '/' : '%%']]
 keymap_set("c", "%%", ternary_op, extended_opts)
 
--- From tpope's unimpaired.vim via Practical Vim. NB: I've changed a few.
-keymap_set("n", "[b", ":bprevious<CR>", default_opts)
-keymap_set("n", "]b", ":bnext<CR>", default_opts)
-keymap_set("n", "[B", ":bfirst<CR>", default_opts)
-keymap_set("n", "]B", ":blast<CR>", default_opts)
-keymap_set("n", "[t", ":tabprevious<CR>", default_opts)
-keymap_set("n", "]t", ":tabnext<CR>", default_opts)
-keymap_set("n", "[T", ":tabfirst<CR>", default_opts)
-keymap_set("n", "]T", ":tablast<CR>", default_opts)
-keymap_set("n", "[l", ":lprevious<CR>", default_opts)
-keymap_set("n", "]l", ":lnext<CR>", default_opts)
-keymap_set("n", "[L", ":lfirst<CR>", default_opts)
-keymap_set("n", "]L", ":llast<CR>", default_opts)
-keymap_set("n", "[q", ":cprevious<CR>", default_opts)
-keymap_set("n", "]q", ":cnext<CR>", default_opts)
-keymap_set("n", "[Q", ":cfirst<CR>", default_opts)
-keymap_set("n", "]Q", ":clast<CR>", default_opts)
-
 -- Use my bitly command to shorten URLs.
 keymap_set("v", "<Leader>b", require("bitly").shorten, default_opts)
 
