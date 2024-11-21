@@ -58,11 +58,6 @@ if [[ -r $HOME/local/zig/zig ]]; then
     PATH="${HOME}/local/zig:${PATH}"
 fi
 
-# gitmirror may live in $HOME/local/gitmirror
-if [[ -r $HOME/local/gitmirror/bin ]]; then
-    PATH="${HOME}/local/gitmirror/bin:${PATH}"
-fi
-
 # lua probably lives in $HOME/local/lua
 if [[ -d $HOME/local/lua ]]; then
     PATH="${HOME}/local/lua/bin:${PATH}"
