@@ -115,7 +115,7 @@ create_autocmd("LspAttach", {
 create_autocmd("BufWritePre", {
     pattern = "*.go",
     callback = function()
-        local params = lsp.util.make_range_params()
+        local params = lsp.util.make_range_params(0, "utf-16")
         params.context = { only = { "source.organizeImports" } }
         local result =
             lsp.buf_request_sync(0, "textDocument/codeAction", params)
