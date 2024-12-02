@@ -54,7 +54,7 @@ snippet map "map[Type]Type"
 # main()
 snippet mn "func main() { ... }" b
 	func main() {
-		${1}
+		${1:$TM_SELECTED_TEXT}
 	}$0
 snippet con "single constant declaration" b
 	const ${1:name} = ${2:value}
