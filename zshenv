@@ -1,9 +1,3 @@
-# shellcheck shell=bash
-# if [[ $PS1 && -n $GHOSTTY_RESOURCES_DIR ]]; then
-#     builtin source \
-#         "${GHOSTTY_RESOURCES_DIR}/shell-integration/bash/ghostty.bash"
-# fi
-
 export MAILDIR=$HOME/.maildir
 export NO_COLOR=1
 
