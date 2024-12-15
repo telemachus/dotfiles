@@ -290,6 +290,7 @@ safe_setup("ibl", {
 safe_setup("conform", {
     -- log_level = vim.log.levels.DEBUG,
     formatters_by_ft = {
+        json = { "gojq" },
         go = { "gofumpt" },
         lua = { "stylua" },
         python = { "isort", "black" },
@@ -298,6 +299,10 @@ safe_setup("conform", {
         rust = { "rustfmt" },
     },
     formatters = {
+        gojq = {
+            command = "gojq",
+            args = { "--indent", "4" },
+        },
         shfmt = {
             prepend_args = { "-ci", "-s", "-i", "4" },
         },
@@ -366,14 +371,21 @@ safe_setup("autoclose", {
     },
 })
 
--- https://github.com/echasnovski/mini.surround
+-- https://github.com/telemachus/mini.surround
 safe_setup("mini.surround", {
     silent = true,
 })
 
 -- https://github.com/telemachus/refinery.nvim.git
 safe_setup("refinery", {
-    linters = { "golangcilint", "luacheck", "shellcheck", "vint" },
+    linters = {
+        "golangcilint",
+        "luacheck",
+        "revive",
+        "shellcheck",
+        "staticcheck",
+        "vint",
+    },
     -- For testing refinery.nvim
     -- linters = {
     --     golangcilint = {},
