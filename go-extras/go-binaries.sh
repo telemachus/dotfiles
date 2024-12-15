@@ -24,3 +24,5 @@ go install github.com/segmentio/golines@latest ||
     warn "failed to install golines"
 go install golang.org/x/tools/cmd/godoc@latest ||
     warn "failed to install godoc"
+go install golang.org/x/vuln/cmd/govulncheck@latest ||
+    warn "failed to install govulncheck"
