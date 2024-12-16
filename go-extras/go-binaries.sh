@@ -26,3 +26,5 @@ go install golang.org/x/tools/cmd/godoc@latest ||
     warn "failed to install godoc"
 go install golang.org/x/vuln/cmd/govulncheck@latest ||
     warn "failed to install govulncheck"
+go install github.com/itchyny/gojq/cmd/gojq@latest ||
+    warn "failed to install gojq"
