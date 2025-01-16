@@ -11,16 +11,6 @@ local notify = vim.notify
 g.mapleader = " "
 g.localmapleader = " "
 
-if g.neovide then
-    g.neovide_theme = "light"
-    o.guifont = "Consolas:h16"
-    g.neovide_hide_mouse_when_typing = true
-    g.neovide_input_macos_option_key_is_meta = "only_right"
-    g.neovide_cursor_animation_length = 0
-    g.neovide_cursor_animate_in_insert_mode = false
-    g.neovide_cursor_animate_command_line = false
-end
-
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
 g.loaded_python_provider = 0
@@ -43,9 +33,6 @@ local dont_load = {
 for _, plugin in pairs(dont_load) do
     g["loaded_" .. plugin] = 1
 end
-
-local packages = require("packages")
-require("paq")(packages)
 
 -- https://github.com/dstein64/vim-startuptime
 g.startuptime_tries = 10
@@ -321,6 +308,15 @@ if lsp_loaded then
     -- gopls: https://github.com/golang/tools/tree/master/gopls
     lspconfig.gopls.setup({
         settings = { gofumpt = true },
+        capabilities = {
+            textDocument = {
+                completion = {
+                    completionItem = {
+                        snippetSupport = false,
+                    },
+                },
+            },
+        },
     })
 
     -- lua-language-server: https://luals.github.io
@@ -342,12 +338,13 @@ if lsp_loaded then
                 format = {
                     enable = false,
                 },
+                completion = {
+                    callSnippet = "Disable",
+                    keywordSnippet = "Disable",
+                },
             },
         },
     })
-
-    -- rust-analyzer: https://github.com/rust-lang/rust-analyzer
-    lspconfig.rust_analyzer.setup({})
 end
 
 -- https://github.com/telemachus/autoclose.nvim.git
@@ -394,23 +391,6 @@ safe_setup("refinery", {
     --     vint = {},
     --     foobar = {},
     -- },
-})
-
--- https://github.com/stevearc/oil.nvim
-safe_setup("oil", {
-    columns = {},
-    keymaps = { ["<C-h>"] = false },
-    default_file_explorer = true,
-    delete_to_trash = true,
-    skip_confirm_for_simple_edits = true,
-    view_options = {
-        show_hidden = false,
-        natural_order = true,
-        is_always_hidden = function(name, _)
-            return name == ".." or name == ".git"
-        end,
-    },
-    win_options = { wrap = true },
 })
 
 safe_require("filetypes")

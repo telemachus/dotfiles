@@ -9,7 +9,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "savq/paq-nvim",
     "stevearc/conform.nvim",
-    "stevearc/oil.nvim",
     {
         "telemachus/autoclose.nvim",
         branch = "mapcheck",
