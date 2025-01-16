@@ -28,3 +28,7 @@ go install golang.org/x/vuln/cmd/govulncheck@latest ||
     warn "failed to install govulncheck"
 go install github.com/itchyny/gojq/cmd/gojq@latest ||
     warn "failed to install gojq"
+go install go.uber.org/nilaway/cmd/nilaway@latest ||
+    warn "failed to install nilaway"
+go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest ||
+    warn "failed to install fieldalignment"
