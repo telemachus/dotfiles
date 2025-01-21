@@ -90,18 +90,24 @@ keymap_set("n", "dd", function()
 end, extended_opts)
 
 -- Lazy mappings for nvim-snippy
+--
+-- Use Tab to start and move through a snippet.
 keymap_set({ "i", "s" }, "<Tab>", function()
     if require("snippy").can_expand_or_advance() then
         return "<Plug>(snippy-expand-or-advance)"
     end
     return "<Tab>"
 end, extended_opts)
+
+-- Use Shift-Tab to move backwards through a snippet.
 keymap_set({ "i", "s" }, "<S-Tab>", function()
     if require("snippy").can_jump(-1) then
         return "<Plug>(snippy-previous)"
     end
     return "<S-Tab>"
 end, extended_opts)
+
+-- Use Leader-x to cut text for the TM_VISUAL placeholder.
 keymap_set("x", "<Leader>x", "<Plug>(snippy-cut-text)", default_opts)
 keymap_set("n", "<Leader>x", "<Plug>(snippy-cut-text)", default_opts)
 
@@ -118,11 +124,13 @@ keymap_set(
     default_opts
 )
 
--- Paste a characterwise yank as if it were linewise.
+-- Paste a characterwise yank, as if it were linewise, on the line above.
 keymap_set("n", "[p", function()
     vim.go.operatorfunc = "v:lua.require'put'.linewise_above"
     return "g@l"
 end, extended_opts)
+
+-- Paste a characterwise yank, as if it were linewise, on the line above.
 keymap_set("n", "]p", function()
     vim.go.operatorfunc = "v:lua.require'put'.linewise_below"
     return "g@l"
