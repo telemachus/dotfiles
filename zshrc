@@ -129,6 +129,10 @@ alias findexecs='find . -type f -perm -a=x'
 # daily updates
 alias morning='sudo portup ; neoup'
 
+# aliases for movement
+alias ..='cd ..'
+alias ...='cd ../..'
+
 ZSH_GIT_PROMPT_SHOW_STASH=1
 # ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
 
