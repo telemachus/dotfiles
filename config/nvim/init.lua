@@ -89,6 +89,7 @@ o.infercase = true
 o.hlsearch = false
 o.conceallevel = 0
 o.concealcursor = ""
+o.winborder = "rounded"
 
 o.backup = true
 o.backupcopy = "yes"

@@ -139,7 +139,6 @@ end
 ---@return fun(contents: table, syntax: string, opts: table): integer?, integer?
 local float_wrapper = function(opener)
     return function(contents, syntax, opts)
-        opts = vim.tbl_deep_extend("force", opts, { border = "rounded" })
         local buf_id, win_id = opener(contents, syntax, opts)
 
         -- Return if the buffer or window is not created.
