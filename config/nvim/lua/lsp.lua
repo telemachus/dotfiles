@@ -130,8 +130,6 @@ local close_window = function(win_id)
     end
 
     win_close(win_id, false)
-    -- As a hackish alternative, I can pretend to move the cursor.
-    -- exec_autocmds("CursorMoved", { buffer = 0, modeline = false })
 end
 
 ---Wrap the function that opens floating windows in order to customize them.
