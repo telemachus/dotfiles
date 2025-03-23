@@ -76,6 +76,8 @@ macos-option-as-alt = right
 window-height = 30
 window-width = 90
 
+# Get nightly updates
+auto-update-channel = tip
 # auto-update = { check, download, off }
 auto-update = download
 
