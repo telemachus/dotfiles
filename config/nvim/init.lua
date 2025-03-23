@@ -223,7 +223,6 @@ safe_setup("nvim-treesitter.configs", {
         "markdown_inline",
         "lua",
         "python",
-        "rust",
         "query",
         "vim",
         "vimdoc",
@@ -290,7 +289,6 @@ safe_setup("conform", {
         python = { "isort", "black" },
         sh = { "shfmt" },
         sql = { "sleek" },
-        rust = { "rustfmt" },
     },
     formatters = {
         gojq = {
