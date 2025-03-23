@@ -327,6 +327,10 @@ local highlight_groups = {
     -- oil.nvim
     -- https://github.com/stevearc/oil.nvim
     ["OilDir"] = { fg = colors.blue },
+
+    -- Custom queries
+    ["@diff.old_file"] = { link = "DiffChange" },
+    ["@diff.new_file"] = { link = "DiffAdd" },
 }
 
 local highlight = vim.api.nvim_set_hl

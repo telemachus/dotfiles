@@ -208,6 +208,7 @@ safe_setup("nvim-treesitter.configs", {
         "bash",
         "c",
         "css",
+        "diff",
         "git_config",
         "git_rebase",
         "gitattributes",

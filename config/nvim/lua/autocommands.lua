@@ -140,3 +140,19 @@ create_autocmd("TextYankPost", {
     end,
     group = telemachus_augroup,
 })
+
+-- Tweak highlighting of file names in diff output.
+-- See the following discussion for why this is not a Treesitter default.
+-- https://bit.ly/41RT1OM
+create_autocmd("FileType", {
+    pattern = { "diff", "gitcommit" },
+    -- The following is very brittle, but Good Enough for Now™.
+    callback = function()
+        -- Match old filenames (a/path/to/file)
+        vim.fn.matchadd("DiffChange", "\\<a/[^ \t\r\n]\\+")
+
+        -- Match new filenames (b/path/to/file)
+        vim.fn.matchadd("DiffAdd", "\\<b/[^ \t\r\n]\\+")
+    end,
+    group = telemachus_augroup,
+})
