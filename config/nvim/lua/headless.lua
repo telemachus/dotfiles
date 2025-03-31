@@ -89,8 +89,16 @@ local function clean()
     cmd("quit")
 end
 
+--Update helptags and then quit.
+local function helptags()
+    cmd("helptags ALL")
+    notify(" headless: helptags done\n")
+    cmd("quit")
+end
+
 return {
     install = install,
     update = update,
     clean = clean,
+    helptags = helptags,
 }
