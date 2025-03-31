@@ -5,3 +5,14 @@ snippet repo "repo object for a gitmirror.json file" b
 		"url": "$1",
 		"name": "${2:${1/\(.*\)\/\(.*\)/\2/}}"
 	}${0:,}
+snippet plug "plugin object for a pluggo.json file" b
+	{
+		"url": "$1",
+		"name": "${2:${1/\(.*\)\/\(.*\)/\2/}}"${3:,}
+	}${0:,}
+snippet branch "branch listing for a pluggo plugin" b
+	"branch": "${1:branch}"${0:,}
+snippet pin "pin listing for a pluggo plugin" b
+	"pin": ${1:true}${0:,}
+snippet opt "opt listing for a pluggo plugin" b
+	"opt": ${1:true}${0:,}
