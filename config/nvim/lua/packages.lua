@@ -7,10 +7,7 @@ return {
     "neovim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter",
-    {
-        "savq/paq-nvim",
-        branch = "nightly",
-    },
+    "savq/paq-nvim",
     "stevearc/conform.nvim",
     {
         "telemachus/autoclose.nvim",
