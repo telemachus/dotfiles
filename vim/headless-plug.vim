@@ -20,11 +20,15 @@ Plug 'telemachus/vim-textobj-curly'
 Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'LunarWatcher/auto-pairs'
 
 call plug#end()
 
 :PlugInstall
 :PlugUpdate
 :PlugClean!
+
+:helptags ALL
 
 :quitall
