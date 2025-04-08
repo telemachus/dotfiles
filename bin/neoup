@@ -35,13 +35,8 @@ make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$INSTALL_DIR" ||
 rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
 make install || die '`make install` failed'
 
-{
-    nvim --headless -u NONE -c 'lua require("headless").install()'
-    nvim --headless -u NONE -c 'lua require("headless").update()'
-    nvim --headless -u NONE -c 'lua require("headless").clean()'
-    # In order to build help tags for plugins, we have to load plugins.
-    # That means removing "-u NONE".
-    nvim --headless -c 'lua require("headless").helptags()'
-} || die 'paq failed'
+pluggo || die 'pluggo failed'
+
+nvim --headless -c 'helptags ALL | quit' || die 'failed to update helptag files'
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
