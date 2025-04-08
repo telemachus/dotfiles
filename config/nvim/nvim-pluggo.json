@@ -1,0 +1,73 @@
+{
+    "dataDirs": [
+        "HOME",
+        ".local",
+        "share",
+        "nvim",
+        "site",
+        "pack",
+        "pluggo"
+    ],
+    "plugins": [
+        {
+            "branch": "master",
+            "name": "nvim-snippy",
+            "url": "https://github.com/dcampos/nvim-snippy"
+        },
+        {
+            "branch": "master",
+            "name": "vim-startuptime",
+            "url": "https://github.com/dstein64/vim-startuptime"
+        },
+        {
+            "branch": "master",
+            "name": "vim-lastplace",
+            "url": "https://github.com/farmergreg/vim-lastplace"
+        },
+        {
+            "branch": "master",
+            "name": "suda.vim",
+            "url": "https://github.com/lambdalisue/suda.vim"
+        },
+        {
+            "branch": "master",
+            "name": "indent-blankline.nvim",
+            "url": "https://github.com/lukas-reineke/indent-blankline.nvim"
+        },
+        {
+            "branch": "master",
+            "name": "nvim-lspconfig",
+            "url": "https://github.com/neovim/nvim-lspconfig"
+        },
+        {
+            "branch": "master",
+            "name": "nvim-treesitter-textobjects",
+            "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+        },
+        {
+            "branch": "master",
+            "name": "nvim-treesitter",
+            "url": "https://github.com/nvim-treesitter/nvim-treesitter"
+        },
+        {
+            "branch": "master",
+            "name": "conform.nvim",
+            "url": "https://github.com/stevearc/conform.nvim"
+        },
+        {
+            "branch": "mapcheck",
+            "name": "autoclose.nvim",
+            "url": "https://github.com/telemachus/autoclose.nvim"
+        },
+        {
+            "branch": "highlight",
+            "name": "mini.surround",
+            "url": "https://github.com/telemachus/mini.surround"
+        },
+        {
+            "branch": "setup",
+            "name": "refinery.nvim",
+            "url": "https://github.com/telemachus/refinery.nvim"
+        }
+    ]
+}

@@ -35,8 +35,8 @@ make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX="$INSTALL_DIR" ||
 rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
 make install || die '`make install` failed'
 
-pluggo || die 'pluggo failed'
-
+# Update plugins and their helptags.
+pluggo -config=${HOME}/.config/nvim/nvim-pluggo.json || die 'pluggo failed'
 nvim --headless -c 'helptags ALL | quit' || die 'failed to update helptag files'
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :

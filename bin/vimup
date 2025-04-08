@@ -53,10 +53,6 @@ rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
 
 make install || die '`make install` failed'
 
-# vim-plug causes vim to error with a failure status if there is nothing for
-# PlugClean! to remove. Since I don't consider this a failure, I add `exit 0`.
-# WARNING: keep an eye on this in case I'm hiding real errors.
-vim -es -u "${HOME}/.vim/headless-plug.vim" -U NONE
-exit 0
+pluggo -config=${HOME}/.vim/pluggo-vim.json
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :

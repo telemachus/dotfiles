@@ -7,8 +7,9 @@ snippet repo "repo object for a gitmirror.json file" b
 	}${0:,}
 snippet plug "plugin object for a pluggo.json file" b
 	{
-		"url": "$1",
-		"name": "${2:${1/\(.*\)\/\(.*\)/\2/}}"${3:,}
+		"branch": "${3:master}",
+		"name": "${2:${1/\(.*\)\/\(.*\)/\2/}}",
+		"url": "${1}"
 	}${0:,}
 snippet branch "branch listing for a pluggo plugin" b
 	"branch": "${1:branch}"${0:,}
