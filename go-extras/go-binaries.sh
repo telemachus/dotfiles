@@ -32,3 +32,5 @@ go install go.uber.org/nilaway/cmd/nilaway@latest ||
     warn "failed to install nilaway"
 go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignment@latest ||
     warn "failed to install fieldalignment"
+go install github.com/dkorunic/betteralign/cmd/betteralign@latest ||
+    warn "failed to install betteralign"
