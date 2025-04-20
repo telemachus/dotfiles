@@ -1,5 +1,5 @@
 {
-    "dataDirs": [
+    "dataDir": [
         "HOME",
         ".vim",
         "pack",
@@ -10,6 +10,12 @@
             "branch": "master",
             "name": "vim-lastplace",
             "url": "https://github.com/dietsche/vim-lastplace"
+        },
+        {
+            "branch": "master",
+            "name": "vim-startuptime",
+            "opt": true,
+            "url": "https://github.com/dstein64/vim-startuptime"
         },
         {
             "branch": "master",

@@ -1,5 +1,5 @@
 {
-    "dataDirs": [
+    "dataDir": [
         "HOME",
         ".local",
         "share",
@@ -17,6 +17,7 @@
         {
             "branch": "master",
             "name": "vim-startuptime",
+            "opt": true,
             "url": "https://github.com/dstein64/vim-startuptime"
         },
         {
