@@ -13,7 +13,9 @@ export MANPAGER='nvim +Man! -i NONE'
 # Set PARINIT for par. How did I pick these values?
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 # vim may live in $HOME/local/vim
-[[ -d "${HOME}/local/vim" ]] && PATH="${HOME}/local/vim/bin:${PATH}"
+if [[ -d "${HOME}/local/vim" ]]; then
+	PATH="${HOME}/local/vim/bin:${PATH}"
+fi
 
 # passage lives in $HOME/local/passage
 if [[ -d ${HOME}/local/passage ]]; then
@@ -21,7 +23,9 @@ if [[ -d ${HOME}/local/passage ]]; then
 fi
 
 # neovim probably lives in $HOME/local/neovim
-[[ -d ${HOME}/local/neovim ]] && PATH="${PATH}:${HOME}/local/neovim/bin"
+if [[ -d ${HOME}/local/neovim ]]; then
+	PATH="${PATH}:${HOME}/local/neovim/bin"
+fi
 
 # go probably lives in $HOME/local/go
 if [[ -d $HOME/local/go/bin ]]; then
@@ -45,7 +49,9 @@ if [[ -d $HOME/local/lua-language-server/bin ]]; then
 fi
 
 # rust
-[[ -r $HOME/.cargo/env ]] && source "$HOME/.cargo/env"
+if [[ -r $HOME/.cargo/env ]]; then
+	source "$HOME/.cargo/env"
+fi
 
 # zig may live in $HOME/local/zig
 if [[ -r $HOME/local/zig/zig ]]; then

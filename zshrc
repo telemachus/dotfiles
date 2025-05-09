@@ -137,9 +137,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
 # ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
 
 PROMPT='%3~ $(gitprompt)%# '
-source ~/.config/zsh/git-prompt.zsh/git-prompt.zsh
-# source ~/.config/zsh/test-git-prompt.zsh
-source ~/Downloads/src/zsh-prompt-benchmark/zsh-prompt-benchmark.plugin.zsh
+source ~/Downloads/src/git-prompt.zsh/git-prompt.zsh
 
 (( $+aliases[run-help] )) && unalias run-help
 autoload -Uz run-help
