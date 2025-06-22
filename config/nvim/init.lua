@@ -38,7 +38,6 @@ end
 g.startuptime_tries = 10
 
 o.background = "light"
-o.cpo = o.cpo .. "J"
 o.joinspaces = true
 
 o.scrolloff = 0
@@ -283,7 +282,7 @@ safe_setup("ibl", {
 safe_setup("conform", {
     -- log_level = vim.log.levels.DEBUG,
     formatters_by_ft = {
-        json = { "gojq" },
+        json = { "jq" },
         go = { "gofumpt" },
         lua = { "stylua" },
         python = { "isort", "black" },
@@ -291,8 +290,8 @@ safe_setup("conform", {
         sql = { "sleek" },
     },
     formatters = {
-        gojq = {
-            command = "gojq",
+        jq = {
+            command = "jq",
             args = { "--indent", "4" },
         },
         shfmt = {
@@ -383,6 +382,7 @@ safe_setup("refinery", {
     linters = {
         "golangcilint",
         "luacheck",
+        "pylint",
         "revive",
         "shellcheck",
         "staticcheck",

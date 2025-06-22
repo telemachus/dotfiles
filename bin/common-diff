@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+
+import argparse
+import sys
+from pathlib import Path
+from subprocess import run as subprocess_run
+
+
+def die(message):
+    """Print error message and exit with status 1."""
+    print(f"Error: {message}", file=sys.stderr)
+    sys.exit(1)
+
+
+def info_exit(message):
+    """Print info message and exit with status 0."""
+    print(message)
+    sys.exit(0)
+
+
+def validate_directories(dir_a, dir_b):
+    """Validate that both directories exist and are directories."""
+    if not dir_a.exists():
+        die(f"directory {dir_a} does not exist")
+    if not dir_a.is_dir():
+        die(f"{dir_a} is not a directory")
+    if not dir_b.exists():
+        die(f"directory {dir_b} does not exist")
+    if not dir_b.is_dir():
+        die(f"{dir_b} is not a directory")
+
+
+def get_all_paths(directory):
+    """Get all files and directories relative to the given directory."""
+    paths = set()
+
+    for path in directory.rglob("*"):
+        rel_path = path.relative_to(directory)
+        paths.add(rel_path)
+
+        for parent in rel_path.parents:
+            if parent != Path("."):
+                paths.add(parent)
+
+    return paths
+
+
+def find_minimal_excludes(dir1_paths, dir2_paths):
+    """
+    Find the minimal set of paths to exclude from diff.
+
+    Returns only top-level uncommon directories and individual uncommon files
+    whose parent directories exist in both trees.
+    """
+    all_uncommon = (dir1_paths - dir2_paths) | (dir2_paths - dir1_paths)
+    minimal_excludes = set()
+
+    for path in all_uncommon:
+        has_uncommon_parent = False
+
+        for parent in path.parents:
+            if parent != Path(".") and parent in all_uncommon:
+                has_uncommon_parent = True
+                break
+
+        if not has_uncommon_parent:
+            minimal_excludes.add(path)
+
+    return minimal_excludes
+
+
+def find_excludes(dir_a, dir_b, custom_excludes, plus_a, plus_b):
+    """Find paths to exclude from diff based on flags and custom excludes."""
+    paths_a = get_all_paths(dir_a)
+    paths_b = get_all_paths(dir_b)
+
+    if not paths_a & paths_b:
+        info_exit("No common files found")
+
+    if plus_a:
+        uncommon_to_exclude = paths_b - paths_a
+    elif plus_b:
+        uncommon_to_exclude = paths_a - paths_b
+    else:
+        uncommon_to_exclude = (paths_a - paths_b) | (paths_b - paths_a)
+
+    if uncommon_to_exclude:
+        if plus_a:
+            minimal_excludes = find_minimal_excludes(paths_b, paths_a)
+        elif plus_b:
+            minimal_excludes = find_minimal_excludes(paths_a, paths_b)
+        else:
+            minimal_excludes = find_minimal_excludes(paths_a, paths_b)
+    else:
+        minimal_excludes = set()
+
+    all_excludes = minimal_excludes | set(custom_excludes)
+    return sorted(str(path) for path in all_excludes)
+
+
+def run_diff(dir_a, dir_b, excludes):
+    """Run diff with exclude arguments."""
+    cmd = ["diff", "-ruN"]
+
+    for exclude in excludes:
+        cmd.extend(["--exclude", exclude])
+
+    cmd.extend([str(dir_a), str(dir_b)])
+
+    try:
+        result = subprocess_run(cmd, capture_output=False)
+
+        # For diff, both 0 and 1 are normal return codes; 0 means no diff, and
+        # 1 means A and B differ.
+        if result.returncode not in (0, 1):
+            die("diff command failed")
+
+    except Exception as e:
+        die(f"failed to run diff: {e}")
+
+
+def process_directories(dir_a, dir_b, custom_excludes, plus_a, plus_b):
+    """Main processing function."""
+    validate_directories(dir_a, dir_b)
+    excludes = find_excludes(dir_a, dir_b, custom_excludes, plus_a, plus_b)
+    run_diff(dir_a, dir_b, excludes)
+
+
+def main():
+    """Main entry point."""
+    parser = argparse.ArgumentParser(
+        description="Diff only common files between two directory trees"
+    )
+    parser.add_argument("dir1", help="First directory")
+    parser.add_argument("dir2", help="Second directory")
+    parser.add_argument(
+        "--exclude",
+        action="append",
+        default=[],
+        help="Additional patterns to exclude (can be used multiple times)",
+    )
+    parser.add_argument(
+        "--plus-a",
+        action="store_true",
+        help="Include files that exist only in the first directory",
+    )
+    parser.add_argument(
+        "--plus-b",
+        action="store_true",
+        help="Include files that exist only in the second directory",
+    )
+
+    args = parser.parse_args()
+
+    if args.plus_a and args.plus_b:
+        die("--plus-a and --plus-b are mutually exclusive")
+
+    dir_a = Path(args.dir1)
+    dir_b = Path(args.dir2)
+
+    process_directories(dir_a, dir_b, args.exclude, args.plus_a, args.plus_b)
+
+
+if __name__ == "__main__":
+    main()

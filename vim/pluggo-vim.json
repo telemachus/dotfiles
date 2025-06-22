@@ -8,6 +8,11 @@
     "plugins": [
         {
             "branch": "master",
+            "name": "vim-over",
+            "url": "https://github.com/osyo-manga/vim-over"
+        },
+        {
+            "branch": "master",
             "name": "vim-lastplace",
             "url": "https://github.com/dietsche/vim-lastplace"
         },

@@ -63,6 +63,11 @@ if [[ -d $HOME/local/lua ]]; then
     PATH="${HOME}/local/lua/bin:${PATH}"
 fi
 
+# npm globals may live in $HOME/local/npm
+if [[ -d $HOME/local/npm ]]; then
+    PATH="${HOME}/local/npm/bin:${PATH}"
+fi
+
 # pipx, rust-analyzer and (possibly) others live in ~/.local/bin
 # I need this to end up *before* the cargo/rustup PATH.
 # See the following discussion on GitHub for why:  https://bit.ly/3MESyZ3.
