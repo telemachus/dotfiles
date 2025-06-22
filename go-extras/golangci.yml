@@ -1,39 +1,40 @@
-run:
-  timeout: 2m
-  issues-exit-code: 1
-  modules-download-mode: readonly
-  format: line-number,stderr
-  skip-dirs:
-    - internal
-
 linters-settings:
   cyclop:
     max-complexity: 10
-    package-average: 5
+    package-average: 0.0
     skip-tests: false
+  copyloopvar:
+    check-alias: true
   depguard:
-    rules:
-      main:
-        files:
-          - $all
-        deny:
-          - pkg: reflect
-            desc: "avoid reflect"
-      test:
-        files:
-          - $all
-        deny:
-          - pkg: reflect
-            desc: "avoid reflect"
+      rules:
+        main:
+          files:
+            - $all
+          deny:
+            - pkg: reflect
+              desc: "avoid reflect"
+        test:
+          files:
+            - $all
+          deny:
+            - pkg: reflect
+              desc: "avoid reflect"
   errcheck:
     check-type-assertions: true
     check-blank: true
+    exclude-functions:
+      - fmt.Printf
+      - fmt.Println
+      - fmt.Fprintf
+      - fmt.Fprintln
   exhaustive:
     default-signifies-exhaustive: true
   goconst:
     min-len: 2
     min-occurrences: 3
   gocritic:
+    disabled-checks:
+      - hugeParam
     enabled-tags:
       - diagnostic
       - experimental
@@ -41,7 +42,7 @@ linters-settings:
       - performance
       - style
   govet:
-    check-shadowing: true
+    enable-all: true
     shadow:
       strict: true
   nolintlint:
@@ -52,44 +53,39 @@ linters:
   disable-all: true
   enable:
     - bodyclose
+    - copyloopvar
     - cyclop
     - depguard
     - dogsled
-    - dupl
     - errcheck
     - errchkjson
     - errname
     - errorlint
-    - exportloopref
     - exhaustive
     - goconst
     - gocritic
-    - gofmt
-    - gofumpt
-    - goimports
     - gosec
     - gosimple
     - govet
     - ineffassign
+    - ireturn
+    - maintidx
     - misspell
-    - nakedret
-    - nilnil
     - nolintlint
-    - paralleltest
+    - nakedret
     - prealloc
     - predeclared
-    - reassign
-    - staticcheck
     - stylecheck
-    - tagalign
     - thelper
+    - typecheck
     - unconvert
     - unparam
-    - usestdlibvars
+    - unused
     - whitespace
-    - wrapcheck
 
-issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
+run:
+  concurrency: 8
+  issues-exit-code: 1
+  timeout: 3m
+  tests: true
+  allow-parallel-runners: false
