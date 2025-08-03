@@ -5,7 +5,7 @@ local buf_line_count = vim.api.nvim_buf_line_count
 local win_get_width = vim.api.nvim_win_get_width
 local buf_get_lines = vim.api.nvim_buf_get_lines
 local str_width = vim.fn.strwidth
-local replace_termcodes = vim.api.nvim_replace_termcodes
+local keycode = vim.keycode
 local get_win_info = vim.fn.getwininfo
 local win_is_valid = vim.api.nvim_win_is_valid
 local keymap_del = vim.keymap.del
@@ -75,10 +75,6 @@ local win_buf_height = function(win_id)
     return height
 end
 
-local escape_keycodes = function(str)
-    return replace_termcodes(str, true, true, true)
-end
-
 ---Scroll the window by a given number of lines.
 ---@param win_id integer
 ---@param num integer
@@ -88,9 +84,9 @@ local scroll = function(win_id, num)
         keymap_del("n", "<C-f>", { buffer = true })
         keymap_del("n", "<C-b>", { buffer = true })
         if num > 0 then
-            feedkeys(escape_keycodes("<C-f>"))
+            feedkeys(keycode("<C-f>"))
         else
-            feedkeys(escape_keycodes("<C-b>"))
+            feedkeys(keycode("<C-b>"))
         end
 
         return
@@ -124,7 +120,7 @@ local close_window = function(win_id)
     -- Delete the keymap on "<Leader>;" after the hover closes.
     if not win_is_valid(win_id) then
         keymap_del("n", "<Leader>;", { buffer = true })
-        feedkeys(escape_keycodes("<Leader>;"))
+        feedkeys(keycode("<Leader>;"))
 
         return
     end

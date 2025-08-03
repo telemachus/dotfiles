@@ -5,7 +5,7 @@ local mode = vim.fn.mode
 local getpos = vim.fn.getpos
 local getregion = vim.fn.getregion
 local buf_set_text = vim.api.nvim_buf_set_text
-local replace_termcodes = vim.api.nvim_replace_termcodes
+local keycode = vim.keycode
 local feedkeys = vim.api.nvim_feedkeys
 
 local _should_swap = function(start_pos, end_pos)
@@ -69,7 +69,7 @@ local shorten = function()
         end_pos[3],
         { url }
     )
-    feedkeys(replace_termcodes("<Esc>", true, false, true), "x", false)
+    feedkeys(keycode("<Esc>"), "x", false)
 end
 
 return {
