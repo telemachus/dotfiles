@@ -173,7 +173,7 @@ snippet bench "func BenchmarkXYZ(b *testing.B) { ... }"
 # got != want
 snippet gotwant "if got != want { t.Errorf(...) }"
 	if ${1:got} != ${2:want} {
-		t.Errorf("${3:Function() = [%+v]}; want %${4:[%+v]}", ${1:got}, ${2:want})
+		t.Errorf("${3:Function() = [%+v]}; want ${4:[%+v]}", ${1:got}, ${2:want})
 	}
 # do something when a key is present in a map
 snippet ok "if <key>, ok := <map>[<value>]; ok { ... }"
