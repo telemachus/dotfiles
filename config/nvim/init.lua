@@ -382,7 +382,6 @@ safe_setup("refinery", {
     linters = {
         "golangcilint",
         "luacheck",
-        "pylint",
         "revive",
         "shellcheck",
         "staticcheck",
