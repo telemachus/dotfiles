@@ -3,3 +3,4 @@
 com.googlecode.iterm2.plist
 config/nvim/spell/
 *.zwc
+.zsh_history
