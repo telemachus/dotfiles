@@ -1,0 +1,24 @@
+# die: print message to stderr and exit current shell session
+#
+# Args: $1: message (default: "empty message"); $2: exit code (default: 1)
+# Exit code: $2 (or 1 if $2 is empty)
+#
+# Examples:
+#   die 'something broke' 3
+#   mkdir -p "$P" || die "$(printf '`mkdir -p %s` failed' "$P")"
+#
+if [[ -o interactive ]]; then
+    printf >&2 'This will exit your shell. Continue? (y/N) '
+    read -q || {
+        # Turn die into warn if the user says no.
+        printf >&2 '\n%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
+        return ${2:-1}
+    }
+    # If the user says yes, clean up the prompt line.
+    printf >&2 '\n'
+fi
+
+printf >&2 '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
+exit ${2:-1}
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

@@ -1,0 +1,12 @@
+# info: print message to stdout
+#
+# Args: $1 = message (default: "empty message")
+# Exit code: whatever printf returns as $?
+#
+# Examples:
+#   info 'wonderful news'
+#   mkdir -p "$P" && info "$(printf '`mkdir -p %s` succeeded' "$P")"
+#
+printf '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :

@@ -1,0 +1,6 @@
+# Manually rebuild zshell's completion dump.
+#
+rm -f "$_comp_dumpfile"*(N) && compinit -d "$_comp_dumpfile"
+[[ -r $_comp_dumpfile ]] && zcompile "$_comp_dumpfile"
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

@@ -1,0 +1,36 @@
+#compdef nvim
+#autoload
+
+# Copyright (C) 2023 Peter Aronoff
+
+_nvim() {
+    _arguments -s -S \
+        '--cmd[Execute \<cmd\> before any config]' \
+        '-l[Execute Lua \<script\> (with optional args)]' \
+        '-S[Source <session> after loading the first file]' \
+        '-s[Read Normal mode commands from \<scriptin\>]' \
+        '-u[Use this config file]' \
+        '-d[Diff mode]' \
+        '(-es -Es)'{-es,-Es}'[Silent (batch) mode]' \
+        '(-h --help)'{-h,--help}'[Print this help message]' \
+        '-i[Use this shada file]' \
+        '-n[No swap file, use memory only]' \
+        '-o[Open N windows (default: one per file)]' \
+        '-O[Open N vertical windows (default: one per file)]' \
+        '-p[Open N tab pages (default: one per file)]' \
+        '-R[Read-only (view) mode]' \
+        '(-v --version)'{-v,--version}'[Print version information]' \
+        '-V[Verbose \<level\> \<file\>]' \
+        '--[Only file names after this]' \
+        '--api-info[Write msgpack-encoded API metadata to stdout]' \
+        '--clean[Factory defaults (skip user config and plugins, shada)]' \
+        '--embed[Use stdin/stdout as a msgpack-rpc channel]' \
+        "--headless[Don't start a user interface]" \
+        '--listen[Serve RPC API from this \<address\>]' \
+        '--remote[Execute commands remotely on a server]' \
+        '--server[Specify RPC server to send commands to]' \
+        '--startuptime[Write startup timing messages to \<file\>]' \
+        '*::filename:_files'
+}
+
+_nvim

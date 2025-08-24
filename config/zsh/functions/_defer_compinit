@@ -1,0 +1,39 @@
+# _defer_compinit: optimize startup by running compinit after first prompt.
+#
+# Credit for idea and code to Marlon Richert in zsh-snap.
+# https://github.com/marlonrichert/zsh-snap
+#
+autoload -Uz add-zsh-hook
+
+add-zsh-hook -d precmd _defer_compinit
+unfunction _defer_compinit
+
+zmodload zsh/complist
+if ! [[ -v _comp_setup && -f $_comp_dumpfile ]]; then
+    unfunction compdef compinit 2>/dev/null
+    autoload -Uz compinit
+
+    local -a compargs=()
+    zstyle -a ':autocomplete::compinit' arguments compargs
+    if [[ $_comp_dumpfile -nt ${ZDOTDIR:-$HOME}/.zshrc ]]; then
+        compinit -C -d "$_comp_dumpfile" "$compargs[@]"
+    else
+        rm -f "$_comp_dumpfile"*(N) &&
+            compinit -d "$_comp_dumpfile" "$compargs[@]"
+    fi
+
+    [[ -r $_comp_dumpfile ]] && zcompile "$_comp_dumpfile" &|
+fi
+
+# Process queued compdef calls
+local def
+for def in $_deferred_compdefs; do
+    eval "compdef $def"
+done
+unset _deferred_compdefs
+
+compinit() {:}
+
+true
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

@@ -1,0 +1,13 @@
+# warn: print message to stderr
+#
+# Args: $1 = message (default: "empty message"); $2 = return value (default: 1)
+# Return value: $2 (or 1 if $2 is empty)
+#
+# Examples:
+#   warn 'something broke' 3
+#   mkdir -p "$P" || warn "$(printf '`mkdir -p %s` failed' "$P")"
+#
+printf >&2 '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
+return ${2:-1}
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :

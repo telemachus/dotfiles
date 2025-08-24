@@ -1,0 +1,11 @@
+local current_dir="${PWD/#$HOME/~}"
+#
+# Apply truncation like %3~
+local -a parts=("${(@s:/:)current_dir}")
+if (( ${#parts} > 3 )); then
+    psvar=("${parts[-3]}/${parts[-2]}/${parts[-1]}")
+else
+    psvar=("$current_dir")
+fi
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :
