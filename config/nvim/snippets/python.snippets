@@ -18,4 +18,31 @@ snippet try "try…except block"
 		${1:${TM_SELECTED_TEXT:pass}}
 	except ${2:Exception} as ${3:e}:
 		${0:raise $3}
+snippet dstr "docstring"
+	"""${1:${TM_SELECTED_TEXT}}"""
+snippet dstrl "docstring"
+	"""
+	${1:${TM_SELECTED_TEXT}}
+	"""
+snippet dstrf "docstring"
+	"""
+	${1:${TM_SELECTED_TEXT}}
+
+	${2:short description}
+	"""
+
+snippet dargs "args in long docstring"
+	Args:
+		${1:arg name}: ${2:arg description}
+
+snippet dreturns "returns in long docstring"
+	Returns:
+		${1:arg name}: ${2:arg description}
+
+snippet draises "raises in long docstring"
+	Raises:
+		${1:arg name}: ${2:arg description}
+
+snippet ditem "something: description in long docstring"
+	${1:item}: ${2:item description}
 # vim:ft=snippets:
