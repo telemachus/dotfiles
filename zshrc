@@ -1,7 +1,12 @@
-fpath=($HOME/.zfunctions $HOME/.zcompletions $fpath)
+if [[ -n $ZSH_DEBUGRC ]]; then
+    zmodload zsh/zprof
+fi
 
-autoload -Uz compinit && compinit
-autoload -Uz add-zsh-hook
+if [[ ! ~/.zshrc.zwc || ~/.zshrc -nt ~/.zshrc.zwc ]]; then
+    zcompile ~/.zshrc
+fi
+
+fpath=($HOME/.zfunctions $HOME/.zcompletions $fpath)
 
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000
@@ -23,15 +28,19 @@ bindkey -v
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
+# Fix backspace key after using ZLE
+bindkey "^?" backward-delete-char
+
 setopt AUTO_CD
 setopt CD_SILENT
+unsetopt AUTO_NAME_DIRS
 setopt AUTO_LIST
 setopt NO_AUTO_MENU
 setopt NO_MENU_COMPLETE
@@ -40,31 +49,14 @@ setopt CASE_MATCH
 
 CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
 
+hash -d dots=$HOME/Documents/git-repos/dotfiles \
+    trinity=$HOME/Documents/git-repos/trinity
+
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
 zstyle ':completion:*:(ssh|scp|rsync):*' hosts $hosts
 zstyle ':completion:*:(ssh|scp|rsync):*' users $users
-
-# if [[ -d $HOME/.fzf/shell ]]; then
-#     source "$HOME/.fzf/shell/completion.zsh"
-#     source "$HOME/.fzf/shell/key-bindings.zsh"
-# fi
-#
-# if type rg &> /dev/null; then
-#     export FZF_DEFAULT_COMMAND='rg --files --hidden'
-#     export FZF_DEFAULT_OPTS="
-#     --height 40%
-#     --layout=reverse
-#     --border
-#     --bind '?:toggle-preview'
-#     --preview-window=:hidden
-#     --preview='less {}'
-#     --no-color "
-# fi
-#
-# zle -N fzf-cd-widget
-# bindkey '\C-j' fzf-cd-widget
 
 if [[ -d $HOME/local/lua ]]; then
     LUA_PATH='/Users/telemachus/local/lua/share/lua/5.1/?.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/Users/telemachus/.luarocks/share/lua/5.1/?.lua;/Users/telemachus/.luarocks/share/lua/5.1/?/init.lua;/Users/telemachus/local/lua/share/lua/5.1/?/init.lua'
@@ -133,18 +125,61 @@ alias morning='sudo portup ; neoup'
 alias ..='cd ..'
 alias ...='cd ../..'
 
+# alias for profiling zsh startup
+alias zprofile='time ZSH_DEBUGRC=1 zsh -i -c exit'
+
+# alias to manually reload zcompdump
+alias rebuildcomp='rm -f ~/.zcompdump* && autoload -Uz compinit && compinit'
+
 ZSH_GIT_PROMPT_SHOW_STASH=1
 # ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
 
 PROMPT='%3~ $(gitprompt)%# '
 source ~/Downloads/src/git-prompt.zsh/git-prompt.zsh
 
-(( $+aliases[run-help] )) && unalias run-help
+HELPDIR="/usr/share/zsh/$(zsh --version | cut -d' ' -f2)/help"
+(( ${+aliases[run-help]} )) && unalias run-help
 autoload -Uz run-help
 autoload -Uz run-help-git
 autoload -Uz run-help-sudo
 alias help=run-help
-HELPDIR="/usr/share/zsh/$(zsh --version | cut -d' ' -f2)/help"
 bindkey -M viins '^h' run-help
 
-autoload -Uz mkcd
+zsh_directory_name() {
+    emulate -L zsh
+
+    if [[ $1 = n && $2 = git ]]; then
+        local git_root=$(git rev-parse --show-toplevel 2>/dev/null)
+        if [[ -n $git_root ]]; then
+            typeset -ga reply=("$git_root")
+            return 0
+        fi
+    fi
+
+    return 1
+}
+
+# My personal functions
+autoload -Uz info warn mkcd
+
+_expand_abbrev() {
+    # Get the current word
+    local current_word="${LBUFFER##* }"
+
+    if [[ "$current_word" == "G" ]]; then
+        # Replace G with ~[git]/
+        LBUFFER="${LBUFFER%G}~[git]/"
+    else
+        # Insert normal space
+        LBUFFER="$LBUFFER "
+    fi
+}
+
+zle -N _expand_abbrev
+bindkey ' ' _expand_abbrev
+
+if [[ -n $ZSH_DEBUGRC ]]; then
+    zprof
+fi
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

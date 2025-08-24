@@ -5,10 +5,8 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export VIMCONFIG="$HOME/.vim"
 export VIMDATA="$HOME/.vim"
-# -R = READONLY mode; -i NONE = no SHADA
 export PAGER=less
 export LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
-export MANPAGER='nvim +Man! -i NONE'
 
 # Set PARINIT for par. How did I pick these values?
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
