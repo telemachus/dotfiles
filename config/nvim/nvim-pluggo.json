@@ -68,7 +68,7 @@
         {
             "branch": "setup",
             "name": "refinery.nvim",
-            "url": "https://github.com/telemachus/refinery.nvim"
+            "url": "git@github.com:telemachus/refinery.nvim.git"
         }
     ]
 }
