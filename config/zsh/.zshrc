@@ -19,10 +19,13 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 setopt HIST_VERIFY
 
+# Let's try both CDPATH and hash -d.
+CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
 hash -d \
     zsh=$HOME/Downloads/src/zsh-launchpad \
     dots=$HOME/Documents/git-repos/dotfiles \
     trinity=$HOME/Documents/git-repos/trinity
+
 # -U ensures each entry in these is unique (that is, discards duplicates).
 export -U PATH path FPATH fpath MANPATH manpath
 export -UT INFOPATH infopath
