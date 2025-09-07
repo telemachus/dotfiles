@@ -1,0 +1,22 @@
+# _abbrev_expand: replace known abbreviations with their values.
+#
+# I got the idea from zsh-abbr: https://github.com/olets/zsh-abbr.
+#
+local line="$LBUFFER$RBUFFER"
+local pos=$#LBUFFER
+
+local word_start=$pos
+while [[ $word_start -gt 0 && "${line:$((word_start-1)):1}" != [[:space:]] ]]
+do
+    ((word_start--))
+done
+
+local word="${line:$word_start:$((pos-word_start))}"
+if [[ -n "$ABBREVS[$word]" ]]
+then
+    LBUFFER="${LBUFFER:0:$((pos-${#word}))}$ABBREVS[$word]"
+else
+        zle self-insert
+fi
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

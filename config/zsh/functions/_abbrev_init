@@ -1,0 +1,8 @@
+# _abbrev_init: initialize an associative array of abbreviations.
+#
+typeset -gA ABBREVS
+ABBREVS=(
+    "G" "~[git]/"
+)
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

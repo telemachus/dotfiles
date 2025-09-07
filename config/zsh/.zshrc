@@ -204,6 +204,13 @@ bindkey '^[w' where-is
   }
 } .sudo
 
+autoload -Uz _abbrev_init _abbrev_expand _abbrev_execute
+zle -N _abbrev_expand
+zle -N _abbrev_execute
+_abbrev_init
+bindkey ' ' _abbrev_expand
+bindkey '^M' _abbrev_execute
+
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
