@@ -1,6 +1,10 @@
+# prompt_chpwd: replace /some/very/long/path/name/here with path/name/here,
+#               and replace $HOME with ~. But do not replace named directories
+#               with ~dir.
+#
 local current_dir="${PWD/#$HOME/~}"
 #
-# Apply truncation like %3~
+# Apply truncation like %3~ does.
 local -a parts=("${(@s:/:)current_dir}")
 if (( ${#parts} > 3 )); then
     psvar=("${parts[-3]}/${parts[-2]}/${parts[-1]}")

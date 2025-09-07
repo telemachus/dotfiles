@@ -1,6 +1,7 @@
 # _defer_compinit: optimize startup by running compinit after first prompt.
 #
 # Credit for idea and code to Marlon Richert in zsh-snap.
+#
 # https://github.com/marlonrichert/zsh-snap
 #
 autoload -Uz add-zsh-hook
@@ -25,7 +26,7 @@ if ! [[ -v _comp_setup && -f $_comp_dumpfile ]]; then
     [[ -r $_comp_dumpfile ]] && zcompile "$_comp_dumpfile" &|
 fi
 
-# Process queued compdef calls
+# Process queued compdef calls.
 local def
 for def in $_deferred_compdefs; do
     eval "compdef $def"
