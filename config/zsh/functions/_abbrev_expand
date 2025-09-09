@@ -6,8 +6,7 @@ local line="$LBUFFER$RBUFFER"
 local pos=$#LBUFFER
 
 local word_start=$pos
-while [[ $word_start -gt 0 && "${line:$((word_start-1)):1}" != [[:space:]] ]]
-do
+while [[ $word_start -gt 0 && "${line:$((word_start-1)):1}" != " " ]]; do
     ((word_start--))
 done
 
