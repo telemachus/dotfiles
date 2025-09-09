@@ -15,25 +15,49 @@
 #      there are important errors.
 #
 zcompile_if_new() {
-    if [[ -s ${1} && ( ! -s ${1}.zwc || ${1} -nt ${1}.zwc ) ]]; then
-        zcompile ${1}
+    if [[ -z "${1}" || -z "${2}" ]]; then
+        return
+    fi
+
+    if [[ -s "${2}" && ( ! -s "${2}.zwc" || "${2}" -nt "${2}.zwc" ) ]]; then
+        zcompile "${1}" "${2}"
     fi
 }
 
 _deferred_compile() {
     add-zsh-hook -d preexec _deferred_compile
 
+    # For these files, zcompile will use its -R flag, which causes the contents
+    # of the files to be copied into the shell's memory rather than mapped.
+    #
+    # Add files here such as startup items that are read once and then done.
+    local -a r_files=(
+        "${HOME}/.zshenv"
+        "${ZDOTDIR}/.zlogin"
+        "${ZDOTDIR}/.zshrc"
+    )
+
+    # For these files, zcompile will use its -M flag, which causes the contents
+    # of the files to be mapped into the shell's memory rather than copied.
+    #
+    # Add files here such as functions and completions that are used repeatedly.
+    local -a m_files=(
+        "${HOME}"/.config/zsh/functions/^*.zwc(N)
+        "${ZDOTDIR}"/completions/^*.zwc(N)
+    )
+
     (
-        zcompile_if_new "${ZDOTDIR}/.zshrc"
-        for func in ~/.config/zsh/functions/^*.zwc(N); do
-            zcompile_if_new "$func"
+        for r_file in "${r_files[@]}"; do
+            zcompile_if_new "-R" "$r_file"
         done
-        for comp in ${ZDOTDIR}/completions/^*.zwc(N); do
-            zcompile_if_new "$comp"
+
+        for m_file in "${m_files[@]}"; do
+            zcompile_if_new "-M" "$m_file"
         done
     ) &> /dev/null &!
 }
 
+(( ${+functions[add-zsh-hook]} )) || autoload -Uz add-zsh-hook
 add-zsh-hook preexec _deferred_compile
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :
