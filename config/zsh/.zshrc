@@ -36,6 +36,7 @@ path=(
     $HOME/local/lua/bin(N)
     $HOME/local/lua-language-server/bin(N)
     $HOME/local/neovim/bin(N)
+    $HOME/local/npm/bin(N)
     $HOME/local/passage/bin(N)
     $HOME/local/vim/bin(N)
     $HOME/.local/bin(N)
