@@ -20,18 +20,24 @@ setopt HIST_NO_STORE
 setopt HIST_VERIFY
 
 # Let's try both CDPATH and hash -d.
-CDPATH=::$HOME:$HOME/Documents/git-repos/trinity:$HOME/Documents/git-repos:$HOME/Documents
+cdpath=(
+    .
+    $HOME
+    $HOME/Documents/git-repos/trinity(N)
+    $HOME/Documents/git-repos(N)
+    $HOME/Documents(N)
+)
 hash -d \
     zsh=$HOME/Downloads/src/zsh-launchpad \
     dots=$HOME/Documents/git-repos/dotfiles \
-    trinity=$HOME/Documents/git-repos/trinity
+    trinity=$HOME/Documents/git-repos/trinity \
+    books=$HOME/Documents/legenda
 
 # -U ensures each entry in these is unique (that is, discards duplicates).
 export -U PATH path FPATH fpath MANPATH manpath
 export -UT INFOPATH infopath
 
 path=(
-    # (N): null if file doesn't exist
     $HOME/local/go/bin(N)
     $HOME/local/lua/bin(N)
     $HOME/local/lua-language-server/bin(N)
@@ -40,11 +46,27 @@ path=(
     $HOME/local/passage/bin(N)
     $HOME/local/vim/bin(N)
     $HOME/.local/bin(N)
-    $HOME/.cargo/bin
-    $HOME/go/bin
+    $HOME/.cargo/bin(N)
+    $HOME/go/bin(N)
     $HOME/bin(N)
     $path
 )
+
+# Apple has moved key manpages into Xcode.app, which is a pain.
+# We use the following command—from `port notes man-db` to find them.
+# find $(xcode-select -p) -type d | /usr/bin/grep '/usr/share/man$' |
+#     /usr/bin/tr -s '\n' ':'; echo
+#
+if [[ $(uname -s) == Darwin ]]; then
+    local XCODE_BASE=/Applications/Xcode.app/Contents/Developer
+    local USMAN=usr/share/man
+    manpath=(
+        $manpath
+        ${XCODE_BASE}/${USMAN}(N)
+        ${XCODE_BASE}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/${USMAN}(N)
+        ${XCODE_BASE}/Toolchains/XcodeDefault.xctoolchain/${USMAN}(N)
+    )
+fi
 
 # In order to be able to `autoload` a function for use on the command line, it
 # either needs to be in the $fpath or you need to autoload by absolute path.
@@ -62,6 +84,8 @@ fpath=(
 
 autoload -Uz die info mkcd warn zsh_directory_name
 
+# I am surprised that this is necessary.
+export TZ=America/New_York
 export MAILDIR=$HOME/.maildir
 export NO_COLOR=1
 export VISUAL=nvim
