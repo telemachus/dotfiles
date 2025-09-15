@@ -32,7 +32,14 @@ keymap_set("n", "-", "<CMD>Oil<CR>", default_opts)
 keymap_set("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
-keymap_set("n", "<Leader>t", ":+1,$d<CR>", default_opts)
+keymap_set("n", "<Leader>t", function()
+    local current_line = vim.api.nvim_win_get_cursor(0)[1]
+    local last_line = vim.api.nvim_buf_line_count(0)
+
+    if current_line < last_line then
+        vim.api.nvim_buf_set_lines(0, current_line, -1, false, {})
+    end
+end, default_opts)
 
 -- Properly indent yanked text.
 keymap_set("n", "<Leader>pi", function()
