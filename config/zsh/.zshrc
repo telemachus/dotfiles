@@ -93,6 +93,7 @@ unsetopt FLOW_CONTROL
 
 # Use vim bindings, but keep C-a and C-e from emacs.
 bindkey -v
+export KEYTIMEOUT=1
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
@@ -171,6 +172,34 @@ _abbrev_init
 bindkey ' ' _abbrev_expand
 bindkey '^M' _abbrev_execute
 
+# Distinguish Vi-modes by cursor: steady block for normal and blinking bar for
+# insert mode.
+function zle-keymap-select {
+    local steady_block="\e[2 q"
+    local blinking_bar="\e[5 q"
+
+    case $KEYMAP in
+        vicmd)
+            print -n $steady_block
+            ;;
+        viins|main|'')
+            print -n $blinking_bar
+            ;;
+    esac
+}
+
+function zle-line-init {
+    print -n "\e[5 q"
+}
+
+function zle-line-finish {
+    print -n "\e[2 q"
+}
+
+zle -N zle-keymap-select
+zle -N zle-line-init
+zle -N fle-line-finish
+
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
 
@@ -181,7 +210,7 @@ zstyle ':completion:*:*:git-(push|fetch):*' file-patterns ''
 zstyle ':completion:*:*:git-(push|fetch):*' tag-order \
     'remotes recent-branches branches'
 
-# Always set aliases _last,_ so they don't get used in function definitions.
+# Always set aliases *last*, so they don't get used in function definitions.
 
 # Movement
 alias -- -='cd -'
@@ -276,7 +305,6 @@ alias rebuildcomp='autoload -Uz _rebuild_compdump && _rebuild_compdump &|'
 
 # Use `< file` to quickly view the contents of any text file.
 READNULLCMD=$PAGER  # Set the program to use for this.
-
 
 if [[ -n $ZSH_DEBUGRC ]]; then
     zprof
