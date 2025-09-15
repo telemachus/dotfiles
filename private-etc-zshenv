@@ -1,0 +1,39 @@
+# Set path and manpath manually rather than via /usr/libexec/path_helper, which
+# Apple calls in /private/etc/zprofile.
+#
+path=(
+    /usr/local/bin(N)
+    /System/Cryptexes/App/usr/bin(N)
+    /usr/local/sbin(N)
+    /usr/bin(N)
+    /bin(N)
+    /usr/sbin(N)
+    /sbin(N)
+    /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin(N)
+    /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin(N)
+    /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin(N)
+    /Library/Apple/usr/bin(N)
+    /Library/TeX/texbin(N)
+    /opt/local/bin(N)
+    /opt/local/sbin(N)
+)
+
+# Apple has moved developer docs from /usr/local/share to XCode itself.
+# This is a pain, but `port notes man-db` suggests the following command.
+#
+# find $(xcode-select -p) -type d | grep '/usr/share/man$' | tr -s '\n'$ ':'
+#
+local XCODE_BASE=/Applications/Xcode.app/Contents/Developer
+local US_MAN=usr/share/man
+manpath=(
+    /Applications/Ghostty.app/Contents/Resources/ghostty/../man(N)
+    ${XCODE_BASE}/${US_MAN}*(N)
+    ${XCODE_BASE}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/${US_MAN}*(N)
+    ${XCODE_BASE}/Toolchains/XcodeDefault.xctoolchain/${US_MAN}*(N)
+    /usr/share/man(N)
+    /usr/local/share/man(N)
+    /Library/TeX/Distributions/.DefaultTeX/Contents/Man(N)
+)
+
+# Do not read /etc/zprofile, /etc/zshrc, or /etc/zlogin.
+setopt noglobalrcs
