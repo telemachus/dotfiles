@@ -1,3 +1,52 @@
 ZDOTDIR="${XDG_CONFIG_HOME:=${HOME}/.config}/zsh"
 
+# -U ensures each entry in these is unique (that is, discards duplicates).
+export -U PATH path FPATH fpath MANPATH manpath
+export -UT INFOPATH infopath
+
+path=(
+    ${HOME}/local/*/bin(N)
+    ${HOME}/.local/bin(N)
+    ${HOME}/.cargo/bin(N)
+    ${HOME}/go/bin(N)
+    $path
+)
+manpath=(
+    ${HOME}/local/*/share/man(N)
+    ${HOME}/.local/share/man(N)
+    $manpath
+)
+
+# I am surprised that macOS does not set the timezone.
+export TZ=America/New_York
+export MAILDIR=$HOME/.maildir
+export NO_COLOR=1
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+export VIMCONFIG=$HOME/.vim
+export VIMDATA=$HOME/.vim
+
+# Configure less:
+# -G: no search highlighting
+# -R: handle ANSI escape codes
+# -J: show search locations in side column
+# -x4: 4-space tabs
+# P...: prompt containing [filename/STDIN] and [N%] for percentage through file.
+export LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
+export PAGER=less
+
+# Configure par:
+# r: repeat quote prefixes
+# T: handle tabs
+# b: handle backspaces
+# g: guess paragraphs
+# q: handle nested quotes
+# R: repeat non-whitespace prefixes
+# B=.,?_A_a: body chars (punctuation + letters)
+# Q=_s>|: quote chars (underscore, space, >, |)
+export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
+
+# Use this later for zcompdump.
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :

@@ -33,41 +33,6 @@ hash -d \
     trinity=$HOME/Documents/git-repos/trinity \
     books=$HOME/Documents/legenda
 
-# -U ensures each entry in these is unique (that is, discards duplicates).
-export -U PATH path FPATH fpath MANPATH manpath
-export -UT INFOPATH infopath
-
-path=(
-    $HOME/local/go/bin(N)
-    $HOME/local/lua/bin(N)
-    $HOME/local/lua-language-server/bin(N)
-    $HOME/local/neovim/bin(N)
-    $HOME/local/npm/bin(N)
-    $HOME/local/passage/bin(N)
-    $HOME/local/vim/bin(N)
-    $HOME/.local/bin(N)
-    $HOME/.cargo/bin(N)
-    $HOME/go/bin(N)
-    $HOME/bin(N)
-    $path
-)
-
-# Apple has moved key manpages into Xcode.app, which is a pain.
-# We use the following command—from `port notes man-db` to find them.
-# find $(xcode-select -p) -type d | /usr/bin/grep '/usr/share/man$' |
-#     /usr/bin/tr -s '\n' ':'; echo
-#
-if [[ $(uname -s) == Darwin ]]; then
-    local XCODE_BASE=/Applications/Xcode.app/Contents/Developer
-    local USMAN=usr/share/man
-    manpath=(
-        $manpath
-        ${XCODE_BASE}/${USMAN}(N)
-        ${XCODE_BASE}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/${USMAN}(N)
-        ${XCODE_BASE}/Toolchains/XcodeDefault.xctoolchain/${USMAN}(N)
-    )
-fi
-
 # In order to be able to `autoload` a function for use on the command line, it
 # either needs to be in the $fpath or you need to autoload by absolute path.
 # Note: Zsh's completions system will automatically autoload completion
@@ -84,37 +49,7 @@ fpath=(
 
 autoload -Uz die info mkcd warn zsh_directory_name
 
-# I am surprised that this is necessary.
-export TZ=America/New_York
-export MAILDIR=$HOME/.maildir
-export NO_COLOR=1
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-export VIMCONFIG=$HOME/.vim
-export VIMDATA=$HOME/.vim
-
-# Configure less:
-# -G: no search highlighting
-# -R: handle ANSI escape codes
-# -J: show search locations in side column
-# -x4: 4-space tabs
-# P...: prompt containing [filename/STDIN] and [N%] for percentage through file.
-export LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
-export PAGER=less
-
-# Configure par:
-# r: repeat quote prefixes
-# T: handle tabs
-# b: handle backspaces
-# g: guess paragraphs
-# q: handle nested quotes
-# R: repeat non-whitespace prefixes
-# B=.,?_A_a: body chars (punctuation + letters)
-# Q=_s>|: quote chars (underscore, space, >, |)
-export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
-
 # Speed up compinit.
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 mkdir -p $XDG_CACHE_HOME/zsh
 typeset -gH _comp_dumpfile=$XDG_CACHE_HOME/zsh/compdump
 
@@ -227,7 +162,7 @@ bindkey '^[w' where-is
     # way, we preserve the cursor's position.
     LBUFFER="sudo $LBUFFER"
   }
-} .sudo
+} _sudo
 
 autoload -Uz _abbrev_init _abbrev_expand _abbrev_execute
 zle -N _abbrev_expand
@@ -337,7 +272,7 @@ alias morning='sudo portup ; neoup'
 alias zprofile='time ZSH_DEBUGRC=1 zsh -i -c exit'
 
 # Manually reload zcompdump.
- alias rebuildcomp='autoload -Uz _rebuild_compdump && _rebuild_compdump &|'
+alias rebuildcomp='autoload -Uz _rebuild_compdump && _rebuild_compdump &|'
 
 # Use `< file` to quickly view the contents of any text file.
 READNULLCMD=$PAGER  # Set the program to use for this.
