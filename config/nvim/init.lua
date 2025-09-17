@@ -19,15 +19,19 @@ g.loaded_node_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
 
+--- The names that files check for are highly inconsistent.
+--- The only way to be sure is to read each file.
 local dont_load = {
+    "2html_plugin",
     "gzip",
+    "man",
     "matchit",
     "matchparen",
     "netrwPlugin",
-    "rplugin",
+    "shada_plugin",
+    "remote_plugins",
     "tarPlugin",
-    "tohtml",
-    "tutor",
+    "tutor_mode_plugin",
     "zipPlugin",
 }
 for _, plugin in pairs(dont_load) do

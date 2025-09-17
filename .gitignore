@@ -2,5 +2,6 @@
 .netrwhist
 com.googlecode.iterm2.plist
 config/nvim/spell/
+config/karabiner
 *.zwc
 .zsh_history
