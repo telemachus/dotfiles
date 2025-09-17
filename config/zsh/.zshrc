@@ -163,7 +163,7 @@ bindkey '^[w' where-is
     # way, we preserve the cursor's position.
     LBUFFER="sudo $LBUFFER"
   }
-} _sudo
+} sudo_prefix
 
 autoload -Uz _abbrev_init _abbrev_expand _abbrev_execute
 zle -N _abbrev_expand
