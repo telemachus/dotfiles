@@ -304,56 +304,48 @@ safe_setup("conform", {
     },
 })
 
--- https://github.com/neovim/nvim-lspconfig.git
--- Require my LSP tweaks here since some LSP setup seems order dependent.
 safe_require("lsp")
-local lsp_loaded, lspconfig = safe_require("lspconfig")
-if lsp_loaded then
-    lspconfig.util.default_config.on_init = function(client)
-        client.server_capabilities.semanticTokensProvider = nil
-    end
-
+vim.lsp.config("gopls", {
     -- gopls: https://github.com/golang/tools/tree/master/gopls
-    lspconfig.gopls.setup({
-        settings = { gofumpt = true },
-        capabilities = {
-            textDocument = {
-                completion = {
-                    completionItem = {
-                        snippetSupport = false,
-                    },
+    settings = { gofumpt = true },
+    capabilities = {
+        textDocument = {
+            completion = {
+                completionItem = {
+                    snippetSupport = false,
                 },
             },
         },
-    })
+    },
+})
+vim.lsp.enable("gopls")
 
-    -- lua-language-server: https://luals.github.io
-    lspconfig.lua_ls.setup({
-        settings = {
-            Lua = {
-                runtime = {
-                    version = "LuaJIT",
+vim.lsp.config("lua_ls", {
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    "/Users/telemachus/Downloads/src/LLS-Addons",
                 },
-                workspace = {
-                    checkThirdParty = false,
-                    library = {
-                        vim.env.VIMRUNTIME,
-                        "/Users/telemachus/Downloads/src/LLS-Addons",
-                    },
-                    -- TODO: find out why this does not work.
-                    userThirdParty = {},
-                },
-                format = {
-                    enable = false,
-                },
-                completion = {
-                    callSnippet = "Disable",
-                    keywordSnippet = "Disable",
-                },
+                -- TODO: find out why this does not work.
+                userThirdParty = {},
+            },
+            format = {
+                enable = false,
+            },
+            completion = {
+                callSnippet = "Disable",
+                keywordSnippet = "Disable",
             },
         },
-    })
-end
+    },
+})
+vim.lsp.enable("lua_ls")
 
 -- https://github.com/telemachus/autoclose.nvim.git
 safe_setup("autoclose", {
