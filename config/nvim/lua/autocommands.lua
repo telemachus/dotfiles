@@ -93,12 +93,15 @@ create_autocmd("User", {
 
 -- Add keybindings to a buffer when LSP attaches.
 create_autocmd("LspAttach", {
-    callback = function(ev)
+    callback = function(args)
         -- Do not let the LSP set formatexpr since some LSPs don't support
         -- reformatting comments.
-        bo[ev.buf].formatexpr = nil
+        bo[args.buf].formatexpr = nil
 
-        local keymap_opts = { remap = false, silent = true, buffer = ev.buf }
+        -- Do not highlight color terms in the buffer.
+        lsp.document_color.enable(false, args.buf)
+
+        local keymap_opts = { remap = false, silent = true, buffer = args.buf }
         -- Jump to definition of item under cursor.
         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
         -- Jump to definition of item under cursor, but in a split.
