@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/zsh
 
 exec &> >(while read line; do echo "$(date -R) $line"; done)
 
