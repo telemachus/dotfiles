@@ -91,16 +91,26 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
--- Add keybindings to a buffer when LSP attaches.
+-- Global configuration when an LSP attaches.
 create_autocmd("LspAttach", {
     callback = function(args)
         -- Do not let the LSP set formatexpr since some LSPs (e.g., gopls) don't
         -- support reformatting comments.
         bo[args.buf].formatexpr = nil
 
+        -- Disable color, completion, and semantic tokens.
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.server_capabilities then
+            client.server_capabilities.colorProvider = nil
+            client.server_capabilities.completionProvider = nil
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+
+        -- TODO: Remove as redundant?
         -- Do not highlight color references in the buffer.
         lsp.document_color.enable(false, args.buf)
 
+        -- Set keymaps.
         local keymap_opts = { remap = false, silent = true, buffer = args.buf }
 
         -- Jump to definition of item under cursor.

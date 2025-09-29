@@ -35,6 +35,8 @@ function vim.lsp.protocol.make_client_capabilities()
         caps.workspace.semanticTokens = nil
     end
     if caps.textDocument then
+        caps.textDocument.colorProvider = nil
+        caps.textDocument.completion = nil
         caps.textDocument.semanticTokens = nil
     end
 
