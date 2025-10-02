@@ -16,14 +16,19 @@ if ! [[ -v _comp_setup && -f $_comp_dumpfile ]]; then
 
     local -a compargs=()
     zstyle -a ':autocomplete::compinit' arguments compargs
-    if [[ $_comp_dumpfile -nt ${ZDOTDIR:-$HOME}/.zshrc ]]; then
-        compinit -C -d "$_comp_dumpfile" "$compargs[@]"
-    else
-        rm -f "$_comp_dumpfile"*(N) &&
-            compinit -d "$_comp_dumpfile" "$compargs[@]"
-    fi
+    compinit -C -d "$_comp_dumpfile" "$compargs[@]"
 
-    [[ -r $_comp_dumpfile ]] && zcompile "$_comp_dumpfile" &|
+    if [[ ! $_comp_dumpfile -nt ${ZDOTDIR:-$HOME}/.zshrc ]]; then
+        typeset -g _compinit_needs_reload=1
+        (
+            rm -f "$_comp_dumpfile"*(N) &&
+                compinit -d "$_comp_dumpfile" "$compargs[@]" &&
+                zcompile "$_comp_dumpfile"
+        ) &|
+
+        # Add hook to reload once regeneration completes
+        add-zsh-hook precmd _check_compinit_reload
+    fi
 fi
 
 # Process queued compdef calls.
@@ -34,6 +39,21 @@ done
 unset _deferred_compdefs
 
 compinit() {:}
+
+_check_compinit_reload() {
+    if [[ -v _compinit_needs_reload &&
+        $_comp_dumpfile -nt ${ZDOTDIR:-$HOME}/.zshrc ]]; then
+        unset _compinit_needs_reload
+        add-zsh-hook -d precmd _check_compinit_reload
+
+        unfunction compinit
+        autoload -Uz compinit
+        local -a compargs=()
+        zstyle -a ':autocomplete::compinit' arguments compargs
+        compinit -C -d "$_comp_dumpfile" "$compargs[@]"
+        compinit() {:}
+    fi
+}
 
 true
 
