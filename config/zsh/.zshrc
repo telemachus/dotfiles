@@ -2,6 +2,53 @@ if [[ -n $ZSH_DEBUGRC ]]; then
     zmodload zsh/zprof
 fi
 
+# In order to be able to `autoload` a function for use on the command line, it
+# either needs to be in the $fpath or you need to autoload by absolute path.
+# Note: Zsh's completions system will automatically autoload completion
+# functions inside dirs that are in the $fpath. So, no need to explicitly
+# autoload those.
+fpath=(
+    $ZDOTDIR/functions
+    $ZDOTDIR/completions
+    $fpath
+    # Add MacPort's dir to the end of $fpath, so that we use its completions
+    # for commands that zsh doesn't already know how to complete.
+    /opt/local/share/zsh/site-functions
+)
+
+autoload -Uz die info mkcd warn zsh_directory_name add-zsh-hook
+
+ZSH_GIT_PROMPT_SHOW_STASH=1
+# Upstream name in the prompt is too noisy. Reconsider this later?
+# ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
+
+add-zsh-hook chpwd prompt_chpwd
+
+# Call prompt_chpwd now to set psvar for the first prompt. I need this function
+# because I want something similar to %~ and %d but not exactly like either.
+#
+# Like %~, I want $HOME to be replaced by ~ everywhere.
+# Like %d, I want named dirs to appear literally in prompts not as ~name.
+prompt_chpwd
+
+PROMPT='%v $(gitprompt)%# '
+
+. ~/Downloads/src/git-prompt.zsh/git-prompt.zsh
+
+# Let's try both CDPATH and hash -d.
+cdpath=(
+    .
+    $HOME
+    $HOME/Documents/git-repos/trinity(N)
+    $HOME/Documents/git-repos(N)
+    $HOME/Documents(N)
+)
+hash -d \
+    zsh=$HOME/Downloads/src/zsh-launchpad \
+    dots=$HOME/Documents/git-repos/dotfiles \
+    trinity=$HOME/Documents/git-repos/trinity \
+    books=$HOME/Documents/legenda
+
 # https://zsh.sourceforge.io/Doc/Release/Expansion.html#Filename-Generation
 setopt EXTENDED_GLOB
 
@@ -19,36 +66,6 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_NO_STORE
 setopt HIST_VERIFY
 
-# Let's try both CDPATH and hash -d.
-cdpath=(
-    .
-    $HOME
-    $HOME/Documents/git-repos/trinity(N)
-    $HOME/Documents/git-repos(N)
-    $HOME/Documents(N)
-)
-hash -d \
-    zsh=$HOME/Downloads/src/zsh-launchpad \
-    dots=$HOME/Documents/git-repos/dotfiles \
-    trinity=$HOME/Documents/git-repos/trinity \
-    books=$HOME/Documents/legenda
-
-# In order to be able to `autoload` a function for use on the command line, it
-# either needs to be in the $fpath or you need to autoload by absolute path.
-# Note: Zsh's completions system will automatically autoload completion
-# functions inside dirs that are in the $fpath. So, no need to explicitly
-# autoload those.
-fpath=(
-    $ZDOTDIR/functions
-    $ZDOTDIR/completions
-    $fpath
-    # Add MacPort's dir to the end of $fpath, so that we use its completions
-    # for commands that zsh doesn't already know how to complete.
-    /opt/local/share/zsh/site-functions
-)
-
-autoload -Uz die info mkcd warn zsh_directory_name
-
 # Speed up compinit.
 mkdir -p $XDG_CACHE_HOME/zsh
 typeset -gH _comp_dumpfile=$XDG_CACHE_HOME/zsh/compdump
@@ -60,7 +77,7 @@ compdef() {
 }
 
 compinit() {:}
-autoload -Uz add-zsh-hook _defer_compinit
+autoload -Uz _defer_compinit
 add-zsh-hook precmd _defer_compinit
 
 # Don't let > silently overwrite files. To overwrite, use >! instead.
@@ -106,24 +123,6 @@ bindkey "^[[B" down-line-or-beginning-search
 
 # Fix backspace key after using ZLE
 bindkey "^?" backward-delete-char
-
-ZSH_GIT_PROMPT_SHOW_STASH=1
-# Upstream name in the prompt is too noisy. Reconsider this later?
-# ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
-
-autoload -Uz add-zsh-hook
-add-zsh-hook chpwd prompt_chpwd
-
-# Call prompt_chpwd now to set psvar for the first prompt. I need this function
-# because I want something similar to %~ and %d but not exactly like either.
-#
-# Like %~, I want $HOME to be replaced by ~ everywhere.
-# Like %d, I want named dirs to appear literally in prompts not as ~name.
-prompt_chpwd
-
-PROMPT='%v $(gitprompt)%# '
-
-. ~/Downloads/src/git-prompt.zsh/git-prompt.zsh
 
 # Ctrl-u
 # - On the main prompt: Push aside your current command line, so you can type a
