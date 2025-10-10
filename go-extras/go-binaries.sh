@@ -4,6 +4,8 @@ warn() {
     printf >&2 '%s: %s\n' "${0##*/}" "$1"
 }
 
+go install golang.org/x/perf/cmd/benchstat@latest ||
+    warn "failed to install benchstat"
 go install github.com/kisielk/errcheck@latest ||
     warn "failed to install errcheck"
 go install github.com/rogpeppe/godef@latest ||
