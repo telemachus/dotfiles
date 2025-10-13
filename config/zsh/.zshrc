@@ -18,10 +18,6 @@ fpath=(
 
 autoload -Uz die info mkcd warn zsh_directory_name add-zsh-hook
 
-ZSH_GIT_PROMPT_SHOW_STASH=1
-# Upstream name in the prompt is too noisy. Reconsider this later?
-# ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
-
 add-zsh-hook chpwd prompt_chpwd
 
 # Call prompt_chpwd now to set psvar for the first prompt. I need this function
@@ -31,8 +27,10 @@ add-zsh-hook chpwd prompt_chpwd
 # Like %d, I want named dirs to appear literally in prompts not as ~name.
 prompt_chpwd
 
-PROMPT='%v $(gitprompt)%# '
+NEWLINE=$'\n'
+PROMPT='%v $(gitprompt)${NEWLINE}%# '
 
+ZSH_GIT_PROMPT_SHOW_UPSTREAM_NAME=1
 . ~/Downloads/src/git-prompt.zsh/git-prompt.zsh
 
 # Let's try both CDPATH and hash -d.
