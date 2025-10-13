@@ -42,7 +42,7 @@ palette = 14=#42d4f4
 # white
 palette = 15=#ffffff
 
-shell-integration-features = no-cursor,no-title
+shell-integration-features = no-cursor,title
 
 # Base colors and cursor styles.
 background = ffffff
