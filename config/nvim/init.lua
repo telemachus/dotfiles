@@ -287,7 +287,7 @@ safe_setup("conform", {
     -- log_level = vim.log.levels.DEBUG,
     formatters_by_ft = {
         json = { "jq" },
-        go = { "gofumpt" },
+        go = { "goimports", "gofumpt" },
         lua = { "stylua" },
         python = { "isort", "black" },
         sh = { "shfmt" },
@@ -304,48 +304,48 @@ safe_setup("conform", {
     },
 })
 
-safe_require("lsp")
-vim.lsp.config("gopls", {
-    -- gopls: https://github.com/golang/tools/tree/master/gopls
-    settings = { gofumpt = true },
-    capabilities = {
-        textDocument = {
-            completion = {
-                completionItem = {
-                    snippetSupport = false,
-                },
-            },
-        },
-    },
-})
-vim.lsp.enable("gopls")
-
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME,
-                    "/Users/telemachus/Downloads/src/LLS-Addons",
-                },
-                -- TODO: find out why this does not work.
-                userThirdParty = {},
-            },
-            format = {
-                enable = false,
-            },
-            completion = {
-                callSnippet = "Disable",
-                keywordSnippet = "Disable",
-            },
-        },
-    },
-})
-vim.lsp.enable("lua_ls")
+-- safe_require("lsp")
+-- vim.lsp.config("gopls", {
+--     -- gopls: https://github.com/golang/tools/tree/master/gopls
+--     settings = { gofumpt = true },
+--     capabilities = {
+--         textDocument = {
+--             completion = {
+--                 completionItem = {
+--                     snippetSupport = false,
+--                 },
+--             },
+--         },
+--     },
+-- })
+-- vim.lsp.enable("gopls")
+--
+-- vim.lsp.config("lua_ls", {
+--     settings = {
+--         Lua = {
+--             runtime = {
+--                 version = "LuaJIT",
+--             },
+--             workspace = {
+--                 checkThirdParty = false,
+--                 library = {
+--                     vim.env.VIMRUNTIME,
+--                     "/Users/telemachus/Downloads/src/LLS-Addons",
+--                 },
+--                 -- TODO: find out why this does not work.
+--                 userThirdParty = {},
+--             },
+--             format = {
+--                 enable = false,
+--             },
+--             completion = {
+--                 callSnippet = "Disable",
+--                 keywordSnippet = "Disable",
+--             },
+--         },
+--     },
+-- })
+-- vim.lsp.enable("lua_ls")
 
 -- https://github.com/telemachus/autoclose.nvim.git
 safe_setup("autoclose", {

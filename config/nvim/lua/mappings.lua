@@ -78,14 +78,14 @@ keymap_set("n", "<Leader>sv", ":source $MYVIMRC<CR>", default_opts)
 
 -- Mappings for diagnostics.
 -- TODO: remove these? Check, but I think these are now built-in.
-keymap_set("n", "[d", function()
-    diagnostic.jump({ count = -1, float = true })
-end, default_opts)
-keymap_set("n", "]d", function()
-    diagnostic.jump({ count = 1, float = true })
-end, default_opts)
-keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
-keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
+-- keymap_set("n", "[d", function()
+--     diagnostic.jump({ count = -1, float = true })
+-- end, default_opts)
+-- keymap_set("n", "]d", function()
+--     diagnostic.jump({ count = 1, float = true })
+-- end, default_opts)
+-- keymap_set("n", "<Leader>do", diagnostic.open_float, default_opts)
+-- keymap_set("n", "<Leader>dq", diagnostic.setqflist, default_opts)
 
 -- Automatically put blank lines into the black-hole register
 -- https://nanotipsforvim.prose.sh/keeping-your-register-clean-from-dd
@@ -142,3 +142,6 @@ keymap_set("n", "]p", function()
     vim.go.operatorfunc = "v:lua.require'put'.linewise_below"
     return "g@l"
 end, extended_opts)
+
+-- Use gd instead of C-] for "go to definition".
+keymap_set("n", "gd", "<C-]>", default_opts)

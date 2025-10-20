@@ -3,7 +3,7 @@ local create_autocmd = vim.api.nvim_create_autocmd
 local o = vim.o
 local bo = vim.bo
 local cmd = vim.cmd
-local lsp = vim.lsp
+-- local lsp = vim.lsp
 local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
 local on_yank = vim.hl.on_yank
@@ -91,62 +91,62 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
--- Global configuration when an LSP attaches.
-create_autocmd("LspAttach", {
-    callback = function(args)
-        -- Do not let the LSP set formatexpr since some LSPs (e.g., gopls) don't
-        -- support reformatting comments.
-        bo[args.buf].formatexpr = nil
-
-        -- Disable color, completion, and semantic tokens.
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client and client.server_capabilities then
-            client.server_capabilities.colorProvider = nil
-            client.server_capabilities.completionProvider = nil
-            client.server_capabilities.semanticTokensProvider = nil
-        end
-
-        -- TODO: Remove as redundant?
-        -- Do not highlight color references in the buffer.
-        lsp.document_color.enable(false, args.buf)
-
-        -- Set keymaps.
-        local keymap_opts = { remap = false, silent = true, buffer = args.buf }
-
-        -- Jump to definition of item under cursor.
-        keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
-        -- Jump to definition of item under cursor, but in a split.
-        keymap_set("n", "gs", "<C-w>]", keymap_opts)
-        -- Start rename action for item under cursor.
-        keymap_set("n", "R", lsp.buf.rename, keymap_opts)
-        -- Go to the definition of the type under cursor.
-        keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
-        -- Show signature help for current function.
-        keymap_set("i", "<C-k>", lsp.buf.signature_help, keymap_opts)
-    end,
-    group = telemachus_augroup,
-})
-
--- Call goimports via gopls on write.
-create_autocmd("BufWritePre", {
-    pattern = "*.go",
-    callback = function()
-        local params = lsp.util.make_range_params(0, "utf-16")
-        params.context = { only = { "source.organizeImports" } }
-        local result =
-            lsp.buf_request_sync(0, "textDocument/codeAction", params)
-        for cid, res in pairs(result or {}) do
-            for _, r in pairs(res.result or {}) do
-                if r.edit then
-                    local client = lsp.get_client_by_id(cid) or {}
-                    local enc = client.offset_encoding or "utf-16"
-                    lsp.util.apply_workspace_edit(r.edit, enc)
-                end
-            end
-        end
-    end,
-    group = telemachus_augroup,
-})
+-- -- Global configuration when an LSP attaches.
+-- create_autocmd("LspAttach", {
+--     callback = function(args)
+--         -- Do not let the LSP set formatexpr since some LSPs (e.g., gopls) don't
+--         -- support reformatting comments.
+--         bo[args.buf].formatexpr = nil
+--
+--         -- Disable color, completion, and semantic tokens.
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--         if client and client.server_capabilities then
+--             client.server_capabilities.colorProvider = nil
+--             client.server_capabilities.completionProvider = nil
+--             client.server_capabilities.semanticTokensProvider = nil
+--         end
+--
+--         -- TODO: Remove as redundant?
+--         -- Do not highlight color references in the buffer.
+--         lsp.document_color.enable(false, args.buf)
+--
+--         -- Set keymaps.
+--         local keymap_opts = { remap = false, silent = true, buffer = args.buf }
+--
+--         -- Jump to definition of item under cursor.
+--         keymap_set("n", "gd", lsp.buf.definition, keymap_opts)
+--         -- Jump to definition of item under cursor, but in a split.
+--         keymap_set("n", "gs", "<C-w>]", keymap_opts)
+--         -- Start rename action for item under cursor.
+--         keymap_set("n", "R", lsp.buf.rename, keymap_opts)
+--         -- Go to the definition of the type under cursor.
+--         keymap_set("n", "T", lsp.buf.type_definition, keymap_opts)
+--         -- Show signature help for current function.
+--         keymap_set("i", "<C-k>", lsp.buf.signature_help, keymap_opts)
+--     end,
+--     group = telemachus_augroup,
+-- })
+--
+-- -- Call goimports via gopls on write.
+-- create_autocmd("BufWritePre", {
+--     pattern = "*.go",
+--     callback = function()
+--         local params = lsp.util.make_range_params(0, "utf-16")
+--         params.context = { only = { "source.organizeImports" } }
+--         local result =
+--             lsp.buf_request_sync(0, "textDocument/codeAction", params)
+--         for cid, res in pairs(result or {}) do
+--             for _, r in pairs(res.result or {}) do
+--                 if r.edit then
+--                     local client = lsp.get_client_by_id(cid) or {}
+--                     local enc = client.offset_encoding or "utf-16"
+--                     lsp.util.apply_workspace_edit(r.edit, enc)
+--                 end
+--             end
+--         end
+--     end,
+--     group = telemachus_augroup,
+-- })
 
 -- Highlight on yank!
 create_autocmd("TextYankPost", {
