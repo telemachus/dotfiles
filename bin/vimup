@@ -55,4 +55,11 @@ make install || die '`make install` failed'
 
 pluggo -config=${HOME}/.vim/pluggo-vim.json
 
+# I need a minimal vimrc since `vim -e` sets compatible and some of my plugins
+# need nocompatible. The `-u` flag requires a file, which I fake using printf
+# and /dev/stdin.
+printf 'set nocompatible\n' |
+    vim -es -u /dev/stdin -c 'helptags ALL' -c 'quit' ||
+    die 'failed to update tag files for plugin docs'
+
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
