@@ -1,10 +1,13 @@
 local keymap_set = vim.keymap.set
 local default_opts = { remap = false, silent = true }
 local extended_opts = { remap = false, silent = true, expr = true }
+local win_get_cursor = vim.api.nvim_win_get_cursor
+local buf_line_count = vim.api.nvim_buf_line_count
+local buf_set_lines = vim.api.nvim_buf_set_lines
 local cmd = vim.cmd
 local set_register = vim.fn.setreg
 local get_line = vim.fn.getline
-local diagnostic = vim.diagnostic
+-- local diagnostic = vim.diagnostic
 local get_current_buf = vim.api.nvim_get_current_buf
 
 -- Text objects for lines.
@@ -25,19 +28,16 @@ keymap_set("o", "ie", ":<C-u>normal vie<CR>", default_opts)
 keymap_set("x", "ae", "GoggV", default_opts)
 keymap_set("o", "ae", ":<C-u>normal vae<CR>", default_opts)
 
--- Open parent directory in current window.
-keymap_set("n", "-", "<CMD>Oil<CR>", default_opts)
-
 -- From the Vim wiki: https://bit.ly/4eLAARp.
 keymap_set("n", "<Leader>r", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
 keymap_set("n", "<Leader>t", function()
-    local current_line = vim.api.nvim_win_get_cursor(0)[1]
-    local last_line = vim.api.nvim_buf_line_count(0)
+    local current_line = win_get_cursor(0)[1]
+    local last_line = buf_line_count(0)
 
     if current_line < last_line then
-        vim.api.nvim_buf_set_lines(0, current_line, -1, false, {})
+        buf_set_lines(0, current_line, -1, false, {})
     end
 end, default_opts)
 
@@ -145,3 +145,13 @@ end, extended_opts)
 
 -- Use gd instead of C-] for "go to definition".
 keymap_set("n", "gd", "<C-]>", default_opts)
+
+-- Create text object for comments. The `ic` version selects comment text but
+-- not comment marker, and `ac` selects comment text and comment marker.
+-- (Comments with start and end markers are not supported.)
+keymap_set({ "o", "x" }, "ic", function()
+    return require("comment-textobj").inner_comment()
+end, extended_opts)
+keymap_set({ "o", "x" }, "ac", function()
+    return require("comment-textobj").around_comment()
+end, extended_opts)
