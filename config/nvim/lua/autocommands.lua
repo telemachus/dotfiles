@@ -1,10 +1,10 @@
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 local o = vim.o
-local bo = vim.bo
+-- local bo = vim.bo
 local cmd = vim.cmd
 -- local lsp = vim.lsp
-local keymap_set = vim.keymap.set
+-- local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
 local on_yank = vim.hl.on_yank
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
