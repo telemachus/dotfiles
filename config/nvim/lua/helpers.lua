@@ -14,6 +14,24 @@ local needs_left_curly = function()
     return false
 end
 
+local mt = {}
+mt.__concat = function(t1, t2)
+    assert(type(t1) == "table" and type(t2) == "table")
+    local dict = setmetatable({}, mt)
+    for k, v in pairs(t1) do
+        dict[k] = v
+    end
+    for k, v in pairs(t2) do
+        dict[k] = v
+    end
+    return dict
+end
+
+local concat_table = function(t)
+    return setmetatable(t or {}, mt)
+end
+
 return {
     needs_left_curly = needs_left_curly,
+    concat_table = concat_table,
 }
