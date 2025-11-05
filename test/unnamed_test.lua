@@ -12,7 +12,7 @@ unnamed.load_tests({
         local result = a .. b
         t:deep_equal(
             result,
-            { foo = 1, bar = 2, baz = 3, qux = 4 },
+            helpers.concat_table({ foo = 1, bar = 2, baz = 3, qux = 4 }),
             "merges two non-empty tables"
         )
     end,
@@ -23,7 +23,7 @@ unnamed.load_tests({
         local result = a .. b
         t:deep_equal(
             result,
-            { foo = 1, bar = "overridden", baz = 3 },
+            helpers.concat_table({ foo = 1, bar = "overridden", baz = 3 }),
             "handles key conflicts with last key winning"
         )
     end,
@@ -32,27 +32,43 @@ unnamed.load_tests({
         local a = helpers.concat_table()
         local b = helpers.concat_table({ foo = 1, bar = 2 })
         local result = a .. b
-        t:deep_equal(a, {}, "no arguments returns empty table")
+        t:deep_equal(
+            a,
+            helpers.concat_table({}),
+            "no arguments returns empty table"
+        )
         t:deep_equal(
             result,
-            { foo = 1, bar = 2 },
+            helpers.concat_table({ foo = 1, bar = 2 }),
             "empty table concatenation works"
         )
 
         a = helpers.concat_table({})
         b = helpers.concat_table({ foo = 1, bar = 2 })
         result = a .. b
-        t:deep_equal(result, { foo = 1, bar = 2 }, "handles empty first table")
+        t:deep_equal(
+            result,
+            helpers.concat_table({ foo = 1, bar = 2 }),
+            "handles empty first table"
+        )
 
         a = helpers.concat_table({ foo = 1, bar = 2 })
         b = helpers.concat_table({})
         result = a .. b
-        t:deep_equal(result, { foo = 1, bar = 2 }, "handles empty second table")
+        t:deep_equal(
+            result,
+            helpers.concat_table({ foo = 1, bar = 2 }),
+            "handles empty second table"
+        )
 
         a = helpers.concat_table({})
         b = helpers.concat_table({})
         result = a .. b
-        t:deep_equal(result, {}, "handles both tables empty")
+        t:deep_equal(
+            result,
+            helpers.concat_table({}),
+            "handles both tables empty"
+        )
     end,
 
     test_nil_values = function(t)
@@ -70,8 +86,8 @@ unnamed.load_tests({
         local original_a = { foo = 1, bar = 2 }
         local original_b = { baz = 3, qux = 4 }
         local _ = a .. b
-        t:deep_equal(a, original_a, "does not modify first table")
-        t:deep_equal(b, original_b, "does not modify second table")
+        t:deep_equal_relaxed(a, original_a, "does not modify first table")
+        t:deep_equal_relaxed(b, original_b, "does not modify second table")
     end,
 
     test_chaining_concatenation = function(t)
@@ -81,7 +97,7 @@ unnamed.load_tests({
         local result = a .. b .. c
         t:deep_equal(
             result,
-            { a = 1, b = 2, c = 3 },
+            helpers.concat_table({ a = 1, b = 2, c = 3 }),
             "supports multiple concatenations"
         )
 
@@ -102,7 +118,10 @@ unnamed.load_tests({
         local result = a .. b
         t:deep_equal(
             result,
-            { string_key = "value1", another_string = "value2" },
+            helpers.concat_table({
+                string_key = "value1",
+                another_string = "value2",
+            }),
             "works with string keys"
         )
     end,
