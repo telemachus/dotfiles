@@ -169,24 +169,24 @@ _abbrev_init
 bindkey ' ' _abbrev_expand
 bindkey '^M' _abbrev_execute
 
-# Distinguish Vi-modes by cursor: steady block for normal and blinking bar for
-# insert mode.
+# Distinguish Vi-modes by cursor: steady block for normal and blinking
+# underline for insert mode.
 function zle-keymap-select {
     local steady_block="\e[2 q"
-    local blinking_bar="\e[5 q"
+    local blinking_underline="\e[3 q"
 
     case $KEYMAP in
         vicmd)
             print -n $steady_block
             ;;
         viins|main|'')
-            print -n $blinking_bar
+            print -n $blinking_underline
             ;;
     esac
 }
 
 function zle-line-init {
-    print -n "\e[5 q"
+    print -n "\e[3 q"
 }
 
 function zle-line-finish {
