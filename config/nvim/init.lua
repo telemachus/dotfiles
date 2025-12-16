@@ -193,7 +193,7 @@ end
 
 o.guicursor = join({
     "n-v-c-sm:block",
-    "i-ci-ve:ver100-Cursor-blinkwait800-blinkon800-blinkoff950",
+    "i-ci-ve:hor100-Cursor-blinkwait800-blinkon800-blinkoff950",
     "r-cr-o:hor20",
 }, ",")
 cmd("colorscheme minimum")
