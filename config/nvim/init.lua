@@ -8,6 +8,9 @@ local join = table.concat
 local fmt = string.format
 local notify = vim.notify
 
+-- Turn off editorconfig.
+g.editorconfig = false
+
 g.mapleader = " "
 g.localmapleader = " "
 
