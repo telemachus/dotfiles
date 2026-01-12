@@ -195,7 +195,7 @@ function zle-line-finish {
 
 zle -N zle-keymap-select
 zle -N zle-line-init
-zle -N fle-line-finish
+zle -N zle-line-finish
 
 zstyle ':completion:*:make:*:targets' call-command true
 zstyle ':completion:*:*:make:*' tag-order 'targets'
