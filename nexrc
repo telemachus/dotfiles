@@ -1,0 +1,14 @@
+set autoindent
+set escape=1
+set exrc
+set iclower
+set noerrorbells
+set matchtime=4
+set noflash
+set nowarn
+set number
+set ruler
+set searchincr
+set shiftwidth=4
+set showmode
+set tabstop=4
