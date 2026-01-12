@@ -9,8 +9,10 @@ die() {
 
 BUILD_ROOT="${HOME}/Downloads/src"
 BUILD_FULL="${BUILD_ROOT}/nvi2"
-GIT_REPO='https://github.com/lichray/nvi2.git'
+# GIT_REPO='https://github.com/lichray/nvi2.git'
+GIT_REPO='https://github.com/telemachus/nvi2.git'
 INSTALL_DIR="${HOME}/local/nvi2"
+DOTFILES="${HOME}/Documents/git-repos/dotfiles"
 
 for DEP in ninja cmake git; do
     hash "$DEP" 2>/dev/null || die "$(printf 'missing requirement: %s' "$DEP")"
@@ -22,7 +24,8 @@ fi
 cd "$BUILD_ROOT" || die "$(printf '`cd %s` failed' "$BUILD_ROOT")"
 
 if [ ! -d "$BUILD_FULL" ]; then
-    git clone "$GIT_REPO" || die "$(printf '`git clone %s` failed' "$GIT_REPO")"
+    git clone --branch cq "$GIT_REPO" ||
+        die "$(printf '`git clone %s` failed' "$GIT_REPO")"
 fi
 cd "$BUILD_FULL" || die "$(printf '`cd %s` failed' "$BUILD_FULL")"
 git pull || die '`git pull` failed'
@@ -47,5 +50,8 @@ cp -v build/Release/nvi "$INSTALL_DIR/bin/nvi" || die '`cp nvi` failed'
 cp -v man/vi.1 "$INSTALL_DIR/share/man/man1/nvi.1" || die '`cp manpage` failed'
 
 cd "$INSTALL_DIR/bin" || die "$(printf '`cd %s/bin` failed' "$INSTALL_DIR")"
-ln -s nvi nex || die '`ln -s nvi nex` failed'
-printf 'ln -s %s/bin/nex -> %s/bin/nvi\n' "$INSTALL_DIR" "$INSTALL_DIR"
+ln -sf nvi nex || die '`ln -s nvi nex` failed'
+printf 'ln -sf %s/bin/nex -> %s/bin/nvi\n' "$INSTALL_DIR" "$INSTALL_DIR"
+
+ln -sf "${DOTFILES}/nexrc" "${HOME}/.nexrc"
+printf 'ln -sf %s/nexrc -> %s/.nexrc\n' "$DOTFILES" "$HOME"
