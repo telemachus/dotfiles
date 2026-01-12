@@ -35,10 +35,12 @@ export VIMDATA=$HOME/.vim
 # Configure less:
 # -G: no search highlighting
 # -R: handle ANSI escape codes
+# -i: smart-case searches
+# -c: always start printing from the top
 # -J: show search locations in side column
 # -x4: 4-space tabs
 # P...: prompt containing [filename/STDIN] and [N%] for percentage through file.
-export LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
+export LESS='-GRicJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export PAGER=less
 
 # Configure par:
