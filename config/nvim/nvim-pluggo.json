@@ -41,12 +41,12 @@
             "url": "https://github.com/neovim/nvim-lspconfig"
         },
         {
-            "branch": "master",
+            "branch": "main",
             "name": "nvim-treesitter-textobjects",
             "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
         },
         {
-            "branch": "master",
+            "branch": "main",
             "name": "nvim-treesitter",
             "url": "https://github.com/nvim-treesitter/nvim-treesitter"
         },

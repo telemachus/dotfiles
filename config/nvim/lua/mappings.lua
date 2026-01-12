@@ -92,7 +92,7 @@ end, default_opts .. { desc = "Paste and indent contents of unnamed register" })
 
 -- Use Q for gq.
 keymap_set(
-    { "n", "v" },
+    { "n", "x" },
     "Q",
     "gq",
     default_opts .. { desc = "Format over movement" }
@@ -112,7 +112,7 @@ keymap_set(
 
 -- Use my bitly command to shorten URLs.
 keymap_set(
-    "v",
+    "x",
     "<Leader>b",
     require("bitly").shorten,
     default_opts .. { desc = "Shorten URL with Bitly" }
@@ -130,7 +130,7 @@ end, default_opts .. { desc = "Paste current line into the system clipboard" })
 
 -- Yank the visual selection into the system clipboard.
 keymap_set(
-    "v",
+    "x",
     "<Leader>y",
     '"+y',
     default_opts
@@ -197,7 +197,7 @@ keymap_set(
     default_opts .. { desc = "Cut text for the TM_VISUAL placeholder" }
 )
 keymap_set(
-    "n",
+    "x",
     "<Leader>x",
     "<Plug>(snippy-cut-text)",
     default_opts .. { desc = "Cut text for the TM_VISUAL placeholder" }
@@ -258,3 +258,64 @@ end, extended_opts .. { desc = "Inner-comment textobject" })
 keymap_set({ "o", "x" }, "ac", function()
     return require("comment-textobj").around_comment()
 end, extended_opts .. { desc = "Around-comment textobject" })
+
+-- Create text objects for functions using nvim-treesitter.
+keymap_set({ "o", "x" }, "if", function()
+    require("nvim-treesitter-textobjects.select").select_textobject(
+        "@function.inner",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Select inside function" })
+
+keymap_set({ "o", "x" }, "af", function()
+    require("nvim-treesitter-textobjects.select").select_textobject(
+        "@function.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Select around function" })
+
+-- Create mappings to jump to the start/end of next/previous function using
+-- nvim-treesitter.
+keymap_set({ "n", "o", "x" }, "]m", function()
+    require("nvim-treesitter-textobjects.move").goto_next_start(
+        "@function.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to function start" })
+
+keymap_set({ "n", "o", "x" }, "]M", function()
+    require("nvim-treesitter-textobjects.move").goto_next_end(
+        "@function.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to next function end" })
+
+keymap_set({ "n", "o", "x" }, "[m", function()
+    require("nvim-treesitter-textobjects.move").goto_previous_start(
+        "@function.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to previous function start" })
+
+keymap_set({ "n", "x", "o" }, "[M", function()
+    require("nvim-treesitter-textobjects.move").goto_previous_end(
+        "@function.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to previous function end" })
+
+-- Create mappings to jump to the start of next/previous header in Markdown or
+-- HTML using nvim-treesitter. This requires custom queries.
+keymap_set({ "n", "o", "x" }, "]h", function()
+    require("nvim-treesitter-textobjects.move").goto_next_start(
+        "@heading.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to next header" })
+
+keymap_set({ "n", "o", "x" }, "[h", function()
+    require("nvim-treesitter-textobjects.move").goto_previous_start(
+        "@heading.outer",
+        "textobjects"
+    )
+end, default_opts .. { desc = "Move to previous header" })

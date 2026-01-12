@@ -208,63 +208,24 @@ o.grepprg = "rg --vimgrep --smart-case --"
 
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
-safe_setup("nvim-treesitter.configs", {
-    ensure_installed = {
-        "awk",
-        "bash",
-        "c",
-        "css",
-        "diff",
-        "git_config",
-        "git_rebase",
-        "gitattributes",
-        "gitcommit",
-        "gitignore",
-        "go",
-        "gomod",
-        "gosum",
-        "gowork",
-        "html",
-        "markdown",
-        "markdown_inline",
-        "lua",
-        "python",
-        "query",
-        "vim",
-        "vimdoc",
-    },
-    sync_install = false,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    textobjects = {
-        select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
+-- See config/nvim/lua/mappings.lua for text object mappings.
+loaded_ts, ts = safe_require("nvim-treesitter")
+if loaded_ts then
+    loaded_langs, ts_langs = safe_require("treesitterlangs")
+    if loaded_langs then
+        ts.install(ts_langs, { max_jobs = 8 })
+
+        safe_setup("nvim-treesitter-textobjects", {
+            select = {
+                lookahead = true,
+                include_surrounding_whitespace = false,
             },
-        },
-        move = {
-            enable = true,
-            set_jumps = true, -- place jumps in the jumplist
-            goto_next_start = {
-                ["]m"] = "@function.outer",
+            move = {
+                set_jumps = true,
             },
-            goto_next_end = {
-                ["]M"] = "@function.outer",
-            },
-            goto_previous_start = {
-                ["[m"] = "@function.outer",
-            },
-            goto_previous_end = {
-                ["[M"] = "@function.outer",
-            },
-        },
-    },
-})
+        })
+    end
+end
 
 -- https://github.com/lukas-reineke/indent-blankline.nvim.git
 safe_setup("ibl", {

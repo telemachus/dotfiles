@@ -84,12 +84,18 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
--- Update helptags after Paq installs or updates plugins.
-create_autocmd("User", {
-    pattern = "PaqDone*",
-    command = ":helptags ALL",
-    group = telemachus_augroup,
-})
+-- Start treesitter highlighting for relevant languages.
+loaded_langs, ts_langs = safe_require("treesitterlangs")
+if loaded_langs then
+    local ts = vim.treesitter
+    create_autocmd("FileType", {
+        pattern = ts_langs,
+        callback = function()
+            ts.start()
+        end,
+        group = telemachus_augroup,
+    })
+end
 
 -- -- Global configuration when an LSP attaches.
 -- create_autocmd("LspAttach", {
