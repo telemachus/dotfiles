@@ -1,14 +1,25 @@
 set autoindent
+set backspace=3
 set escape=1
 set exrc
 set iclower
-set noerrorbells
 set matchtime=4
+set noerrorbells
 set noflash
+set nomesg
 set nowarn
-set number
+set number relativenumber
 set ruler
 set searchincr
+set shell=/bin/dash
 set shiftwidth=4
 set showmode
 set tabstop=4
+set tags=tags\ /usr/local/tags
+set windowname
+
+" map space-t to delete everything below the cursor line.
+map  t :+1,$d
+map *  {!}par 
+map ** {!}par -w80
+map!  

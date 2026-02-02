@@ -36,3 +36,4 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
     warn "failed to install fieldalignment"
 go install github.com/dkorunic/betteralign/cmd/betteralign@latest ||
     warn "failed to install betteralign"
+go install mvdan.cc/sh/v3/cmd/shfmt@latest || warn "failed to install shfmt"
