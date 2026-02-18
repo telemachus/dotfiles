@@ -1,0 +1,17 @@
+#!/usr/bin/env dash
+#
+# shfmt-wrapper: filter for use with vi's :%! command.
+#
+# Usage: shfmt-wrapper
+#
+# The script calls shfmt and writes results to a temporary file. If there are no
+# errors, the script writes the temp file to stdout. Otherwise, the script
+# exits with a non-zero status.
+
+set -eu
+
+tmp=$(mktemp)
+trap 'rm -f "$tmp"' EXIT
+
+cat >"$tmp"
+shfmt -ci -s -i=4 "$tmp"

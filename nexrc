@@ -22,4 +22,6 @@ set windowname
 map  t :+1,$d
 map *  {!}par 
 map ** {!}par -w80
+map ,g :%!gofmt-wrapper
+map ,s :%!shfmt-wrapper
 map!  

@@ -1,0 +1,21 @@
+#!/usr/bin/env dash
+#
+# gofmt-wrapper: stdin/stdout filter for use with vi's :%! command.
+#
+# Usage: gofmt-wrapper [srcdir]
+#
+# The script calls goimports and gofumpt and writes results to a temporary
+# file. If there are no errors, the script writes the temp file to stdout.
+# If there are errors, the script exits with a non-zero status.
+#
+# An optional first argument is passed as an argument to `goimports -srcdir`.
+# The default, if no argument is given, is `go imports -srcdir $PWD`.
+
+set -eu
+
+tmp=$(mktemp)
+trap 'rm -f "$tmp" "${tmp}.out"' EXIT
+
+cat >"$tmp"
+goimports -srcdir "${1:-$PWD}" "$tmp" >"${tmp}.out"
+gofumpt "${tmp}.out"
