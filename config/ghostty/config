@@ -9,9 +9,9 @@
 # https://github.com/ghostty-org/ghostty/discussions/10852
 #
 palette-generate = false
+
 # I took many of these colors from Sasha Trubetskoy.
 # https://sashamaps.net/docs/resources/20-colors/
-
 # See also https://www.ditig.com/publications/256-colors-cheat-sheet.
 #
 # black
@@ -50,8 +50,8 @@ palette = 15=#ffffff
 shell-integration-features = no-cursor,title
 
 # Base colors and cursor styles.
-background = ffffff
-foreground= 090909
+background = #ffffff
+foreground= #090909
 cursor-invert-fg-bg = true
 cursor-style = block
 cursor-style-blink = false
