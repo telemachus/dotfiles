@@ -1,9 +1,14 @@
 # The syntax is "key = value". Whitespace doesn't matter.
 
-# Define colors as a sixteen-item palatte. The docs describe pairs (e.g.,
+# Define colors as a sixteen-item palette. The docs describe pairs (e.g.,
 # 0 and 8) as regular and bold. I find it easier to think of them in terms of
 # their color names. I.e., 0 is black and 8 is dark grey.
 #
+# Do NOT use the new palette generator. It turns white into black.
+# See discussion at the following link.
+# https://github.com/ghostty-org/ghostty/discussions/10852
+#
+palette-generate = false
 # I took many of these colors from Sasha Trubetskoy.
 # https://sashamaps.net/docs/resources/20-colors/
 
