@@ -256,7 +256,7 @@ alias mvv='mv -v'
 alias cpr='cp -r'
 
 # Use git more easily.
-alias gs='git status -sb'
+alias gs='git status -sb | { read line; print "$line"; sort -k2; }'
 alias g.='gs .'
 alias gd='git diff'
 alias gdh='git diff HEAD'
