@@ -84,6 +84,14 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
+local safe_require = function(m)
+    local ok, loaded_m = pcall(require, m)
+    if not ok then
+        notify(fmt([[init.lua: error loading "%s"]], m))
+    end
+    return ok, loaded_m
+end
+
 -- Start treesitter highlighting for relevant languages.
 loaded_langs, ts_langs = safe_require("treesitterlangs")
 if loaded_langs then
