@@ -1,0 +1,32 @@
+#!/bin/dash
+# gofix: run `go fix ./...` until there are no more fixes to make.
+#
+# Usage: gofix [max_passes]
+#
+# The script runs `go fix ./...` until `go fix -diff ./...` produces no output.
+# I.e., there are no more fixes. The default number of passes is five, but the
+# user can add an argument to change that.
+set -e
+
+max="${1:-5}"
+pass=0
+suffix=""
+
+while [ "$pass" -lt "$max" ]; do
+    pass=$((pass + 1))
+
+    printf "pass %d: go fix ./...\n" "$pass" >&2
+    go fix ./...
+
+    if diff_output="$(go fix -diff ./... 2>&1)" && [ -z "$diff_output" ]; then
+        if [ "$pass" -ne 1 ]; then
+            suffix="es"
+        fi
+        printf "converged after %d pass%s\n" "$pass" "$suffix" >&2
+        exit 0
+    fi
+done
+
+printf "warning: 'gofix ./...' did not converge after %d pass%s\n" \
+    "$max" "$suffix" >&2
+exit 1
