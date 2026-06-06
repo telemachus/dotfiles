@@ -89,5 +89,10 @@ auto-update = download
 # Hide the mouse immediately when typing.
 mouse-hide-while-typing = false
 
-keybind="ctrl+tab=next_tab"
-keybind="ctrl+shift+tab=previous_tab"
+keybind = "ctrl+tab=next_tab"
+keybind = "ctrl+shift+tab=previous_tab"
+
+# No more visual bells or progress indications
+progress-style = false
+notify-on-command-finish = never
+notify-on-command-finish-action = no-bell,no-notify
