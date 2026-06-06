@@ -56,9 +56,9 @@
             "url": "https://github.com/stevearc/conform.nvim"
         },
         {
-            "branch": "mapcheck",
+            "branch": "main",
             "name": "autoclose.nvim",
-            "url": "https://github.com/telemachus/autoclose.nvim"
+            "url": "https://github.com/m4xshen/autoclose.nvim"
         },
         {
             "branch": "highlight",

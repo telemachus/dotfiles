@@ -315,20 +315,7 @@ safe_setup("conform", {
 safe_setup("autoclose", {
     options = {
         disable_command_mode = true,
-    },
-    keys = {
-        ["“"] = {
-            close = true,
-            escape = false,
-            pair = { "“", "”" },
-            enabled_filetypes = { "markdown", "text", "mail" },
-        },
-        ["”"] = {
-            close = false,
-            escape = true,
-            pair = { "“", "”" },
-            enabled_filetypes = { "markdown", "text", "mail" },
-        },
+        disabled_filetypes = {},
     },
 })
 
