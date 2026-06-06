@@ -16,8 +16,6 @@ go install github.com/mgechev/revive@latest ||
     warn "failed to install revive"
 go install golang.org/x/tools/gopls@latest ||
     warn "failed to install gopls"
-go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest ||
-    warn "failed to install golangci-lint"
 go install honnef.co/go/tools/cmd/staticcheck@latest ||
     warn "failed to install staticcheck"
 go install mvdan.cc/gofumpt@latest ||
@@ -37,3 +35,5 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 go install github.com/dkorunic/betteralign/cmd/betteralign@latest ||
     warn "failed to install betteralign"
 go install mvdan.cc/sh/v3/cmd/shfmt@latest || warn "failed to install shfmt"
+curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.12.2 ||
+    warn "failed to install golangci-lint"
