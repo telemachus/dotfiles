@@ -7,6 +7,13 @@ die() {
     exit 1
 }
 
+update_treesitter() {
+    nvim --headless \
+        -c 'lua require("nvim-treesitter").setup()' \
+        -c 'lua local ok, err = pcall(function() require("nvim-treesitter").update():wait(60000) end); if not ok then vim.api.nvim_err_writeln(err); vim.cmd("cquit 1") end' \
+        -c 'quit'
+}
+
 BUILD_ROOT="${HOME}/Downloads/src"
 BUILD_FULL="${BUILD_ROOT}/neovim"
 GIT_REPO='https://github.com/neovim/neovim.git'
@@ -35,8 +42,10 @@ LUA_PATH='' LUA_CPATH='' make CMAKE_BUILD_TYPE=Release \
 rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
 LUA_PATH='' LUA_CPATH='' make install || die '`make install` failed'
 
-# Update plugins and their helptags.
+# Update plugins and their helptags. Then update Treesitter parsers.
 pluggo -config="${HOME}"/.config/nvim/nvim-pluggo.json || die 'pluggo failed'
 nvim --headless -c 'helptags ALL | quit' || die 'failed to update helptag files'
+update_treesitter || die 'Failed to update Treesitter parsers'
+printf '\n'
 
 # vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
