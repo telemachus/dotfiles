@@ -1,0 +1,19 @@
+# toss: move one or more items into a directory, creating it as needed
+#
+# Args: $1..$#-1 = sources to move; last arg = target directory
+# Exit code: result of mkdir -p or mv if they fail, or 0
+#
+# Examples:
+#   toss report.txt archive/2026
+#   toss *.log old-logs/rotated/september
+#
+(( $# < 2 )) && die 'toss requires at least one source and a target directory'
+
+mkdir -p -- "${@[-1]}" || {
+    warn "$(printf '`mkdir -p -- %s` failed' "${@[-1]}")" $?
+    return
+}
+
+mv -v -- "$@" || warn "$(printf '`mv -v -- %s` failed' "$*")"
+
+# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
