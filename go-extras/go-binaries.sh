@@ -35,5 +35,5 @@ go install golang.org/x/tools/go/analysis/passes/fieldalignment/cmd/fieldalignme
 go install github.com/dkorunic/betteralign/cmd/betteralign@latest ||
     warn "failed to install betteralign"
 go install mvdan.cc/sh/v3/cmd/shfmt@latest || warn "failed to install shfmt"
-curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.12.2 ||
+curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.14.0 ||
     warn "failed to install golangci-lint"
