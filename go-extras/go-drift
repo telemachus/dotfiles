@@ -1,0 +1,379 @@
+#!/usr/bin/env python3
+
+"""Report how Go projects have drifted from the canonical files in go-extras.
+
+Each project is classified as a CLI (it has cmd/ or a root main.go) or a
+library. Its config files are compared to the canonical files after filling in
+the placeholders @@NAME@@ and @@GO_MATRIX@@. go-drift also checks the go
+directive in go.mod and that LICENSE.txt and docs/README.md exist.
+
+Accepted differences live in go-drift.toml, next to this script. Each
+[[exception]] names a project and a reason, plus either a file with the exact
+lines that may be missing from it or extra in it, or a go directive. Lines are
+matched by content, ignoring indentation. For example:
+
+    [[exception]]
+    project = "pluggo"
+    file = ".github/workflows/go.yml"
+    missing = ["- windows-latest"]
+    reason = "Windows support was dropped."
+
+    [[exception]]
+    project = "gradebook"
+    go = "1.27.0"
+    reason = "encoding/json/v2 needs Go 1.27."
+
+Any difference that no exception covers is drift, and so is any exception that
+no longer matches anything (a stale exception). By default, go-drift lists only
+projects with drift or stale exceptions. The exit status is 1 if there are any,
+0 otherwise.
+"""
+
+import argparse
+import difflib
+import re
+import sys
+import tomllib
+from collections import Counter
+from pathlib import Path
+from subprocess import run as subprocess_run
+
+CANON_DIR = Path(__file__).resolve().parent
+EXCEPTIONS_FILE = CANON_DIR / "go-drift.toml"
+DEFAULT_ROOT = Path.home() / "go" / "src" / "github.com" / "telemachus"
+
+# Project path -> canonical file name, for each kind of project.
+COMMON_FILES = {
+    ".golangci.yml": "golangci.yml",
+    "revive.toml": "revive.toml",
+    "staticcheck.conf": "staticcheck.conf",
+    ".github/workflows/go.yml": "go.yml",
+}
+KIND_FILES = {
+    "cli": COMMON_FILES | {"Makefile": "Makefile.cli", ".gitignore": "gitignore.cli"},
+    "lib": COMMON_FILES | {"Makefile": "Makefile.lib"},
+}
+
+
+def die(message):
+    """Print error message and exit with status 2."""
+    print(f"go-drift: {message}", file=sys.stderr)
+    sys.exit(2)
+
+
+def go_version(override):
+    """Return the current Go release as a (minor, patch) tuple."""
+    if override:
+        version = override
+    else:
+        result = subprocess_run(
+            ["go", "env", "GOVERSION"], capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            die("cannot run 'go env GOVERSION'")
+        version = result.stdout.strip().removeprefix("go")
+
+    match = re.fullmatch(r"1\.(\d+)\.(\d+)", version)
+    if not match:
+        die(f"cannot parse Go version {version!r}")
+
+    return int(match[1]), int(match[2])
+
+
+class Allowance:
+    """The differences that exceptions allow for one project file."""
+
+    def __init__(self):
+        self.missing = Counter()
+        self.extra = Counter()
+
+    def stale(self):
+        """Return the allowed lines that nothing used, as (kind, line) pairs."""
+        return [
+            (kind, line)
+            for kind, counter in (("missing", self.missing), ("extra", self.extra))
+            for line, count in counter.items()
+            for _ in range(count)
+        ]
+
+
+def load_exceptions(path):
+    """Return the file and go allowances in path, keyed by project.
+
+    The result is (files, gos), where files maps project -> file -> Allowance
+    and gos maps project -> go directive.
+    """
+    files = {}
+    gos = {}
+    if not path.is_file():
+        return files, gos
+
+    with path.open("rb") as fh:
+        try:
+            data = tomllib.load(fh)
+        except tomllib.TOMLDecodeError as err:
+            die(f"{path}: {err}")
+
+    for i, exc in enumerate(data.get("exception", []), start=1):
+        where = f"{path.name}: exception {i}"
+        project = exc.get("project")
+        if not project or not exc.get("reason"):
+            die(f"{where}: needs a project and a reason")
+        if ("file" in exc) == ("go" in exc):
+            die(f"{where}: needs exactly one of file or go")
+        if "go" in exc:
+            gos[project] = exc["go"]
+            continue
+        if not exc.get("missing") and not exc.get("extra"):
+            die(f"{where}: a file exception needs missing or extra lines")
+        allowance = files.setdefault(project, {}).setdefault(exc["file"], Allowance())
+        allowance.missing.update(line.strip() for line in exc.get("missing", []))
+        allowance.extra.update(line.strip() for line in exc.get("extra", []))
+
+    return files, gos
+
+
+def project_kind(project):
+    """Return "cli" or "lib" for the project."""
+    if (project / "cmd").is_dir() or (project / "main.go").is_file():
+        return "cli"
+
+    return "lib"
+
+
+def expected_go(kind, minor, patch):
+    """Return the expected go directive and CI matrix for the kind."""
+    if kind == "cli":
+        return f"1.{minor}.{patch}", f"'1.{minor}.x'"
+
+    return f"1.{minor - 1}.0", f"'1.{minor - 1}.x', '1.{minor}.x'"
+
+
+def read_lines(path):
+    """Return the file's lines without trailing whitespace."""
+    return [line.rstrip() for line in path.read_text().splitlines()]
+
+
+def compare(canon_lines, project_lines):
+    """Return (missing, extra, diff) for two lists of lines.
+
+    missing and extra hold the non-blank changed lines, stripped of
+    indentation.
+    """
+    diff = list(
+        difflib.unified_diff(
+            canon_lines,
+            project_lines,
+            fromfile="canonical",
+            tofile="project",
+            lineterm="",
+        )
+    )
+    body = [line for line in diff[2:] if not line.startswith("@@")]
+    missing = [line[1:].strip() for line in body if line.startswith("-")]
+    extra = [line[1:].strip() for line in body if line.startswith("+")]
+
+    return [line for line in missing if line], [line for line in extra if line], diff
+
+
+def unexcepted(lines, allowed):
+    """Return the lines that allowed does not cover, using up what it does."""
+    left = []
+    for line in lines:
+        if allowed[line] > 0:
+            allowed[line] -= 1
+        else:
+            left.append(line)
+
+    return left
+
+
+def check_files(project, kind, go_matrix, allowances):
+    """Return (findings, has_drift) for the project's config files."""
+    findings = []
+    has_drift = False
+
+    for rel_path, canon_name in KIND_FILES[kind].items():
+        path = project / rel_path
+        if not path.is_file():
+            findings.append((rel_path, "absent", "", []))
+            has_drift = True
+            continue
+
+        canon_text = (CANON_DIR / canon_name).read_text()
+        canon_text = canon_text.replace("@@NAME@@", project.name)
+        canon_text = canon_text.replace("@@GO_MATRIX@@", go_matrix)
+        canon_lines = [line.rstrip() for line in canon_text.splitlines()]
+
+        missing, extra, diff = compare(canon_lines, read_lines(path))
+        allowance = allowances.get(rel_path, Allowance())
+        missing = unexcepted(missing, allowance.missing)
+        extra = unexcepted(extra, allowance.extra)
+        if missing or extra:
+            status = "drift"
+            detail = f"{len(missing)} missing, {len(extra)} extra"
+            has_drift = True
+        elif diff:
+            status, detail = "excepted", ""
+        else:
+            status, detail = "ok", ""
+        findings.append((rel_path, status, detail, diff))
+
+    for rel_path, allowance in allowances.items():
+        for kind_of_line, line in allowance.stale():
+            findings.append((rel_path, "stale", f"{kind_of_line}: {line}", []))
+            has_drift = True
+
+    return findings, has_drift
+
+
+def check_go(project, go_directive, excepted_go):
+    """Return (finding, has_drift) for the project's go directive."""
+    match = re.search(r"^go (\S+)", (project / "go.mod").read_text(), re.M)
+    actual = match[1] if match else "none"
+
+    if excepted_go is None:
+        if actual == go_directive:
+            return ("go directive", "ok", "", []), False
+        return ("go directive", "drift", f"{actual}, want {go_directive}", []), True
+
+    if actual == go_directive:
+        detail = f"exception for go {excepted_go} is no longer needed"
+        return ("go directive", "stale", detail, []), True
+    if actual == excepted_go:
+        return ("go directive", "excepted", f"{actual}", []), False
+
+    detail = f"{actual}, want {excepted_go} (excepted) or {go_directive}"
+    return ("go directive", "drift", detail, []), True
+
+
+def check_project(project, minor, patch, file_allowances, excepted_go):
+    """Return (kind, findings, has_drift) for one project.
+
+    Each finding is a (label, status, detail, diff) tuple.
+    """
+    kind = project_kind(project)
+    go_directive, go_matrix = expected_go(kind, minor, patch)
+
+    findings, has_drift = check_files(project, kind, go_matrix, file_allowances)
+    for rel_path in file_allowances:
+        if rel_path not in KIND_FILES[kind]:
+            findings.append(
+                (rel_path, "stale", "go-drift does not check this file", [])
+            )
+            has_drift = True
+
+    finding, go_drift = check_go(project, go_directive, excepted_go)
+    findings.append(finding)
+    has_drift = has_drift or go_drift
+
+    for rel_path in ("LICENSE.txt", "docs/README.md"):
+        if (project / rel_path).is_file():
+            findings.append((rel_path, "ok", "", []))
+        else:
+            findings.append((rel_path, "absent", "", []))
+            has_drift = True
+
+    if (project / "README.md").is_file():
+        findings.append(("README.md", "drift", "belongs in docs/", []))
+        has_drift = True
+
+    return kind, findings, has_drift
+
+
+def report(project, kind, findings, show_diff, show_all):
+    """Print the findings for one project."""
+    if show_all:
+        shown = findings
+    else:
+        shown = [f for f in findings if f[1] not in ("ok", "excepted")]
+    if not shown:
+        return
+
+    print(f"{project.name} ({kind}):")
+    width = max(len(label) for label, _, _, _ in shown)
+    for label, status, detail, diff in shown:
+        line = f"  {label:<{width}}  {status:<8}  {detail}"
+        print(line.rstrip())
+        if show_diff and diff:
+            for diff_line in diff:
+                print(f"      {diff_line}".rstrip())
+
+
+def find_projects(root, names):
+    """Return the Go projects under root, limited to names if given."""
+    if names:
+        projects = [root / name for name in names]
+        for project in projects:
+            if not (project / "go.mod").is_file():
+                die(f"{project} is not a Go project")
+        return projects
+
+    return sorted(p for p in root.iterdir() if (p / "go.mod").is_file())
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Report drift from the canonical Go project files.",
+        epilog="Exit status is 1 if any project has drift or a stale exception.",
+    )
+    parser.add_argument(
+        "-a",
+        "--all",
+        action="store_true",
+        help="list every project and file, including ok and excepted ones",
+    )
+    parser.add_argument(
+        "-d", "--diff", action="store_true", help="show diffs (canonical vs. project)"
+    )
+    parser.add_argument(
+        "-g",
+        "--go",
+        metavar="VERSION",
+        help="current Go release, e.g. 1.27.2 (default: go env GOVERSION)",
+    )
+    parser.add_argument(
+        "-r",
+        "--root",
+        type=Path,
+        default=DEFAULT_ROOT,
+        help=f"directory holding the projects (default: {DEFAULT_ROOT})",
+    )
+    parser.add_argument("projects", nargs="*", help="projects to check (default: all)")
+    args = parser.parse_args()
+
+    if not args.root.is_dir():
+        die(f"{args.root} is not a directory")
+
+    minor, patch = go_version(args.go)
+    file_exceptions, go_exceptions = load_exceptions(EXCEPTIONS_FILE)
+    projects = find_projects(args.root, args.projects)
+
+    any_drift = False
+    for project in projects:
+        kind, findings, has_drift = check_project(
+            project,
+            minor,
+            patch,
+            file_exceptions.get(project.name, {}),
+            go_exceptions.get(project.name),
+        )
+        report(project, kind, findings, args.diff, args.all)
+        any_drift = any_drift or has_drift
+
+    # Exceptions for projects that no longer exist are stale too. This check
+    # needs the full list of projects, so it runs only without names.
+    if not args.projects:
+        names = {project.name for project in projects}
+        for name in sorted((file_exceptions.keys() | go_exceptions.keys()) - names):
+            print(f"{name}: stale exceptions: no such project in {args.root}")
+            any_drift = True
+
+    if not any_drift:
+        print("all projects match")
+
+    sys.exit(1 if any_drift else 0)
+
+
+if __name__ == "__main__":
+    main()

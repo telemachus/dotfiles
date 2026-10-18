@@ -1,0 +1,141 @@
+# Accepted differences between the Go projects and the canonical files in
+# go-extras. go-drift reads this file; see go-drift --help and its docstring.
+#
+# Each exception names a project and a reason, plus either a file with the
+# lines that may be missing from it or extra in it, or a go directive. Lines
+# are matched by content, ignoring indentation. go-drift reports an exception
+# that no longer matches anything as stale, so delete it when that happens.
+
+[[exception]]
+project = "fivemat"
+file = "Makefile"
+extra = [
+    'testj:',
+    '@go test -shuffle on -json ./...',
+    '.PHONY: testj',
+]
+reason = "fivemat dogfoods its own input with go test -json."
+
+[[exception]]
+project = "gradebook"
+go = "1.27.0"
+reason = "encoding/json/v2 needs Go 1.27, one release newer than the library rule allows."
+
+[[exception]]
+project = "gradebook"
+file = ".github/workflows/go.yml"
+missing = ["go: ['1.26.x', '1.27.x']"]
+extra = ["go: ['1.27.x']"]
+reason = "encoding/json/v2 needs Go 1.27, so CI cannot test Go 1.26."
+
+[[exception]]
+project = "gradebook-suite"
+file = "Makefile"
+missing = [
+    'go build ./cmd/gradebook-suite',
+    'go install ./cmd/gradebook-suite',
+    'rm -f gradebook-suite',
+]
+extra = [
+    'go build ./cmd/gradebook-calc',
+    'go build ./cmd/gradebook-emails',
+    'go build ./cmd/gradebook-names',
+    'go build ./cmd/gradebook-new',
+    'go build ./cmd/gradebook-unscored',
+    'go install ./cmd/gradebook-calc',
+    'go install ./cmd/gradebook-emails',
+    'go install ./cmd/gradebook-names',
+    'go install ./cmd/gradebook-new',
+    'go install ./cmd/gradebook-unscored',
+    'rm -f gradebook-calc gradebook-emails gradebook-names gradebook-new \',
+    'gradebook-unscored',
+]
+reason = "gradebook-suite builds five binaries, not one named for the project."
+
+[[exception]]
+project = "gradebook-suite"
+file = ".gitignore"
+missing = ['/gradebook-suite']
+extra = [
+    '/gradebook-calc',
+    '/gradebook-emails',
+    '/gradebook-names',
+    '/gradebook-new',
+    '/gradebook-unscored',
+]
+reason = "gradebook-suite builds five binaries, not one named for the project."
+
+[[exception]]
+project = "humane"
+file = ".golangci.yml"
+extra = [
+    '- (*github.com/telemachus/humane/internal/pooled.Buffer).WriteByte',
+    '- (*github.com/telemachus/humane/internal/pooled.Buffer).WriteString',
+    '- r slog.Record',
+    '- a slog.Attr',
+]
+reason = "pooled.Buffer writes cannot fail; r and a are slog's own names."
+
+[[exception]]
+project = "humane"
+file = "Makefile"
+extra = [
+    'rm -f bench-baseline.txt bench-new.txt',
+    'bench-quick:',
+    "go test -bench='Basic|WithGroupChaining|WithAttrsChaining' -benchmem -benchtime=1s -count=3 -run=NONE",
+    'bench:',
+    'go test -bench=. -benchmem -benchtime=1s -count=6 -run=NONE',
+    'bench-baseline:',
+    'go test -bench=Humane -benchmem -benchtime=1s -count=6 -run=NONE > bench-baseline.txt',
+    'bench-compare:',
+    'go test -bench=Humane -benchmem -benchtime=1s -count=6 -run=NONE > bench-new.txt',
+    'benchstat bench-baseline.txt bench-new.txt',
+    '.PHONY: bench-quick bench bench-baseline bench-compare',
+]
+reason = "humane is performance-sensitive and tracks benchmarks with benchstat."
+
+[[exception]]
+project = "mailarchiver"
+file = ".github/workflows/go.yml"
+missing = ['- windows-latest']
+reason = "A personal tool; I never use Windows."
+
+[[exception]]
+project = "opts"
+file = ".golangci.yml"
+extra = ['- g *Group']
+reason = "g is the Group receiver name, used by the generic define function. Drop this when opts targets Go 1.27 and define becomes a generic method."
+
+[[exception]]
+project = "pluggo"
+file = ".github/workflows/go.yml"
+missing = ['- windows-latest']
+reason = "Windows support was dropped."
+
+[[exception]]
+project = "rbackup"
+file = ".golangci.yml"
+extra = ['- j job']
+reason = "j is rbackup's name for a job throughout."
+
+[[exception]]
+project = "rbackup"
+file = ".github/workflows/go.yml"
+missing = ['- windows-latest']
+reason = "rbackup drives rsync, and its tests use Unix paths."
+
+[[exception]]
+project = "spacecat"
+file = ".golangci.yml"
+extra = ['- p *padder']
+reason = "p is the padder receiver name, also used as a parameter."
+
+[[exception]]
+project = "spacecat"
+file = "Makefile"
+extra = [
+    'bench:',
+    "go test -run '^$$' -bench . -benchmem -count 10 ./...",
+    '.PHONY: bench',
+]
+reason = "spacecat has benchmarks."
