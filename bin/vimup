@@ -8,9 +8,10 @@ die() {
 }
 
 BUILD_ROOT="${HOME}/Downloads/src"
-BUILD_FULL="${BUILD_ROOT}/vim"
-GIT_REPO='https://github.com/vim/vim.git'
-INSTALL_DIR="${HOME}/local/vim"
+# BUILD_FULL="${BUILD_ROOT}/vim"
+BUILD_FULL="${BUILD_ROOT}/vim-classic"
+GIT_REPO='https://git.sr.ht/~sircmpwn/vim-classic'
+INSTALL_DIR="${HOME}/local/vim-classic"
 
 if [ ! -d "$BUILD_ROOT" ]; then
     mkdir -p "$BUILD_ROOT" || die "$(printf '`mkdir -p %s` failed' "$BUILD_ROOT")"
@@ -41,7 +42,7 @@ fi
     --enable-largefile \
     --disable-smack \
     --disable-selinux \
-    --disable-xattr \
+    \
     --disable-xsmp \
     --disable-xsmp-interact \
     --disable-nls \

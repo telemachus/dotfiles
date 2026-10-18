@@ -11,6 +11,12 @@ set scrolloff=0     " No breathing room
 set number
 set relativenumber
 set mouse=          " No mouse capture
+" let &t_EI = "\<Esc>[2 q"
+" let &t_SI = "\<Esc>[3 q"
+" let &t_SR = "\<Esc>[3 q"
+" set virtualedit+=onemore
+" set nomousehide
+" autocmd VimLeave * silent !echo -ne "\e[6 q"
 
 set ruler           " Show the cursor position all the time
 set showcmd
@@ -89,9 +95,9 @@ set colorcolumn=+1
 colorscheme minimum
 
 if has('gui')
-    set guicursor=n-v-c-sm:block-blinkwait900-blinkoff900-blinkon900,i-ci-ve:ver25-Cursor-blinkwait900-blinkoff900-blinkon900
+    set guicursor=n-v-c:block-Cursor-blinkon0,i-ci-ve:ver25-Cursor-blinkwait700-blinkon400-blinkoff250,r-cr:hor20-Cursor
+    set columns=100 lines=30
     set guifont=Consolas:h16
-    set rows=40 columns=90
 endif
 
 set printoptions:paper:letter,header:0,syntax:n
@@ -113,3 +119,5 @@ inoremap <silent> <expr> <C-CR>
         \ get(chars, strpart(getline('.'), col('.')-1, 1), v:false)
         \ ? '<Right>'
         \ : '<C-CR>'
+
+set tags+=~/.tags
