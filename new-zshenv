@@ -57,4 +57,4 @@ export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
 # Use this later for zcompdump.
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
-# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

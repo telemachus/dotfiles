@@ -307,4 +307,4 @@ if [[ -n $ZSH_DEBUGRC ]]; then
     zprof
 fi
 
-# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

@@ -60,4 +60,4 @@ _deferred_compile() {
 (( ${+functions[add-zsh-hook]} )) || autoload -Uz add-zsh-hook
 add-zsh-hook preexec _deferred_compile
 
-# vim: set ts=8 sw=4 ts=4 tw=0 et ft=zsh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

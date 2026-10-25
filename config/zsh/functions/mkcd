@@ -14,4 +14,4 @@ mkdir -p -- "$1" || {
 
 cd -- "$1" || warn "$(printf '`cd -- %s` failed' "$1")"
 
-# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :

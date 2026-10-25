@@ -16,4 +16,4 @@ mkdir -p -- "${@[-1]}" || {
 
 mv -v -- "$@" || warn "$(printf '`mv -v -- %s` failed' "$*")"
 
-# vim: set ts=8 sw=4 ts=4 tw=0 et ft=sh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
