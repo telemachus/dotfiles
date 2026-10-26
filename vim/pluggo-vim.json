@@ -1,10 +1,5 @@
 {
-    "dataDir": [
-        "HOME",
-        ".vim",
-        "pack",
-        "pluggo"
-    ],
+    "dataDir": "~/.vim/pack/pluggo",
     "plugins": [
         {
             "branch": "master",
