@@ -1,8 +1,6 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" You need to set the background *before* you enable syntax.
-" See :help 'background'.
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -54,19 +52,22 @@ set incsearch           " Do incremental searching
 set nohlsearch          " Do not hightlight all matches in a search
 set conceallevel=0      " Conceal is evil
 
+for s:dir in ['~/.vim_backups', '~/.vim_swap', '~/.vim_undo']
+    if !isdirectory(expand(s:dir))
+        call mkdir(expand(s:dir), 'p', 0700)
+    endif
+endfor
+unlet s:dir
+
 set backup
 set undofile
-if has('nvim')
-    set backupdir=$HOME/.nvim_backups,/tmp
-    set directory=/tmp,$HOME/.nvim_backups
-    set undodir=$HOME/.nvim_undo,/tmp
-else
-    set backupdir=$HOME/.vim_backups,/tmp
-    set directory=/tmp,$HOME/.vim_backups
-    set undodir=$HOME/.vim_undo,/tmp
-    if has('syntax') && has('eval')
-        packadd! matchit
-    endif
+" A trailing // makes Vim name files by their full path to avoid collisions.
+set backupdir=$HOME/.vim_backups//
+set directory=$HOME/.vim_swap//
+set undodir=$HOME/.vim_undo
+
+if has('syntax') && has('eval')
+    packadd! matchit
 endif
 
 if executable('rg')
@@ -94,29 +95,23 @@ set background=light
 set colorcolumn=+1
 colorscheme minimum
 
-if has('gui')
-    set guicursor=n-v-c:block-Cursor-blinkon0,i-ci-ve:ver25-Cursor-blinkwait700-blinkon400-blinkoff250,r-cr:hor20-Cursor
-    set columns=100 lines=30
-    set guifont=Consolas:h16
-endif
-
-set printoptions:paper:letter,header:0,syntax:n
-set printfont:Consolas
+set printoptions=paper:letter,header:0,syntax:n
+set printfont=Consolas
 
 set iskeyword+=-
 
 let g:mapleader=' '
-let g:localleader=' '
+let g:maplocalleader=' '
 
 " Put things here that eventually belong in vim-dotfiles if I keep them.
-let chars = {
+let g:skip_close_chars = {
         \ '"': v:true,
         \ "'": v:true,
         \ ')': v:true,
         \ '}': v:true,
         \ }
 inoremap <silent> <expr> <C-CR>
-        \ get(chars, strpart(getline('.'), col('.')-1, 1), v:false)
+        \ get(g:skip_close_chars, strpart(getline('.'), col('.')-1, 1), v:false)
         \ ? '<Right>'
         \ : '<C-CR>'
 
