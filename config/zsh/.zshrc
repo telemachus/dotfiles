@@ -16,7 +16,7 @@ fpath=(
     /opt/local/share/zsh/site-functions
 )
 
-autoload -Uz die info mkcd warn zsh_directory_name add-zsh-hook toss
+autoload -Uz die info mkcd warn zsh_directory_name add-zsh-hook toss extract
 
 add-zsh-hook chpwd prompt_chpwd
 

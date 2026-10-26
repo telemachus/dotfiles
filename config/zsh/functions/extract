@@ -1,0 +1,63 @@
+# extract: extract an archive, choosing the tool by file extension
+#
+# Args: [-v] $1 = archive to extract (-v = verbose; quiet by default)
+#   Any remaining args are passed as-is to the extracting tool,
+#   placed before the archive name
+# Exit code: 1 if no archive is given, the archive isn't a file,
+#   or the archive has an unknown extension;
+#   otherwise, the exit code of the extracting tool
+#
+# Examples:
+#   extract foo.tar.gz
+#   extract -v foo.zip
+#   extract go1.27.3.darwin-arm64.tar.gz -C ~/local
+#
+local v= quiet=1
+
+if [[ $1 == -v ]]; then
+    v=-v
+    quiet=
+    shift
+fi
+
+(($#)) || {
+    warn 'extract requires an archive'
+    return
+}
+
+local archive=$1
+shift
+
+# Protect against filenames starting with '-'.
+[[ $archive == -* ]] && archive=./$archive
+
+[[ -f $archive ]] || {
+    warn "$(printf "'%s' is not a file" "$archive")" 1
+    return
+}
+
+case $archive in
+    *.tar | *.tar.* | *.tgz | *.tbz2)
+        tar -x $v "$@" -f "$archive"
+        ;;
+    *.bz2)
+        bunzip2 -k $v "$@" -- "$archive"
+        ;;
+    *.gz | *.Z)
+        gunzip -k $v "$@" -- "$archive"
+        ;;
+    *.zip)
+        unzip ${quiet:+-q} "$@" "$archive"
+        ;;
+    *.rar)
+        unrar x ${quiet:+-idq} "$@" -- "$archive"
+        ;;
+    *.7z)
+        7zz x${quiet:+-bso0} ${quiet:+-bsp0} "$@" -- "$archive"
+        ;;
+    *)
+        warn "$(printf "unknown archive type: '%s'" "$archive")" 1
+        ;;
+esac
+
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
