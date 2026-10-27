@@ -1,5 +1,5 @@
 local bo = vim.bo
-local wo = vim.wo
+local wo = vim.wo[0][0]
 
 bo.textwidth = 80
 wo.list = true

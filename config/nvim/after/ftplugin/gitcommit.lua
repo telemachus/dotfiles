@@ -1,4 +1,4 @@
-local wo = vim.wo
+local wo = vim.wo[0][0]
 local bo = vim.bo
 local cmd = vim.cmd
 

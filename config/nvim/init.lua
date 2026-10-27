@@ -5,14 +5,13 @@ local cmd = vim.cmd
 local g = vim.g
 local o = vim.o
 local join = table.concat
-local fmt = string.format
-local notify = vim.notify
+local safe_require = require("helpers").safe_require
 
 -- Turn off editorconfig.
 g.editorconfig = false
 
 g.mapleader = " "
-g.localmapleader = " "
+g.maplocalleader = " "
 
 -- Don't waste time looking for various scripting providers.
 -- See also this issue re UltiSnips: https://bit.ly/3w1nN9y.
@@ -169,18 +168,6 @@ o.statusline =
 
 o.spelllang = "en"
 
----Safely require a module.
----@param m string
----@return boolean ok
----@return table loaded_m
-local safe_require = function(m)
-    local ok, loaded_m = pcall(require, m)
-    if not ok then
-        notify(fmt([[init.lua: error loading "%s"]], m))
-    end
-    return ok, loaded_m
-end
-
 ---Safely call setup on a plugin.
 ---@param plugin string
 ---@param t table|nil
@@ -209,9 +196,9 @@ o.grepprg = "rg --vimgrep --smart-case --"
 -- https://github.com/nvim-treesitter/nvim-treesitter.git
 -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 -- See config/nvim/lua/mappings.lua for text object mappings.
-loaded_ts, ts = safe_require("nvim-treesitter")
+local loaded_ts, ts = safe_require("nvim-treesitter")
 if loaded_ts then
-    loaded_langs, ts_langs = safe_require("treesitterlangs")
+    local loaded_langs, ts_langs = safe_require("treesitterlangs")
     if loaded_langs then
         ts.install(ts_langs, { max_jobs = 8 })
 

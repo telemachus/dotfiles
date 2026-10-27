@@ -38,14 +38,18 @@ keymap_set(
     default_opts .. { desc = "Around-line textobject" }
 )
 
--- Text objects for the entire document.
--- TODO: improve the ie object.
-keymap_set(
-    "x",
-    "ie",
-    ":<C-u>let z = @/|1;/^./kz<CR>G??<CR>:let @/ = z<CR>V'z",
-    default_opts .. { desc = "Inner-document textobject" }
-)
+-- Text objects for the entire document. The ie object selects linewise from
+-- the first non-blank line to the last non-blank line.
+keymap_set("x", "ie", function()
+    local esc = vim.keycode("<Esc>")
+    local first = vim.fn.nextnonblank(1)
+    if first == 0 then
+        cmd("normal! " .. esc)
+        return
+    end
+    local last = vim.fn.prevnonblank(vim.fn.line("$"))
+    cmd(string.format("normal! %s%dGV%dG", esc, first, last))
+end, default_opts .. { desc = "Inner-document textobject" })
 keymap_set(
     "o",
     "ie",

@@ -7,6 +7,7 @@ local cmd = vim.cmd
 -- local keymap_set = vim.keymap.set
 local defer_fn = vim.defer_fn
 local on_yank = vim.hl.hl_op
+local safe_require = require("helpers").safe_require
 local telemachus_augroup = create_augroup("TelemachusAugroup", { clear = true })
 
 -- Highlight searches while searching, but not while moving over matches.
@@ -30,9 +31,10 @@ create_autocmd("CmdlineLeave", {
 create_autocmd("Filetype", {
     pattern = { "help", "man" },
     callback = function()
-        o.number = false
-        o.relativenumber = false
-        o.statuscolumn = ""
+        local wo = vim.wo[0][0]
+        wo.number = false
+        wo.relativenumber = false
+        wo.statuscolumn = ""
         -- TODO: add a namespace for highlighting line numbers here.
     end,
     group = telemachus_augroup,
@@ -84,22 +86,19 @@ create_autocmd("User", {
     group = telemachus_augroup,
 })
 
-local safe_require = function(m)
-    local ok, loaded_m = pcall(require, m)
-    if not ok then
-        notify(fmt([[init.lua: error loading "%s"]], m))
-    end
-    return ok, loaded_m
-end
-
--- Start treesitter highlighting for relevant languages.
-loaded_langs, ts_langs = safe_require("treesitterlangs")
+-- Start treesitter highlighting for relevant languages. Map the filetype to a
+-- language when the event fires, since nvim-treesitter registers its mappings
+-- (e.g., sh to bash) after init.lua runs. The pcall covers a listed parser
+-- that is not yet installed.
+local loaded_langs, ts_langs = safe_require("treesitterlangs")
 if loaded_langs then
     local ts = vim.treesitter
     create_autocmd("FileType", {
-        pattern = ts_langs,
-        callback = function()
-            ts.start()
+        callback = function(args)
+            local lang = ts.language.get_lang(args.match)
+            if lang and vim.list_contains(ts_langs, lang) then
+                pcall(ts.start, args.buf, lang)
+            end
         end,
         group = telemachus_augroup,
     })
