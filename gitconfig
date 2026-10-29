@@ -3,8 +3,9 @@
 	email = peter@aronoff.org
 
 [alias]
-    unmerged = !git branch -r --no-merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
-    merged = !git branch -r --merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+	dup = "!f() { for c in $(git rev-list HEAD); do git diff-tree -p $c | git patch-id; done | perl -anle '($p,$c)=@F;print \"$c $s{$p}\" if $s{$p};$s{$p}=$c' | xargs -L 1 git show -s --oneline; }; f" # "git dup" lists duplicate commits
+	unmerged = !git branch -r --no-merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
+	merged = !git branch -r --merged | grep -v HEAD | xargs -L1 git --no-pager log --pretty=tformat:'%Cgreen%d%Creset - %h by %an (%Cblue%ar%Creset)' -1
 	ll = log --pretty=oneline --abbrev-commit --max-count=15
 	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
@@ -13,47 +14,21 @@
 	current-branch = !git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
 	track = checkout -t
 	retrack = "!retrack() { git config \"branch.$1.remote\" $(dirname \"$2\"); git config \"branch.$1.merge\" \"refs/heads/$(basename \"$2\")\"; }; retrack"
-	ll = log --pretty=oneline --abbrev-commit --max-count=15
-	timelog = log --pretty=format:'%Cred%h%Creset - %C(yellow)%ae%Creset - %Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=short
 	c = rev-parse --short HEAD
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
 	find = "!func() { git grep $1 $(git rev-list --all); }; func"
 	logger = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	ctags = !.git/hooks/ctags
+	alias = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /"
+	up = "!git remote update --prune && git merge --ff-only @{u}"
+	root = rev-parse --show-toplevel
+	rename = branch -m
+	staash = stash --all
+	safeforce = push --force-with-lease
 
 [color]
-	ui = auto
-
-[branch]
-	autosetupmerge = true
-
-[github]
-	user = telemachus
-	token = <TODO>
-	password = <TODO>
-
-[core]
-	excludesfile = ~/.gitignore_global
-	filemode = true
-	logallrefupdates = true
-	whitespace = space-before-tab, trailing-space
-
-[diff]
-	tool = nvimdiff2
-
-[difftool "nvimdiff2"]
-	trustExitCode = true
-	cmd = nvim -d $LOCAL $REMOTE
-
-[merge]
-	tool = nvimdiff4
-
-[mergetool "nvimdiff4"]
-	trustExitCode = true
-	cmd = nvim -d $LOCAL $BASE $REMOVE $MERGED -c '$wincmd w' -c 'wincmd J'
-
-[commit]
-	verbose = true
+	ui = off
+	pager = no
 
 [color "diff"]
 	meta = blue bold
@@ -72,19 +47,61 @@
 	changed = green bold
 	untracked = blue bold
 
+[core]
+	excludesfile = ~/.gitignore_global
+	filemode = true
+	logallrefupdates = true
+	whitespace = space-before-tab, trailing-space
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	light = true
+
 [init]
-	templatedir = ~/.git_template
+	defaultBranch = main
+
+[branch]
+	autosetupmerge = true
+	sort = -committerdate
+
+[commit]
+	verbose = true
+
+[fetch]
+	writeCommitGraph = true
+
+[pull]
+	ff = only
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[rerere]
+	enabled = true
+
+[column]
+	ui = never
 
 [credential]
 	helper = osxkeychain
 
-[push]
-	default = simple
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 
-[http]
+[url "https://github.com/telemachus/"]
+	insteadOf = telemachus:
+[url "https://github.com/"]
+	insteadOf = gh:
+[url "https://github.com/"]
+	insteadOf = github:
 
-[diff]
-	compactionHeuristic = true
-
-[pull]
-	ff = only
+# Machine-specific and private settings. Not tracked.
+[include]
+	path = ~/.gitconfig.local
