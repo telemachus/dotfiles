@@ -1,77 +1,60 @@
+ZDOTDIR="${XDG_CONFIG_HOME:=${HOME}/.config}/zsh"
+
+# -U ensures each entry in these is unique (that is, discards duplicates).
+export -U PATH path FPATH fpath MANPATH manpath
+export -UT INFOPATH infopath
+
+path=(
+    ${HOME}/local/*/bin(N)
+    ${HOME}/.local/bin(N)
+    ${HOME}/.cargo/bin(N)
+    ${HOME}/go/bin(N)
+    ${HOME}/bin
+    $path
+)
+
+manpath=(
+    ${HOME}/local/*/share/man(N)
+    ${HOME}/.local/share/man(N)
+    $manpath
+    # Add empty element for lookup with manpath.
+    ""
+)
+export LUA_PATH="/Users/telemachus/local/lua/share/lua/5.1/?.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/Users/telemachus/.luarocks/share/lua/5.1/?.lua;/Users/telemachus/.luarocks/share/lua/5.1/?/init.lua;/Users/telemachus/local/lua/share/lua/5.1/?/init.lua"
+export LUA_CPATH="./?.so;/usr/local/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/Users/telemachus/.luarocks/lib/lua/5.1/?.so;/Users/telemachus/local/lua/lib/lua/5.1/?.so"
+
+# I am surprised that macOS does not set the timezone.
+export TZ=America/New_York
 export MAILDIR=$HOME/.maildir
 export NO_COLOR=1
-
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-export VIMCONFIG="$HOME/.vim"
-export VIMDATA="$HOME/.vim"
+export VIMCONFIG=$HOME/.vim
+export VIMDATA=$HOME/.vim
+
+# Configure less:
+# -G: no search highlighting
+# -R: handle ANSI escape codes
+# -i: smart-case searches
+# -c: always start printing from the top
+# -J: show search locations in side column
+# -x4: 4-space tabs
+# P...: prompt containing [filename/STDIN] and [N%] for percentage through file.
+export LESS='-GRicJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 export PAGER=less
-export LESS='-GRJx4P?f[%f]:[STDIN].?pB - [%pB\%]:\.\.\..'
 
-# Set PARINIT for par. How did I pick these values?
+# Configure par:
+# r: repeat quote prefixes
+# T: handle tabs
+# b: handle backspaces
+# g: guess paragraphs
+# q: handle nested quotes
+# R: repeat non-whitespace prefixes
+# B=.,?_A_a: body chars (punctuation + letters)
+# Q=_s>|: quote chars (underscore, space, >, |)
 export PARINIT='rTbgqR B=.,?_A_a Q=_s>|'
-# vim may live in $HOME/local/vim
-if [[ -d "${HOME}/local/vim" ]]; then
-	PATH="${HOME}/local/vim/bin:${PATH}"
-fi
 
-# passage lives in $HOME/local/passage
-if [[ -d ${HOME}/local/passage ]]; then
-    PATH="${PATH}:${HOME}/local/passage/bin"
-fi
+# Use this later for zcompdump.
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
-# neovim probably lives in $HOME/local/neovim
-if [[ -d ${HOME}/local/neovim ]]; then
-	PATH="${PATH}:${HOME}/local/neovim/bin"
-fi
-
-# go probably lives in $HOME/local/go
-if [[ -d $HOME/local/go/bin ]]; then
-    PATH="${HOME}/local/go/bin:${PATH}"
-fi
-# go environment probably lives in $HOME/go
-if [[ -d ${HOME}/go ]]; then
-    export GOPATH="${HOME}/go"
-    export GOBIN="${HOME}/go/bin"
-    PATH="${PATH}:${GOBIN}"
-fi
-
-# postgres
-if [[ -d /Applications/Postgres.app ]]; then
-    PATH="${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin"
-fi
-
-# lua-language-server
-if [[ -d $HOME/local/lua-language-server/bin ]]; then
-    PATH="${HOME}/local/lua-language-server/bin:${PATH}"
-fi
-
-# rust
-if [[ -r $HOME/.cargo/env ]]; then
-	source "$HOME/.cargo/env"
-fi
-
-# zig may live in $HOME/local/zig
-if [[ -r $HOME/local/zig/zig ]]; then
-    PATH="${HOME}/local/zig:${PATH}"
-fi
-
-# lua probably lives in $HOME/local/lua
-if [[ -d $HOME/local/lua ]]; then
-    PATH="${HOME}/local/lua/bin:${PATH}"
-fi
-
-# npm globals may live in $HOME/local/npm
-if [[ -d $HOME/local/npm ]]; then
-    PATH="${HOME}/local/npm/bin:${PATH}"
-fi
-
-# pipx, rust-analyzer and (possibly) others live in ~/.local/bin
-# I need this to end up *before* the cargo/rustup PATH.
-# See the following discussion on GitHub for why:  https://bit.ly/3MESyZ3.
-# TODO: investigate what ~/.cargo/env does to PATH.
-if [[ -d ${HOME}/.local/bin ]]; then
-    PATH="${HOME}/.local/bin:${PATH}"
-fi
-
-export PATH
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :
