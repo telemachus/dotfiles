@@ -2,6 +2,8 @@
 # Apple calls in /private/etc/zprofile.
 #
 path=(
+    /opt/homebrew/bin(N)
+    /opt/homebrew/sbin(N)
     /usr/local/bin(N)
     /System/Cryptexes/App/usr/bin(N)
     /usr/local/sbin(N)
@@ -14,8 +16,6 @@ path=(
     /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin(N)
     /Library/Apple/usr/bin(N)
     /Library/TeX/texbin(N)
-    /opt/local/bin(N)
-    /opt/local/sbin(N)
 )
 
 # Apple has moved developer docs from /usr/local/share to XCode itself.
@@ -31,6 +31,7 @@ manpath=(
     ${XCODE_BASE}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/${US_MAN}*(N)
     ${XCODE_BASE}/Toolchains/XcodeDefault.xctoolchain/${US_MAN}*(N)
     /usr/share/man(N)
+    /opt/homebrew/share/man(N)
     /usr/local/share/man(N)
     /Library/TeX/Distributions/.DefaultTeX/Contents/Man(N)
 )
