@@ -43,7 +43,7 @@ rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
 LUA_PATH='' LUA_CPATH='' make install || die '`make install` failed'
 
 # Update plugins and their helptags. Then update Treesitter parsers.
-pluggo -config="${HOME}"/.config/nvim/nvim-pluggo.json || die 'pluggo failed'
+pluggo -config="${HOME}"/.config/nvim/pluggo-nvim.json || die 'pluggo failed'
 nvim --headless -c 'helptags ALL | quit' || die 'failed to update helptag files'
 update_treesitter || die 'Failed to update Treesitter parsers'
 printf '\n'
