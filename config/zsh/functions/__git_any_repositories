@@ -1,0 +1,25 @@
+# __git_any_repositories: complete repositories for git subcommands
+#
+# This replaces the helper in zsh's _git, which defines its own version only
+# if none exists yet. For `git clone`, complete only the url.<base>.insteadOf
+# prefixes from git's config. Every other command gets the original behavior.
+#
+# Exit code: 0 if any matches were added; otherwise, 1
+#
+if [[ $curcontext == *:git-clone:* ]]; then
+    local line
+    local -a prefixes
+    for line in ${(f)"$(git config --get-regexp '^url\..*\.insteadof$' 2>/dev/null)"}; do
+        # line is "url.<base>.insteadof <prefix>"
+        prefixes+=("${${line##* }//:/\\:}:${${line%% *}[5,-11]}")
+    done
+    _describe -t insteadof 'URL prefix' prefixes -S ''
+    return
+fi
+
+_alternative \
+    'local-repositories::__git_local_repositories' \
+    'remotes: :__git_remotes' \
+    'remote-repositories::__git_remote_repositories'
+
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

@@ -207,6 +207,9 @@ zstyle ':completion:*:*:git-(push|fetch):*' file-patterns ''
 zstyle ':completion:*:*:git-(push|fetch):*' tag-order \
     'remotes recent-branches branches'
 
+# Override _git's helper so that `git clone` completes insteadOf prefixes.
+autoload -Uz __git_any_repositories
+
 # Always set aliases *last*, so they don't get used in function definitions.
 
 # Movement
