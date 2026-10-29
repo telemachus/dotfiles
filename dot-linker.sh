@@ -89,6 +89,7 @@ nexrc .nexrc
 gitconfig .gitconfig
 gitignore_global .gitignore_global
 hushlogin .hushlogin
+config/mpd/mpd.conf .mpdconf
 EOF
 
 exit $status
