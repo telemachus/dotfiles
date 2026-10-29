@@ -25,3 +25,4 @@ map ** {!}par -w80
 map ,g :%!gofmt-wrapper
 map ,s :%!shfmt-wrapper
 map!  
+map zz z.
