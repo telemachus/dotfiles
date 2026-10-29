@@ -5,3 +5,4 @@ config/nvim/spell/
 config/karabiner
 *.zwc
 .zsh_history
+config/configstore/

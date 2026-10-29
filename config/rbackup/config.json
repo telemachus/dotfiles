@@ -1,0 +1,28 @@
+{
+    "rsync_executable": "/opt/homebrew/bin/rsync",
+    "default_opts": [
+        "-avz",
+        "--exclude",
+        ".DS_Store",
+        "--exclude",
+        ".localized"
+    ],
+    "jobs": [
+        {
+            "src": "/Users/telemachus/.musica/",
+            "dest": "rsync:musica"
+        },
+        {
+            "src": "/Users/telemachus/Documents/legenda/",
+            "dest": "rsync:legenda"
+        },
+        {
+            "src": "/Users/telemachus/go/src/",
+            "dest": "rsync:go/src"
+        },
+        {
+            "src": "/Users/telemachus/Documents/git-repos/",
+            "dest": "rsync:git-repos"
+        }
+    ]
+}
