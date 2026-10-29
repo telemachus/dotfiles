@@ -54,6 +54,11 @@
         },
         {
             "branch": "main",
+            "name": "autoclose.vim",
+            "url": "https://github.com/telemachus/autoclose.vim"
+        },
+        {
+            "branch": "main",
             "name": "vim-dotfiles",
             "url": "https://github.com/telemachus/vim-dotfiles"
         },
