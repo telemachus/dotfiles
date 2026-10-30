@@ -50,15 +50,21 @@ run() {
     fi
 }
 
-# link SRC DEST links $DOTFILES/SRC to $HOME/DEST.
-link() {
+# link_dotfile SRC DEST links $DOTFILES/SRC to $HOME/DEST.
+link_dotfile() {
     local src="$DOTFILES/$1"
     local dest="$HOME/$2"
-    local backup="$HOME/old_${2#.}"
+    local dir="${dest%/*}"
+    local name="${dest##*/}"
+    local backup="$dir/old_${name#.}"
 
     if [ ! -e "$src" ]; then
         warn "missing $src"
         return 1
+    fi
+
+    if [ ! -d "$dir" ]; then
+        run mkdir -p "$dir" || return
     fi
 
     if [ -L "$dest" ]; then
@@ -80,7 +86,7 @@ link() {
 
 status=0
 while read -r src dest; do
-    link "$src" "$dest" || status=1
+    link_dotfile "$src" "$dest" || status=1
 done <<EOF
 config .config
 zshenv .zshenv
@@ -91,5 +97,10 @@ gitignore_global .gitignore_global
 hushlogin .hushlogin
 config/mpd/mpd.conf .mpdconf
 EOF
+
+for f in "$DOTFILES"/bin/*; do
+    f=${f#"$DOTFILES"/}
+    link_dotfile "$f" "$f" || status=1
+done
 
 exit $status
