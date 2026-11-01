@@ -3,11 +3,6 @@
     "plugins": [
         {
             "branch": "master",
-            "name": "vim-over",
-            "url": "https://github.com/osyo-manga/vim-over"
-        },
-        {
-            "branch": "master",
             "name": "vim-lastplace",
             "url": "https://github.com/dietsche/vim-lastplace"
         },
@@ -16,11 +11,6 @@
             "name": "vim-startuptime",
             "opt": true,
             "url": "https://github.com/dstein64/vim-startuptime"
-        },
-        {
-            "branch": "master",
-            "name": "vim-vsnip",
-            "url": "https://github.com/hrsh7th/vim-vsnip"
         },
         {
             "branch": "master",
@@ -53,14 +43,29 @@
             "url": "https://github.com/machakann/vim-sandwich"
         },
         {
+            "branch": "master",
+            "name": "vim-over",
+            "url": "https://github.com/osyo-manga/vim-over"
+        },
+        {
             "branch": "main",
             "name": "autoclose.vim",
             "url": "https://github.com/telemachus/autoclose.vim"
         },
         {
             "branch": "main",
+            "name": "conform.vim",
+            "url": "https://github.com/telemachus/conform.vim"
+        },
+        {
+            "branch": "main",
             "name": "vim-dotfiles",
             "url": "https://github.com/telemachus/vim-dotfiles"
+        },
+        {
+            "branch": "main",
+            "name": "vim-snippy",
+            "url": "https://github.com/telemachus/vim-snippy"
         },
         {
             "branch": "main",
