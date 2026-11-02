@@ -9,7 +9,7 @@
 # If there are errors, the script exits with a non-zero status.
 #
 # An optional first argument is passed as an argument to `goimports -srcdir`.
-# The default, if no argument is given, is `go imports -srcdir $PWD`.
+# The default, if no argument is given, is `goimports -srcdir $PWD`.
 
 set -eu
 

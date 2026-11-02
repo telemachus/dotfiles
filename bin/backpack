@@ -1,16 +1,27 @@
-#!/usr/bin/env bash
+#!/usr/bin/env dash
+#
+# backpack: back up documents, pictures, mail, and music to olympus.
 
-set -e
+set -u
 
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    --exclude "cltk_data" --exclude "Zoom" \
-    $HOME/Documents/ /Volumes/olympus/cito/documents
+die() {
+    fmt=$1
+    shift
+    printf >&2 "%s: $fmt\n" "${0##*/}" "$@"
+    exit 1
+}
 
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/Pictures/videnda/ /Volumes/olympus/cito/videnda
+DEST='/Volumes/olympus/cito'
 
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/.maildir/ /Volumes/olympus/cito/maildir
+[ -d "$DEST" ] || die '%s not found; is olympus mounted?' "$DEST"
 
-rsync -rvz --ignore-existing --exclude ".DS_Store" --exclude ".localized" \
-    $HOME/.musica/ /Volumes/olympus/cito/musica
+# backup [rsync options...] SRC DEST
+backup() {
+    rsync -rvz --ignore-existing --exclude '.DS_Store' --exclude '.localized' "$@"
+}
+
+backup --exclude 'cltk_data' --exclude 'Zoom' \
+    "${HOME}/Documents/" "${DEST}/documents" || die 'backup of Documents failed'
+backup "${HOME}/Pictures/videnda/" "${DEST}/videnda" || die 'backup of videnda failed'
+backup "${HOME}/.maildir/" "${DEST}/maildir" || die 'backup of maildir failed'
+backup "${HOME}/.musica/" "${DEST}/musica" || die 'backup of musica failed'

@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/usr/bin/env dash
 # gofix: run `go fix ./...` until there are no more fixes to make.
 #
 # Usage: gofix [max_passes]
@@ -8,9 +8,13 @@
 # user can add an argument to change that.
 set -e
 
+# plural: print "es" unless $1 is 1, to make "pass" or "passes".
+plural() {
+    [ "$1" -eq 1 ] || printf 'es'
+}
+
 max="${1:-5}"
 pass=0
-suffix=""
 
 while [ "$pass" -lt "$max" ]; do
     pass=$((pass + 1))
@@ -19,14 +23,11 @@ while [ "$pass" -lt "$max" ]; do
     go fix ./...
 
     if diff_output="$(go fix -diff ./... 2>&1)" && [ -z "$diff_output" ]; then
-        if [ "$pass" -ne 1 ]; then
-            suffix="es"
-        fi
-        printf "converged after %d pass%s\n" "$pass" "$suffix" >&2
+        printf "converged after %d pass%s\n" "$pass" "$(plural "$pass")" >&2
         exit 0
     fi
 done
 
-printf "warning: 'gofix ./...' did not converge after %d pass%s\n" \
-    "$max" "$suffix" >&2
+printf "warning: 'go fix ./...' did not converge after %d pass%s\n" \
+    "$max" "$(plural "$max")" >&2
 exit 1

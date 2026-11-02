@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
-exec &> >(while read line; do echo "$(date -R) $line"; done)
+exec &> >(while IFS= read -r line; do print -r -- "$(date -R) $line"; done)
 
 echo Mail Sync &&
     mbsync -Va &&

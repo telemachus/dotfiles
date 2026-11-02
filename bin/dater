@@ -1,25 +1,22 @@
-#!/usr/bin/env bash
-set -e
+#!/usr/bin/env dash
+#
+# dater: print the date and time, e.g., "Monday, November 2nd, 2026 at 2:05PM".
 
+set -u
+
+# ordinalize: print a day of the month with its ordinal suffix.
 ordinalize() {
     case "$1" in
-        1|21|31)
-            ordinalized="${1}st"
-            ;;
-        2|22)
-            ordinalized="${1}nd"
-            ;;
-        3|23)
-            ordinalized="${1}rd"
-            ;;
-        *)
-            ordinalized="${1}th"
-
+        1 | 21 | 31) printf '%sst' "$1" ;;
+        2 | 22) printf '%snd' "$1" ;;
+        3 | 23) printf '%srd' "$1" ;;
+        *) printf '%sth' "$1" ;;
     esac
 }
 
-date_first="$(date '+%A, %B')"
-date_secnd="$(date '+%e')"
-date_third="$(date '+%Y at %l:%M%p')"
-ordinalize $date_secnd
-printf "%s %s, %s" "${date_first}" "${ordinalized}" "${date_third}" | tr -s " "
+# One call to date keeps the fields consistent with each other. Word splitting
+# also drops the space that %e and %l put before single digits.
+# shellcheck disable=SC2046
+set -- $(date '+%A %B %e %Y %l %M %p')
+
+printf '%s, %s %s, %s at %s:%s%s' "$1" "$2" "$(ordinalize "$3")" "$4" "$5" "$6" "$7"
