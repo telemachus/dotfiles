@@ -109,10 +109,11 @@ let g:skip_close_chars = {
         \ "'": v:true,
         \ ')': v:true,
         \ '}': v:true,
+        \ ']': v:true,
         \ }
 inoremap <silent> <expr> <C-CR>
         \ get(g:skip_close_chars, strpart(getline('.'), col('.')-1, 1), v:false)
-        \ ? '<Right>'
+        \ ? '<C-G>U<Right>'
         \ : '<C-CR>'
 
 set tags+=~/.tags
