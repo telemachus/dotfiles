@@ -3,7 +3,9 @@
 set -u
 
 die() {
-    printf >&2 '%s: %s\n' "${0##*/}" "$1"
+    fmt=$1
+    shift
+    printf >&2 "%s: $fmt\n" "${0##*/}" "$@"
     exit 1
 }
 
@@ -15,19 +17,19 @@ INSTALL_DIR="${HOME}/local/nvi2"
 DOTFILES="${HOME}/Documents/git-repos/dotfiles"
 
 for DEP in ninja cmake git; do
-    hash "$DEP" 2>/dev/null || die "$(printf 'missing requirement: %s' "$DEP")"
+    hash "$DEP" 2>/dev/null || die 'missing requirement: %s' "$DEP"
 done
 
 if [ ! -d "$BUILD_ROOT" ]; then
-    mkdir -p "$BUILD_ROOT" || die "$(printf '`mkdir -p %s` failed' "$BUILD_ROOT")"
+    mkdir -p "$BUILD_ROOT" || die '`mkdir -p %s` failed' "$BUILD_ROOT"
 fi
-cd "$BUILD_ROOT" || die "$(printf '`cd %s` failed' "$BUILD_ROOT")"
+cd "$BUILD_ROOT" || die '`cd %s` failed' "$BUILD_ROOT"
 
 if [ ! -d "$BUILD_FULL" ]; then
     git clone --branch cq "$GIT_REPO" ||
-        die "$(printf '`git clone %s` failed' "$GIT_REPO")"
+        die '`git clone %s` failed' "$GIT_REPO"
 fi
-cd "$BUILD_FULL" || die "$(printf '`cd %s` failed' "$BUILD_FULL")"
+cd "$BUILD_FULL" || die '`cd %s` failed' "$BUILD_FULL"
 git pull || die '`git pull` failed'
 
 if [ "${1:-}" = "--clean" ]; then
@@ -42,14 +44,14 @@ cmake -G "Ninja Multi-Config" -B build \
 ninja -C build -f build-Release.ninja || die '`ninja` failed'
 
 # Manual installation since there's no install target
-rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
-mkdir -p "$INSTALL_DIR/bin" || die "$(printf '`mkdir -p %s/bin` failed' "$INSTALL_DIR")"
-mkdir -p "$INSTALL_DIR/share/man/man1" || die "$(printf '`mkdir -p %s/share/man/man1` failed' "$INSTALL_DIR")"
+rm -rf "$INSTALL_DIR" || die '`rm -rf %s` failed' "$INSTALL_DIR"
+mkdir -p "$INSTALL_DIR/bin" || die '`mkdir -p %s/bin` failed' "$INSTALL_DIR"
+mkdir -p "$INSTALL_DIR/share/man/man1" || die '`mkdir -p %s/share/man/man1` failed' "$INSTALL_DIR"
 
 cp -v build/Release/nvi "$INSTALL_DIR/bin/nvi" || die '`cp nvi` failed'
 cp -v man/vi.1 "$INSTALL_DIR/share/man/man1/nvi.1" || die '`cp manpage` failed'
 
-cd "$INSTALL_DIR/bin" || die "$(printf '`cd %s/bin` failed' "$INSTALL_DIR")"
+cd "$INSTALL_DIR/bin" || die '`cd %s/bin` failed' "$INSTALL_DIR"
 ln -sf nvi nex || die '`ln -s nvi nex` failed'
 printf 'ln -sf %s/bin/nex -> %s/bin/nvi\n' "$INSTALL_DIR" "$INSTALL_DIR"
 

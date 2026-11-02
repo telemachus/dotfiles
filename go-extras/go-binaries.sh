@@ -7,19 +7,21 @@ golangci_version=v2.14.0
 failed=0
 
 warn() {
-    printf >&2 '%s: %s\n' "${0##*/}" "$1"
+    fmt=$1
+    shift
+    printf >&2 "%s: $fmt\n" "${0##*/}" "$@"
     failed=1
 }
 
 die() {
-    warn "$1"
+    warn "$@"
     exit 1
 }
 
 # Ensure we have the commands we need.
 for cmd in go curl; do
     if ! command -v "$cmd" >/dev/null; then
-        die "$cmd not found"
+        die '%s not found' "$cmd"
     fi
 done
 
