@@ -3,46 +3,47 @@
 set -u
 
 die() {
-    printf >&2 '%s: %s\n' "${0##*/}" "$1"
+    fmt=$1
+    shift
+    printf >&2 "%s: $fmt\n" "${0##*/}" "$@"
     exit 1
 }
 
-BUILD_ROOT="${HOME}/Downloads/src"
-# BUILD_FULL="${BUILD_ROOT}/vim"
-BUILD_FULL="${BUILD_ROOT}/vim-classic"
-GIT_REPO='https://git.sr.ht/~sircmpwn/vim-classic'
-INSTALL_DIR="${HOME}/local/vim-classic"
+BUILD_DIR="${HOME}/Downloads/src/vim"
+GIT_REPO='https://github.com/vim/vim.git'
+INSTALL_DIR="${HOME}/local/vim"
+OLD_DIR="${INSTALL_DIR}.old"
 
-if [ ! -d "$BUILD_ROOT" ]; then
-    mkdir -p "$BUILD_ROOT" || die "$(printf '`mkdir -p %s` failed' "$BUILD_ROOT")"
+[ "$#" -le 1 ] || die 'too many arguments'
+
+clean=false
+case "${1:-}" in
+    '') ;;
+    --clean) clean=true ;;
+    *) die 'unknown argument: %s' "$1" ;;
+esac
+
+if [ ! -d "$BUILD_DIR" ]; then
+    git clone "$GIT_REPO" "$BUILD_DIR" || die '`git clone %s` failed' "$GIT_REPO"
 fi
 
-cd "$BUILD_ROOT" || die "$(printf '`cd %s` failed' "$BUILD_ROOT")"
-
-if [ ! -d "$BUILD_FULL" ]; then
-    git clone "$GIT_REPO" || die "$(printf '`git clone %s` failed' "$GIT_REPO")"
-fi
-
-cd "$BUILD_FULL" || die "$(printf '`cd %s` failed' "$BUILD_FULL")"
+cd "$BUILD_DIR" || die '`cd %s` failed' "$BUILD_DIR"
 git pull || die '`git pull` failed'
 
-if [ X"${1:-}" = X"--clean" ]; then
-    make clean || die '`make clean` failed'
+if "$clean"; then
+    make distclean || die '`make distclean` failed'
 fi
 
 ./configure --prefix="$INSTALL_DIR" \
     --enable-fail-if-missing \
-    --enable-multibyte \
     --with-compiledby="Peter Aronoff <peteraronoff@fastmail.com>" \
     --enable-cscope \
     --enable-terminal \
     --enable-gui=no \
     --without-x \
-    --enable-fontset \
-    --enable-largefile \
     --disable-smack \
     --disable-selinux \
-    \
+    --disable-xattr \
     --disable-xsmp \
     --disable-xsmp-interact \
     --disable-nls \
@@ -50,17 +51,37 @@ fi
 
 make || die '`make` failed'
 
-rm -rf "$INSTALL_DIR" || die "$(printf '`rm -rf %s` failed' "$INSTALL_DIR")"
+# Install into a staging directory next to INSTALL_DIR, so that the final move
+# is a rename on the same filesystem. DESTDIR keeps the compiled-in prefix
+# pointing at INSTALL_DIR. The EXIT trap removes the staging directory whether
+# the install succeeds or fails; the INT, TERM, and HUP trap makes sure the
+# EXIT trap also runs if the script is interrupted.
+mkdir -p "${INSTALL_DIR%/*}" || die '`mkdir -p %s` failed' "${INSTALL_DIR%/*}"
+stage=$(mktemp -d "${INSTALL_DIR}.XXXXXX") || die '`mktemp` failed'
+trap 'rm -rf "$stage"' EXIT
+trap 'exit 1' INT TERM HUP
 
-make install || die '`make install` failed'
+make install DESTDIR="$stage" || die '`make install` failed'
 
-pluggo -config=${HOME}/.vim/pluggo-vim.json
+# Swap the new build into place. Keep the old one until the new one is in
+# place, and restore it if the move fails.
+rm -rf "$OLD_DIR" || die '`rm -rf %s` failed' "$OLD_DIR"
+if [ -d "$INSTALL_DIR" ]; then
+    mv "$INSTALL_DIR" "$OLD_DIR" || die '`mv %s %s` failed' "$INSTALL_DIR" "$OLD_DIR"
+fi
+if ! mv "${stage}${INSTALL_DIR}" "$INSTALL_DIR"; then
+    [ -d "$OLD_DIR" ] && mv "$OLD_DIR" "$INSTALL_DIR"
+    die 'failed to move new build into %s' "$INSTALL_DIR"
+fi
+rm -rf "$OLD_DIR" || die '`rm -rf %s` failed' "$OLD_DIR"
+
+pluggo -config="${HOME}/.vim/pluggo-vim.json" || die '`pluggo` failed'
 
 # I need a minimal vimrc since `vim -e` sets compatible and some of my plugins
 # need nocompatible. The `-u` flag requires a file, which I fake using printf
 # and /dev/stdin.
 printf 'set nocompatible\n' |
-    vim -es -u /dev/stdin -c 'helptags ALL' -c 'quit' ||
+    "$INSTALL_DIR/bin/vim" -es -u /dev/stdin -c 'helptags ALL' -c 'quit' ||
     die 'failed to update tag files for plugin docs'
 
 # vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
