@@ -1,24 +1,33 @@
-# die: print message to stderr and exit current shell session
+# die: print a formatted message to stderr and exit current shell session
 #
-# Args: $1: message (default: "empty message"); $2: exit code (default: 1)
-# Exit code: $2 (or 1 if $2 is empty)
+# Args: [-s status] format [args...]
+#   -s status = exit code (default: 1)
+#   format and args are passed to printf (write a literal % as %%)
+# Exit code: status (or 1 if -s is not given)
 #
 # Examples:
-#   die 'something broke' 3
-#   mkdir -p "$P" || die "$(printf '`mkdir -p %s` failed' "$P")"
+#   die -s 3 'something broke'
+#   mkdir -p -- "$P" || die -s $? '`mkdir -p -- %s` failed' "$P"
 #
+local st=1
+if [[ $1 == -s ]]; then
+    st=$2
+    shift 2
+fi
+local fmt=${1:-empty message}
+
 if [[ -o interactive ]]; then
     printf >&2 'This will exit your shell. Continue? (y/N) '
     read -q || {
         # Turn die into warn if the user says no.
-        printf >&2 '\n%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
-        return ${2:-1}
+        printf >&2 "\n%s: $fmt\n" "${funcstack[2]:-unknown caller}" "${@:2}"
+        return $st
     }
     # If the user says yes, clean up the prompt line.
     printf >&2 '\n'
 fi
 
-printf >&2 '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
-exit ${2:-1}
+printf >&2 "%s: $fmt\n" "${funcstack[2]:-unknown caller}" "${@:2}"
+exit $st
 
 # vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

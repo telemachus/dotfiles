@@ -32,7 +32,7 @@ shift
 [[ $archive == -* ]] && archive=./$archive
 
 [[ -f $archive ]] || {
-    warn "$(printf "'%s' is not a file" "$archive")" 1
+    warn "'%s' is not a file" "$archive"
     return
 }
 
@@ -56,8 +56,8 @@ case $archive in
         7zz x${quiet:+-bso0} ${quiet:+-bsp0} "$@" -- "$archive"
         ;;
     *)
-        warn "$(printf "unknown archive type: '%s'" "$archive")" 1
+        warn "unknown archive type: '%s'" "$archive"
         ;;
 esac
 
-# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

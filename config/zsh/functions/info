@@ -1,12 +1,13 @@
-# info: print message to stdout
+# info: print a formatted message to stdout
 #
-# Args: $1 = message (default: "empty message")
+# Args: format [args...]
+#   format and args are passed to printf (write a literal % as %%)
 # Exit code: whatever printf returns as $?
 #
 # Examples:
 #   info 'wonderful news'
-#   mkdir -p "$P" && info "$(printf '`mkdir -p %s` succeeded' "$P")"
+#   mkdir -p -- "$P" && info '`mkdir -p -- %s` succeeded' "$P"
 #
-printf '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
+printf "%s: ${1:-empty message}\n" "${funcstack[2]:-unknown caller}" "${@:2}"
 
-# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :

@@ -1,13 +1,21 @@
-# warn: print message to stderr
+# warn: print a formatted message to stderr
 #
-# Args: $1 = message (default: "empty message"); $2 = return value (default: 1)
-# Return value: $2 (or 1 if $2 is empty)
+# Args: [-s status] format [args...]
+#   -s status = return value (default: 1)
+#   format and args are passed to printf (write a literal % as %%)
+# Return value: status (or 1 if -s is not given)
 #
 # Examples:
-#   warn 'something broke' 3
-#   mkdir -p "$P" || warn "$(printf '`mkdir -p %s` failed' "$P")"
+#   warn 'something broke'
+#   mkdir -p -- "$P" || warn -s $? '`mkdir -p -- %s` failed' "$P"
 #
-printf >&2 '%s: %s\n' "${funcstack[2]:-unknown caller}" "${1:-empty message}"
-return ${2:-1}
+local st=1
+if [[ $1 == -s ]]; then
+    st=$2
+    shift 2
+fi
 
-# vim: set ts=8 sw=4 sts=4 tw=0 et ft=sh :
+printf >&2 "%s: ${1:-empty message}\n" "${funcstack[2]:-unknown caller}" "${@:2}"
+return $st
+
+# vim: set ts=8 sw=4 sts=4 tw=0 et ft=zsh :
