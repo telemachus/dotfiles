@@ -9,12 +9,20 @@ set scrolloff=0     " No breathing room
 set number
 set relativenumber
 set mouse=          " No mouse capture
-" let &t_EI = "\<Esc>[2 q"
-" let &t_SI = "\<Esc>[3 q"
-" let &t_SR = "\<Esc>[3 q"
-" set virtualedit+=onemore
-" set nomousehide
-" autocmd VimLeave * silent !echo -ne "\e[6 q"
+
+" Cursor shape:
+"   + steady block in Normal mode
+"   + steady block when Vim starts
+"   + blinking underline in Insert and Replace modes
+"   + reset to blinking underline when Vim exits
+let &t_EI = "\<Esc>[2 q"
+let &t_SI = "\<Esc>[3 q"
+let &t_SR = "\<Esc>[3 q"
+if !exists('g:cursor_codes_set')
+    let &t_ti ..= "\<Esc>[2 q"
+    let &t_te = "\<Esc>[3 q" .. &t_te
+    let g:cursor_codes_set = 1
+endif
 
 set ruler           " Show the cursor position all the time
 set showcmd
