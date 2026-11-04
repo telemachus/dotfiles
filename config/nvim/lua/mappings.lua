@@ -78,12 +78,20 @@ keymap_set(
 )
 
 -- Delete everything below the current line. Mnemonic: t is for trim.
+-- nvim_buf_set_lines writes no registers, doesn't move the cursor or
+-- view, and makes a single undoable change.
 keymap_set("n", "<Leader>t", function()
-    local current_line = win_get_cursor(0)[1]
-    local last_line = buf_line_count(0)
+    if not vim.bo.modifiable then
+        vim.notify(
+            "E21: Cannot make changes, 'modifiable' is off",
+            vim.log.levels.ERROR
+        )
+        return
+    end
 
-    if current_line < last_line then
-        buf_set_lines(0, current_line, -1, false, {})
+    local row = win_get_cursor(0)[1]
+    if row < buf_line_count(0) then
+        buf_set_lines(0, row, -1, true, {})
     end
 end, default_opts .. { desc = "Delete everything below current line" })
 

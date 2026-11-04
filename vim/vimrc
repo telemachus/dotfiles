@@ -112,6 +112,7 @@ let g:mapleader=' '
 let g:maplocalleader=' '
 
 " Put things here that eventually belong in vim-dotfiles if I keep them.
+
 let g:skip_close_chars = {
         \ '"': v:true,
         \ "'": v:true,
@@ -137,4 +138,19 @@ augroup mail_curly_quotes
     autocmd FileType mail inoremap <buffer> <silent> <expr> ' <SID>CurlyQuote('‘', '’')
 augroup END
 
-set tags+=~/.tags
+" Delete everything below the current line. Mnemonic: t is for trim.
+" deletebufline() writes no registers, doesn't move the cursor or view,
+" and makes a single undoable change.
+function! s:Trim() abort
+    if !&modifiable
+        echohl ErrorMsg
+        echomsg "E21: Cannot make changes, 'modifiable' is off"
+        echohl None
+        return
+    endif
+
+    if line('.') < line('$')
+        silent call deletebufline('', line('.') + 1, '$')
+    endif
+endfunction
+nnoremap <silent> <Leader>t <Cmd>call <SID>Trim()<CR>
