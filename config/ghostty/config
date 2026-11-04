@@ -51,8 +51,9 @@ shell-integration-features = no-cursor,title
 
 # Base colors and cursor styles.
 background = #ffffff
-foreground= #090909
-cursor-invert-fg-bg = true
+foreground = #090909
+cursor-color = #000000
+cursor-text = #ffffff
 cursor-style = block
 cursor-style-blink = false
 
