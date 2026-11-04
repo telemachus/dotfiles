@@ -124,4 +124,17 @@ inoremap <silent> <expr> <C-CR>
         \ ? '<C-G>U<Right>'
         \ : '<C-CR>'
 
+" Curly quotes in mail: open at start of line or after whitespace or
+" opening punctuation; otherwise close.
+function! s:CurlyQuote(left, right) abort
+    let l:prev = matchstr(getline('.'), '.\%' .. col('.') .. 'c')
+    return l:prev =~# '^[[:space:]([{“‘—/-]\=$' ? a:left : a:right
+endfunction
+
+augroup mail_curly_quotes
+    autocmd!
+    autocmd FileType mail inoremap <buffer> <silent> <expr> " <SID>CurlyQuote('“', '”')
+    autocmd FileType mail inoremap <buffer> <silent> <expr> ' <SID>CurlyQuote('‘', '’')
+augroup END
+
 set tags+=~/.tags

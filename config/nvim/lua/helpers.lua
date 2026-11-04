@@ -1,17 +1,27 @@
 local col = vim.fn.col
 local getline = vim.fn.getline
-local substring = string.sub
+local matchstr = vim.fn.matchstr
+
+-- Characters after which a quote opens rather than closes. An empty
+-- string means the cursor is at the start of the line.
+local opens_quote = {
+    [""] = true,
+    [" "] = true,
+    ["\t"] = true,
+    ["("] = true,
+    ["["] = true,
+    ["{"] = true,
+    ["“"] = true,
+    ["‘"] = true,
+    ["—"] = true,
+    ["-"] = true,
+    ["/"] = true,
+}
 
 local needs_left_curly = function()
-    local prev_col = col(".") - 1
-    if prev_col == 0 then
-        return true
-    end
-    local prev_char = substring(getline("."), prev_col, prev_col)
-    if prev_char == " " or prev_char == "(" then
-        return true
-    end
-    return false
+    -- Match the whole (possibly multibyte) character before the cursor.
+    local prev_char = matchstr(getline("."), ".\\%" .. col(".") .. "c")
+    return opens_quote[prev_char] == true
 end
 
 local mt = {}
