@@ -154,3 +154,128 @@ function! s:Trim() abort
     endif
 endfunction
 nnoremap <silent> <Leader>t <Cmd>call <SID>Trim()<CR>
+
+" Language servers via https://github.com/yegappan/lsp. Keep it quiet: no
+" signs, inline highlights, virtual text, autocompletion, snippets, or
+" semantic highlighting. Completion is on demand with <C-x><C-o>.
+" The plugin loads after vimrc and reads these variables then, so don't call
+" LspOptionsSet() or LspAddServer() here.
+"
+" showSignature (on by default) pops up the signature in Insert mode after
+" ( or , and closes it on leaving Insert mode. To turn it off, add
+" "showSignature: v:false" below. <Leader>S still works either way.
+let g:lsp_options = #{
+        \ autoComplete: v:false,
+        \ autoHighlightDiags: v:false,
+        \ highlightDiagInline: v:false,
+        \ semanticHighlight: v:false,
+        \ showDiagWithSign: v:false,
+        \ showDiagWithVirtualText: v:false,
+        \ snippetSupport: v:false,
+        \ ignoreMissingServer: v:true,
+        \ popupBorder: v:true,
+        \ }
+
+let g:lsp_servers = []
+if executable('gopls')
+    call add(g:lsp_servers, #{
+            \ name: 'gopls',
+            \ filetype: ['go', 'gomod'],
+            \ path: exepath('gopls'),
+            \ args: ['serve'],
+            \ syncInit: v:true,
+            \ workspaceConfig: #{gopls: #{gofumpt: v:true}},
+            \ })
+endif
+
+" The tagfunc makes <C-]>, g<C-]>, <C-w>], and :tjump use the server, so
+" there are no separate go-to-definition mappings.
+function! s:LspAttached() abort
+    setlocal tagfunc=lsp#lsp#TagFunc
+    nnoremap <buffer> <silent> <Leader>R <Cmd>LspRename<CR>
+    nnoremap <buffer> <silent> <Leader>T <Cmd>LspGotoTypeDef<CR>
+    nnoremap <buffer> <silent> <Leader>S <Cmd>LspShowSignature<CR>
+    nnoremap <buffer> <silent> K <Cmd>call <SID>LspHoverOrEnter()<CR>
+    nnoremap <buffer> <silent> [d <Cmd>LspDiag prevWrap<CR>
+    nnoremap <buffer> <silent> ]d <Cmd>LspDiag nextWrap<CR>
+    nnoremap <buffer> <silent> <Leader>d <Cmd>LspDiag current<CR>
+    nnoremap <buffer> <silent> <Leader>; <Cmd>call <SID>LspPopupsClose()<CR>
+endfunction
+
+" The id of the visible hover popup, or 0 if there isn't one. The plugin
+" doesn't expose the id, so recognize the popup by its close callback.
+function! s:LspHoverPopup() abort
+    for l:id in popup_list()
+        if string(get(popup_getoptions(l:id), 'callback', '')) =~# 'HoverPopupClosed'
+            return l:id
+        endif
+    endfor
+    return 0
+endfunction
+
+" Close the hover and signature popups without moving the cursor. (<Esc>
+" also closes the hover.) The plugin keeps the signature popup's id on the
+" server as signaturePopup (-1 when there isn't one). Closing it from outside
+" is fine: the plugin's close callback resets its signature state.
+function! s:LspPopupsClose() abort
+    let l:id = s:LspHoverPopup()
+    if l:id
+        call popup_close(l:id)
+    endif
+    let l:id = get(lsp#buffer#CurbufGetServer(), 'signaturePopup', -1)
+    if l:id > 0
+        call popup_close(l:id)
+    endif
+endfunction
+
+" K shows the hover. With the hover already up, K moves its text into the
+" preview window, where you can move around, yank, and search (<C-w>p to go
+" back, :pclose to close). The plugin's popup filter does that, but it never
+" sees K once mappings are on (see below), so hand it the key.
+function! s:LspHoverOrEnter() abort
+    let l:id = s:LspHoverPopup()
+    if l:id
+        call popup_getoptions(l:id).filter(l:id, 'K')
+    else
+        LspHover
+    endif
+endfunction
+
+" The plugin opens the hover with mappings off, so <Leader> mappings don't
+" work while it's up (<Space> just moves the cursor, which closes it). Turn
+" mappings back on. None of the popup's scroll keys are mapped.
+function! s:LspHoverAllowMappings() abort
+    let l:id = win_getid()
+    if l:id == s:LspHoverPopup()
+        call popup_setoptions(l:id, #{mapping: v:true})
+    endif
+endfunction
+
+function! s:LspDetached() abort
+    setlocal tagfunc<
+    for l:lhs in ['<Leader>R', '<Leader>T', '<Leader>S', 'K', '[d', ']d',
+                \ '<Leader>d', '<Leader>;']
+        silent! execute 'nunmap <buffer>' l:lhs
+    endfor
+endfunction
+
+augroup lsp_mappings
+    autocmd!
+    autocmd User LspAttached call s:LspAttached()
+    autocmd User LspDetached call s:LspDetached()
+    " No 'showbreak' markers on wrapped lines inside popups. The plugin sets
+    " the hover's filetype from inside the popup, so this runs there.
+    autocmd FileType * if &buftype ==# 'popup' | setlocal showbreak=NONE | endif
+    autocmd FileType lspgfm,text if &buftype ==# 'popup' | call s:LspHoverAllowMappings() | endif
+augroup END
+
+" <Leader>; closes the preview window from inside it, as it closes the hover
+" popup. This covers the hover's preview split (second K) and :ptag, :pedit,
+" and so on.
+augroup preview_close
+    autocmd!
+    " No space before the | after <CR>: it would become part of the mapping.
+    autocmd WinEnter * if &previewwindow
+                \ | nnoremap <buffer> <silent> <Leader>; <Cmd>pclose<CR>|
+                \ endif
+augroup END

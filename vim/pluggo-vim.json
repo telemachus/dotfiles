@@ -91,6 +91,11 @@
             "branch": "master",
             "name": "vim-unimpaired",
             "url": "https://github.com/tpope/vim-unimpaired"
+        },
+        {
+            "branch": "main",
+            "name": "lsp",
+            "url": "https://github.com/yegappan/lsp"
         }
     ]
 }
