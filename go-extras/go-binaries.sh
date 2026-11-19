@@ -3,7 +3,7 @@
 # Protect me from myself.
 set -u
 
-golangci_version=v2.14.0
+golangci_version=v2.15.0
 failed=0
 
 warn() {
